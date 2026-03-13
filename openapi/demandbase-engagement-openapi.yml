@@ -1,0 +1,424 @@
+openapi: 3.1.0
+info:
+  title: Demandbase Engagement API
+  description: >-
+    Access engagement data and activity streams for target accounts across web,
+    email, and advertising channels. Track account-level engagement scores,
+    monitor buying signals, and retrieve activity timelines.
+  version: '1.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+externalDocs:
+  description: Demandbase Engagement API Documentation
+  url: https://docs.demandbase.com/docs/engagement-api
+servers:
+  - url: https://api.demandbase.com/engagement
+    description: Demandbase Engagement API Production
+tags:
+  - name: Engagement
+    description: Account engagement scores and metrics
+  - name: Activities
+    description: Activity streams and event tracking
+  - name: Intent
+    description: Intent signals and buying indicators
+  - name: Webhooks
+    description: Webhook subscription management
+security:
+  - bearerAuth: []
+paths:
+  /accounts/{accountId}/engagement:
+    get:
+      operationId: getAccountEngagement
+      summary: Get account engagement
+      description: >-
+        Retrieve the engagement score and engagement metrics for a specific
+        account, including channel-level breakdown and trend data.
+      tags:
+        - Engagement
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - name: start_date
+          in: query
+          required: false
+          description: Start date for engagement data (YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: false
+          description: End date for engagement data (YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Account engagement data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountEngagement'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Account not found
+  /accounts/{accountId}/activities:
+    get:
+      operationId: getAccountActivities
+      summary: Get account activities
+      description: >-
+        Retrieve the activity stream for a specific account, including web
+        visits, email interactions, ad engagements, and other tracked events.
+      tags:
+        - Activities
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - name: type
+          in: query
+          required: false
+          description: Filter by activity type
+          schema:
+            type: string
+            enum:
+              - web_visit
+              - email_open
+              - email_click
+              - ad_click
+              - ad_impression
+              - form_fill
+              - content_download
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 50
+            maximum: 200
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Account activity stream
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  activities:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Activity'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+        '404':
+          description: Account not found
+  /accounts/{accountId}/intent:
+    get:
+      operationId: getAccountIntent
+      summary: Get account intent signals
+      description: >-
+        Retrieve intent signals and buying indicators for a specific account,
+        including keyword-level intent data and trend information.
+      tags:
+        - Intent
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        '200':
+          description: Account intent signals
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntentSignals'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Account not found
+  /engagement/summary:
+    get:
+      operationId: getEngagementSummary
+      summary: Get engagement summary
+      description: >-
+        Retrieve a summary of engagement metrics across all tracked accounts,
+        including top engaged accounts and trend data.
+      tags:
+        - Engagement
+      parameters:
+        - name: start_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: limit
+          in: query
+          required: false
+          description: Number of top accounts to return
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: Engagement summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_accounts_engaged:
+                    type: integer
+                  average_engagement_score:
+                    type: number
+                  top_accounts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AccountEngagement'
+        '401':
+          description: Unauthorized
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      summary: List webhooks
+      description: Retrieve all configured webhook subscriptions.
+      tags:
+        - Webhooks
+      responses:
+        '200':
+          description: List of webhooks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webhooks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Webhook'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createWebhook
+      summary: Create a webhook
+      description: >-
+        Create a new webhook subscription to receive real-time notifications
+        for engagement events.
+      tags:
+        - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookRequest'
+      responses:
+        '201':
+          description: Webhook created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+  /webhooks/{webhookId}:
+    delete:
+      operationId: deleteWebhook
+      summary: Delete a webhook
+      description: Delete a webhook subscription.
+      tags:
+        - Webhooks
+      parameters:
+        - name: webhookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Webhook deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Webhook not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for API access
+  parameters:
+    accountId:
+      name: accountId
+      in: path
+      required: true
+      description: Demandbase account unique identifier
+      schema:
+        type: string
+  schemas:
+    AccountEngagement:
+      type: object
+      properties:
+        account_id:
+          type: string
+          description: Demandbase account identifier
+        company_name:
+          type: string
+          description: Company name
+        engagement_score:
+          type: number
+          description: Overall engagement score (0-100)
+        engagement_trend:
+          type: string
+          enum:
+            - increasing
+            - stable
+            - decreasing
+          description: Engagement trend direction
+        web_engagement:
+          type: number
+          description: Web channel engagement score
+        email_engagement:
+          type: number
+          description: Email channel engagement score
+        ad_engagement:
+          type: number
+          description: Advertising channel engagement score
+        last_activity_date:
+          type: string
+          format: date-time
+          description: Timestamp of most recent activity
+        total_activities:
+          type: integer
+          description: Total number of tracked activities
+    Activity:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Activity unique identifier
+        account_id:
+          type: string
+          description: Associated account ID
+        type:
+          type: string
+          enum:
+            - web_visit
+            - email_open
+            - email_click
+            - ad_click
+            - ad_impression
+            - form_fill
+            - content_download
+          description: Activity type
+        timestamp:
+          type: string
+          format: date-time
+          description: When the activity occurred
+        url:
+          type: string
+          format: uri
+          description: URL associated with the activity
+        page_title:
+          type: string
+          description: Page title for web activities
+        channel:
+          type: string
+          description: Channel the activity originated from
+        metadata:
+          type: object
+          description: Additional activity-specific metadata
+    IntentSignals:
+      type: object
+      properties:
+        account_id:
+          type: string
+          description: Demandbase account identifier
+        overall_intent_strength:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+          description: Overall intent strength
+        keywords:
+          type: array
+          items:
+            type: object
+            properties:
+              keyword:
+                type: string
+                description: Intent keyword
+              intent_strength:
+                type: string
+                enum:
+                  - high
+                  - medium
+                  - low
+              trend:
+                type: string
+                enum:
+                  - increasing
+                  - stable
+                  - decreasing
+          description: Keyword-level intent signals
+        last_updated:
+          type: string
+          format: date-time
+          description: When intent data was last refreshed
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Webhook unique identifier
+        url:
+          type: string
+          format: uri
+          description: Webhook endpoint URL
+        events:
+          type: array
+          items:
+            type: string
+          description: Event types subscribed to
+        active:
+          type: boolean
+          description: Whether the webhook is active
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp
+    CreateWebhookRequest:
+      type: object
+      required:
+        - url
+        - events
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Webhook endpoint URL
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+              - engagement.threshold
+              - intent.surge
+              - account.identified
+          description: Event types to subscribe to

@@ -1,0 +1,508 @@
+openapi: 3.1.0
+info:
+  title: Demandbase B2B Data API
+  description: >-
+    REST-based API providing programmatic access to B2B company and contact
+    intelligence, including company search, contact discovery, data enrichment,
+    and firmographic data across millions of businesses.
+  version: '1.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+externalDocs:
+  description: Demandbase B2B Data API Documentation
+  url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+servers:
+  - url: https://api.demandbase.com
+    description: Demandbase B2B Data API Production
+tags:
+  - name: Company Search
+    description: Search and discover companies
+  - name: Contacts
+    description: Contact discovery and lookup
+  - name: Enrichment
+    description: Data enrichment operations
+  - name: Technographics
+    description: Technology usage data
+security:
+  - apiKeyAuth: []
+paths:
+  /data/v1/companies/search:
+    get:
+      operationId: searchCompanies
+      summary: Search companies
+      description: >-
+        Search for companies by name, domain, industry, location, or other
+        firmographic attributes. Returns matching companies with detailed
+        firmographic profiles.
+      tags:
+        - Company Search
+      parameters:
+        - name: query
+          in: query
+          required: false
+          description: Free-text search query
+          schema:
+            type: string
+        - name: domain
+          in: query
+          required: false
+          description: Filter by company domain
+          schema:
+            type: string
+        - name: industry
+          in: query
+          required: false
+          description: Filter by industry
+          schema:
+            type: string
+        - name: country
+          in: query
+          required: false
+          description: Filter by country
+          schema:
+            type: string
+        - name: employee_range
+          in: query
+          required: false
+          description: Filter by employee range
+          schema:
+            type: string
+        - name: revenue_range
+          in: query
+          required: false
+          description: Filter by revenue range
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 25
+            maximum: 100
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Company search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+                  total:
+                    type: integer
+        '400':
+          description: Invalid search parameters
+        '401':
+          description: Unauthorized
+        '429':
+          description: Rate limit exceeded
+  /data/v1/companies/{companyId}:
+    get:
+      operationId: getCompany
+      summary: Get company details
+      description: >-
+        Retrieve detailed company information by Demandbase company ID,
+        including firmographics, technographics, and corporate hierarchy.
+      tags:
+        - Company Search
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+      responses:
+        '200':
+          description: Company details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Company not found
+  /data/v1/contacts/search:
+    get:
+      operationId: searchContacts
+      summary: Search contacts
+      description: >-
+        Search for business contacts by name, title, company, or other
+        attributes. Returns matching contact profiles.
+      tags:
+        - Contacts
+      parameters:
+        - name: query
+          in: query
+          required: false
+          description: Free-text search query
+          schema:
+            type: string
+        - name: company_id
+          in: query
+          required: false
+          description: Filter contacts by company ID
+          schema:
+            type: string
+        - name: domain
+          in: query
+          required: false
+          description: Filter contacts by company domain
+          schema:
+            type: string
+        - name: title
+          in: query
+          required: false
+          description: Filter by job title
+          schema:
+            type: string
+        - name: department
+          in: query
+          required: false
+          description: Filter by department
+          schema:
+            type: string
+        - name: seniority
+          in: query
+          required: false
+          description: Filter by seniority level
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 25
+            maximum: 100
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Contact search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contact'
+                  total:
+                    type: integer
+        '400':
+          description: Invalid search parameters
+        '401':
+          description: Unauthorized
+  /data/v1/contacts/{contactId}:
+    get:
+      operationId: getContact
+      summary: Get contact details
+      description: Retrieve detailed information for a specific contact.
+      tags:
+        - Contacts
+      parameters:
+        - name: contactId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Contact details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Contact not found
+  /data/v1/enrichment/company:
+    post:
+      operationId: enrichCompany
+      summary: Enrich company data
+      description: >-
+        Enrich a company record with Demandbase data by providing a domain,
+        company name, or other identifiers.
+      tags:
+        - Enrichment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                domain:
+                  type: string
+                  description: Company domain
+                company_name:
+                  type: string
+                  description: Company name
+                country:
+                  type: string
+                  description: Country for disambiguation
+      responses:
+        '200':
+          description: Enriched company data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: No matching company found
+  /data/v1/enrichment/contact:
+    post:
+      operationId: enrichContact
+      summary: Enrich contact data
+      description: >-
+        Enrich a contact record with Demandbase data by providing email,
+        name, or other identifiers.
+      tags:
+        - Enrichment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: Contact email address
+                first_name:
+                  type: string
+                  description: Contact first name
+                last_name:
+                  type: string
+                  description: Contact last name
+                company_domain:
+                  type: string
+                  description: Company domain for matching
+      responses:
+        '200':
+          description: Enriched contact data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: No matching contact found
+  /data/v1/technographics/{domain}:
+    get:
+      operationId: getTechnographics
+      summary: Get technographic data
+      description: >-
+        Retrieve technology usage data for a company by domain, including
+        technologies detected and categories.
+      tags:
+        - Technographics
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          description: Company domain
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Technographic data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Technographics'
+        '401':
+          description: Unauthorized
+        '404':
+          description: No technographic data found
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key for authentication
+  parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      description: Demandbase company unique identifier
+      schema:
+        type: string
+  schemas:
+    Company:
+      type: object
+      properties:
+        company_id:
+          type: string
+          description: Demandbase company identifier
+        company_name:
+          type: string
+          description: Official company name
+        domain:
+          type: string
+          description: Primary web domain
+        website:
+          type: string
+          format: uri
+          description: Company website URL
+        industry:
+          type: string
+          description: Industry classification
+        sub_industry:
+          type: string
+          description: Sub-industry classification
+        sic_code:
+          type: string
+          description: SIC code
+        naics_code:
+          type: string
+          description: NAICS code
+        employee_count:
+          type: integer
+          description: Number of employees
+        employee_range:
+          type: string
+          description: Employee count range
+        revenue:
+          type: number
+          description: Annual revenue in USD
+        revenue_range:
+          type: string
+          description: Revenue range
+        address:
+          type: string
+          description: Street address
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State or province
+        country:
+          type: string
+          description: Country
+        zip:
+          type: string
+          description: Postal code
+        phone:
+          type: string
+          description: Phone number
+        stock_ticker:
+          type: string
+          description: Stock ticker symbol
+        founded_year:
+          type: integer
+          description: Year the company was founded
+        fortune_1000:
+          type: boolean
+          description: Fortune 1000 membership
+        forbes_2000:
+          type: boolean
+          description: Forbes 2000 membership
+        parent_company_id:
+          type: string
+          description: Parent company ID
+        parent_company_name:
+          type: string
+          description: Parent company name
+        ultimate_parent_company_id:
+          type: string
+          description: Ultimate parent company ID
+        ultimate_parent_company_name:
+          type: string
+          description: Ultimate parent company name
+    Contact:
+      type: object
+      properties:
+        contact_id:
+          type: string
+          description: Demandbase contact identifier
+        first_name:
+          type: string
+          description: First name
+        last_name:
+          type: string
+          description: Last name
+        email:
+          type: string
+          format: email
+          description: Email address
+        title:
+          type: string
+          description: Job title
+        department:
+          type: string
+          description: Department
+        seniority:
+          type: string
+          description: Seniority level
+        phone:
+          type: string
+          description: Direct phone number
+        linkedin_url:
+          type: string
+          format: uri
+          description: LinkedIn profile URL
+        company_id:
+          type: string
+          description: Associated Demandbase company ID
+        company_name:
+          type: string
+          description: Company name
+        company_domain:
+          type: string
+          description: Company domain
+    Technographics:
+      type: object
+      properties:
+        domain:
+          type: string
+          description: Company domain
+        technologies:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Technology name
+              category:
+                type: string
+                description: Technology category
+              vendor:
+                type: string
+                description: Technology vendor
+              first_detected:
+                type: string
+                format: date
+                description: When the technology was first detected
+              last_detected:
+                type: string
+                format: date
+                description: When the technology was last detected
+          description: Technologies used by the company

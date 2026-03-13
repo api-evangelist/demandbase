@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.demandbase.com/schemas/demandbase/campaign.json",
+  "title": "Demandbase Campaign",
+  "description": "Represents an advertising campaign in Demandbase for account-based marketing, including budget, targeting, and scheduling information.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Campaign unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Campaign name"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "paused", "completed", "draft"],
+      "description": "Current campaign status"
+    },
+    "budget": {
+      "type": "number",
+      "description": "Total campaign budget in USD"
+    },
+    "daily_budget": {
+      "type": "number",
+      "description": "Daily budget cap in USD"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Campaign start date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Campaign end date"
+    },
+    "audience_id": {
+      "type": "string",
+      "description": "Associated audience segment identifier"
+    },
+    "impressions": {
+      "type": "integer",
+      "description": "Total impressions served"
+    },
+    "clicks": {
+      "type": "integer",
+      "description": "Total clicks received"
+    },
+    "ctr": {
+      "type": "number",
+      "description": "Click-through rate"
+    },
+    "spend": {
+      "type": "number",
+      "description": "Total spend in USD"
+    },
+    "accounts_reached": {
+      "type": "integer",
+      "description": "Number of unique target accounts reached"
+    },
+    "accounts_engaged": {
+      "type": "integer",
+      "description": "Number of accounts showing engagement"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Campaign creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    }
+  }
+}

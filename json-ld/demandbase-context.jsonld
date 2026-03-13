@@ -1,0 +1,246 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "demandbase": "https://api.demandbase.com/schemas/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Account": {
+      "@id": "demandbase:Account",
+      "@context": {
+        "company_name": "schema:name",
+        "domain": "schema:url",
+        "website": "schema:url",
+        "industry": "schema:industry",
+        "employee_count": {
+          "@id": "schema:numberOfEmployees",
+          "@type": "xsd:integer"
+        },
+        "revenue": {
+          "@id": "demandbase:revenue",
+          "@type": "xsd:decimal"
+        },
+        "address": "schema:streetAddress",
+        "city": "schema:addressLocality",
+        "state": "schema:addressRegion",
+        "country": "schema:addressCountry",
+        "zip": "schema:postalCode",
+        "phone": "schema:telephone",
+        "stock_ticker": "schema:tickerSymbol",
+        "founded_year": {
+          "@id": "schema:foundingDate",
+          "@type": "xsd:integer"
+        },
+        "fortune_1000": {
+          "@id": "demandbase:fortune1000",
+          "@type": "xsd:boolean"
+        },
+        "forbes_2000": {
+          "@id": "demandbase:forbes2000",
+          "@type": "xsd:boolean"
+        },
+        "parent_company_id": "demandbase:parentCompanyId",
+        "ultimate_parent_company_id": "demandbase:ultimateParentCompanyId"
+      }
+    },
+
+    "Contact": {
+      "@id": "demandbase:Contact",
+      "@context": {
+        "first_name": "schema:givenName",
+        "last_name": "schema:familyName",
+        "email": "schema:email",
+        "title": "schema:jobTitle",
+        "department": "demandbase:department",
+        "seniority": "demandbase:seniority",
+        "phone": "schema:telephone",
+        "linkedin_url": "schema:sameAs",
+        "company_name": "schema:worksFor"
+      }
+    },
+
+    "Campaign": {
+      "@id": "demandbase:Campaign",
+      "@context": {
+        "name": "schema:name",
+        "status": "demandbase:campaignStatus",
+        "budget": {
+          "@id": "demandbase:budget",
+          "@type": "xsd:decimal"
+        },
+        "daily_budget": {
+          "@id": "demandbase:dailyBudget",
+          "@type": "xsd:decimal"
+        },
+        "start_date": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        },
+        "end_date": {
+          "@id": "schema:endDate",
+          "@type": "xsd:date"
+        },
+        "impressions": {
+          "@id": "demandbase:impressions",
+          "@type": "xsd:integer"
+        },
+        "clicks": {
+          "@id": "demandbase:clicks",
+          "@type": "xsd:integer"
+        },
+        "accounts_reached": {
+          "@id": "demandbase:accountsReached",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "Engagement": {
+      "@id": "demandbase:Engagement",
+      "@context": {
+        "engagement_score": {
+          "@id": "demandbase:engagementScore",
+          "@type": "xsd:decimal"
+        },
+        "engagement_trend": "demandbase:engagementTrend",
+        "web_engagement": {
+          "@id": "demandbase:webEngagement",
+          "@type": "xsd:decimal"
+        },
+        "email_engagement": {
+          "@id": "demandbase:emailEngagement",
+          "@type": "xsd:decimal"
+        },
+        "ad_engagement": {
+          "@id": "demandbase:adEngagement",
+          "@type": "xsd:decimal"
+        },
+        "last_activity_date": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "total_activities": {
+          "@id": "demandbase:totalActivities",
+          "@type": "xsd:integer"
+        },
+        "intent_strength": "demandbase:intentStrength"
+      }
+    },
+
+    "Activity": {
+      "@id": "demandbase:Activity",
+      "@context": {
+        "type": "demandbase:activityType",
+        "timestamp": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "url": "schema:url",
+        "page_title": "schema:name",
+        "channel": "demandbase:channel"
+      }
+    },
+
+    "Audience": {
+      "@id": "demandbase:Audience",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "account_count": {
+          "@id": "demandbase:accountCount",
+          "@type": "xsd:integer"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "AccountList": {
+      "@id": "demandbase:AccountList",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "type": "demandbase:listType",
+        "account_count": {
+          "@id": "demandbase:accountCount",
+          "@type": "xsd:integer"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "ExportJob": {
+      "@id": "demandbase:ExportJob",
+      "@context": {
+        "entity_type": "demandbase:entityType",
+        "status": "demandbase:jobStatus",
+        "record_count": {
+          "@id": "demandbase:recordCount",
+          "@type": "xsd:integer"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "completed_at": {
+          "@id": "demandbase:completedAt",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "ImportJob": {
+      "@id": "demandbase:ImportJob",
+      "@context": {
+        "entity_type": "demandbase:entityType",
+        "operation": "demandbase:importOperation",
+        "status": "demandbase:jobStatus",
+        "total_rows": {
+          "@id": "demandbase:totalRows",
+          "@type": "xsd:integer"
+        },
+        "success_count": {
+          "@id": "demandbase:successCount",
+          "@type": "xsd:integer"
+        },
+        "error_count": {
+          "@id": "demandbase:errorCount",
+          "@type": "xsd:integer"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "User": {
+      "@id": "demandbase:User",
+      "@context": {
+        "email": "schema:email",
+        "first_name": "schema:givenName",
+        "last_name": "schema:familyName",
+        "role": "demandbase:userRole",
+        "status": "demandbase:userStatus",
+        "last_login": {
+          "@id": "demandbase:lastLogin",
+          "@type": "xsd:dateTime"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    }
+  }
+}

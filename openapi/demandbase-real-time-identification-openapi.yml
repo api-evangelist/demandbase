@@ -1,0 +1,249 @@
+openapi: 3.1.0
+info:
+  title: Demandbase Real-Time Identification API
+  description: >-
+    Identifies companies visiting your website in real-time based on IP address
+    and provides firmographic data and intent signals. Use this API for website
+    personalization, real-time account identification, and visitor intelligence.
+  version: '1.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+externalDocs:
+  description: Real-Time Identification API Documentation
+  url: https://docs.demandbase.com/docs/real-time-identification-api
+servers:
+  - url: https://api.company-target.com
+    description: Demandbase Real-Time Identification Production
+tags:
+  - name: Identification
+    description: Real-time company identification from IP and signals
+  - name: Visitor Intelligence
+    description: Visitor tracking and company resolution
+security:
+  - apiKeyAuth: []
+paths:
+  /api/v3/ip.json:
+    get:
+      operationId: identifyByIp
+      summary: Identify company by IP address
+      description: >-
+        Identify the company associated with a given IP address in real-time.
+        Returns firmographic data, intent signals, and company attributes for
+        the resolved organization.
+      tags:
+        - Identification
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: Demandbase API key
+          schema:
+            type: string
+        - name: query
+          in: query
+          required: true
+          description: IP address to identify
+          schema:
+            type: string
+            format: ipv4
+        - name: callback
+          in: query
+          required: false
+          description: JSONP callback function name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Company identification result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentificationResult'
+        '400':
+          description: Invalid IP address format
+        '401':
+          description: Unauthorized - invalid API key
+        '404':
+          description: No company identified for the given IP
+        '429':
+          description: Rate limit exceeded
+  /api/v3/domain.json:
+    get:
+      operationId: identifyByDomain
+      summary: Identify company by domain
+      description: >-
+        Resolve a company from a web domain and return firmographic data and
+        company attributes.
+      tags:
+        - Identification
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: Demandbase API key
+          schema:
+            type: string
+        - name: query
+          in: query
+          required: true
+          description: Domain to identify (e.g., acme.com)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Company identification result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentificationResult'
+        '401':
+          description: Unauthorized
+        '404':
+          description: No company found for the given domain
+  /api/v3/visitor.json:
+    get:
+      operationId: getVisitorIntelligence
+      summary: Get visitor intelligence
+      description: >-
+        Retrieve visitor intelligence for the current request, combining IP
+        identification with cookie-based signals for enhanced accuracy.
+      tags:
+        - Visitor Intelligence
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: Demandbase API key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Visitor intelligence data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentificationResult'
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: query
+      name: key
+      description: Demandbase API key passed as query parameter
+  schemas:
+    IdentificationResult:
+      type: object
+      properties:
+        company_name:
+          type: string
+          description: Identified company name
+        demandbase_sid:
+          type: string
+          description: Demandbase company identifier
+        domain:
+          type: string
+          description: Primary company domain
+        industry:
+          type: string
+          description: Industry classification
+        sub_industry:
+          type: string
+          description: Sub-industry classification
+        employee_count:
+          type: integer
+          description: Number of employees
+        employee_range:
+          type: string
+          description: Employee count range
+        revenue:
+          type: number
+          description: Annual revenue in USD
+        revenue_range:
+          type: string
+          description: Revenue range
+        address:
+          type: string
+          description: Street address
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State or province
+        country:
+          type: string
+          description: Country
+        zip:
+          type: string
+          description: Postal code
+        country_code:
+          type: string
+          description: ISO country code
+        phone:
+          type: string
+          description: Phone number
+        website:
+          type: string
+          format: uri
+          description: Company website
+        stock_ticker:
+          type: string
+          description: Stock ticker symbol
+        fortune_1000:
+          type: boolean
+          description: Fortune 1000 membership
+        forbes_2000:
+          type: boolean
+          description: Forbes 2000 membership
+        traffic:
+          type: string
+          enum:
+            - Very High
+            - High
+            - Medium
+            - Low
+          description: Website traffic classification
+        b2b:
+          type: boolean
+          description: Whether the company is a B2B company
+        b2c:
+          type: boolean
+          description: Whether the company is a B2C company
+        ip:
+          type: string
+          description: The resolved IP address
+        isp:
+          type: boolean
+          description: Whether the IP belongs to an ISP
+        audience:
+          type: string
+          description: Audience segment classification
+        audience_segment:
+          type: string
+          description: Detailed audience segment
+        registry_company_name:
+          type: string
+          description: Company name from IP registry
+        registry_city:
+          type: string
+          description: City from IP registry
+        registry_state:
+          type: string
+          description: State from IP registry
+        registry_country:
+          type: string
+          description: Country from IP registry
+        registry_country_code:
+          type: string
+          description: Country code from IP registry
+        information_level:
+          type: string
+          enum:
+            - Detailed
+            - Basic
+            - Limited
+          description: Level of information available

@@ -1,0 +1,497 @@
+openapi: 3.1.0
+info:
+  title: Demandbase Advertising API
+  description: >-
+    Programmatically manage advertising campaigns, audiences, and performance
+    metrics for account-based advertising. Create and manage targeted B2B ad
+    campaigns, define audience segments, and retrieve campaign analytics.
+  version: '1.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+externalDocs:
+  description: Demandbase Advertising API Documentation
+  url: https://docs.demandbase.com/docs/advertising-api
+servers:
+  - url: https://api.demandbase.com/advertising
+    description: Demandbase Advertising API Production
+tags:
+  - name: Campaigns
+    description: Manage advertising campaigns
+  - name: Audiences
+    description: Create and manage audience segments
+  - name: Analytics
+    description: Retrieve campaign performance metrics
+  - name: Creatives
+    description: Manage ad creatives
+security:
+  - bearerAuth: []
+paths:
+  /campaigns:
+    get:
+      operationId: listCampaigns
+      summary: List campaigns
+      description: >-
+        Retrieve a list of advertising campaigns with optional filtering
+        by status, date range, and other parameters.
+      tags:
+        - Campaigns
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: Filter by campaign status
+          schema:
+            type: string
+            enum:
+              - active
+              - paused
+              - completed
+              - draft
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of results
+          schema:
+            type: integer
+            default: 25
+            maximum: 100
+        - name: offset
+          in: query
+          required: false
+          description: Pagination offset
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of campaigns
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  campaigns:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Campaign'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createCampaign
+      summary: Create a campaign
+      description: Create a new advertising campaign with targeting and budget settings.
+      tags:
+        - Campaigns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCampaignRequest'
+      responses:
+        '201':
+          description: Campaign created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+  /campaigns/{campaignId}:
+    get:
+      operationId: getCampaign
+      summary: Get a campaign
+      description: Retrieve details of a specific advertising campaign.
+      tags:
+        - Campaigns
+      parameters:
+        - $ref: '#/components/parameters/campaignId'
+      responses:
+        '200':
+          description: Campaign details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Campaign not found
+    put:
+      operationId: updateCampaign
+      summary: Update a campaign
+      description: Update an existing advertising campaign.
+      tags:
+        - Campaigns
+      parameters:
+        - $ref: '#/components/parameters/campaignId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCampaignRequest'
+      responses:
+        '200':
+          description: Campaign updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Campaign not found
+    delete:
+      operationId: deleteCampaign
+      summary: Delete a campaign
+      description: Delete an advertising campaign.
+      tags:
+        - Campaigns
+      parameters:
+        - $ref: '#/components/parameters/campaignId'
+      responses:
+        '204':
+          description: Campaign deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Campaign not found
+  /campaigns/{campaignId}/analytics:
+    get:
+      operationId: getCampaignAnalytics
+      summary: Get campaign analytics
+      description: >-
+        Retrieve performance analytics for a specific campaign including
+        impressions, clicks, spend, and account-level engagement metrics.
+      tags:
+        - Analytics
+      parameters:
+        - $ref: '#/components/parameters/campaignId'
+        - name: start_date
+          in: query
+          required: false
+          description: Start date for analytics (YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: false
+          description: End date for analytics (YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Campaign analytics data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignAnalytics'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Campaign not found
+  /audiences:
+    get:
+      operationId: listAudiences
+      summary: List audiences
+      description: Retrieve a list of audience segments for advertising targeting.
+      tags:
+        - Audiences
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 25
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of audiences
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  audiences:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Audience'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createAudience
+      summary: Create an audience
+      description: Create a new audience segment for advertising targeting.
+      tags:
+        - Audiences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAudienceRequest'
+      responses:
+        '201':
+          description: Audience created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audience'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+  /audiences/{audienceId}:
+    get:
+      operationId: getAudience
+      summary: Get an audience
+      description: Retrieve details of a specific audience segment.
+      tags:
+        - Audiences
+      parameters:
+        - $ref: '#/components/parameters/audienceId'
+      responses:
+        '200':
+          description: Audience details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audience'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Audience not found
+    delete:
+      operationId: deleteAudience
+      summary: Delete an audience
+      description: Delete an audience segment.
+      tags:
+        - Audiences
+      parameters:
+        - $ref: '#/components/parameters/audienceId'
+      responses:
+        '204':
+          description: Audience deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Audience not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for API access
+  parameters:
+    campaignId:
+      name: campaignId
+      in: path
+      required: true
+      description: Campaign unique identifier
+      schema:
+        type: string
+    audienceId:
+      name: audienceId
+      in: path
+      required: true
+      description: Audience unique identifier
+      schema:
+        type: string
+  schemas:
+    Campaign:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Campaign unique identifier
+        name:
+          type: string
+          description: Campaign name
+        status:
+          type: string
+          enum:
+            - active
+            - paused
+            - completed
+            - draft
+          description: Campaign status
+        budget:
+          type: number
+          description: Campaign budget in USD
+        daily_budget:
+          type: number
+          description: Daily budget cap in USD
+        start_date:
+          type: string
+          format: date
+          description: Campaign start date
+        end_date:
+          type: string
+          format: date
+          description: Campaign end date
+        audience_id:
+          type: string
+          description: Associated audience segment ID
+        created_at:
+          type: string
+          format: date-time
+          description: Campaign creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+    CreateCampaignRequest:
+      type: object
+      required:
+        - name
+        - budget
+        - start_date
+      properties:
+        name:
+          type: string
+          description: Campaign name
+        budget:
+          type: number
+          description: Campaign budget in USD
+        daily_budget:
+          type: number
+          description: Daily budget cap in USD
+        start_date:
+          type: string
+          format: date
+          description: Campaign start date
+        end_date:
+          type: string
+          format: date
+          description: Campaign end date
+        audience_id:
+          type: string
+          description: Target audience segment ID
+    Audience:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Audience unique identifier
+        name:
+          type: string
+          description: Audience segment name
+        description:
+          type: string
+          description: Audience description
+        account_count:
+          type: integer
+          description: Number of accounts in the audience
+        criteria:
+          type: object
+          description: Targeting criteria for the audience
+          properties:
+            industries:
+              type: array
+              items:
+                type: string
+              description: Target industries
+            employee_ranges:
+              type: array
+              items:
+                type: string
+              description: Target employee count ranges
+            revenue_ranges:
+              type: array
+              items:
+                type: string
+              description: Target revenue ranges
+            countries:
+              type: array
+              items:
+                type: string
+              description: Target countries
+        created_at:
+          type: string
+          format: date-time
+          description: Audience creation timestamp
+    CreateAudienceRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Audience segment name
+        description:
+          type: string
+          description: Audience description
+        criteria:
+          type: object
+          properties:
+            industries:
+              type: array
+              items:
+                type: string
+            employee_ranges:
+              type: array
+              items:
+                type: string
+            revenue_ranges:
+              type: array
+              items:
+                type: string
+            countries:
+              type: array
+              items:
+                type: string
+    CampaignAnalytics:
+      type: object
+      properties:
+        campaign_id:
+          type: string
+          description: Campaign identifier
+        impressions:
+          type: integer
+          description: Total impressions served
+        clicks:
+          type: integer
+          description: Total clicks
+        ctr:
+          type: number
+          description: Click-through rate
+        spend:
+          type: number
+          description: Total spend in USD
+        accounts_reached:
+          type: integer
+          description: Number of unique accounts reached
+        accounts_engaged:
+          type: integer
+          description: Number of accounts showing engagement
+        cpm:
+          type: number
+          description: Cost per thousand impressions
+        start_date:
+          type: string
+          format: date
+          description: Analytics period start
+        end_date:
+          type: string
+          format: date
+          description: Analytics period end

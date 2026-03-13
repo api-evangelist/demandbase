@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.demandbase.com/schemas/demandbase/engagement.json",
+  "title": "Demandbase Account Engagement",
+  "description": "Represents account-level engagement data in Demandbase, including engagement scores across channels, activity counts, and trend indicators for ABM measurement.",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "description": "Demandbase account identifier"
+    },
+    "company_name": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "engagement_score": {
+      "type": "number",
+      "description": "Overall engagement score (0-100)"
+    },
+    "engagement_trend": {
+      "type": "string",
+      "enum": ["increasing", "stable", "decreasing"],
+      "description": "Engagement trend direction"
+    },
+    "web_engagement": {
+      "type": "number",
+      "description": "Web channel engagement score"
+    },
+    "email_engagement": {
+      "type": "number",
+      "description": "Email channel engagement score"
+    },
+    "ad_engagement": {
+      "type": "number",
+      "description": "Advertising channel engagement score"
+    },
+    "last_activity_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of most recent activity"
+    },
+    "total_activities": {
+      "type": "integer",
+      "description": "Total number of tracked activities"
+    },
+    "intent_strength": {
+      "type": "string",
+      "enum": ["high", "medium", "low"],
+      "description": "Overall intent signal strength"
+    },
+    "buying_stage": {
+      "type": "string",
+      "enum": ["awareness", "consideration", "decision", "purchase"],
+      "description": "Estimated buying journey stage"
+    }
+  }
+}

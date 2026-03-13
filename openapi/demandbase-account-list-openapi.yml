@@ -1,0 +1,371 @@
+openapi: 3.1.0
+info:
+  title: Demandbase Account List API
+  description: >-
+    Create, manage, and sync target account lists for ABM campaigns and
+    personalization efforts. Build dynamic and static account lists, add or
+    remove accounts, and sync lists with CRM systems.
+  version: '1.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+externalDocs:
+  description: Demandbase Account List API Documentation
+  url: https://docs.demandbase.com/docs/account-list-api
+servers:
+  - url: https://api.demandbase.com/accounts
+    description: Demandbase Account List API Production
+tags:
+  - name: Account Lists
+    description: Manage target account lists
+  - name: List Members
+    description: Manage accounts within lists
+  - name: Sync
+    description: CRM synchronization operations
+security:
+  - bearerAuth: []
+paths:
+  /lists:
+    get:
+      operationId: listAccountLists
+      summary: List account lists
+      description: Retrieve all target account lists with metadata.
+      tags:
+        - Account Lists
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 25
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of account lists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lists:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AccountList'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createAccountList
+      summary: Create an account list
+      description: Create a new target account list.
+      tags:
+        - Account Lists
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountListRequest'
+      responses:
+        '201':
+          description: Account list created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountList'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+  /lists/{listId}:
+    get:
+      operationId: getAccountList
+      summary: Get an account list
+      description: Retrieve details of a specific account list.
+      tags:
+        - Account Lists
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      responses:
+        '200':
+          description: Account list details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Account list not found
+    put:
+      operationId: updateAccountList
+      summary: Update an account list
+      description: Update an existing account list.
+      tags:
+        - Account Lists
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountListRequest'
+      responses:
+        '200':
+          description: Account list updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountList'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Account list not found
+    delete:
+      operationId: deleteAccountList
+      summary: Delete an account list
+      description: Delete a target account list.
+      tags:
+        - Account Lists
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      responses:
+        '204':
+          description: Account list deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Account list not found
+  /lists/{listId}/members:
+    get:
+      operationId: listAccountListMembers
+      summary: List account list members
+      description: Retrieve all accounts within a specific account list.
+      tags:
+        - List Members
+      parameters:
+        - $ref: '#/components/parameters/listId'
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 50
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of account members
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AccountListMember'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+        '404':
+          description: Account list not found
+    post:
+      operationId: addAccountListMembers
+      summary: Add accounts to list
+      description: Add one or more accounts to an account list.
+      tags:
+        - List Members
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - accounts
+              properties:
+                accounts:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      account_id:
+                        type: string
+                        description: Demandbase account ID
+                      domain:
+                        type: string
+                        description: Company domain (alternative to account_id)
+      responses:
+        '200':
+          description: Accounts added to list
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Account list not found
+  /lists/{listId}/members/{accountId}:
+    delete:
+      operationId: removeAccountListMember
+      summary: Remove account from list
+      description: Remove a specific account from an account list.
+      tags:
+        - List Members
+      parameters:
+        - $ref: '#/components/parameters/listId'
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Account removed from list
+        '401':
+          description: Unauthorized
+        '404':
+          description: Account or list not found
+  /lists/{listId}/sync:
+    post:
+      operationId: syncAccountList
+      summary: Sync account list to CRM
+      description: >-
+        Trigger synchronization of an account list with an integrated CRM system.
+      tags:
+        - Sync
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                target:
+                  type: string
+                  enum:
+                    - salesforce
+                    - hubspot
+                    - dynamics
+                  description: Target CRM system
+      responses:
+        '202':
+          description: Sync initiated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sync_id:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                      - pending
+                      - in_progress
+        '401':
+          description: Unauthorized
+        '404':
+          description: Account list not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for API access
+  parameters:
+    listId:
+      name: listId
+      in: path
+      required: true
+      description: Account list unique identifier
+      schema:
+        type: string
+  schemas:
+    AccountList:
+      type: object
+      properties:
+        id:
+          type: string
+          description: List unique identifier
+        name:
+          type: string
+          description: List name
+        description:
+          type: string
+          description: List description
+        type:
+          type: string
+          enum:
+            - static
+            - dynamic
+          description: List type
+        account_count:
+          type: integer
+          description: Number of accounts in the list
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        created_by:
+          type: string
+          description: User who created the list
+    CreateAccountListRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: List name
+        description:
+          type: string
+          description: List description
+        type:
+          type: string
+          enum:
+            - static
+            - dynamic
+          default: static
+          description: List type
+    AccountListMember:
+      type: object
+      properties:
+        account_id:
+          type: string
+          description: Demandbase account ID
+        company_name:
+          type: string
+          description: Company name
+        domain:
+          type: string
+          description: Company domain
+        added_at:
+          type: string
+          format: date-time
+          description: When the account was added to the list

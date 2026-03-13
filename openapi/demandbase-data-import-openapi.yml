@@ -1,0 +1,412 @@
+openapi: 3.1.0
+info:
+  title: Demandbase Data Import API
+  description: >-
+    Allows bulk, asynchronous, programmatic import of new data rows into
+    Demandbase One or updates to existing records, supporting data on accounts,
+    people, opportunities, and activities with CSV-based ingestion.
+  version: '1.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+externalDocs:
+  description: Demandbase Data Import API Documentation
+  url: https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+servers:
+  - url: https://api.demandbase.com
+    description: Demandbase Data Import API Production
+tags:
+  - name: Import Jobs
+    description: Create and manage data import jobs
+  - name: Uploads
+    description: Upload data files for import
+  - name: Mappings
+    description: Field mapping configuration
+security:
+  - bearerAuth: []
+paths:
+  /import/v1/jobs:
+    get:
+      operationId: listImportJobs
+      summary: List import jobs
+      description: Retrieve a list of data import jobs with their current status.
+      tags:
+        - Import Jobs
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: Filter by job status
+          schema:
+            type: string
+            enum:
+              - pending
+              - validating
+              - processing
+              - completed
+              - failed
+              - cancelled
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 25
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of import jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ImportJob'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createImportJob
+      summary: Create an import job
+      description: >-
+        Create a new asynchronous data import job. Specify the entity type,
+        operation mode (insert, update, or upsert), and field mappings.
+        Upload the CSV data file after creating the job.
+      tags:
+        - Import Jobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImportJobRequest'
+      responses:
+        '202':
+          description: Import job created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJob'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+  /import/v1/jobs/{jobId}:
+    get:
+      operationId: getImportJob
+      summary: Get import job status
+      description: >-
+        Retrieve the current status and details of a specific import job,
+        including processing progress and error summary.
+      tags:
+        - Import Jobs
+      parameters:
+        - $ref: '#/components/parameters/jobId'
+      responses:
+        '200':
+          description: Import job details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJob'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Import job not found
+    delete:
+      operationId: cancelImportJob
+      summary: Cancel an import job
+      description: Cancel a pending or validating import job.
+      tags:
+        - Import Jobs
+      parameters:
+        - $ref: '#/components/parameters/jobId'
+      responses:
+        '200':
+          description: Import job cancelled
+        '401':
+          description: Unauthorized
+        '404':
+          description: Import job not found
+        '409':
+          description: Job cannot be cancelled
+  /import/v1/jobs/{jobId}/upload:
+    post:
+      operationId: uploadImportFile
+      summary: Upload import file
+      description: >-
+        Upload a CSV file for an import job. The file must match the field
+        mappings specified when creating the job.
+      tags:
+        - Uploads
+      parameters:
+        - $ref: '#/components/parameters/jobId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: CSV file to import
+      responses:
+        '200':
+          description: File uploaded and validation started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJob'
+        '400':
+          description: Invalid file format or content
+        '401':
+          description: Unauthorized
+        '404':
+          description: Import job not found
+        '413':
+          description: File too large
+  /import/v1/jobs/{jobId}/errors:
+    get:
+      operationId: getImportErrors
+      summary: Get import errors
+      description: >-
+        Retrieve detailed error information for rows that failed during import.
+      tags:
+        - Import Jobs
+      parameters:
+        - $ref: '#/components/parameters/jobId'
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 100
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Import errors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ImportError'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+        '404':
+          description: Import job not found
+  /import/v1/mappings:
+    get:
+      operationId: listFieldMappings
+      summary: List field mappings
+      description: >-
+        Retrieve available field mappings for each entity type, showing
+        which fields can be imported and their requirements.
+      tags:
+        - Mappings
+      parameters:
+        - name: entity_type
+          in: query
+          required: false
+          description: Filter by entity type
+          schema:
+            type: string
+            enum:
+              - accounts
+              - people
+              - opportunities
+              - activities
+      responses:
+        '200':
+          description: Field mapping information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FieldMapping'
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for API access
+  parameters:
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      description: Import job unique identifier
+      schema:
+        type: string
+  schemas:
+    ImportJob:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Import job unique identifier
+        entity_type:
+          type: string
+          enum:
+            - accounts
+            - people
+            - opportunities
+            - activities
+          description: Type of entity being imported
+        operation:
+          type: string
+          enum:
+            - insert
+            - update
+            - upsert
+          description: Import operation mode
+        status:
+          type: string
+          enum:
+            - pending
+            - validating
+            - processing
+            - completed
+            - failed
+            - cancelled
+          description: Current job status
+        total_rows:
+          type: integer
+          description: Total number of rows in the import file
+        processed_rows:
+          type: integer
+          description: Number of rows processed so far
+        success_count:
+          type: integer
+          description: Number of rows successfully imported
+        error_count:
+          type: integer
+          description: Number of rows that failed
+        file_name:
+          type: string
+          description: Name of the uploaded file
+        file_size_bytes:
+          type: integer
+          description: Size of the uploaded file
+        created_at:
+          type: string
+          format: date-time
+          description: Job creation timestamp
+        started_at:
+          type: string
+          format: date-time
+          description: Processing start timestamp
+        completed_at:
+          type: string
+          format: date-time
+          description: Processing completion timestamp
+        error_message:
+          type: string
+          description: Error details if the job failed
+    CreateImportJobRequest:
+      type: object
+      required:
+        - entity_type
+        - operation
+      properties:
+        entity_type:
+          type: string
+          enum:
+            - accounts
+            - people
+            - opportunities
+            - activities
+          description: Type of entity to import
+        operation:
+          type: string
+          enum:
+            - insert
+            - update
+            - upsert
+          description: >-
+            Import operation mode. Insert creates new records, update modifies
+            existing records, upsert creates or updates based on match key.
+        match_key:
+          type: string
+          description: >-
+            Field used to match existing records for update/upsert operations
+            (e.g., domain, email, account_id)
+        field_mappings:
+          type: array
+          items:
+            type: object
+            properties:
+              csv_column:
+                type: string
+                description: Column name in the CSV file
+              demandbase_field:
+                type: string
+                description: Target Demandbase field name
+          description: Map CSV columns to Demandbase fields
+    ImportError:
+      type: object
+      properties:
+        row_number:
+          type: integer
+          description: Row number in the CSV file
+        field:
+          type: string
+          description: Field that caused the error
+        value:
+          type: string
+          description: Value that caused the error
+        error_type:
+          type: string
+          description: Type of error
+        message:
+          type: string
+          description: Error description
+    FieldMapping:
+      type: object
+      properties:
+        entity_type:
+          type: string
+          description: Entity type
+        field_name:
+          type: string
+          description: Demandbase field name
+        field_type:
+          type: string
+          description: Field data type
+        required:
+          type: boolean
+          description: Whether the field is required for import
+        description:
+          type: string
+          description: Field description

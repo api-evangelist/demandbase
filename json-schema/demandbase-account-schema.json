@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.demandbase.com/schemas/demandbase/account.json",
+  "title": "Demandbase Account",
+  "description": "Represents a company account in Demandbase with firmographic data, corporate hierarchy, and classification attributes used across ABM workflows.",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "description": "Unique Demandbase account identifier"
+    },
+    "company_name": {
+      "type": "string",
+      "description": "Official company name"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Primary web domain"
+    },
+    "website": {
+      "type": "string",
+      "format": "uri",
+      "description": "Company website URL"
+    },
+    "industry": {
+      "type": "string",
+      "description": "Industry classification"
+    },
+    "sub_industry": {
+      "type": "string",
+      "description": "Sub-industry classification"
+    },
+    "sic_code": {
+      "type": "string",
+      "description": "Standard Industrial Classification code"
+    },
+    "naics_code": {
+      "type": "string",
+      "description": "North American Industry Classification System code"
+    },
+    "employee_count": {
+      "type": "integer",
+      "description": "Number of employees"
+    },
+    "employee_range": {
+      "type": "string",
+      "description": "Employee count range bucket"
+    },
+    "revenue": {
+      "type": "number",
+      "description": "Annual revenue in USD"
+    },
+    "revenue_range": {
+      "type": "string",
+      "description": "Revenue range bucket"
+    },
+    "address": {
+      "type": "string",
+      "description": "Street address"
+    },
+    "city": {
+      "type": "string",
+      "description": "City"
+    },
+    "state": {
+      "type": "string",
+      "description": "State or province"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country"
+    },
+    "zip": {
+      "type": "string",
+      "description": "Postal code"
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO country code"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Primary phone number"
+    },
+    "stock_ticker": {
+      "type": "string",
+      "description": "Stock ticker symbol"
+    },
+    "founded_year": {
+      "type": "integer",
+      "description": "Year the company was founded"
+    },
+    "fortune_1000": {
+      "type": "boolean",
+      "description": "Whether the company is in the Fortune 1000"
+    },
+    "forbes_2000": {
+      "type": "boolean",
+      "description": "Whether the company is in the Forbes 2000"
+    },
+    "b2b": {
+      "type": "boolean",
+      "description": "Whether the company operates in the B2B space"
+    },
+    "b2c": {
+      "type": "boolean",
+      "description": "Whether the company operates in the B2C space"
+    },
+    "parent_company_id": {
+      "type": "string",
+      "description": "Demandbase ID of the parent company"
+    },
+    "parent_company_name": {
+      "type": "string",
+      "description": "Name of the parent company"
+    },
+    "ultimate_parent_company_id": {
+      "type": "string",
+      "description": "Demandbase ID of the ultimate parent company"
+    },
+    "ultimate_parent_company_name": {
+      "type": "string",
+      "description": "Name of the ultimate parent company"
+    }
+  }
+}

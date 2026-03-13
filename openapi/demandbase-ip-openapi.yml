@@ -1,0 +1,302 @@
+openapi: 3.1.0
+info:
+  title: Demandbase IP API
+  description: >-
+    Returns firmographic data for a specific IP address or cookie, enabling
+    real-time company identification of website visitors with attributes
+    including employee count, revenue, industry, and corporate hierarchy with
+    parent and ultimate parent IDs. This is the v3 API for Demandbase One.
+  version: '3.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+externalDocs:
+  description: Demandbase IP API v3 Documentation
+  url: https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+servers:
+  - url: https://api.demandbase.com
+    description: Demandbase IP API Production
+tags:
+  - name: IP Identification
+    description: Identify companies from IP addresses
+  - name: Cookie Identification
+    description: Identify companies from cookies
+security:
+  - apiKeyAuth: []
+paths:
+  /api/v3/ip.json:
+    get:
+      operationId: identifyCompanyByIp
+      summary: Identify company by IP address
+      description: >-
+        Look up firmographic data associated with a given IP address. Returns
+        detailed company information including name, industry, employee count,
+        revenue, location, and corporate hierarchy (parent and ultimate parent
+        company IDs).
+      tags:
+        - IP Identification
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: Demandbase API key
+          schema:
+            type: string
+        - name: query
+          in: query
+          required: true
+          description: IPv4 address to look up
+          schema:
+            type: string
+            format: ipv4
+        - name: callback
+          in: query
+          required: false
+          description: JSONP callback function name for cross-domain requests
+          schema:
+            type: string
+        - name: var
+          in: query
+          required: false
+          description: Variable name for JSONP response assignment
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Company identification result with firmographic data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IpIdentificationResult'
+        '400':
+          description: Invalid IP address or missing parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: No company identified for the given IP address
+        '429':
+          description: Rate limit exceeded
+  /api/v3/ip.json/{ip}:
+    get:
+      operationId: identifyCompanyByIpPath
+      summary: Identify company by IP address (path)
+      description: >-
+        Alternative endpoint for IP identification with the IP address
+        specified in the URL path.
+      tags:
+        - IP Identification
+      parameters:
+        - name: ip
+          in: path
+          required: true
+          description: IPv4 address to look up
+          schema:
+            type: string
+            format: ipv4
+        - name: key
+          in: query
+          required: true
+          description: Demandbase API key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Company identification result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IpIdentificationResult'
+        '401':
+          description: Unauthorized
+        '404':
+          description: No company identified
+  /api/v3/cookie.json:
+    get:
+      operationId: identifyCompanyByCookie
+      summary: Identify company by cookie
+      description: >-
+        Identify a company using Demandbase tracking cookie data. Provides
+        enhanced identification accuracy by combining IP-based identification
+        with cookie-based behavioral signals.
+      tags:
+        - Cookie Identification
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: Demandbase API key
+          schema:
+            type: string
+        - name: cookie
+          in: query
+          required: true
+          description: Demandbase tracking cookie value
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Company identification result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IpIdentificationResult'
+        '401':
+          description: Unauthorized
+        '404':
+          description: No company identified from the cookie
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: query
+      name: key
+      description: Demandbase API key passed as query parameter
+  schemas:
+    IpIdentificationResult:
+      type: object
+      properties:
+        company_name:
+          type: string
+          description: Identified company name
+        demandbase_sid:
+          type: integer
+          description: Demandbase company identifier (SID)
+        db_company_id:
+          type: string
+          description: Demandbase company ID
+        domain:
+          type: string
+          description: Primary company web domain
+        industry:
+          type: string
+          description: Industry classification
+        sub_industry:
+          type: string
+          description: Sub-industry classification
+        employee_count:
+          type: integer
+          description: Number of employees
+        employee_range:
+          type: string
+          description: Employee count range bucket
+        revenue:
+          type: number
+          description: Annual revenue in USD
+        revenue_range:
+          type: string
+          description: Revenue range bucket
+        street_address:
+          type: string
+          description: Street address
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State or province
+        zip:
+          type: string
+          description: Postal code
+        country:
+          type: string
+          description: Country name
+        country_code:
+          type: string
+          description: ISO country code
+        phone:
+          type: string
+          description: Primary phone number
+        website:
+          type: string
+          format: uri
+          description: Company website URL
+        stock_ticker:
+          type: string
+          description: Stock ticker symbol
+        sic_code:
+          type: string
+          description: SIC industry code
+        naics_code:
+          type: string
+          description: NAICS industry code
+        fortune_1000:
+          type: boolean
+          description: Whether the company is in the Fortune 1000
+        forbes_2000:
+          type: boolean
+          description: Whether the company is in the Forbes 2000
+        b2b:
+          type: boolean
+          description: Whether the company is a B2B company
+        b2c:
+          type: boolean
+          description: Whether the company is a B2C company
+        traffic:
+          type: string
+          description: Website traffic classification
+        isp:
+          type: boolean
+          description: Whether the IP belongs to an ISP rather than a company
+        parent_company_id:
+          type: string
+          description: Demandbase ID of the parent company
+        parent_company_name:
+          type: string
+          description: Name of the parent company
+        ultimate_parent_company_id:
+          type: string
+          description: Demandbase ID of the ultimate parent company
+        ultimate_parent_company_name:
+          type: string
+          description: Name of the ultimate parent company
+        registry_company_name:
+          type: string
+          description: Company name from the IP address registry
+        registry_city:
+          type: string
+          description: City from the IP address registry
+        registry_state:
+          type: string
+          description: State from the IP address registry
+        registry_country:
+          type: string
+          description: Country from the IP address registry
+        registry_country_code:
+          type: string
+          description: Country code from the IP address registry
+        ip:
+          type: string
+          description: The queried IP address
+        information_level:
+          type: string
+          enum:
+            - Detailed
+            - Basic
+            - Limited
+          description: Level of information available for this IP
+        audience:
+          type: string
+          description: Audience segment classification
+        audience_segment:
+          type: string
+          description: Detailed audience segment
+        latitude:
+          type: number
+          description: Latitude of the IP geolocation
+        longitude:
+          type: number
+          description: Longitude of the IP geolocation
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code

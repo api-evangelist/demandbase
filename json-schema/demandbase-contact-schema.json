@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.demandbase.com/schemas/demandbase/contact.json",
+  "title": "Demandbase Contact",
+  "description": "Represents a business contact in Demandbase with professional details, company association, and contact information for B2B engagement.",
+  "type": "object",
+  "properties": {
+    "contact_id": {
+      "type": "string",
+      "description": "Unique Demandbase contact identifier"
+    },
+    "first_name": {
+      "type": "string",
+      "description": "First name"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Last name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Business email address"
+    },
+    "title": {
+      "type": "string",
+      "description": "Job title"
+    },
+    "department": {
+      "type": "string",
+      "description": "Department or functional area"
+    },
+    "seniority": {
+      "type": "string",
+      "description": "Seniority level (e.g., C-Level, VP, Director, Manager)"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Direct phone number"
+    },
+    "linkedin_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "LinkedIn profile URL"
+    },
+    "company_id": {
+      "type": "string",
+      "description": "Associated Demandbase company ID"
+    },
+    "company_name": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "company_domain": {
+      "type": "string",
+      "description": "Company web domain"
+    }
+  }
+}
