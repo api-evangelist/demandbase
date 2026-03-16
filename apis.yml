@@ -1,10 +1,12 @@
+aid: demandbase
 name: Demandbase
 description: Demandbase is the leading Account-Based Marketing (ABM) platform that helps B2B companies identify, engage, and convert target accounts through intent data, advertising, personalization, and sales intelligence.
-image: https://www.demandbase.com/wp-content/themes/demandbase/assets/images/demandbase-logo.svg
-created: 2024-01-20 00:00:00+00:00
-modified: '2026-03-04'
-specificationVersion: '0.18'
-url: https://www.demandbase.com
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/demandbase/refs/heads/main/apis.yml
+created: '2024-01-20'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 tags:
 - account-based marketing
 - b2b marketing
