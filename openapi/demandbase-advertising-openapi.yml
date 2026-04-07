@@ -31,7 +31,7 @@ paths:
   /campaigns:
     get:
       operationId: listCampaigns
-      summary: List campaigns
+      summary: Demandbase List campaigns
       description: >-
         Retrieve a list of advertising campaigns with optional filtering
         by status, date range, and other parameters.
@@ -82,7 +82,7 @@ paths:
           description: Unauthorized
     post:
       operationId: createCampaign
-      summary: Create a campaign
+      summary: Demandbase Create a campaign
       description: Create a new advertising campaign with targeting and budget settings.
       tags:
         - Campaigns
@@ -106,7 +106,7 @@ paths:
   /campaigns/{campaignId}:
     get:
       operationId: getCampaign
-      summary: Get a campaign
+      summary: Demandbase Get a campaign
       description: Retrieve details of a specific advertising campaign.
       tags:
         - Campaigns
@@ -125,7 +125,7 @@ paths:
           description: Campaign not found
     put:
       operationId: updateCampaign
-      summary: Update a campaign
+      summary: Demandbase Update a campaign
       description: Update an existing advertising campaign.
       tags:
         - Campaigns
@@ -152,7 +152,7 @@ paths:
           description: Campaign not found
     delete:
       operationId: deleteCampaign
-      summary: Delete a campaign
+      summary: Demandbase Delete a campaign
       description: Delete an advertising campaign.
       tags:
         - Campaigns
@@ -168,7 +168,7 @@ paths:
   /campaigns/{campaignId}/analytics:
     get:
       operationId: getCampaignAnalytics
-      summary: Get campaign analytics
+      summary: Demandbase Get campaign analytics
       description: >-
         Retrieve performance analytics for a specific campaign including
         impressions, clicks, spend, and account-level engagement metrics.
@@ -204,7 +204,7 @@ paths:
   /audiences:
     get:
       operationId: listAudiences
-      summary: List audiences
+      summary: Demandbase List audiences
       description: Retrieve a list of audience segments for advertising targeting.
       tags:
         - Audiences
@@ -239,7 +239,7 @@ paths:
           description: Unauthorized
     post:
       operationId: createAudience
-      summary: Create an audience
+      summary: Demandbase Create an audience
       description: Create a new audience segment for advertising targeting.
       tags:
         - Audiences
@@ -263,7 +263,7 @@ paths:
   /audiences/{audienceId}:
     get:
       operationId: getAudience
-      summary: Get an audience
+      summary: Demandbase Get an audience
       description: Retrieve details of a specific audience segment.
       tags:
         - Audiences
@@ -282,7 +282,7 @@ paths:
           description: Audience not found
     delete:
       operationId: deleteAudience
-      summary: Delete an audience
+      summary: Demandbase Delete an audience
       description: Delete an audience segment.
       tags:
         - Audiences

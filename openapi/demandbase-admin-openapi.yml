@@ -29,7 +29,7 @@ paths:
   /admin/v1/users:
     get:
       operationId: listUsers
-      summary: List users
+      summary: Demandbase List users
       description: >-
         Retrieve a list of all users in the Demandbase One organization
         with their roles and status.
@@ -85,7 +85,7 @@ paths:
           description: Forbidden - insufficient permissions
     post:
       operationId: createUser
-      summary: Create a user
+      summary: Demandbase Create a user
       description: Create a new user in the Demandbase One organization.
       tags:
         - Users
@@ -113,7 +113,7 @@ paths:
   /admin/v1/users/{userId}:
     get:
       operationId: getUser
-      summary: Get a user
+      summary: Demandbase Get a user
       description: Retrieve details of a specific user.
       tags:
         - Users
@@ -134,7 +134,7 @@ paths:
           description: User not found
     put:
       operationId: updateUser
-      summary: Update a user
+      summary: Demandbase Update a user
       description: Update an existing user's details and role assignments.
       tags:
         - Users
@@ -163,7 +163,7 @@ paths:
           description: User not found
     delete:
       operationId: deleteUser
-      summary: Delete a user
+      summary: Demandbase Delete a user
       description: Delete a user from the Demandbase One organization.
       tags:
         - Users
@@ -181,7 +181,7 @@ paths:
   /admin/v1/api-keys:
     get:
       operationId: listApiKeys
-      summary: List API key sets
+      summary: Demandbase List API key sets
       description: Retrieve all API key sets for the organization.
       tags:
         - API Keys
@@ -203,7 +203,7 @@ paths:
           description: Forbidden
     post:
       operationId: createApiKey
-      summary: Create an API key set
+      summary: Demandbase Create an API key set
       description: >-
         Generate a new API key set for programmatic access to Demandbase APIs.
       tags:
@@ -230,7 +230,7 @@ paths:
   /admin/v1/api-keys/{keyId}:
     get:
       operationId: getApiKey
-      summary: Get an API key set
+      summary: Demandbase Get an API key set
       description: Retrieve details of a specific API key set.
       tags:
         - API Keys
@@ -249,7 +249,7 @@ paths:
           description: API key set not found
     delete:
       operationId: deleteApiKey
-      summary: Delete an API key set
+      summary: Demandbase Delete an API key set
       description: Revoke and delete an API key set.
       tags:
         - API Keys
@@ -265,7 +265,7 @@ paths:
   /admin/v1/roles:
     get:
       operationId: listRoles
-      summary: List roles
+      summary: Demandbase List roles
       description: Retrieve all available roles and their permissions.
       tags:
         - Roles

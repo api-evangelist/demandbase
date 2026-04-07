@@ -31,7 +31,7 @@ paths:
   /data/v1/companies/search:
     get:
       operationId: searchCompanies
-      summary: Search companies
+      summary: Demandbase Search companies
       description: >-
         Search for companies by name, domain, industry, location, or other
         firmographic attributes. Returns matching companies with detailed
@@ -111,7 +111,7 @@ paths:
   /data/v1/companies/{companyId}:
     get:
       operationId: getCompany
-      summary: Get company details
+      summary: Demandbase Get company details
       description: >-
         Retrieve detailed company information by Demandbase company ID,
         including firmographics, technographics, and corporate hierarchy.
@@ -133,7 +133,7 @@ paths:
   /data/v1/contacts/search:
     get:
       operationId: searchContacts
-      summary: Search contacts
+      summary: Demandbase Search contacts
       description: >-
         Search for business contacts by name, title, company, or other
         attributes. Returns matching contact profiles.
@@ -210,7 +210,7 @@ paths:
   /data/v1/contacts/{contactId}:
     get:
       operationId: getContact
-      summary: Get contact details
+      summary: Demandbase Get contact details
       description: Retrieve detailed information for a specific contact.
       tags:
         - Contacts
@@ -234,7 +234,7 @@ paths:
   /data/v1/enrichment/company:
     post:
       operationId: enrichCompany
-      summary: Enrich company data
+      summary: Demandbase Enrich company data
       description: >-
         Enrich a company record with Demandbase data by providing a domain,
         company name, or other identifiers.
@@ -272,7 +272,7 @@ paths:
   /data/v1/enrichment/contact:
     post:
       operationId: enrichContact
-      summary: Enrich contact data
+      summary: Demandbase Enrich contact data
       description: >-
         Enrich a contact record with Demandbase data by providing email,
         name, or other identifiers.
@@ -314,7 +314,7 @@ paths:
   /data/v1/technographics/{domain}:
     get:
       operationId: getTechnographics
-      summary: Get technographic data
+      summary: Demandbase Get technographic data
       description: >-
         Retrieve technology usage data for a company by domain, including
         technologies detected and categories.

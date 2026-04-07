@@ -28,7 +28,7 @@ paths:
   /export/v1/jobs:
     get:
       operationId: listExportJobs
-      summary: List export jobs
+      summary: Demandbase List export jobs
       description: >-
         Retrieve a list of data export jobs with their current status and
         metadata.
@@ -77,7 +77,7 @@ paths:
           description: Unauthorized
     post:
       operationId: createExportJob
-      summary: Create an export job
+      summary: Demandbase Create an export job
       description: >-
         Create a new asynchronous data export job. Specify the entity type,
         fields to export, filters, and date range. Exported data is delivered
@@ -106,7 +106,7 @@ paths:
   /export/v1/jobs/{jobId}:
     get:
       operationId: getExportJob
-      summary: Get export job status
+      summary: Demandbase Get export job status
       description: >-
         Retrieve the current status and details of a specific export job,
         including progress information and download URLs when complete.
@@ -127,7 +127,7 @@ paths:
           description: Export job not found
     delete:
       operationId: cancelExportJob
-      summary: Cancel an export job
+      summary: Demandbase Cancel an export job
       description: Cancel a pending or processing export job.
       tags:
         - Export Jobs
@@ -149,7 +149,7 @@ paths:
   /export/v1/jobs/{jobId}/download:
     get:
       operationId: downloadExportFile
-      summary: Download export file
+      summary: Demandbase Download export file
       description: >-
         Download the exported CSV file for a completed export job. Returns
         a redirect to a pre-signed download URL.
@@ -181,7 +181,7 @@ paths:
   /export/v1/entities:
     get:
       operationId: listExportableEntities
-      summary: List exportable entities
+      summary: Demandbase List exportable entities
       description: >-
         Retrieve the list of entity types available for export and their
         supported fields.

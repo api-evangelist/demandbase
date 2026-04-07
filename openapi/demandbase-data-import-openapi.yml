@@ -29,7 +29,7 @@ paths:
   /import/v1/jobs:
     get:
       operationId: listImportJobs
-      summary: List import jobs
+      summary: Demandbase List import jobs
       description: Retrieve a list of data import jobs with their current status.
       tags:
         - Import Jobs
@@ -77,7 +77,7 @@ paths:
           description: Unauthorized
     post:
       operationId: createImportJob
-      summary: Create an import job
+      summary: Demandbase Create an import job
       description: >-
         Create a new asynchronous data import job. Specify the entity type,
         operation mode (insert, update, or upsert), and field mappings.
@@ -104,7 +104,7 @@ paths:
   /import/v1/jobs/{jobId}:
     get:
       operationId: getImportJob
-      summary: Get import job status
+      summary: Demandbase Get import job status
       description: >-
         Retrieve the current status and details of a specific import job,
         including processing progress and error summary.
@@ -125,7 +125,7 @@ paths:
           description: Import job not found
     delete:
       operationId: cancelImportJob
-      summary: Cancel an import job
+      summary: Demandbase Cancel an import job
       description: Cancel a pending or validating import job.
       tags:
         - Import Jobs
@@ -143,7 +143,7 @@ paths:
   /import/v1/jobs/{jobId}/upload:
     post:
       operationId: uploadImportFile
-      summary: Upload import file
+      summary: Demandbase Upload import file
       description: >-
         Upload a CSV file for an import job. The file must match the field
         mappings specified when creating the job.
@@ -182,7 +182,7 @@ paths:
   /import/v1/jobs/{jobId}/errors:
     get:
       operationId: getImportErrors
-      summary: Get import errors
+      summary: Demandbase Get import errors
       description: >-
         Retrieve detailed error information for rows that failed during import.
       tags:
@@ -222,7 +222,7 @@ paths:
   /import/v1/mappings:
     get:
       operationId: listFieldMappings
-      summary: List field mappings
+      summary: Demandbase List field mappings
       description: >-
         Retrieve available field mappings for each entity type, showing
         which fields can be imported and their requirements.

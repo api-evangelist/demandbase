@@ -27,7 +27,7 @@ paths:
   /api/v3/ip.json:
     get:
       operationId: identifyByIp
-      summary: Identify company by IP address
+      summary: Demandbase Identify company by IP address
       description: >-
         Identify the company associated with a given IP address in real-time.
         Returns firmographic data, intent signals, and company attributes for
@@ -72,7 +72,7 @@ paths:
   /api/v3/domain.json:
     get:
       operationId: identifyByDomain
-      summary: Identify company by domain
+      summary: Demandbase Identify company by domain
       description: >-
         Resolve a company from a web domain and return firmographic data and
         company attributes.
@@ -105,7 +105,7 @@ paths:
   /api/v3/visitor.json:
     get:
       operationId: getVisitorIntelligence
-      summary: Get visitor intelligence
+      summary: Demandbase Get visitor intelligence
       description: >-
         Retrieve visitor intelligence for the current request, combining IP
         identification with cookie-based signals for enhanced accuracy.

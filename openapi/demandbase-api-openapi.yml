@@ -32,7 +32,7 @@ paths:
   /accounts/search:
     get:
       operationId: searchAccounts
-      summary: Search accounts
+      summary: Demandbase Search accounts
       description: >-
         Search for accounts by company name, domain, or other firmographic
         attributes. Returns matching account records with firmographic data.
@@ -84,7 +84,7 @@ paths:
   /accounts/{accountId}:
     get:
       operationId: getAccount
-      summary: Get account by ID
+      summary: Demandbase Get account by ID
       description: >-
         Retrieve detailed firmographic and account information for a specific
         account by its Demandbase account ID.
@@ -106,7 +106,7 @@ paths:
   /accounts/domain/{domain}:
     get:
       operationId: getAccountByDomain
-      summary: Get account by domain
+      summary: Demandbase Get account by domain
       description: >-
         Look up a company account by its web domain. Returns firmographic
         data and account attributes for the matched company.
@@ -134,7 +134,7 @@ paths:
   /enrichment/account:
     post:
       operationId: enrichAccount
-      summary: Enrich account record
+      summary: Demandbase Enrich account record
       description: >-
         Enrich an account record with Demandbase firmographic data, intent
         signals, and technographic information by providing a domain or
@@ -163,7 +163,7 @@ paths:
   /firmographics/{domain}:
     get:
       operationId: getFirmographics
-      summary: Get firmographic data
+      summary: Demandbase Get firmographic data
       description: >-
         Retrieve firmographic data for a company by its domain, including
         employee count, revenue, industry, location, and corporate hierarchy.

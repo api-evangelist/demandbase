@@ -31,7 +31,7 @@ paths:
   /accounts/{accountId}/engagement:
     get:
       operationId: getAccountEngagement
-      summary: Get account engagement
+      summary: Demandbase Get account engagement
       description: >-
         Retrieve the engagement score and engagement metrics for a specific
         account, including channel-level breakdown and trend data.
@@ -67,7 +67,7 @@ paths:
   /accounts/{accountId}/activities:
     get:
       operationId: getAccountActivities
-      summary: Get account activities
+      summary: Demandbase Get account activities
       description: >-
         Retrieve the activity stream for a specific account, including web
         visits, email interactions, ad engagements, and other tracked events.
@@ -123,7 +123,7 @@ paths:
   /accounts/{accountId}/intent:
     get:
       operationId: getAccountIntent
-      summary: Get account intent signals
+      summary: Demandbase Get account intent signals
       description: >-
         Retrieve intent signals and buying indicators for a specific account,
         including keyword-level intent data and trend information.
@@ -145,7 +145,7 @@ paths:
   /engagement/summary:
     get:
       operationId: getEngagementSummary
-      summary: Get engagement summary
+      summary: Demandbase Get engagement summary
       description: >-
         Retrieve a summary of engagement metrics across all tracked accounts,
         including top engaged accounts and trend data.
@@ -192,7 +192,7 @@ paths:
   /webhooks:
     get:
       operationId: listWebhooks
-      summary: List webhooks
+      summary: Demandbase List webhooks
       description: Retrieve all configured webhook subscriptions.
       tags:
         - Webhooks
@@ -212,7 +212,7 @@ paths:
           description: Unauthorized
     post:
       operationId: createWebhook
-      summary: Create a webhook
+      summary: Demandbase Create a webhook
       description: >-
         Create a new webhook subscription to receive real-time notifications
         for engagement events.
@@ -238,7 +238,7 @@ paths:
   /webhooks/{webhookId}:
     delete:
       operationId: deleteWebhook
-      summary: Delete a webhook
+      summary: Demandbase Delete a webhook
       description: Delete a webhook subscription.
       tags:
         - Webhooks

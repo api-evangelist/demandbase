@@ -29,7 +29,7 @@ paths:
   /lists:
     get:
       operationId: listAccountLists
-      summary: List account lists
+      summary: Demandbase List account lists
       description: Retrieve all target account lists with metadata.
       tags:
         - Account Lists
@@ -64,7 +64,7 @@ paths:
           description: Unauthorized
     post:
       operationId: createAccountList
-      summary: Create an account list
+      summary: Demandbase Create an account list
       description: Create a new target account list.
       tags:
         - Account Lists
@@ -88,7 +88,7 @@ paths:
   /lists/{listId}:
     get:
       operationId: getAccountList
-      summary: Get an account list
+      summary: Demandbase Get an account list
       description: Retrieve details of a specific account list.
       tags:
         - Account Lists
@@ -107,7 +107,7 @@ paths:
           description: Account list not found
     put:
       operationId: updateAccountList
-      summary: Update an account list
+      summary: Demandbase Update an account list
       description: Update an existing account list.
       tags:
         - Account Lists
@@ -134,7 +134,7 @@ paths:
           description: Account list not found
     delete:
       operationId: deleteAccountList
-      summary: Delete an account list
+      summary: Demandbase Delete an account list
       description: Delete a target account list.
       tags:
         - Account Lists
@@ -150,7 +150,7 @@ paths:
   /lists/{listId}/members:
     get:
       operationId: listAccountListMembers
-      summary: List account list members
+      summary: Demandbase List account list members
       description: Retrieve all accounts within a specific account list.
       tags:
         - List Members
@@ -188,7 +188,7 @@ paths:
           description: Account list not found
     post:
       operationId: addAccountListMembers
-      summary: Add accounts to list
+      summary: Demandbase Add accounts to list
       description: Add one or more accounts to an account list.
       tags:
         - List Members
@@ -226,7 +226,7 @@ paths:
   /lists/{listId}/members/{accountId}:
     delete:
       operationId: removeAccountListMember
-      summary: Remove account from list
+      summary: Demandbase Remove account from list
       description: Remove a specific account from an account list.
       tags:
         - List Members
@@ -247,7 +247,7 @@ paths:
   /lists/{listId}/sync:
     post:
       operationId: syncAccountList
-      summary: Sync account list to CRM
+      summary: Demandbase Sync account list to CRM
       description: >-
         Trigger synchronization of an account list with an integrated CRM system.
       tags:
