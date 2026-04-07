@@ -17,10 +17,10 @@ servers:
   - url: https://api.demandbase.com/engagement
     description: Demandbase Engagement API Production
 tags:
-  - name: Engagement
-    description: Account engagement scores and metrics
   - name: Activities
     description: Activity streams and event tracking
+  - name: Engagement
+    description: Account engagement scores and metrics
   - name: Intent
     description: Intent signals and buying indicators
   - name: Webhooks

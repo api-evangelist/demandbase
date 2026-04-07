@@ -18,10 +18,10 @@ servers:
   - url: https://api.demandbase.com
     description: Demandbase IP API Production
 tags:
-  - name: IP Identification
-    description: Identify companies from IP addresses
   - name: Cookie Identification
     description: Identify companies from cookies
+  - name: IP Identification
+    description: Identify companies from IP addresses
 security:
   - apiKeyAuth: []
 paths:

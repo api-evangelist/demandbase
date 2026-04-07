@@ -18,10 +18,10 @@ servers:
   - url: https://api.demandbase.com
     description: Demandbase Data Export API Production
 tags:
-  - name: Export Jobs
-    description: Create and manage data export jobs
   - name: Downloads
     description: Download exported data files
+  - name: Export Jobs
+    description: Create and manage data export jobs
 security:
   - bearerAuth: []
 paths:

@@ -19,10 +19,10 @@ servers:
 tags:
   - name: Import Jobs
     description: Create and manage data import jobs
-  - name: Uploads
-    description: Upload data files for import
   - name: Mappings
     description: Field mapping configuration
+  - name: Uploads
+    description: Upload data files for import
 security:
   - bearerAuth: []
 paths:

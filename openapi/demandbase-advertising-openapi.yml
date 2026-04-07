@@ -17,14 +17,12 @@ servers:
   - url: https://api.demandbase.com/advertising
     description: Demandbase Advertising API Production
 tags:
-  - name: Campaigns
-    description: Manage advertising campaigns
-  - name: Audiences
-    description: Create and manage audience segments
   - name: Analytics
     description: Retrieve campaign performance metrics
-  - name: Creatives
-    description: Manage ad creatives
+  - name: Audiences
+    description: Create and manage audience segments
+  - name: Campaigns
+    description: Manage advertising campaigns
 security:
   - bearerAuth: []
 paths:

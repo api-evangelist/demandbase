@@ -17,12 +17,12 @@ servers:
   - url: https://api.demandbase.com
     description: Demandbase Admin API Production
 tags:
-  - name: Users
-    description: User management operations
   - name: API Keys
     description: API key set management
   - name: Roles
     description: Role and permission management
+  - name: Users
+    description: User management operations
 security:
   - bearerAuth: []
 paths:

@@ -20,12 +20,12 @@ servers:
 tags:
   - name: Accounts
     description: Look up and retrieve account information
+  - name: Enrichment
+    description: Enrich account and contact records with B2B data
   - name: Firmographics
     description: Access firmographic data for companies
   - name: Identification
     description: Identify companies from various signals
-  - name: Enrichment
-    description: Enrich account and contact records with B2B data
 security:
   - apiKeyAuth: []
 paths:
