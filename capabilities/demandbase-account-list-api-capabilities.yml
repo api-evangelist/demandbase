@@ -1,0 +1,55 @@
+name: Demandbase Account List API Capabilities
+description: >-
+  Capabilities for creating and managing target account lists used in
+  ABM campaigns and personalization.
+capabilities:
+  - name: List Account Lists
+    description: List all account lists in the workspace.
+    operationId: listAccountLists
+    method: GET
+    path: /lists
+  - name: Create Account List
+    description: Create a new target account list.
+    operationId: createAccountList
+    method: POST
+    path: /lists
+  - name: Get Account List
+    description: Retrieve a specific account list by ID.
+    operationId: getAccountList
+    method: GET
+    path: /lists/{listId}
+  - name: Update Account List
+    description: Update metadata or filters of an existing account list.
+    operationId: updateAccountList
+    method: PUT
+    path: /lists/{listId}
+  - name: Delete Account List
+    description: Delete an account list.
+    operationId: deleteAccountList
+    method: DELETE
+    path: /lists/{listId}
+  - name: List Members
+    description: List the accounts that belong to a list.
+    operationId: listAccountListMembers
+    method: GET
+    path: /lists/{listId}/members
+  - name: Add Members
+    description: Add accounts to an account list.
+    operationId: addAccountListMembers
+    method: POST
+    path: /lists/{listId}/members
+  - name: Remove Member
+    description: Remove an account from an account list.
+    operationId: removeAccountListMember
+    method: DELETE
+    path: /lists/{listId}/members/{accountId}
+  - name: Sync Account List
+    description: Synchronize an account list with connected CRM or ad platforms.
+    operationId: syncAccountList
+    method: POST
+    path: /lists/{listId}/sync
+use_cases:
+  - name: ABM target list management
+    description: Curate prioritized account lists for ABM motions across marketing and sales.
+  - name: CRM and ad platform sync
+    description: Push account lists to Salesforce, HubSpot, and ad networks for activation.

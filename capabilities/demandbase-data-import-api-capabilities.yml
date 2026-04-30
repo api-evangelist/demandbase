@@ -1,0 +1,45 @@
+name: Demandbase Data Import API Capabilities
+description: >-
+  Capabilities for orchestrating bulk asynchronous CSV imports of
+  accounts, people, opportunities, and activities into Demandbase One.
+capabilities:
+  - name: List Import Jobs
+    description: List bulk import jobs.
+    operationId: listImportJobs
+    method: GET
+    path: /import/v1/jobs
+  - name: Create Import Job
+    description: Submit a new bulk import job.
+    operationId: createImportJob
+    method: POST
+    path: /import/v1/jobs
+  - name: Get Import Job
+    description: Get the status and metadata of an import job.
+    operationId: getImportJob
+    method: GET
+    path: /import/v1/jobs/{jobId}
+  - name: Cancel Import Job
+    description: Cancel a running import job.
+    operationId: cancelImportJob
+    method: DELETE
+    path: /import/v1/jobs/{jobId}
+  - name: Upload Import File
+    description: Upload a CSV payload for an import job.
+    operationId: uploadImportFile
+    method: POST
+    path: /import/v1/jobs/{jobId}/upload
+  - name: Get Import Errors
+    description: Retrieve row-level errors for a completed or failed import job.
+    operationId: getImportErrors
+    method: GET
+    path: /import/v1/jobs/{jobId}/errors
+  - name: List Field Mappings
+    description: List field mappings used to map CSV columns to Demandbase fields.
+    operationId: listFieldMappings
+    method: GET
+    path: /import/v1/mappings
+use_cases:
+  - name: CRM-to-Demandbase loading
+    description: Push CRM accounts, contacts, and opportunities into Demandbase in bulk.
+  - name: Activity ingestion
+    description: Ingest external engagement activity events for unified account history.

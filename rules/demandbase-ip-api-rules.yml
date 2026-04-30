@@ -1,0 +1,26 @@
+extends:
+  - spectral:oas
+rules:
+  demandbase-ip-base-url:
+    description: Servers should reference api.demandbase.com or company-target.com.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "(demandbase|company-target)\\.com"
+  demandbase-ip-apikey-auth:
+    description: IP API should declare apiKey authentication.
+    given: $.components.securitySchemes
+    severity: error
+    then:
+      field: apiKeyAuth
+      function: truthy
+  demandbase-ip-resource:
+    description: IP API should expose /api/v3/ip.json.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/api/v3/ip"

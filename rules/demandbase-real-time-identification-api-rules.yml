@@ -1,0 +1,34 @@
+extends:
+  - spectral:oas
+rules:
+  demandbase-rtid-base-url:
+    description: Servers should reference api.company-target.com or api.demandbase.com.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "(company-target|demandbase)\\.com"
+  demandbase-rtid-apikey-auth:
+    description: Real-Time Identification API should declare apiKey authentication.
+    given: $.components.securitySchemes
+    severity: error
+    then:
+      field: apiKeyAuth
+      function: truthy
+  demandbase-rtid-ip-resource:
+    description: Real-Time Identification API should expose /api/v3/ip.json.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "ip"
+  demandbase-rtid-domain-resource:
+    description: Real-Time Identification API should expose /api/v3/domain.json.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "domain"

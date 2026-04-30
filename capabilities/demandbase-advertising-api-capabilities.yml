@@ -1,0 +1,62 @@
+name: Demandbase Advertising API Capabilities
+description: >-
+  Capabilities for managing ABM advertising campaigns, audiences, and
+  performance analytics.
+capabilities:
+  - name: List Campaigns
+    description: List advertising campaigns.
+    operationId: listCampaigns
+    method: GET
+    path: /campaigns
+  - name: Create Campaign
+    description: Create a new advertising campaign.
+    operationId: createCampaign
+    method: POST
+    path: /campaigns
+  - name: Get Campaign
+    description: Retrieve a campaign by ID.
+    operationId: getCampaign
+    method: GET
+    path: /campaigns/{campaignId}
+  - name: Update Campaign
+    description: Update campaign settings, targeting, or budget.
+    operationId: updateCampaign
+    method: PUT
+    path: /campaigns/{campaignId}
+  - name: Delete Campaign
+    description: Archive or delete a campaign.
+    operationId: deleteCampaign
+    method: DELETE
+    path: /campaigns/{campaignId}
+  - name: Get Campaign Analytics
+    description: Retrieve performance metrics for a campaign.
+    operationId: getCampaignAnalytics
+    method: GET
+    path: /campaigns/{campaignId}/analytics
+  - name: List Audiences
+    description: List ABM audiences.
+    operationId: listAudiences
+    method: GET
+    path: /audiences
+  - name: Create Audience
+    description: Create a new ABM audience definition.
+    operationId: createAudience
+    method: POST
+    path: /audiences
+  - name: Get Audience
+    description: Retrieve an audience by ID.
+    operationId: getAudience
+    method: GET
+    path: /audiences/{audienceId}
+  - name: Delete Audience
+    description: Delete an audience.
+    operationId: deleteAudience
+    method: DELETE
+    path: /audiences/{audienceId}
+use_cases:
+  - name: Programmatic ABM advertising
+    description: Programmatically create and optimize account-based ad campaigns.
+  - name: Audience activation
+    description: Sync target account lists into audience definitions for cross-channel activation.
+  - name: Campaign analytics
+    description: Pipe ABM campaign performance into BI and attribution stacks.

@@ -1,0 +1,41 @@
+name: Demandbase Data Export API Capabilities
+description: >-
+  Capabilities for orchestrating bulk asynchronous CSV exports of
+  accounts, people, opportunities, activities, campaigns, and Buying
+  Groups out of Demandbase One.
+capabilities:
+  - name: List Export Jobs
+    description: List bulk export jobs.
+    operationId: listExportJobs
+    method: GET
+    path: /export/v1/jobs
+  - name: Create Export Job
+    description: Submit a new bulk export job.
+    operationId: createExportJob
+    method: POST
+    path: /export/v1/jobs
+  - name: Get Export Job
+    description: Get the status and metadata of an export job.
+    operationId: getExportJob
+    method: GET
+    path: /export/v1/jobs/{jobId}
+  - name: Cancel Export Job
+    description: Cancel a running export job.
+    operationId: cancelExportJob
+    method: DELETE
+    path: /export/v1/jobs/{jobId}
+  - name: Download Export File
+    description: Download the resulting CSV for a completed export job.
+    operationId: downloadExportFile
+    method: GET
+    path: /export/v1/jobs/{jobId}/download
+  - name: List Exportable Entities
+    description: List the entity types that can be exported.
+    operationId: listExportableEntities
+    method: GET
+    path: /export/v1/entities
+use_cases:
+  - name: Data warehouse hydration
+    description: Bulk-load Demandbase records into Snowflake, BigQuery, or Redshift for downstream analytics.
+  - name: Audit and reporting
+    description: Generate point-in-time exports of accounts, people, and opportunities for compliance.

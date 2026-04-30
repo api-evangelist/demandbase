@@ -1,0 +1,27 @@
+name: Demandbase IP API Capabilities
+description: >-
+  Capabilities for identifying companies from IP addresses and cookies,
+  returning firmographics and corporate hierarchy.
+capabilities:
+  - name: Identify Company by IP
+    description: Resolve a company from the caller's IP address.
+    operationId: identifyCompanyByIp
+    method: GET
+    path: /api/v3/ip.json
+  - name: Identify Company by IP (path)
+    description: Resolve a company from a specific IP address provided in the path.
+    operationId: identifyCompanyByIpPath
+    method: GET
+    path: /api/v3/ip.json/{ip}
+  - name: Identify Company by Cookie
+    description: Resolve a company from a Demandbase cookie identifier.
+    operationId: identifyCompanyByCookie
+    method: GET
+    path: /api/v3/cookie.json
+use_cases:
+  - name: Anonymous-visitor identification
+    description: Identify the company behind anonymous web visitors in real time.
+  - name: Site personalization
+    description: Personalize website experiences based on visitor firmographics.
+  - name: Form-shortening
+    description: Pre-fill or shorten lead forms when the company is already known.

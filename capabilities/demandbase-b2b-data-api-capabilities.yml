@@ -1,0 +1,47 @@
+name: Demandbase B2B Data API Capabilities
+description: >-
+  Capabilities for searching and enriching company and contact records
+  with B2B firmographic, technographic, and contact intelligence.
+capabilities:
+  - name: Search Companies
+    description: Search the company graph for matching firms.
+    operationId: searchCompanies
+    method: GET
+    path: /data/v1/companies/search
+  - name: Get Company
+    description: Retrieve a company by Demandbase company ID.
+    operationId: getCompany
+    method: GET
+    path: /data/v1/companies/{companyId}
+  - name: Search Contacts
+    description: Search the contact graph for matching individuals.
+    operationId: searchContacts
+    method: GET
+    path: /data/v1/contacts/search
+  - name: Get Contact
+    description: Retrieve a contact by Demandbase contact ID.
+    operationId: getContact
+    method: GET
+    path: /data/v1/contacts/{contactId}
+  - name: Enrich Company
+    description: Enrich a company record with firmographic data.
+    operationId: enrichCompany
+    method: POST
+    path: /data/v1/enrichment/company
+  - name: Enrich Contact
+    description: Enrich a contact record with verified contact data.
+    operationId: enrichContact
+    method: POST
+    path: /data/v1/enrichment/contact
+  - name: Get Technographics
+    description: Return technology stack intelligence for a domain.
+    operationId: getTechnographics
+    method: GET
+    path: /data/v1/technographics/{domain}
+use_cases:
+  - name: Lead and account enrichment
+    description: Enrich inbound leads with verified firmographic, technographic, and contact data.
+  - name: Total addressable market analysis
+    description: Slice the global B2B graph by industry, size, and tech to size markets.
+  - name: Sales prospecting
+    description: Discover net-new contacts that match an ICP and enrich them at scale.

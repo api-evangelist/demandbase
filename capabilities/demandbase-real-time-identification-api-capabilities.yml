@@ -1,0 +1,25 @@
+name: Demandbase Real-Time Identification API Capabilities
+description: >-
+  Capabilities for real-time company identification by IP, domain, or
+  visitor identifier with firmographic enrichment.
+capabilities:
+  - name: Identify by IP
+    description: Resolve a company from an IP address.
+    operationId: identifyByIp
+    method: GET
+    path: /api/v3/ip.json
+  - name: Identify by Domain
+    description: Resolve company information for a known domain.
+    operationId: identifyByDomain
+    method: GET
+    path: /api/v3/domain.json
+  - name: Get Visitor Intelligence
+    description: Retrieve enriched visitor intelligence for a session or visitor.
+    operationId: getVisitorIntelligence
+    method: GET
+    path: /api/v3/visitor.json
+use_cases:
+  - name: Real-time personalization
+    description: Render account-specific content the moment a visitor arrives.
+  - name: Sales alerting
+    description: Notify sales reps when target accounts visit the website.

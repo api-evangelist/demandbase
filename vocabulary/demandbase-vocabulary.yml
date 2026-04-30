@@ -1,0 +1,29 @@
+name: Demandbase Vocabulary
+description: >-
+  Shared vocabulary of terms used across the Demandbase ABM platform
+  APIs (Accounts, Advertising, Engagement, Data, Identification).
+terms:
+  - term: Account
+    definition: A company-level record representing a target organization within Demandbase One.
+  - term: Account List
+    definition: A curated list of accounts targeted for an ABM motion such as advertising or sales outreach.
+  - term: Audience
+    definition: A definition that resolves to a set of accounts or people for ad targeting and personalization.
+  - term: Buying Group
+    definition: The cluster of contacts within an account participating in a buying decision.
+  - term: Campaign
+    definition: An advertising or marketing initiative scoped to one or more audiences.
+  - term: Engagement
+    definition: Aggregate or itemized signals of an account's interaction with a brand across channels.
+  - term: Firmographics
+    definition: Descriptive attributes of a company - industry, employee count, revenue, location, hierarchy.
+  - term: Intent
+    definition: Third-party research signals indicating a company is in-market for a topic, product, or category.
+  - term: Technographics
+    definition: The set of technologies installed or used by a company.
+  - term: ICP (Ideal Customer Profile)
+    definition: The firmographic and behavioral profile that defines a vendor's best-fit customer.
+  - term: Demandbase ID
+    definition: A persistent identifier assigned to a company or contact in Demandbase's data graph.
+  - term: Real-Time Identification
+    definition: Resolving a company from an anonymous web signal (IP, domain, cookie) at request time.

@@ -1,0 +1,26 @@
+extends:
+  - spectral:oas
+rules:
+  demandbase-export-base-url:
+    description: Servers should reference api.demandbase.com.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "demandbase\\.com"
+  demandbase-export-apikey-auth:
+    description: Data Export API should declare apiKey authentication.
+    given: $.components.securitySchemes
+    severity: error
+    then:
+      field: apiKeyAuth
+      function: truthy
+  demandbase-export-jobs-resource:
+    description: Export API should expose /export/v1/jobs.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/export/v1/jobs"

@@ -1,0 +1,47 @@
+name: Demandbase Engagement API Capabilities
+description: >-
+  Capabilities for retrieving engagement, activity, and intent signals
+  for target accounts and managing engagement webhooks.
+capabilities:
+  - name: Get Account Engagement
+    description: Retrieve aggregate engagement metrics for an account.
+    operationId: getAccountEngagement
+    method: GET
+    path: /accounts/{accountId}/engagement
+  - name: Get Account Activities
+    description: Retrieve the engagement activity stream for an account.
+    operationId: getAccountActivities
+    method: GET
+    path: /accounts/{accountId}/activities
+  - name: Get Account Intent
+    description: Retrieve intent signals for an account.
+    operationId: getAccountIntent
+    method: GET
+    path: /accounts/{accountId}/intent
+  - name: Get Engagement Summary
+    description: Get a workspace-level engagement summary.
+    operationId: getEngagementSummary
+    method: GET
+    path: /engagement/summary
+  - name: List Webhooks
+    description: List webhooks subscribed to engagement events.
+    operationId: listWebhooks
+    method: GET
+    path: /webhooks
+  - name: Create Webhook
+    description: Subscribe to engagement events via webhook.
+    operationId: createWebhook
+    method: POST
+    path: /webhooks
+  - name: Delete Webhook
+    description: Unsubscribe a webhook.
+    operationId: deleteWebhook
+    method: DELETE
+    path: /webhooks/{webhookId}
+use_cases:
+  - name: Real-time engagement triggers
+    description: Drive sales plays and personalization off engagement webhooks.
+  - name: Account journey analytics
+    description: Reconstruct account activity timelines for sales and marketing reporting.
+  - name: Intent-based prioritization
+    description: Prioritize accounts and outreach based on third-party intent signals.

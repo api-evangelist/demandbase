@@ -1,0 +1,34 @@
+extends:
+  - spectral:oas
+rules:
+  demandbase-admin-base-url:
+    description: Servers should reference api.demandbase.com.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "demandbase\\.com"
+  demandbase-admin-apikey-auth:
+    description: Admin API should declare apiKey authentication.
+    given: $.components.securitySchemes
+    severity: error
+    then:
+      field: apiKeyAuth
+      function: truthy
+  demandbase-admin-users-resource:
+    description: Admin API should expose /users for user management.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/users"
+  demandbase-admin-api-keys-resource:
+    description: Admin API should expose /api-keys for key management.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/api-keys"

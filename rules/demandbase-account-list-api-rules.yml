@@ -1,0 +1,34 @@
+extends:
+  - spectral:oas
+rules:
+  demandbase-account-list-base-url:
+    description: Servers should reference api.demandbase.com.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "demandbase\\.com"
+  demandbase-account-list-apikey-auth:
+    description: Account List API should declare apiKey authentication.
+    given: $.components.securitySchemes
+    severity: error
+    then:
+      field: apiKeyAuth
+      function: truthy
+  demandbase-account-list-resource:
+    description: API should expose /lists as a primary resource.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/lists"
+  demandbase-account-list-sync:
+    description: API should expose CRM sync capability.
+    given: $.paths
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        match: "sync"

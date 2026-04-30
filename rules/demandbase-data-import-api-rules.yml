@@ -1,0 +1,26 @@
+extends:
+  - spectral:oas
+rules:
+  demandbase-import-base-url:
+    description: Servers should reference api.demandbase.com.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "demandbase\\.com"
+  demandbase-import-apikey-auth:
+    description: Data Import API should declare apiKey authentication.
+    given: $.components.securitySchemes
+    severity: error
+    then:
+      field: apiKeyAuth
+      function: truthy
+  demandbase-import-jobs-resource:
+    description: Import API should expose /import/v1/jobs.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/import/v1/jobs"

@@ -1,0 +1,34 @@
+extends:
+  - spectral:oas
+rules:
+  demandbase-advertising-base-url:
+    description: Servers should reference api.demandbase.com.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "demandbase\\.com"
+  demandbase-advertising-apikey-auth:
+    description: Advertising API should declare apiKey authentication.
+    given: $.components.securitySchemes
+    severity: error
+    then:
+      field: apiKeyAuth
+      function: truthy
+  demandbase-advertising-campaigns-resource:
+    description: Advertising API should expose /campaigns.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/campaigns"
+  demandbase-advertising-audiences-resource:
+    description: Advertising API should expose /audiences.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/audiences"

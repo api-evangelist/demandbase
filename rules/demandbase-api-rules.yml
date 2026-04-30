@@ -1,0 +1,40 @@
+extends:
+  - spectral:oas
+rules:
+  demandbase-info-contact:
+    description: API info should include Demandbase support contact.
+    given: $.info
+    severity: warn
+    then:
+      field: contact
+      function: truthy
+  demandbase-base-url:
+    description: Servers should reference api.demandbase.com.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "demandbase\\.com"
+  demandbase-apikey-auth:
+    description: API should declare apiKey authentication.
+    given: $.components.securitySchemes
+    severity: error
+    then:
+      field: apiKeyAuth
+      function: truthy
+  demandbase-operation-tags:
+    description: Operations should be tagged Accounts, Enrichment, Firmographics, etc.
+    given: $.paths[*][*]
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+  demandbase-accounts-resource:
+    description: API should expose /accounts as a primary resource.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/accounts"
