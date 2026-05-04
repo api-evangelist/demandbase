@@ -1,0 +1,222 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+provider: Demandbase
+providerId: demandbase
+publisherName: Demandbase
+serviceCategory: API
+created: '2026-05-04'
+modified: '2026-05-04'
+tags:
+  - Account-Based Marketing
+  - Advertising
+  - AI Agents
+  - B2B Marketing
+  - Data Enrichment
+  - Intent Data
+  - Personalization
+  - Sales Intelligence
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: FinOps framework definition for the Demandbase API surface. Provides a FOCUS-aligned mapping
+  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+principles:
+  - name: Visibility
+    description: Make API consumption costs visible to engineering, product, and finance teams in near
+      real-time.
+  - name: Allocation
+    description: Tag every chargeable API call with the consuming team, environment, application, and
+      feature so cost can be allocated.
+  - name: Optimization
+    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
+      cost per useful unit of work.
+  - name: Accountability
+    description: Establish budget owners and chargeback or showback flows for each consuming team.
+domains:
+  - name: Understand Usage and Cost
+    capabilities:
+      - Data Ingestion
+      - Allocation
+      - Reporting and Analytics
+      - Anomaly Management
+  - name: Quantify Business Value
+    capabilities:
+      - Planning and Estimating
+      - Forecasting
+      - Budgeting
+      - Benchmarking
+      - Unit Economics
+  - name: Optimize Usage and Cost
+    capabilities:
+      - Architecting for Cloud
+      - Rate Optimization
+      - Workload Optimization
+      - Cloud Sustainability
+      - Licensing and SaaS
+  - name: Manage the FinOps Practice
+    capabilities:
+      - FinOps Practice Operations
+      - FinOps Education and Enablement
+      - Invoicing and Chargeback
+      - Onboarding Workloads
+      - Intersecting Disciplines
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Credit
+    - Adjustment
+  chargeFrequency: Recurring
+focusColumns:
+  ServiceName: Demandbase
+  ServiceCategory: Developer Tools / API
+  ProviderName: Demandbase
+  PublisherName: Demandbase
+  InvoiceIssuerName: Demandbase
+  PricingCategory: Usage-Based
+  PricingUnit: request
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: api_requests
+    description: Count of billable API requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+      - region
+      - consumer
+  - name: data_egress
+    description: Bytes returned over the network in API responses
+    unit: GB
+    aggregation: sum
+    dimensions:
+      - api
+      - region
+      - consumer
+  - name: compute_seconds
+    description: Server-side compute consumed by the request, where applicable
+    unit: second
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+apis:
+  - name: Demandbase API
+    baseURL: https://api.demandbase.com
+    tags:
+      - Accounts
+      - B2B Data
+      - Firmographics
+      - Identification
+    serviceName: Demandbase API
+    serviceCategory: API
+  - name: Demandbase Real-Time Identification API
+    baseURL: https://api.company-target.com
+    tags:
+      - Identification
+      - IP Intelligence
+      - Real-Time
+      - Visitor Tracking
+    serviceName: Demandbase Real-Time Identification API
+    serviceCategory: API
+  - name: Demandbase Advertising API
+    baseURL: https://api.demandbase.com/advertising
+    tags:
+      - ABM
+      - Advertising
+      - Audiences
+      - Campaigns
+    serviceName: Demandbase Advertising API
+    serviceCategory: API
+  - name: Demandbase Engagement API
+    baseURL: https://api.demandbase.com/engagement
+    tags:
+      - Account Insights
+      - Activity Tracking
+      - Analytics
+      - Engagement
+    serviceName: Demandbase Engagement API
+    serviceCategory: API
+  - name: Demandbase Account List API
+    baseURL: https://api.demandbase.com/accounts
+    tags:
+      - Account Lists
+      - CRM Sync
+      - List Management
+      - Target Accounts
+    serviceName: Demandbase Account List API
+    serviceCategory: API
+  - name: Demandbase B2B Data API
+    baseURL: https://api.demandbase.com
+    tags:
+      - B2B Data
+      - Company Search
+      - Contact Discovery
+      - Data Enrichment
+      - Firmographics
+    serviceName: Demandbase B2B Data API
+    serviceCategory: API
+  - name: Demandbase IP API
+    baseURL: https://api.demandbase.com
+    tags:
+      - Company Identification
+      - Firmographics
+      - IP Intelligence
+      - Real-Time
+      - Visitor Identification
+    serviceName: Demandbase IP API
+    serviceCategory: API
+  - name: Demandbase Admin API
+    baseURL: https://api.demandbase.com
+    tags:
+      - Administration
+      - API Keys
+      - Platform Management
+      - User Management
+    serviceName: Demandbase Admin API
+    serviceCategory: API
+  - name: Demandbase Data Export API
+    baseURL: https://api.demandbase.com
+    tags:
+      - Accounts
+      - Analytics
+      - Bulk Export
+      - Data Export
+      - Reporting
+    serviceName: Demandbase Data Export API
+    serviceCategory: API
+  - name: Demandbase Data Import API
+    baseURL: https://api.demandbase.com
+    tags:
+      - Accounts
+      - Bulk Import
+      - CSV
+      - Data Import
+      - Data Ingestion
+    serviceName: Demandbase Data Import API
+    serviceCategory: API
+unitEconomics:
+  - name: Cost per 1K Requests
+    metric: billed_cost / (api_requests / 1000)
+    target: TBD
+  - name: Cost per Active Consumer
+    metric: billed_cost / active_consumers
+    target: TBD
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+    url: https://www.demandbase.com
