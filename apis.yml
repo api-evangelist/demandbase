@@ -4,7 +4,7 @@ description: Demandbase is the leading Account-Based Marketing (ABM) platform th
 type: Index
 position: Consumer
 access: 3rd-Party
-xType: company
+kind: company
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/demandbase/refs/heads/main/apis.yml
 created: '2024-01-20'
@@ -249,7 +249,7 @@ common:
     url: https://docs.demandbase.com/docs/getting-started
   - type: Authentication
     url: https://docs.demandbase.com/docs/authentication
-  - type: Status
+  - type: StatusPage
     url: https://status.demandbase.com/
   - type: Support
     url: https://support.demandbase.com/
@@ -277,7 +277,7 @@ common:
     url: https://www.demandbase.com/terms-of-use/
   - type: SignUp
     url: https://www.demandbase.com/products/data/api-integration/api-trial/
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/demandbase-context.jsonld
   - type: JSONSchema
     url: json-schema/demandbase-account-schema.json
