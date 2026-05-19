@@ -1,0 +1,168 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Demandbase API — Accounts
+  description: 'Demandbase API — Accounts. 3 operations. Lead operation: Demandbase Get account by domain. Self-contained
+    Naftiko capability covering one Demandbase business surface.'
+  tags:
+  - Demandbase
+  - Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DEMANDBASE_API_KEY: DEMANDBASE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: demandbase-accounts
+    baseUri: https://api.demandbase.com
+    description: Demandbase API — Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-domain-domain
+      path: /accounts/domain/{domain}
+      operations:
+      - name: getaccountbydomain
+        method: GET
+        description: Demandbase Get account by domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: domain
+          in: path
+          type: string
+          description: Company web domain (e.g., acme.com)
+          required: true
+    - name: accounts-search
+      path: /accounts/search
+      operations:
+      - name: searchaccounts
+        method: GET
+        description: Demandbase Search accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: Search query string (company name, domain, etc.)
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results to return
+        - name: offset
+          in: query
+          type: integer
+          description: Number of results to skip for pagination
+    - name: accounts-accountId
+      path: /accounts/{accountId}
+      operations:
+      - name: getaccount
+        method: GET
+        description: Demandbase Get account by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.DEMANDBASE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: demandbase-accounts-rest
+    port: 8080
+    description: REST adapter for Demandbase API — Accounts. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/accounts/domain/{domain}
+      name: accounts-domain-domain
+      description: REST surface for accounts-domain-domain.
+      operations:
+      - method: GET
+        name: getaccountbydomain
+        description: Demandbase Get account by domain
+        call: demandbase-accounts.getaccountbydomain
+        with:
+          domain: rest.domain
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/search
+      name: accounts-search
+      description: REST surface for accounts-search.
+      operations:
+      - method: GET
+        name: searchaccounts
+        description: Demandbase Search accounts
+        call: demandbase-accounts.searchaccounts
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountid}
+      name: accounts-accountid
+      description: REST surface for accounts-accountId.
+      operations:
+      - method: GET
+        name: getaccount
+        description: Demandbase Get account by ID
+        call: demandbase-accounts.getaccount
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: demandbase-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Demandbase API — Accounts. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: demandbase-get-account-domain
+      description: Demandbase Get account by domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: demandbase-accounts.getaccountbydomain
+      with:
+        domain: tools.domain
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-search-accounts
+      description: Demandbase Search accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: demandbase-accounts.searchaccounts
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-get-account-id
+      description: Demandbase Get account by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: demandbase-accounts.getaccount
+      outputParameters:
+      - type: object
+        mapping: $.

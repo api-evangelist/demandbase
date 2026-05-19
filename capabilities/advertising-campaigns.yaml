@@ -1,0 +1,218 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Demandbase Advertising API — Campaigns
+  description: 'Demandbase Advertising API — Campaigns. 5 operations. Lead operation: Demandbase List campaigns. Self-contained
+    Naftiko capability covering one Demandbase business surface.'
+  tags:
+  - Demandbase
+  - Campaigns
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DEMANDBASE_API_KEY: DEMANDBASE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: advertising-campaigns
+    baseUri: https://api.demandbase.com/advertising
+    description: Demandbase Advertising API — Campaigns business capability. Self-contained, no shared references.
+    resources:
+    - name: campaigns
+      path: /campaigns
+      operations:
+      - name: listcampaigns
+        method: GET
+        description: Demandbase List campaigns
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter by campaign status
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          description: Pagination offset
+      - name: createcampaign
+        method: POST
+        description: Demandbase Create a campaign
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: campaigns-campaignId
+      path: /campaigns/{campaignId}
+      operations:
+      - name: getcampaign
+        method: GET
+        description: Demandbase Get a campaign
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatecampaign
+        method: PUT
+        description: Demandbase Update a campaign
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletecampaign
+        method: DELETE
+        description: Demandbase Delete a campaign
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.DEMANDBASE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: advertising-campaigns-rest
+    port: 8080
+    description: REST adapter for Demandbase Advertising API — Campaigns. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/campaigns
+      name: campaigns
+      description: REST surface for campaigns.
+      operations:
+      - method: GET
+        name: listcampaigns
+        description: Demandbase List campaigns
+        call: advertising-campaigns.listcampaigns
+        with:
+          status: rest.status
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcampaign
+        description: Demandbase Create a campaign
+        call: advertising-campaigns.createcampaign
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/campaigns/{campaignid}
+      name: campaigns-campaignid
+      description: REST surface for campaigns-campaignId.
+      operations:
+      - method: GET
+        name: getcampaign
+        description: Demandbase Get a campaign
+        call: advertising-campaigns.getcampaign
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatecampaign
+        description: Demandbase Update a campaign
+        call: advertising-campaigns.updatecampaign
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecampaign
+        description: Demandbase Delete a campaign
+        call: advertising-campaigns.deletecampaign
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: advertising-campaigns-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Demandbase Advertising API — Campaigns. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: demandbase-list-campaigns
+      description: Demandbase List campaigns
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: advertising-campaigns.listcampaigns
+      with:
+        status: tools.status
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-create-campaign
+      description: Demandbase Create a campaign
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: advertising-campaigns.createcampaign
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-get-campaign
+      description: Demandbase Get a campaign
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: advertising-campaigns.getcampaign
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-update-campaign
+      description: Demandbase Update a campaign
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: advertising-campaigns.updatecampaign
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-delete-campaign
+      description: Demandbase Delete a campaign
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: advertising-campaigns.deletecampaign
+      outputParameters:
+      - type: object
+        mapping: $.

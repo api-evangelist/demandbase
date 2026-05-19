@@ -1,0 +1,226 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Demandbase Data Import API — Import Jobs
+  description: 'Demandbase Data Import API — Import Jobs. 5 operations. Lead operation: Demandbase List import jobs. Self-contained
+    Naftiko capability covering one Demandbase business surface.'
+  tags:
+  - Demandbase
+  - Import Jobs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DEMANDBASE_API_KEY: DEMANDBASE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-import-import-jobs
+    baseUri: https://api.demandbase.com
+    description: Demandbase Data Import API — Import Jobs business capability. Self-contained, no shared references.
+    resources:
+    - name: import-v1-jobs
+      path: /import/v1/jobs
+      operations:
+      - name: listimportjobs
+        method: GET
+        description: Demandbase List import jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter by job status
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+      - name: createimportjob
+        method: POST
+        description: Demandbase Create an import job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: import-v1-jobs-jobId
+      path: /import/v1/jobs/{jobId}
+      operations:
+      - name: getimportjob
+        method: GET
+        description: Demandbase Get import job status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cancelimportjob
+        method: DELETE
+        description: Demandbase Cancel an import job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: import-v1-jobs-jobId-errors
+      path: /import/v1/jobs/{jobId}/errors
+      operations:
+      - name: getimporterrors
+        method: GET
+        description: Demandbase Get import errors
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.DEMANDBASE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-import-import-jobs-rest
+    port: 8080
+    description: REST adapter for Demandbase Data Import API — Import Jobs. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/import/v1/jobs
+      name: import-v1-jobs
+      description: REST surface for import-v1-jobs.
+      operations:
+      - method: GET
+        name: listimportjobs
+        description: Demandbase List import jobs
+        call: data-import-import-jobs.listimportjobs
+        with:
+          status: rest.status
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createimportjob
+        description: Demandbase Create an import job
+        call: data-import-import-jobs.createimportjob
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/import/v1/jobs/{jobid}
+      name: import-v1-jobs-jobid
+      description: REST surface for import-v1-jobs-jobId.
+      operations:
+      - method: GET
+        name: getimportjob
+        description: Demandbase Get import job status
+        call: data-import-import-jobs.getimportjob
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: cancelimportjob
+        description: Demandbase Cancel an import job
+        call: data-import-import-jobs.cancelimportjob
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/import/v1/jobs/{jobid}/errors
+      name: import-v1-jobs-jobid-errors
+      description: REST surface for import-v1-jobs-jobId-errors.
+      operations:
+      - method: GET
+        name: getimporterrors
+        description: Demandbase Get import errors
+        call: data-import-import-jobs.getimporterrors
+        with:
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-import-import-jobs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Demandbase Data Import API — Import Jobs. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: demandbase-list-import-jobs
+      description: Demandbase List import jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-import-import-jobs.listimportjobs
+      with:
+        status: tools.status
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-create-import-job
+      description: Demandbase Create an import job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-import-import-jobs.createimportjob
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-get-import-job-status
+      description: Demandbase Get import job status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-import-import-jobs.getimportjob
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-cancel-import-job
+      description: Demandbase Cancel an import job
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: data-import-import-jobs.cancelimportjob
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-get-import-errors
+      description: Demandbase Get import errors
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-import-import-jobs.getimporterrors
+      with:
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.

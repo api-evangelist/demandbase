@@ -1,0 +1,222 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Demandbase Admin API — Users
+  description: 'Demandbase Admin API — Users. 5 operations. Lead operation: Demandbase List users. Self-contained Naftiko
+    capability covering one Demandbase business surface.'
+  tags:
+  - Demandbase
+  - Users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DEMANDBASE_API_KEY: DEMANDBASE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-users
+    baseUri: https://api.demandbase.com
+    description: Demandbase Admin API — Users business capability. Self-contained, no shared references.
+    resources:
+    - name: admin-v1-users
+      path: /admin/v1/users
+      operations:
+      - name: listusers
+        method: GET
+        description: Demandbase List users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter by user status
+        - name: role
+          in: query
+          type: string
+          description: Filter by user role
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+      - name: createuser
+        method: POST
+        description: Demandbase Create a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: admin-v1-users-userId
+      path: /admin/v1/users/{userId}
+      operations:
+      - name: getuser
+        method: GET
+        description: Demandbase Get a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateuser
+        method: PUT
+        description: Demandbase Update a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteuser
+        method: DELETE
+        description: Demandbase Delete a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.DEMANDBASE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-users-rest
+    port: 8080
+    description: REST adapter for Demandbase Admin API — Users. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/admin/v1/users
+      name: admin-v1-users
+      description: REST surface for admin-v1-users.
+      operations:
+      - method: GET
+        name: listusers
+        description: Demandbase List users
+        call: admin-users.listusers
+        with:
+          status: rest.status
+          role: rest.role
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createuser
+        description: Demandbase Create a user
+        call: admin-users.createuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/admin/v1/users/{userid}
+      name: admin-v1-users-userid
+      description: REST surface for admin-v1-users-userId.
+      operations:
+      - method: GET
+        name: getuser
+        description: Demandbase Get a user
+        call: admin-users.getuser
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateuser
+        description: Demandbase Update a user
+        call: admin-users.updateuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteuser
+        description: Demandbase Delete a user
+        call: admin-users.deleteuser
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Demandbase Admin API — Users. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: demandbase-list-users
+      description: Demandbase List users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-users.listusers
+      with:
+        status: tools.status
+        role: tools.role
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-create-user
+      description: Demandbase Create a user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-users.createuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-get-user
+      description: Demandbase Get a user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-users.getuser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-update-user
+      description: Demandbase Update a user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-users.updateuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-delete-user
+      description: Demandbase Delete a user
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-users.deleteuser
+      outputParameters:
+      - type: object
+        mapping: $.

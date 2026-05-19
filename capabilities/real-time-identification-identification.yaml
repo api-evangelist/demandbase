@@ -1,0 +1,144 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Demandbase Real-Time Identification API — Identification
+  description: 'Demandbase Real-Time Identification API — Identification. 2 operations. Lead operation: Demandbase Identify
+    company by domain. Self-contained Naftiko capability covering one Demandbase business surface.'
+  tags:
+  - Demandbase
+  - Identification
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DEMANDBASE_API_KEY: DEMANDBASE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: real-time-identification-identification
+    baseUri: https://api.company-target.com
+    description: Demandbase Real-Time Identification API — Identification business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v3-domain.json
+      path: /api/v3/domain.json
+      operations:
+      - name: identifybydomain
+        method: GET
+        description: Demandbase Identify company by domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: query
+          type: string
+          description: Demandbase API key
+          required: true
+        - name: query
+          in: query
+          type: string
+          description: Domain to identify (e.g., acme.com)
+          required: true
+    - name: api-v3-ip.json
+      path: /api/v3/ip.json
+      operations:
+      - name: identifybyip
+        method: GET
+        description: Demandbase Identify company by IP address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: query
+          type: string
+          description: Demandbase API key
+          required: true
+        - name: query
+          in: query
+          type: string
+          description: IP address to identify
+          required: true
+        - name: callback
+          in: query
+          type: string
+          description: JSONP callback function name
+    authentication:
+      type: apikey
+      key: key
+      value: '{{env.DEMANDBASE_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: real-time-identification-identification-rest
+    port: 8080
+    description: REST adapter for Demandbase Real-Time Identification API — Identification. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v3/domain-json
+      name: api-v3-domain-json
+      description: REST surface for api-v3-domain.json.
+      operations:
+      - method: GET
+        name: identifybydomain
+        description: Demandbase Identify company by domain
+        call: real-time-identification-identification.identifybydomain
+        with:
+          key: rest.key
+          query: rest.query
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v3/ip-json
+      name: api-v3-ip-json
+      description: REST surface for api-v3-ip.json.
+      operations:
+      - method: GET
+        name: identifybyip
+        description: Demandbase Identify company by IP address
+        call: real-time-identification-identification.identifybyip
+        with:
+          key: rest.key
+          query: rest.query
+          callback: rest.callback
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: real-time-identification-identification-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Demandbase Real-Time Identification API — Identification. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: demandbase-identify-company-domain
+      description: Demandbase Identify company by domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: real-time-identification-identification.identifybydomain
+      with:
+        key: tools.key
+        query: tools.query
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-identify-company-ip-address
+      description: Demandbase Identify company by IP address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: real-time-identification-identification.identifybyip
+      with:
+        key: tools.key
+        query: tools.query
+        callback: tools.callback
+      outputParameters:
+      - type: object
+        mapping: $.

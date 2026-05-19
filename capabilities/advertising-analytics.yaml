@@ -1,0 +1,85 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Demandbase Advertising API — Analytics
+  description: 'Demandbase Advertising API — Analytics. 1 operations. Lead operation: Demandbase Get campaign analytics. Self-contained
+    Naftiko capability covering one Demandbase business surface.'
+  tags:
+  - Demandbase
+  - Analytics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DEMANDBASE_API_KEY: DEMANDBASE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: advertising-analytics
+    baseUri: https://api.demandbase.com/advertising
+    description: Demandbase Advertising API — Analytics business capability. Self-contained, no shared references.
+    resources:
+    - name: campaigns-campaignId-analytics
+      path: /campaigns/{campaignId}/analytics
+      operations:
+      - name: getcampaignanalytics
+        method: GET
+        description: Demandbase Get campaign analytics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: start_date
+          in: query
+          type: string
+          description: Start date for analytics (YYYY-MM-DD)
+        - name: end_date
+          in: query
+          type: string
+          description: End date for analytics (YYYY-MM-DD)
+    authentication:
+      type: bearer
+      token: '{{env.DEMANDBASE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: advertising-analytics-rest
+    port: 8080
+    description: REST adapter for Demandbase Advertising API — Analytics. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/campaigns/{campaignid}/analytics
+      name: campaigns-campaignid-analytics
+      description: REST surface for campaigns-campaignId-analytics.
+      operations:
+      - method: GET
+        name: getcampaignanalytics
+        description: Demandbase Get campaign analytics
+        call: advertising-analytics.getcampaignanalytics
+        with:
+          start_date: rest.start_date
+          end_date: rest.end_date
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: advertising-analytics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Demandbase Advertising API — Analytics. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: demandbase-get-campaign-analytics
+      description: Demandbase Get campaign analytics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: advertising-analytics.getcampaignanalytics
+      with:
+        start_date: tools.start_date
+        end_date: tools.end_date
+      outputParameters:
+      - type: object
+        mapping: $.

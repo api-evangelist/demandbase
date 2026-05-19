@@ -1,0 +1,153 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Demandbase B2B Data API — Company Search
+  description: 'Demandbase B2B Data API — Company Search. 2 operations. Lead operation: Demandbase Search companies. Self-contained
+    Naftiko capability covering one Demandbase business surface.'
+  tags:
+  - Demandbase
+  - Company Search
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DEMANDBASE_API_KEY: DEMANDBASE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: b2b-data-company-search
+    baseUri: https://api.demandbase.com
+    description: Demandbase B2B Data API — Company Search business capability. Self-contained, no shared references.
+    resources:
+    - name: data-v1-companies-search
+      path: /data/v1/companies/search
+      operations:
+      - name: searchcompanies
+        method: GET
+        description: Demandbase Search companies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: Free-text search query
+        - name: domain
+          in: query
+          type: string
+          description: Filter by company domain
+        - name: industry
+          in: query
+          type: string
+          description: Filter by industry
+        - name: country
+          in: query
+          type: string
+          description: Filter by country
+        - name: employee_range
+          in: query
+          type: string
+          description: Filter by employee range
+        - name: revenue_range
+          in: query
+          type: string
+          description: Filter by revenue range
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+    - name: data-v1-companies-companyId
+      path: /data/v1/companies/{companyId}
+      operations:
+      - name: getcompany
+        method: GET
+        description: Demandbase Get company details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.DEMANDBASE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: b2b-data-company-search-rest
+    port: 8080
+    description: REST adapter for Demandbase B2B Data API — Company Search. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/data/v1/companies/search
+      name: data-v1-companies-search
+      description: REST surface for data-v1-companies-search.
+      operations:
+      - method: GET
+        name: searchcompanies
+        description: Demandbase Search companies
+        call: b2b-data-company-search.searchcompanies
+        with:
+          query: rest.query
+          domain: rest.domain
+          industry: rest.industry
+          country: rest.country
+          employee_range: rest.employee_range
+          revenue_range: rest.revenue_range
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/v1/companies/{companyid}
+      name: data-v1-companies-companyid
+      description: REST surface for data-v1-companies-companyId.
+      operations:
+      - method: GET
+        name: getcompany
+        description: Demandbase Get company details
+        call: b2b-data-company-search.getcompany
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: b2b-data-company-search-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Demandbase B2B Data API — Company Search. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: demandbase-search-companies
+      description: Demandbase Search companies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: b2b-data-company-search.searchcompanies
+      with:
+        query: tools.query
+        domain: tools.domain
+        industry: tools.industry
+        country: tools.country
+        employee_range: tools.employee_range
+        revenue_range: tools.revenue_range
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demandbase-get-company-details
+      description: Demandbase Get company details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: b2b-data-company-search.getcompany
+      outputParameters:
+      - type: object
+        mapping: $.

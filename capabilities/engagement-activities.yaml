@@ -1,0 +1,89 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Demandbase Engagement API — Activities
+  description: 'Demandbase Engagement API — Activities. 1 operations. Lead operation: Demandbase Get account activities. Self-contained
+    Naftiko capability covering one Demandbase business surface.'
+  tags:
+  - Demandbase
+  - Activities
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DEMANDBASE_API_KEY: DEMANDBASE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engagement-activities
+    baseUri: https://api.demandbase.com/engagement
+    description: Demandbase Engagement API — Activities business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-accountId-activities
+      path: /accounts/{accountId}/activities
+      operations:
+      - name: getaccountactivities
+        method: GET
+        description: Demandbase Get account activities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: type
+          in: query
+          type: string
+          description: Filter by activity type
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.DEMANDBASE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: engagement-activities-rest
+    port: 8080
+    description: REST adapter for Demandbase Engagement API — Activities. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/accounts/{accountid}/activities
+      name: accounts-accountid-activities
+      description: REST surface for accounts-accountId-activities.
+      operations:
+      - method: GET
+        name: getaccountactivities
+        description: Demandbase Get account activities
+        call: engagement-activities.getaccountactivities
+        with:
+          type: rest.type
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engagement-activities-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Demandbase Engagement API — Activities. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: demandbase-get-account-activities
+      description: Demandbase Get account activities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engagement-activities.getaccountactivities
+      with:
+        type: tools.type
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,79 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Demandbase Data Export API — Downloads
+  description: 'Demandbase Data Export API — Downloads. 1 operations. Lead operation: Demandbase Download export file. Self-contained
+    Naftiko capability covering one Demandbase business surface.'
+  tags:
+  - Demandbase
+  - Downloads
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DEMANDBASE_API_KEY: DEMANDBASE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-export-downloads
+    baseUri: https://api.demandbase.com
+    description: Demandbase Data Export API — Downloads business capability. Self-contained, no shared references.
+    resources:
+    - name: export-v1-jobs-jobId-download
+      path: /export/v1/jobs/{jobId}/download
+      operations:
+      - name: downloadexportfile
+        method: GET
+        description: Demandbase Download export file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: part
+          in: query
+          type: integer
+          description: Part number for multi-part exports (starts at 1)
+    authentication:
+      type: bearer
+      token: '{{env.DEMANDBASE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-export-downloads-rest
+    port: 8080
+    description: REST adapter for Demandbase Data Export API — Downloads. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/export/v1/jobs/{jobid}/download
+      name: export-v1-jobs-jobid-download
+      description: REST surface for export-v1-jobs-jobId-download.
+      operations:
+      - method: GET
+        name: downloadexportfile
+        description: Demandbase Download export file
+        call: data-export-downloads.downloadexportfile
+        with:
+          part: rest.part
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-export-downloads-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Demandbase Data Export API — Downloads. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: demandbase-download-export-file
+      description: Demandbase Download export file
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-export-downloads.downloadexportfile
+      with:
+        part: tools.part
+      outputParameters:
+      - type: object
+        mapping: $.
