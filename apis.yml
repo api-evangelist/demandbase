@@ -331,6 +331,9 @@ common:
     url: https://www.demandbase.com/terms-of-service/
   - type: Blog
     url: https://www.demandbase.com/blog/
+  - url: https://www.demandbase.com/feed/
+    type: BlogRSS
+    description: Discovered RSS/Atom feed for https://www.demandbase.com/blog/
   - type: Contact
     url: https://www.demandbase.com/contact/
   - type: LinkedIn
