@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ImportJob",
+  "title": "ImportJob",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Import job unique identifier"
+    },
+    "entity_type": {
+      "type": "string",
+      "enum": [
+        "accounts",
+        "people",
+        "opportunities",
+        "activities"
+      ],
+      "description": "Type of entity being imported"
+    },
+    "operation": {
+      "type": "string",
+      "enum": [
+        "insert",
+        "update",
+        "upsert"
+      ],
+      "description": "Import operation mode"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "validating",
+        "processing",
+        "completed",
+        "failed",
+        "cancelled"
+      ],
+      "description": "Current job status"
+    },
+    "total_rows": {
+      "type": "integer",
+      "description": "Total number of rows in the import file"
+    },
+    "processed_rows": {
+      "type": "integer",
+      "description": "Number of rows processed so far"
+    },
+    "success_count": {
+      "type": "integer",
+      "description": "Number of rows successfully imported"
+    },
+    "error_count": {
+      "type": "integer",
+      "description": "Number of rows that failed"
+    },
+    "file_name": {
+      "type": "string",
+      "description": "Name of the uploaded file"
+    },
+    "file_size_bytes": {
+      "type": "integer",
+      "description": "Size of the uploaded file"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Job creation timestamp"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Processing start timestamp"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Processing completion timestamp"
+    },
+    "error_message": {
+      "type": "string",
+      "description": "Error details if the job failed"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateImportJobRequest",
+  "title": "CreateImportJobRequest",
+  "type": "object",
+  "required": [
+    "entity_type",
+    "operation"
+  ],
+  "properties": {
+    "entity_type": {
+      "type": "string",
+      "enum": [
+        "accounts",
+        "people",
+        "opportunities",
+        "activities"
+      ],
+      "description": "Type of entity to import"
+    },
+    "operation": {
+      "type": "string",
+      "enum": [
+        "insert",
+        "update",
+        "upsert"
+      ],
+      "description": "Import operation mode. Insert creates new records, update modifies existing records, upsert creates or updates based on match key."
+    },
+    "match_key": {
+      "type": "string",
+      "description": "Field used to match existing records for update/upsert operations (e.g., domain, email, account_id)"
+    },
+    "field_mappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "csv_column": {
+            "type": "string",
+            "description": "Column name in the CSV file"
+          },
+          "demandbase_field": {
+            "type": "string",
+            "description": "Target Demandbase field name"
+          }
+        }
+      },
+      "description": "Map CSV columns to Demandbase fields"
+    }
+  }
+}

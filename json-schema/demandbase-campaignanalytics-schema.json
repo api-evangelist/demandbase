@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CampaignAnalytics",
+  "title": "CampaignAnalytics",
+  "type": "object",
+  "properties": {
+    "campaign_id": {
+      "type": "string",
+      "description": "Campaign identifier"
+    },
+    "impressions": {
+      "type": "integer",
+      "description": "Total impressions served"
+    },
+    "clicks": {
+      "type": "integer",
+      "description": "Total clicks"
+    },
+    "ctr": {
+      "type": "number",
+      "description": "Click-through rate"
+    },
+    "spend": {
+      "type": "number",
+      "description": "Total spend in USD"
+    },
+    "accounts_reached": {
+      "type": "integer",
+      "description": "Number of unique accounts reached"
+    },
+    "accounts_engaged": {
+      "type": "integer",
+      "description": "Number of accounts showing engagement"
+    },
+    "cpm": {
+      "type": "number",
+      "description": "Cost per thousand impressions"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Analytics period start"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Analytics period end"
+    }
+  }
+}

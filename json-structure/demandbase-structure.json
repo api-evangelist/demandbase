@@ -1,0 +1,93 @@
+{
+  "provider": "Demandbase",
+  "providerId": "demandbase",
+  "kind": "json-structure",
+  "description": "Structural overview of the Demandbase API surface; extracted from openapi/.",
+  "schemaCount": 3,
+  "operationCount": 7,
+  "schemas": [
+    {
+      "name": "Company",
+      "type": "object",
+      "propertyCount": 26,
+      "required": []
+    },
+    {
+      "name": "Contact",
+      "type": "object",
+      "propertyCount": 12,
+      "required": []
+    },
+    {
+      "name": "Technographics",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/data/v1/companies/search",
+      "operationId": "searchCompanies",
+      "summary": "Demandbase Search companies",
+      "tags": [
+        "Company Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/v1/companies/{companyId}",
+      "operationId": "getCompany",
+      "summary": "Demandbase Get company details",
+      "tags": [
+        "Company Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/v1/contacts/search",
+      "operationId": "searchContacts",
+      "summary": "Demandbase Search contacts",
+      "tags": [
+        "Contacts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/v1/contacts/{contactId}",
+      "operationId": "getContact",
+      "summary": "Demandbase Get contact details",
+      "tags": [
+        "Contacts"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/data/v1/enrichment/company",
+      "operationId": "enrichCompany",
+      "summary": "Demandbase Enrich company data",
+      "tags": [
+        "Enrichment"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/data/v1/enrichment/contact",
+      "operationId": "enrichContact",
+      "summary": "Demandbase Enrich contact data",
+      "tags": [
+        "Enrichment"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/v1/technographics/{domain}",
+      "operationId": "getTechnographics",
+      "summary": "Demandbase Get technographic data",
+      "tags": [
+        "Technographics"
+      ]
+    }
+  ]
+}

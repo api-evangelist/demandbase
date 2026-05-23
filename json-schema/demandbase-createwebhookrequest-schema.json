@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateWebhookRequest",
+  "title": "CreateWebhookRequest",
+  "type": "object",
+  "required": [
+    "url",
+    "events"
+  ],
+  "properties": {
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Webhook endpoint URL"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "engagement.threshold",
+          "intent.surge",
+          "account.identified"
+        ]
+      },
+      "description": "Event types to subscribe to"
+    }
+  }
+}

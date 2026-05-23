@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Company",
+  "title": "Company",
+  "type": "object",
+  "properties": {
+    "company_id": {
+      "type": "string",
+      "description": "Demandbase company identifier"
+    },
+    "company_name": {
+      "type": "string",
+      "description": "Official company name"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Primary web domain"
+    },
+    "website": {
+      "type": "string",
+      "format": "uri",
+      "description": "Company website URL"
+    },
+    "industry": {
+      "type": "string",
+      "description": "Industry classification"
+    },
+    "sub_industry": {
+      "type": "string",
+      "description": "Sub-industry classification"
+    },
+    "sic_code": {
+      "type": "string",
+      "description": "SIC code"
+    },
+    "naics_code": {
+      "type": "string",
+      "description": "NAICS code"
+    },
+    "employee_count": {
+      "type": "integer",
+      "description": "Number of employees"
+    },
+    "employee_range": {
+      "type": "string",
+      "description": "Employee count range"
+    },
+    "revenue": {
+      "type": "number",
+      "description": "Annual revenue in USD"
+    },
+    "revenue_range": {
+      "type": "string",
+      "description": "Revenue range"
+    },
+    "address": {
+      "type": "string",
+      "description": "Street address"
+    },
+    "city": {
+      "type": "string",
+      "description": "City"
+    },
+    "state": {
+      "type": "string",
+      "description": "State or province"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country"
+    },
+    "zip": {
+      "type": "string",
+      "description": "Postal code"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number"
+    },
+    "stock_ticker": {
+      "type": "string",
+      "description": "Stock ticker symbol"
+    },
+    "founded_year": {
+      "type": "integer",
+      "description": "Year the company was founded"
+    },
+    "fortune_1000": {
+      "type": "boolean",
+      "description": "Fortune 1000 membership"
+    },
+    "forbes_2000": {
+      "type": "boolean",
+      "description": "Forbes 2000 membership"
+    },
+    "parent_company_id": {
+      "type": "string",
+      "description": "Parent company ID"
+    },
+    "parent_company_name": {
+      "type": "string",
+      "description": "Parent company name"
+    },
+    "ultimate_parent_company_id": {
+      "type": "string",
+      "description": "Ultimate parent company ID"
+    },
+    "ultimate_parent_company_name": {
+      "type": "string",
+      "description": "Ultimate parent company name"
+    }
+  }
+}

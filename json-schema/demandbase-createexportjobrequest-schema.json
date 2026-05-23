@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateExportJobRequest",
+  "title": "CreateExportJobRequest",
+  "type": "object",
+  "required": [
+    "entity_type"
+  ],
+  "properties": {
+    "entity_type": {
+      "type": "string",
+      "enum": [
+        "accounts",
+        "people",
+        "opportunities",
+        "activities",
+        "campaigns",
+        "buying_groups"
+      ],
+      "description": "Type of entity to export"
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Fields to include in the export. If omitted, all available fields are exported."
+    },
+    "filters": {
+      "type": "object",
+      "description": "Filter criteria to limit exported records",
+      "properties": {
+        "date_range": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string",
+              "description": "Date field to filter on"
+            },
+            "start": {
+              "type": "string",
+              "format": "date",
+              "description": "Start date"
+            },
+            "end": {
+              "type": "string",
+              "format": "date",
+              "description": "End date"
+            }
+          }
+        },
+        "account_list_id": {
+          "type": "string",
+          "description": "Limit export to a specific account list"
+        }
+      }
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "csv"
+      ],
+      "default": "csv",
+      "description": "Export file format"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IntentSignals",
+  "title": "IntentSignals",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "description": "Demandbase account identifier"
+    },
+    "overall_intent_strength": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "description": "Overall intent strength"
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "description": "Intent keyword"
+          },
+          "intent_strength": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "trend": {
+            "type": "string",
+            "enum": [
+              "increasing",
+              "stable",
+              "decreasing"
+            ]
+          }
+        }
+      },
+      "description": "Keyword-level intent signals"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When intent data was last refreshed"
+    }
+  }
+}

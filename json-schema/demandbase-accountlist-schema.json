@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountList",
+  "title": "AccountList",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "List unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "List name"
+    },
+    "description": {
+      "type": "string",
+      "description": "List description"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "static",
+        "dynamic"
+      ],
+      "description": "List type"
+    },
+    "account_count": {
+      "type": "integer",
+      "description": "Number of accounts in the list"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    },
+    "created_by": {
+      "type": "string",
+      "description": "User who created the list"
+    }
+  }
+}

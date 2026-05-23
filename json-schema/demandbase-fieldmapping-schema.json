@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FieldMapping",
+  "title": "FieldMapping",
+  "type": "object",
+  "properties": {
+    "entity_type": {
+      "type": "string",
+      "description": "Entity type"
+    },
+    "field_name": {
+      "type": "string",
+      "description": "Demandbase field name"
+    },
+    "field_type": {
+      "type": "string",
+      "description": "Field data type"
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Whether the field is required for import"
+    },
+    "description": {
+      "type": "string",
+      "description": "Field description"
+    }
+  }
+}

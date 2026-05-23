@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateAccountListRequest",
+  "title": "CreateAccountListRequest",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "List name"
+    },
+    "description": {
+      "type": "string",
+      "description": "List description"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "static",
+        "dynamic"
+      ],
+      "default": "static",
+      "description": "List type"
+    }
+  }
+}

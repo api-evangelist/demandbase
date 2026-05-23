@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Audience",
+  "title": "Audience",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Audience unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Audience segment name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Audience description"
+    },
+    "account_count": {
+      "type": "integer",
+      "description": "Number of accounts in the audience"
+    },
+    "criteria": {
+      "type": "object",
+      "description": "Targeting criteria for the audience",
+      "properties": {
+        "industries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Target industries"
+        },
+        "employee_ranges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Target employee count ranges"
+        },
+        "revenue_ranges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Target revenue ranges"
+        },
+        "countries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Target countries"
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Audience creation timestamp"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Activity",
+  "title": "Activity",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Activity unique identifier"
+    },
+    "account_id": {
+      "type": "string",
+      "description": "Associated account ID"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "web_visit",
+        "email_open",
+        "email_click",
+        "ad_click",
+        "ad_impression",
+        "form_fill",
+        "content_download"
+      ],
+      "description": "Activity type"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the activity occurred"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL associated with the activity"
+    },
+    "page_title": {
+      "type": "string",
+      "description": "Page title for web activities"
+    },
+    "channel": {
+      "type": "string",
+      "description": "Channel the activity originated from"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional activity-specific metadata"
+    }
+  }
+}

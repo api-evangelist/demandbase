@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ImportError",
+  "title": "ImportError",
+  "type": "object",
+  "properties": {
+    "row_number": {
+      "type": "integer",
+      "description": "Row number in the CSV file"
+    },
+    "field": {
+      "type": "string",
+      "description": "Field that caused the error"
+    },
+    "value": {
+      "type": "string",
+      "description": "Value that caused the error"
+    },
+    "error_type": {
+      "type": "string",
+      "description": "Type of error"
+    },
+    "message": {
+      "type": "string",
+      "description": "Error description"
+    }
+  }
+}

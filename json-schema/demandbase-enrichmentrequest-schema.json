@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EnrichmentRequest",
+  "title": "EnrichmentRequest",
+  "type": "object",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "Company web domain for enrichment"
+    },
+    "company_name": {
+      "type": "string",
+      "description": "Company name for matching"
+    }
+  },
+  "description": "Provide at least one of domain or company_name"
+}

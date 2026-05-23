@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Role",
+  "title": "Role",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Role unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Role name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Role description"
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of permissions granted by this role"
+    }
+  }
+}

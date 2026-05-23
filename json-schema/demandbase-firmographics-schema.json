@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Firmographics",
+  "title": "Firmographics",
+  "type": "object",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "Company web domain"
+    },
+    "company_name": {
+      "type": "string",
+      "description": "Official company name"
+    },
+    "employee_count": {
+      "type": "integer",
+      "description": "Number of employees"
+    },
+    "employee_range": {
+      "type": "string",
+      "description": "Employee count range"
+    },
+    "revenue": {
+      "type": "number",
+      "description": "Annual revenue in USD"
+    },
+    "revenue_range": {
+      "type": "string",
+      "description": "Revenue range bucket"
+    },
+    "industry": {
+      "type": "string",
+      "description": "Industry classification"
+    },
+    "sub_industry": {
+      "type": "string",
+      "description": "Sub-industry classification"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country of headquarters"
+    },
+    "state": {
+      "type": "string",
+      "description": "State or province of headquarters"
+    },
+    "city": {
+      "type": "string",
+      "description": "City of headquarters"
+    },
+    "sic_code": {
+      "type": "string",
+      "description": "SIC industry code"
+    },
+    "naics_code": {
+      "type": "string",
+      "description": "NAICS industry code"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Technographics",
+  "title": "Technographics",
+  "type": "object",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "Company domain"
+    },
+    "technologies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Technology name"
+          },
+          "category": {
+            "type": "string",
+            "description": "Technology category"
+          },
+          "vendor": {
+            "type": "string",
+            "description": "Technology vendor"
+          },
+          "first_detected": {
+            "type": "string",
+            "format": "date",
+            "description": "When the technology was first detected"
+          },
+          "last_detected": {
+            "type": "string",
+            "format": "date",
+            "description": "When the technology was last detected"
+          }
+        }
+      },
+      "description": "Technologies used by the company"
+    }
+  }
+}

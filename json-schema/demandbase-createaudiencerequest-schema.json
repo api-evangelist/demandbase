@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateAudienceRequest",
+  "title": "CreateAudienceRequest",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Audience segment name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Audience description"
+    },
+    "criteria": {
+      "type": "object",
+      "properties": {
+        "industries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "employee_ranges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "revenue_ranges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "countries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

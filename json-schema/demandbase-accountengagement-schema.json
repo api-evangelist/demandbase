@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountEngagement",
+  "title": "AccountEngagement",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "description": "Demandbase account identifier"
+    },
+    "company_name": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "engagement_score": {
+      "type": "number",
+      "description": "Overall engagement score (0-100)"
+    },
+    "engagement_trend": {
+      "type": "string",
+      "enum": [
+        "increasing",
+        "stable",
+        "decreasing"
+      ],
+      "description": "Engagement trend direction"
+    },
+    "web_engagement": {
+      "type": "number",
+      "description": "Web channel engagement score"
+    },
+    "email_engagement": {
+      "type": "number",
+      "description": "Email channel engagement score"
+    },
+    "ad_engagement": {
+      "type": "number",
+      "description": "Advertising channel engagement score"
+    },
+    "last_activity_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of most recent activity"
+    },
+    "total_activities": {
+      "type": "integer",
+      "description": "Total number of tracked activities"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountListMember",
+  "title": "AccountListMember",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "description": "Demandbase account ID"
+    },
+    "company_name": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Company domain"
+    },
+    "added_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the account was added to the list"
+    }
+  }
+}

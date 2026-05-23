@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApiKeySet",
+  "title": "ApiKeySet",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "API key set unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "API key set name"
+    },
+    "api_key": {
+      "type": "string",
+      "description": "API key (only shown on creation)"
+    },
+    "api_secret": {
+      "type": "string",
+      "description": "API secret (only shown on creation)"
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Authorized API scopes"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "revoked"
+      ],
+      "description": "Key set status"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp"
+    },
+    "created_by": {
+      "type": "string",
+      "description": "User who created the key set"
+    },
+    "last_used": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last usage timestamp"
+    }
+  }
+}

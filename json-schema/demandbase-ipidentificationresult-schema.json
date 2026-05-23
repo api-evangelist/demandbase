@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IpIdentificationResult",
+  "title": "IpIdentificationResult",
+  "type": "object",
+  "properties": {
+    "company_name": {
+      "type": "string",
+      "description": "Identified company name"
+    },
+    "demandbase_sid": {
+      "type": "integer",
+      "description": "Demandbase company identifier (SID)"
+    },
+    "db_company_id": {
+      "type": "string",
+      "description": "Demandbase company ID"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Primary company web domain"
+    },
+    "industry": {
+      "type": "string",
+      "description": "Industry classification"
+    },
+    "sub_industry": {
+      "type": "string",
+      "description": "Sub-industry classification"
+    },
+    "employee_count": {
+      "type": "integer",
+      "description": "Number of employees"
+    },
+    "employee_range": {
+      "type": "string",
+      "description": "Employee count range bucket"
+    },
+    "revenue": {
+      "type": "number",
+      "description": "Annual revenue in USD"
+    },
+    "revenue_range": {
+      "type": "string",
+      "description": "Revenue range bucket"
+    },
+    "street_address": {
+      "type": "string",
+      "description": "Street address"
+    },
+    "city": {
+      "type": "string",
+      "description": "City"
+    },
+    "state": {
+      "type": "string",
+      "description": "State or province"
+    },
+    "zip": {
+      "type": "string",
+      "description": "Postal code"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country name"
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO country code"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Primary phone number"
+    },
+    "website": {
+      "type": "string",
+      "format": "uri",
+      "description": "Company website URL"
+    },
+    "stock_ticker": {
+      "type": "string",
+      "description": "Stock ticker symbol"
+    },
+    "sic_code": {
+      "type": "string",
+      "description": "SIC industry code"
+    },
+    "naics_code": {
+      "type": "string",
+      "description": "NAICS industry code"
+    },
+    "fortune_1000": {
+      "type": "boolean",
+      "description": "Whether the company is in the Fortune 1000"
+    },
+    "forbes_2000": {
+      "type": "boolean",
+      "description": "Whether the company is in the Forbes 2000"
+    },
+    "b2b": {
+      "type": "boolean",
+      "description": "Whether the company is a B2B company"
+    },
+    "b2c": {
+      "type": "boolean",
+      "description": "Whether the company is a B2C company"
+    },
+    "traffic": {
+      "type": "string",
+      "description": "Website traffic classification"
+    },
+    "isp": {
+      "type": "boolean",
+      "description": "Whether the IP belongs to an ISP rather than a company"
+    },
+    "parent_company_id": {
+      "type": "string",
+      "description": "Demandbase ID of the parent company"
+    },
+    "parent_company_name": {
+      "type": "string",
+      "description": "Name of the parent company"
+    },
+    "ultimate_parent_company_id": {
+      "type": "string",
+      "description": "Demandbase ID of the ultimate parent company"
+    },
+    "ultimate_parent_company_name": {
+      "type": "string",
+      "description": "Name of the ultimate parent company"
+    },
+    "registry_company_name": {
+      "type": "string",
+      "description": "Company name from the IP address registry"
+    },
+    "registry_city": {
+      "type": "string",
+      "description": "City from the IP address registry"
+    },
+    "registry_state": {
+      "type": "string",
+      "description": "State from the IP address registry"
+    },
+    "registry_country": {
+      "type": "string",
+      "description": "Country from the IP address registry"
+    },
+    "registry_country_code": {
+      "type": "string",
+      "description": "Country code from the IP address registry"
+    },
+    "ip": {
+      "type": "string",
+      "description": "The queried IP address"
+    },
+    "information_level": {
+      "type": "string",
+      "enum": [
+        "Detailed",
+        "Basic",
+        "Limited"
+      ],
+      "description": "Level of information available for this IP"
+    },
+    "audience": {
+      "type": "string",
+      "description": "Audience segment classification"
+    },
+    "audience_segment": {
+      "type": "string",
+      "description": "Detailed audience segment"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "Latitude of the IP geolocation"
+    },
+    "longitude": {
+      "type": "number",
+      "description": "Longitude of the IP geolocation"
+    }
+  }
+}

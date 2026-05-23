@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExportJob",
+  "title": "ExportJob",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Export job unique identifier"
+    },
+    "entity_type": {
+      "type": "string",
+      "enum": [
+        "accounts",
+        "people",
+        "opportunities",
+        "activities",
+        "campaigns",
+        "buying_groups"
+      ],
+      "description": "Type of entity being exported"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "completed",
+        "failed",
+        "cancelled"
+      ],
+      "description": "Current job status"
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Fields included in the export"
+    },
+    "filters": {
+      "type": "object",
+      "description": "Applied filters"
+    },
+    "record_count": {
+      "type": "integer",
+      "description": "Total number of records exported"
+    },
+    "file_size_bytes": {
+      "type": "integer",
+      "description": "Size of the exported file in bytes"
+    },
+    "file_parts": {
+      "type": "integer",
+      "description": "Number of file parts for large exports"
+    },
+    "download_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to download the exported file (when completed)"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Job creation timestamp"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Job completion timestamp"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the download URL expires"
+    },
+    "error_message": {
+      "type": "string",
+      "description": "Error details if the job failed"
+    }
+  }
+}
