@@ -1,0 +1,1001 @@
+"""
+Demandbase GraphQL Schema
+Conceptual schema for the Demandbase ABM and B2B Intelligence Platform.
+Covers account-based marketing, intent data, advertising, engagement,
+company/contact intelligence, and platform administration.
+"""
+
+# ─────────────────────────────────────────────
+# Scalars
+# ─────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar URL
+
+# ─────────────────────────────────────────────
+# Enums
+# ─────────────────────────────────────────────
+
+enum BuyingStage {
+  AWARENESS
+  CONSIDERATION
+  DECISION
+  PURCHASE
+  RETENTION
+  ADVOCACY
+}
+
+enum JourneyStage {
+  EARLY
+  MIDDLE
+  LATE
+  CLOSED_WON
+  CLOSED_LOST
+}
+
+enum CampaignType {
+  DISPLAY
+  RETARGETING
+  ACCOUNT_BASED
+  CONTENT_SYNDICATION
+  CONNECTED_TV
+  AUDIO
+  NATIVE
+}
+
+enum CampaignStatus {
+  DRAFT
+  PENDING_REVIEW
+  ACTIVE
+  PAUSED
+  ENDED
+  ARCHIVED
+}
+
+enum IntentStage {
+  NONE
+  LOW
+  MEDIUM
+  HIGH
+  VERY_HIGH
+}
+
+enum TechCategory {
+  CRM
+  MARKETING_AUTOMATION
+  ERP
+  ANALYTICS
+  COLLABORATION
+  SECURITY
+  CLOUD_INFRASTRUCTURE
+  E_COMMERCE
+  CONTENT_MANAGEMENT
+  HUMAN_RESOURCES
+  FINANCE
+  CUSTOMER_SUPPORT
+  DATA_WAREHOUSE
+  ADVERTISING_TECH
+  OTHER
+}
+
+enum ContactRole {
+  DECISION_MAKER
+  INFLUENCER
+  END_USER
+  CHAMPION
+  ECONOMIC_BUYER
+  TECHNICAL_EVALUATOR
+  LEGAL_COMPLIANCE
+  UNKNOWN
+}
+
+# ─────────────────────────────────────────────
+# Account Types
+# ─────────────────────────────────────────────
+
+"""Unique identifier reference for a Demandbase account record."""
+type AccountId {
+  id: ID!
+  demandbaseId: String
+  domainId: String
+  crmId: String
+}
+
+"""Core account record with identifying attributes."""
+type Account {
+  id: AccountId!
+  name: String!
+  domain: String
+  website: URL
+  industry: String
+  subIndustry: String
+  employeeCount: Int
+  employeeRange: String
+  revenue: Float
+  revenueRange: String
+  country: String
+  state: String
+  city: String
+  postalCode: String
+  stockExchange: String
+  stockTicker: String
+  isp: Boolean
+  parentId: String
+  ultimateParentId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  details: AccountDetails
+  score: AccountScore
+  profile: AccountProfile
+  health: AccountHealth
+  intent: Intent
+  segments: [Segment]
+  contacts: [Contact]
+  opportunities: [Opportunity]
+  engagements: [Engagement]
+  pageViews: [PageView]
+}
+
+"""Extended details for an account including enrichment data."""
+type AccountDetails {
+  accountId: ID!
+  naicsCode: String
+  sicCode: String
+  alexaRank: Int
+  yearFounded: Int
+  annualGrowthRate: Float
+  totalFunding: Float
+  latestFundingRound: String
+  numberOfLocations: Int
+  isPublic: Boolean
+  description: String
+  keywords: [String]
+  technologies: [Technology]
+  competitors: [String]
+  socialProfiles: JSON
+}
+
+"""Predictive and engagement scoring for an account."""
+type AccountScore {
+  accountId: ID!
+  pipelineScore: Float
+  engagementScore: Float
+  fitScore: Float
+  intentScore: Float
+  overallScore: Float
+  tier: String
+  scoredAt: DateTime
+}
+
+"""Ideal Customer Profile (ICP) alignment for an account."""
+type AccountProfile {
+  accountId: ID!
+  icpScore: Float
+  icpTier: String
+  firmographicFit: Float
+  technographicFit: Float
+  behavioralFit: Float
+  customProfileScore: Float
+  profiledAt: DateTime
+}
+
+"""Account health metrics and renewal risk indicators."""
+type AccountHealth {
+  accountId: ID!
+  healthScore: Float
+  churnRisk: String
+  expansionPotential: Float
+  npsScore: Float
+  supportTicketVolume: Int
+  productAdoption: Float
+  lastLoginAt: DateTime
+  renewalDate: DateTime
+  contractValue: Float
+}
+
+# ─────────────────────────────────────────────
+# Intent Types
+# ─────────────────────────────────────────────
+
+"""Aggregated intent signals for an account."""
+type Intent {
+  accountId: ID!
+  overallIntentScore: Float
+  stage: IntentStage!
+  buyingStage: BuyingStage
+  topKeywords: [String]
+  weeklyChange: Float
+  trending: Boolean
+  details: [IntentDetails]
+  scoredAt: DateTime
+}
+
+"""Granular intent signal for a specific topic or keyword."""
+type IntentDetails {
+  accountId: ID!
+  keyword: String!
+  topic: String
+  score: IntentScore!
+  researchVolume: Int
+  weeklyResearchVolume: Int
+  monthlyResearchVolume: Int
+  sourceSites: [String]
+  capturedAt: DateTime
+}
+
+"""Numeric intent score with change metrics."""
+type IntentScore {
+  current: Float!
+  previous: Float
+  change: Float
+  percentChange: Float
+  trend: String
+}
+
+# ─────────────────────────────────────────────
+# Segment & Audience Types
+# ─────────────────────────────────────────────
+
+"""A named grouping of accounts based on shared attributes or behaviors."""
+type Segment {
+  id: ID!
+  name: String!
+  description: String
+  accountCount: Int
+  isActive: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  details: SegmentDetails
+  members: [SegmentMember]
+}
+
+"""Configuration details for a segment."""
+type SegmentDetails {
+  segmentId: ID!
+  segmentType: String
+  filterCriteria: JSON
+  refreshFrequency: String
+  lastRefreshedAt: DateTime
+  owner: String
+  tags: [String]
+}
+
+"""An account's membership record within a segment."""
+type SegmentMember {
+  segmentId: ID!
+  accountId: ID!
+  account: Account
+  addedAt: DateTime
+  score: Float
+  reason: String
+}
+
+"""A targetable audience for advertising or personalization."""
+type Audience {
+  id: ID!
+  name: String!
+  description: String
+  accountCount: Int
+  estimatedReach: Int
+  isActive: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  details: AudienceDetails
+  targets: [AudienceTarget]
+}
+
+"""Configuration and performance details for an audience."""
+type AudienceDetails {
+  audienceId: ID!
+  audienceType: String
+  sourceSegments: [String]
+  matchRate: Float
+  cpmBid: Float
+  spendCap: Float
+  geoTargeting: [String]
+  deviceTargeting: [String]
+  dayPartTargeting: JSON
+}
+
+"""An individual targeting specification within an audience."""
+type AudienceTarget {
+  audienceId: ID!
+  targetType: String!
+  targetValue: String!
+  matchCount: Int
+  confidence: Float
+}
+
+# ─────────────────────────────────────────────
+# Campaign & Advertising Types
+# ─────────────────────────────────────────────
+
+"""An advertising campaign managed through Demandbase."""
+type Campaign {
+  id: ID!
+  name: String!
+  type: CampaignType!
+  status: CampaignStatus!
+  budget: Float
+  spend: Float
+  startDate: DateTime
+  endDate: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  details: CampaignDetails
+  adGroups: [AdGroup]
+  impressions: [Impression]
+  clicks: [Click]
+  audienceIds: [String]
+}
+
+"""Extended campaign configuration and performance metrics."""
+type CampaignDetails {
+  campaignId: ID!
+  objective: String
+  bidStrategy: String
+  targetCPM: Float
+  actualCPM: Float
+  targetCTR: Float
+  actualCTR: Float
+  impressionCount: Int
+  clickCount: Int
+  conversionCount: Int
+  accountsReached: Int
+  frequency: Float
+  reach: Int
+  pacing: Float
+  notes: String
+}
+
+"""A grouping of ads within a campaign sharing targeting settings."""
+type AdGroup {
+  id: ID!
+  campaignId: ID!
+  name: String!
+  status: String
+  budget: Float
+  spend: Float
+  bidAmount: Float
+  ads: [Ad]
+  targets: [Target]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""A single creative unit served as part of a campaign."""
+type Ad {
+  id: ID!
+  adGroupId: ID!
+  name: String!
+  format: String
+  size: String
+  status: String
+  clickUrl: URL
+  impressionPixel: URL
+  previewUrl: URL
+  createdAt: DateTime
+  updatedAt: DateTime
+  details: AdDetails
+}
+
+"""Creative details and performance metrics for an ad."""
+type AdDetails {
+  adId: ID!
+  headline: String
+  description: String
+  callToAction: String
+  imageUrl: URL
+  videoUrl: URL
+  impressionCount: Int
+  clickCount: Int
+  ctr: Float
+  conversionCount: Int
+  qualityScore: Float
+}
+
+"""A targeting criterion applied to an ad group."""
+type Target {
+  id: ID!
+  adGroupId: ID!
+  targetType: String!
+  targetValue: String!
+  details: TargetDetails
+}
+
+"""Details and estimated reach for a targeting criterion."""
+type TargetDetails {
+  targetId: ID!
+  matchType: String
+  estimatedReach: Int
+  bidAdjustment: Float
+  excludeFlag: Boolean
+}
+
+# ─────────────────────────────────────────────
+# Performance Event Types
+# ─────────────────────────────────────────────
+
+"""A single ad impression event."""
+type Impression {
+  id: ID!
+  adId: ID!
+  campaignId: ID!
+  accountId: ID
+  timestamp: DateTime!
+  domain: String
+  device: String
+  country: String
+  cost: Float
+}
+
+"""A single ad click event."""
+type Click {
+  id: ID!
+  adId: ID!
+  campaignId: ID!
+  accountId: ID
+  timestamp: DateTime!
+  domain: String
+  device: String
+  country: String
+  landingPage: URL
+  cost: Float
+}
+
+"""A website visit attributed to an account."""
+type Visit {
+  id: ID!
+  accountId: ID
+  visitorId: String
+  sessionId: String
+  startedAt: DateTime!
+  endedAt: DateTime
+  duration: Int
+  pageCount: Int
+  entryPage: URL
+  exitPage: URL
+  referrer: URL
+  device: String
+  country: String
+  city: String
+  pageViews: [PageView]
+  visitor: VisitorDetails
+}
+
+# ─────────────────────────────────────────────
+# Engagement Types
+# ─────────────────────────────────────────────
+
+"""Aggregated engagement record for an account."""
+type Engagement {
+  id: ID!
+  accountId: ID!
+  account: Account
+  totalEngagementScore: Float
+  webEngagementScore: Float
+  adEngagementScore: Float
+  emailEngagementScore: Float
+  period: String
+  startDate: DateTime
+  endDate: DateTime
+  details: [EngagementDetails]
+}
+
+"""Granular engagement event or channel-specific metrics."""
+type EngagementDetails {
+  engagementId: ID!
+  channel: String!
+  eventType: String
+  score: Float
+  count: Int
+  assetUrl: URL
+  assetTitle: String
+  occurredAt: DateTime
+}
+
+# ─────────────────────────────────────────────
+# Company Intelligence Types
+# ─────────────────────────────────────────────
+
+"""A company record in the Demandbase B2B data graph."""
+type Company {
+  id: ID!
+  name: String!
+  domain: String
+  website: URL
+  industry: String
+  country: String
+  state: String
+  city: String
+  employeeCount: Int
+  revenue: Float
+  isPublic: Boolean
+  stockTicker: String
+  details: CompanyDetails
+  firmographic: CompanyFirmographic
+  technographic: CompanyTechnographic
+  keywords: [CompanyKeyword]
+  funding: [Funding]
+  news: [News]
+}
+
+"""Extended company profile data."""
+type CompanyDetails {
+  companyId: ID!
+  legalName: String
+  aliases: [String]
+  description: String
+  logoUrl: URL
+  yearFounded: Int
+  headquarters: String
+  subsidiaries: [String]
+  parentCompany: String
+  ultimateParent: String
+  naicsCode: String
+  sicCode: String
+  alexaRank: Int
+  linkedinUrl: URL
+  twitterHandle: String
+  facebookUrl: URL
+}
+
+"""Firmographic attributes characterizing a company's structure."""
+type CompanyFirmographic {
+  companyId: ID!
+  employeeRange: String
+  revenueRange: String
+  numberOfLocations: Int
+  annualGrowthRate: Float
+  ownershipType: String
+  companyType: String
+  geographicFocus: [String]
+  targetMarkets: [String]
+}
+
+"""Technology stack details for a company."""
+type CompanyTechnographic {
+  companyId: ID!
+  technologies: [Technology]
+  primaryCRM: String
+  primaryMarketing: String
+  primaryERP: String
+  cloudProviders: [String]
+  adPlatforms: [String]
+  lastScannedAt: DateTime
+}
+
+"""A technology product used by a company."""
+type Technology {
+  id: ID!
+  name: String!
+  vendor: String
+  category: TechCategory!
+  version: String
+  confidence: Float
+  firstSeenAt: DateTime
+  lastSeenAt: DateTime
+}
+
+"""A keyword or topic associated with a company."""
+type CompanyKeyword {
+  companyId: ID!
+  keyword: String!
+  relevanceScore: Float
+  category: String
+  source: String
+}
+
+# ─────────────────────────────────────────────
+# Funding Types
+# ─────────────────────────────────────────────
+
+"""A funding event for a company."""
+type Funding {
+  id: ID!
+  companyId: ID!
+  round: String!
+  amount: Float
+  currency: String
+  announcedAt: DateTime
+  investors: [String]
+  leadInvestor: String
+  source: URL
+  details: FundingDetails
+}
+
+"""Detailed attributes of a funding round."""
+type FundingDetails {
+  fundingId: ID!
+  postMoneyValuation: Float
+  preMoneyValuation: Float
+  equityPercentage: Float
+  debtComponent: Float
+  grantType: String
+  notes: String
+}
+
+# ─────────────────────────────────────────────
+# News Types
+# ─────────────────────────────────────────────
+
+"""A news article or press mention related to a company."""
+type News {
+  id: ID!
+  companyId: ID!
+  headline: String!
+  summary: String
+  sourceUrl: URL
+  sourceName: String
+  publishedAt: DateTime!
+  sentiment: String
+  details: NewsDetails
+}
+
+"""Extended metadata for a news item."""
+type NewsDetails {
+  newsId: ID!
+  categories: [String]
+  keywords: [String]
+  entities: [String]
+  language: String
+  readTimeMinutes: Int
+  socialShares: Int
+  author: String
+}
+
+# ─────────────────────────────────────────────
+# Contact & People Types
+# ─────────────────────────────────────────────
+
+"""A B2B contact record."""
+type Contact {
+  id: ID!
+  firstName: String
+  lastName: String
+  email: String
+  phone: String
+  title: String
+  role: ContactRole
+  department: String
+  seniority: String
+  companyId: ID
+  company: Company
+  accountId: ID
+  account: Account
+  linkedinUrl: URL
+  twitterHandle: String
+  isVerified: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  details: ContactDetails
+  profile: ContactProfile
+  leads: [Lead]
+}
+
+"""Extended attributes for a contact."""
+type ContactDetails {
+  contactId: ID!
+  alternateEmails: [String]
+  alternatePhones: [String]
+  location: String
+  country: String
+  state: String
+  city: String
+  bio: String
+  skills: [String]
+  languages: [String]
+  education: JSON
+  workHistory: JSON
+  lastVerifiedAt: DateTime
+}
+
+"""Behavioral and scoring profile for a contact."""
+type ContactProfile {
+  contactId: ID!
+  engagementScore: Float
+  buyingPropensity: Float
+  influencerScore: Float
+  recentActivity: String
+  lastEngagedAt: DateTime
+  preferredChannel: String
+  optInStatus: Boolean
+}
+
+# ─────────────────────────────────────────────
+# Lead Types
+# ─────────────────────────────────────────────
+
+"""A marketing or sales lead record."""
+type Lead {
+  id: ID!
+  contactId: ID
+  contact: Contact
+  accountId: ID
+  account: Account
+  source: String
+  status: String
+  score: Float
+  assignedTo: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  details: LeadDetails
+}
+
+"""Conversion and qualification details for a lead."""
+type LeadDetails {
+  leadId: ID!
+  leadSource: String
+  campaignSource: String
+  qualificationNotes: String
+  convertedAt: DateTime
+  rejectedAt: DateTime
+  rejectionReason: String
+  followUpDate: DateTime
+  estimatedValue: Float
+}
+
+# ─────────────────────────────────────────────
+# Opportunity Type
+# ─────────────────────────────────────────────
+
+"""A sales opportunity linked to an account."""
+type Opportunity {
+  id: ID!
+  accountId: ID!
+  name: String!
+  stage: String
+  amount: Float
+  closeDate: DateTime
+  probability: Float
+  owner: String
+  crmId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+# ─────────────────────────────────────────────
+# Conversation & Web Activity Types
+# ─────────────────────────────────────────────
+
+"""A recorded interaction or conversation tied to an account."""
+type Conversation {
+  id: ID!
+  accountId: ID
+  contactId: ID
+  channel: String!
+  direction: String
+  subject: String
+  body: String
+  sentiment: String
+  outcome: String
+  occurredAt: DateTime!
+  duration: Int
+  participants: [String]
+}
+
+"""A single web page view event."""
+type PageView {
+  id: ID!
+  visitorId: String
+  accountId: ID
+  sessionId: String
+  url: URL!
+  title: String
+  referrer: URL
+  duration: Int
+  device: String
+  browser: String
+  country: String
+  city: String
+  timestamp: DateTime!
+}
+
+"""Visitor-level identity and attribute data."""
+type VisitorDetails {
+  visitorId: ID!
+  accountId: ID
+  company: Company
+  ipAddress: String
+  userAgent: String
+  device: String
+  browser: String
+  os: String
+  country: String
+  state: String
+  city: String
+  isp: String
+  connectionType: String
+  firstSeenAt: DateTime
+  lastSeenAt: DateTime
+  totalVisits: Int
+  totalPageViews: Int
+}
+
+# ─────────────────────────────────────────────
+# Integration Types
+# ─────────────────────────────────────────────
+
+"""Salesforce CRM integration configuration and sync status."""
+type SalesforceIntegration {
+  id: ID!
+  orgId: String!
+  instanceUrl: URL!
+  connectedAt: DateTime
+  syncEnabled: Boolean
+  lastSyncAt: DateTime
+  syncedObjects: [String]
+  fieldMappings: JSON
+  status: String
+  errorLog: [String]
+}
+
+"""HubSpot CRM integration configuration and sync status."""
+type HubSpotIntegration {
+  id: ID!
+  portalId: String!
+  connectedAt: DateTime
+  syncEnabled: Boolean
+  lastSyncAt: DateTime
+  syncedObjects: [String]
+  fieldMappings: JSON
+  status: String
+  errorLog: [String]
+}
+
+"""Marketo marketing automation integration configuration."""
+type MarketoIntegration {
+  id: ID!
+  munchkinId: String!
+  instanceUrl: URL!
+  connectedAt: DateTime
+  syncEnabled: Boolean
+  lastSyncAt: DateTime
+  syncedPrograms: [String]
+  fieldMappings: JSON
+  status: String
+  errorLog: [String]
+}
+
+# ─────────────────────────────────────────────
+# Auth & Admin Types
+# ─────────────────────────────────────────────
+
+"""A Demandbase API key for programmatic access."""
+type APIKey {
+  id: ID!
+  name: String!
+  keyPrefix: String!
+  scopes: [String]
+  createdAt: DateTime!
+  expiresAt: DateTime
+  lastUsedAt: DateTime
+  isActive: Boolean!
+  createdBy: String
+}
+
+"""An authentication token session."""
+type Token {
+  accessToken: String!
+  tokenType: String!
+  expiresIn: Int
+  scope: String
+  issuedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Query Root
+# ─────────────────────────────────────────────
+
+type Query {
+  # Accounts
+  account(id: ID!): Account
+  accounts(
+    domain: String
+    industry: String
+    country: String
+    employeeRange: String
+    revenueRange: String
+    limit: Int
+    offset: Int
+  ): [Account]
+
+  # Intent
+  accountIntent(accountId: ID!): Intent
+  intentByDomain(domain: String!): Intent
+  topIntentAccounts(keyword: String, limit: Int): [Account]
+
+  # Segments
+  segment(id: ID!): Segment
+  segments(isActive: Boolean, limit: Int, offset: Int): [Segment]
+  segmentMembers(segmentId: ID!, limit: Int, offset: Int): [SegmentMember]
+
+  # Audiences
+  audience(id: ID!): Audience
+  audiences(isActive: Boolean, limit: Int, offset: Int): [Audience]
+
+  # Campaigns
+  campaign(id: ID!): Campaign
+  campaigns(status: CampaignStatus, type: CampaignType, limit: Int, offset: Int): [Campaign]
+  adGroup(id: ID!): AdGroup
+  ad(id: ID!): Ad
+
+  # Company Intelligence
+  company(id: ID!): Company
+  companyByDomain(domain: String!): Company
+  companies(industry: String, country: String, employeeRange: String, limit: Int, offset: Int): [Company]
+  companyTechnologies(companyId: ID!): CompanyTechnographic
+  companyFunding(companyId: ID!): [Funding]
+  companyNews(companyId: ID!, limit: Int): [News]
+
+  # Contacts & Leads
+  contact(id: ID!): Contact
+  contacts(accountId: ID, companyId: ID, role: ContactRole, limit: Int, offset: Int): [Contact]
+  lead(id: ID!): Lead
+  leads(accountId: ID, status: String, limit: Int, offset: Int): [Lead]
+
+  # Engagement
+  accountEngagement(accountId: ID!, period: String): Engagement
+  accountVisits(accountId: ID!, limit: Int, offset: Int): [Visit]
+  accountPageViews(accountId: ID!, limit: Int, offset: Int): [PageView]
+  accountConversations(accountId: ID!, limit: Int, offset: Int): [Conversation]
+
+  # Visitor Intelligence
+  visitorByIp(ipAddress: String!): VisitorDetails
+  visitor(id: ID!): VisitorDetails
+
+  # Integrations
+  salesforceIntegration: SalesforceIntegration
+  hubspotIntegration: HubSpotIntegration
+  marketoIntegration: MarketoIntegration
+
+  # Admin
+  apiKeys: [APIKey]
+  apiKey(id: ID!): APIKey
+}
+
+# ─────────────────────────────────────────────
+# Mutation Root
+# ─────────────────────────────────────────────
+
+type Mutation {
+  # Segments
+  createSegment(name: String!, description: String, filterCriteria: JSON): Segment
+  updateSegment(id: ID!, name: String, description: String, filterCriteria: JSON): Segment
+  deleteSegment(id: ID!): Boolean
+  addAccountToSegment(segmentId: ID!, accountId: ID!): SegmentMember
+  removeAccountFromSegment(segmentId: ID!, accountId: ID!): Boolean
+
+  # Audiences
+  createAudience(name: String!, description: String, segmentIds: [ID]): Audience
+  updateAudience(id: ID!, name: String, description: String): Audience
+  deleteAudience(id: ID!): Boolean
+
+  # Campaigns
+  createCampaign(name: String!, type: CampaignType!, budget: Float, startDate: DateTime, endDate: DateTime): Campaign
+  updateCampaign(id: ID!, name: String, status: CampaignStatus, budget: Float): Campaign
+  deleteCampaign(id: ID!): Boolean
+  pauseCampaign(id: ID!): Campaign
+  resumeCampaign(id: ID!): Campaign
+
+  # Ad Groups & Ads
+  createAdGroup(campaignId: ID!, name: String!, budget: Float): AdGroup
+  updateAdGroup(id: ID!, name: String, budget: Float, status: String): AdGroup
+  createAd(adGroupId: ID!, name: String!, format: String!, clickUrl: URL): Ad
+  updateAd(id: ID!, name: String, status: String): Ad
+
+  # Contacts & Leads
+  createContact(firstName: String!, lastName: String!, email: String!, accountId: ID): Contact
+  updateContact(id: ID!, title: String, role: ContactRole, phone: String): Contact
+  deleteContact(id: ID!): Boolean
+  createLead(contactId: ID!, accountId: ID, source: String): Lead
+  updateLead(id: ID!, status: String, score: Float, assignedTo: String): Lead
+
+  # API Keys
+  createAPIKey(name: String!, scopes: [String], expiresAt: DateTime): APIKey
+  revokeAPIKey(id: ID!): Boolean
+
+  # Token
+  generateToken(apiKey: String!): Token
+}
