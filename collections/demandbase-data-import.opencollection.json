@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Demandbase Data Import API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Import Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase List import jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/import/v1/jobs",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by job status"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of data import jobs with their current status."
+        },
+        {
+          "info": {
+            "name": "Demandbase Create an import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.demandbase.com/import/v1/jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new asynchronous data import job. Specify the entity type, operation mode (insert, update, or upsert), and field mappings. Upload the CSV data file after creating the job."
+        },
+        {
+          "info": {
+            "name": "Demandbase Get import job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/import/v1/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "Import job unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the current status and details of a specific import job, including processing progress and error summary."
+        },
+        {
+          "info": {
+            "name": "Demandbase Cancel an import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.demandbase.com/import/v1/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "Import job unique identifier"
+              }
+            ]
+          },
+          "docs": "Cancel a pending or validating import job."
+        },
+        {
+          "info": {
+            "name": "Demandbase Get import errors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/import/v1/jobs/:jobId/errors",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "Import job unique identifier"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed error information for rows that failed during import."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Uploads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Upload import file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.demandbase.com/import/v1/jobs/:jobId/upload",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "Import job unique identifier"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a CSV file for an import job. The file must match the field mappings specified when creating the job."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Mappings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase List field mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/import/v1/mappings",
+            "params": [
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by entity type"
+              }
+            ]
+          },
+          "docs": "Retrieve available field mappings for each entity type, showing which fields can be imported and their requirements."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

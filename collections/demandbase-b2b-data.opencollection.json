@@ -1,0 +1,254 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Demandbase B2B Data API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Search companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/data/v1/companies/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Free-text search query"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Filter by company domain"
+              },
+              {
+                "name": "industry",
+                "value": "",
+                "type": "query",
+                "description": "Filter by industry"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Filter by country"
+              },
+              {
+                "name": "employee_range",
+                "value": "",
+                "type": "query",
+                "description": "Filter by employee range"
+              },
+              {
+                "name": "revenue_range",
+                "value": "",
+                "type": "query",
+                "description": "Filter by revenue range"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search for companies by name, domain, industry, location, or other firmographic attributes. Returns matching companies with detailed firmographic profiles."
+        },
+        {
+          "info": {
+            "name": "Demandbase Get company details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/data/v1/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Demandbase company unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed company information by Demandbase company ID, including firmographics, technographics, and corporate hierarchy."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Search contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/data/v1/contacts/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Free-text search query"
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter contacts by company ID"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Filter contacts by company domain"
+              },
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "Filter by job title"
+              },
+              {
+                "name": "department",
+                "value": "",
+                "type": "query",
+                "description": "Filter by department"
+              },
+              {
+                "name": "seniority",
+                "value": "",
+                "type": "query",
+                "description": "Filter by seniority level"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search for business contacts by name, title, company, or other attributes. Returns matching contact profiles."
+        },
+        {
+          "info": {
+            "name": "Demandbase Get contact details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/data/v1/contacts/:contactId",
+            "params": [
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information for a specific contact."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Enrichment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Enrich company data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.demandbase.com/data/v1/enrichment/company",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrich a company record with Demandbase data by providing a domain, company name, or other identifiers."
+        },
+        {
+          "info": {
+            "name": "Demandbase Enrich contact data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.demandbase.com/data/v1/enrichment/contact",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrich a contact record with Demandbase data by providing email, name, or other identifiers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Technographics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Get technographic data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/data/v1/technographics/:domain",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "Company domain"
+              }
+            ]
+          },
+          "docs": "Retrieve technology usage data for a company by domain, including technologies detected and categories."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

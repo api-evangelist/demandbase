@@ -1,0 +1,788 @@
+{
+  "item": [
+    {
+      "id": "c349f753-9eb4-4eb3-9b0e-99a5f36f2801",
+      "name": "Cookie Identification",
+      "description": {
+        "content": "Identify companies from cookies",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7feb54ef-4d01-4843-b242-06f9f8c9fd44",
+          "name": "Demandbase Identify company by cookie",
+          "request": {
+            "name": "Demandbase Identify company by cookie",
+            "description": {
+              "content": "Identify a company using Demandbase tracking cookie data. Provides enhanced identification accuracy by combining IP-based identification with cookie-based behavioral signals.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "cookie.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) Demandbase API key"
+                },
+                {
+                  "disabled": false,
+                  "key": "cookie",
+                  "value": "<string>",
+                  "description": "(Required) Demandbase tracking cookie value"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef2de4a5-26db-402f-894c-2e7ca100ead6",
+              "name": "Company identification result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "cookie.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cookie",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"company_name\": \"string\",\n  \"demandbase_sid\": 6797,\n  \"db_company_id\": \"string\",\n  \"domain\": \"string\",\n  \"industry\": \"string\",\n  \"sub_industry\": \"string\",\n  \"employee_count\": 6252,\n  \"employee_range\": \"string\",\n  \"revenue\": 7243.762847689561,\n  \"revenue_range\": \"string\",\n  \"street_address\": \"string\",\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"zip\": \"string\",\n  \"country\": \"string\",\n  \"country_code\": \"string\",\n  \"phone\": \"string\",\n  \"website\": \"https://iWwXwpVqLZtGHHQUAD.xpj9UBcDlK.Ox8skurs1TB8743l4QAk0ime5JUi87bOXl-A1jm9852f.\",\n  \"stock_ticker\": \"string\",\n  \"sic_code\": \"string\",\n  \"naics_code\": \"string\",\n  \"fortune_1000\": false,\n  \"forbes_2000\": true,\n  \"b2b\": false,\n  \"b2c\": true,\n  \"traffic\": \"string\",\n  \"isp\": false,\n  \"parent_company_id\": \"string\",\n  \"parent_company_name\": \"string\",\n  \"ultimate_parent_company_id\": \"string\",\n  \"ultimate_parent_company_name\": \"string\",\n  \"registry_company_name\": \"string\",\n  \"registry_city\": \"string\",\n  \"registry_state\": \"string\",\n  \"registry_country\": \"string\",\n  \"registry_country_code\": \"string\",\n  \"ip\": \"string\",\n  \"information_level\": \"Basic\",\n  \"audience\": \"string\",\n  \"audience_segment\": \"string\",\n  \"latitude\": 8281.570783186466,\n  \"longitude\": 2974.193407210729\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c24fbd20-2d55-4705-9243-ad38f4a7b67b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "cookie.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cookie",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f85f5c47-82af-4ec3-89f8-24050f4c53f8",
+              "name": "No company identified from the cookie",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "cookie.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cookie",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2ee7799f-c688-447e-8264-76bdf13cb8ed",
+      "name": "IP Identification",
+      "description": {
+        "content": "Identify companies from IP addresses",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7313b615-a0a3-4704-8c60-46958e085a5a",
+          "name": "Demandbase Identify company by IP address",
+          "request": {
+            "name": "Demandbase Identify company by IP address",
+            "description": {
+              "content": "Look up firmographic data associated with a given IP address. Returns detailed company information including name, industry, employee count, revenue, location, and corporate hierarchy (parent and ultimate parent company IDs).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "ip.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) Demandbase API key"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<ipv4>",
+                  "description": "(Required) IPv4 address to look up"
+                },
+                {
+                  "disabled": false,
+                  "key": "callback",
+                  "value": "<string>",
+                  "description": "JSONP callback function name for cross-domain requests"
+                },
+                {
+                  "disabled": false,
+                  "key": "var",
+                  "value": "<string>",
+                  "description": "Variable name for JSONP response assignment"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f215c131-a5f9-45c7-bda7-e133264aba95",
+              "name": "Company identification result with firmographic data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "ip.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "var",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"company_name\": \"string\",\n  \"demandbase_sid\": 6797,\n  \"db_company_id\": \"string\",\n  \"domain\": \"string\",\n  \"industry\": \"string\",\n  \"sub_industry\": \"string\",\n  \"employee_count\": 6252,\n  \"employee_range\": \"string\",\n  \"revenue\": 7243.762847689561,\n  \"revenue_range\": \"string\",\n  \"street_address\": \"string\",\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"zip\": \"string\",\n  \"country\": \"string\",\n  \"country_code\": \"string\",\n  \"phone\": \"string\",\n  \"website\": \"https://iWwXwpVqLZtGHHQUAD.xpj9UBcDlK.Ox8skurs1TB8743l4QAk0ime5JUi87bOXl-A1jm9852f.\",\n  \"stock_ticker\": \"string\",\n  \"sic_code\": \"string\",\n  \"naics_code\": \"string\",\n  \"fortune_1000\": false,\n  \"forbes_2000\": true,\n  \"b2b\": false,\n  \"b2c\": true,\n  \"traffic\": \"string\",\n  \"isp\": false,\n  \"parent_company_id\": \"string\",\n  \"parent_company_name\": \"string\",\n  \"ultimate_parent_company_id\": \"string\",\n  \"ultimate_parent_company_name\": \"string\",\n  \"registry_company_name\": \"string\",\n  \"registry_city\": \"string\",\n  \"registry_state\": \"string\",\n  \"registry_country\": \"string\",\n  \"registry_country_code\": \"string\",\n  \"ip\": \"string\",\n  \"information_level\": \"Basic\",\n  \"audience\": \"string\",\n  \"audience_segment\": \"string\",\n  \"latitude\": 8281.570783186466,\n  \"longitude\": 2974.193407210729\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "149b6143-c1d3-4027-9eef-0948840ceb89",
+              "name": "Invalid IP address or missing parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "ip.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "var",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 3745\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cb28972-c468-46ba-9e20-d6d40baff21c",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "ip.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "var",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0b1f5226-fd46-455f-850c-4e22b2bc0ad4",
+              "name": "No company identified for the given IP address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "ip.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "var",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9cbd50d-744d-45c7-acf3-b9a9c7563080",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "ip.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "var",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57f83f84-28c1-43d1-ac62-2f031490fc04",
+          "name": "Demandbase Identify company by IP address (path)",
+          "request": {
+            "name": "Demandbase Identify company by IP address (path)",
+            "description": {
+              "content": "Alternative endpoint for IP identification with the IP address specified in the URL path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "ip.json",
+                ":ip"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) Demandbase API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<ipv4>",
+                  "key": "ip",
+                  "description": "(Required) IPv4 address to look up"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2897f2a3-459a-41a7-8003-027c7cff0851",
+              "name": "Company identification result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "ip.json",
+                    ":ip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<ipv4>",
+                      "key": "ip",
+                      "description": "(Required) IPv4 address to look up"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"company_name\": \"string\",\n  \"demandbase_sid\": 6797,\n  \"db_company_id\": \"string\",\n  \"domain\": \"string\",\n  \"industry\": \"string\",\n  \"sub_industry\": \"string\",\n  \"employee_count\": 6252,\n  \"employee_range\": \"string\",\n  \"revenue\": 7243.762847689561,\n  \"revenue_range\": \"string\",\n  \"street_address\": \"string\",\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"zip\": \"string\",\n  \"country\": \"string\",\n  \"country_code\": \"string\",\n  \"phone\": \"string\",\n  \"website\": \"https://iWwXwpVqLZtGHHQUAD.xpj9UBcDlK.Ox8skurs1TB8743l4QAk0ime5JUi87bOXl-A1jm9852f.\",\n  \"stock_ticker\": \"string\",\n  \"sic_code\": \"string\",\n  \"naics_code\": \"string\",\n  \"fortune_1000\": false,\n  \"forbes_2000\": true,\n  \"b2b\": false,\n  \"b2c\": true,\n  \"traffic\": \"string\",\n  \"isp\": false,\n  \"parent_company_id\": \"string\",\n  \"parent_company_name\": \"string\",\n  \"ultimate_parent_company_id\": \"string\",\n  \"ultimate_parent_company_name\": \"string\",\n  \"registry_company_name\": \"string\",\n  \"registry_city\": \"string\",\n  \"registry_state\": \"string\",\n  \"registry_country\": \"string\",\n  \"registry_country_code\": \"string\",\n  \"ip\": \"string\",\n  \"information_level\": \"Basic\",\n  \"audience\": \"string\",\n  \"audience_segment\": \"string\",\n  \"latitude\": 8281.570783186466,\n  \"longitude\": 2974.193407210729\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba364674-d3a2-43bd-8a3c-d8f6b3cbaf0d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "ip.json",
+                    ":ip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<ipv4>",
+                      "key": "ip",
+                      "description": "(Required) IPv4 address to look up"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b96ee254-c66f-415d-98bf-d128bde8cd2f",
+              "name": "No company identified",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "ip.json",
+                    ":ip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<ipv4>",
+                      "key": "ip",
+                      "description": "(Required) IPv4 address to look up"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.demandbase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3b7d965c-82f2-4258-a0e9-c2ac08c31f7f",
+    "name": "Demandbase IP API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Returns firmographic data for a specific IP address or cookie, enabling real-time company identification of website visitors with attributes including employee count, revenue, industry, and corporate hierarchy with parent and ultimate parent IDs. This is the v3 API for Demandbase One.\n\nContact Support:\n Name: Demandbase Support",
+      "type": "text/plain"
+    }
+  }
+}

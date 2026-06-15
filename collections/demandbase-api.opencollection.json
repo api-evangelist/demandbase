@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Demandbase API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Search accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/accounts/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query string (company name, domain, etc.)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Search for accounts by company name, domain, or other firmographic attributes. Returns matching account records with firmographic data."
+        },
+        {
+          "info": {
+            "name": "Demandbase Get account by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/accounts/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Demandbase account unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed firmographic and account information for a specific account by its Demandbase account ID."
+        },
+        {
+          "info": {
+            "name": "Demandbase Get account by domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/accounts/domain/:domain",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "Company web domain (e.g., acme.com)"
+              }
+            ]
+          },
+          "docs": "Look up a company account by its web domain. Returns firmographic data and account attributes for the matched company."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Enrichment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Enrich account record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.demandbase.com/enrichment/account",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrich an account record with Demandbase firmographic data, intent signals, and technographic information by providing a domain or company name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Firmographics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Get firmographic data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/firmographics/:domain",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "Company web domain"
+              }
+            ]
+          },
+          "docs": "Retrieve firmographic data for a company by its domain, including employee count, revenue, industry, location, and corporate hierarchy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

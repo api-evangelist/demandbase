@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Demandbase Real-Time Identification API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Identify company by IP address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.company-target.com/api/v3/ip.json",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Demandbase API key"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "IP address to identify"
+              },
+              {
+                "name": "callback",
+                "value": "",
+                "type": "query",
+                "description": "JSONP callback function name"
+              }
+            ]
+          },
+          "docs": "Identify the company associated with a given IP address in real-time. Returns firmographic data, intent signals, and company attributes for the resolved organization."
+        },
+        {
+          "info": {
+            "name": "Demandbase Identify company by domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.company-target.com/api/v3/domain.json",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Demandbase API key"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Domain to identify (e.g., acme.com)"
+              }
+            ]
+          },
+          "docs": "Resolve a company from a web domain and return firmographic data and company attributes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Visitor Intelligence",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Get visitor intelligence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.company-target.com/api/v3/visitor.json",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Demandbase API key"
+              }
+            ]
+          },
+          "docs": "Retrieve visitor intelligence for the current request, combining IP identification with cookie-based signals for enhanced accuracy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

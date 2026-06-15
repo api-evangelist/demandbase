@@ -1,0 +1,238 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Demandbase Account List API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase List account lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/accounts/lists",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all target account lists with metadata."
+        },
+        {
+          "info": {
+            "name": "Demandbase Create an account list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.demandbase.com/accounts/lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new target account list."
+        },
+        {
+          "info": {
+            "name": "Demandbase Get an account list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/accounts/lists/:listId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Account list unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific account list."
+        },
+        {
+          "info": {
+            "name": "Demandbase Update an account list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.demandbase.com/accounts/lists/:listId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Account list unique identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing account list."
+        },
+        {
+          "info": {
+            "name": "Demandbase Delete an account list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.demandbase.com/accounts/lists/:listId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Account list unique identifier"
+              }
+            ]
+          },
+          "docs": "Delete a target account list."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "List Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase List account list members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/accounts/lists/:listId/members",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Account list unique identifier"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all accounts within a specific account list."
+        },
+        {
+          "info": {
+            "name": "Demandbase Add accounts to list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.demandbase.com/accounts/lists/:listId/members",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Account list unique identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add one or more accounts to an account list."
+        },
+        {
+          "info": {
+            "name": "Demandbase Remove account from list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.demandbase.com/accounts/lists/:listId/members/:accountId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Account list unique identifier"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a specific account from an account list."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Sync account list to CRM",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.demandbase.com/accounts/lists/:listId/sync",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Account list unique identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trigger synchronization of an account list with an integrated CRM system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

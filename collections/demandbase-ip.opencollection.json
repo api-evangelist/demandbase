@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Demandbase IP API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IP Identification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Identify company by IP address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/api/v3/ip.json",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Demandbase API key"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "IPv4 address to look up"
+              },
+              {
+                "name": "callback",
+                "value": "",
+                "type": "query",
+                "description": "JSONP callback function name for cross-domain requests"
+              },
+              {
+                "name": "var",
+                "value": "",
+                "type": "query",
+                "description": "Variable name for JSONP response assignment"
+              }
+            ]
+          },
+          "docs": "Look up firmographic data associated with a given IP address. Returns detailed company information including name, industry, employee count, revenue, location, and corporate hierarchy (parent and ultimate parent company IDs)."
+        },
+        {
+          "info": {
+            "name": "Demandbase Identify company by IP address (path)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/api/v3/ip.json/:ip",
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "path",
+                "description": "IPv4 address to look up"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Demandbase API key"
+              }
+            ]
+          },
+          "docs": "Alternative endpoint for IP identification with the IP address specified in the URL path."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cookie Identification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demandbase Identify company by cookie",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.demandbase.com/api/v3/cookie.json",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Demandbase API key"
+              },
+              {
+                "name": "cookie",
+                "value": "",
+                "type": "query",
+                "description": "Demandbase tracking cookie value"
+              }
+            ]
+          },
+          "docs": "Identify a company using Demandbase tracking cookie data. Provides enhanced identification accuracy by combining IP-based identification with cookie-based behavioral signals."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
