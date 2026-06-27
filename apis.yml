@@ -299,9 +299,9 @@ common:
   url: https://partners.demandbase.com/
 - type: Integrations
   url: https://partners.demandbase.com/t/partners/integrations
-- type: TermsOfUse
+- type: TermsOfService
   url: https://www.demandbase.com/terms-of-use/
-- type: SignUp
+- type: Signup
   url: https://www.demandbase.com/products/data/api-integration/api-trial/
 - type: JSONLD
   url: json-ld/demandbase-context.jsonld
