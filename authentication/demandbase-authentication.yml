@@ -1,0 +1,42 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/demandbase-account-list-openapi.yml, openapi/demandbase-admin-openapi.yml, openapi/demandbase-advertising-openapi.yml,
+  openapi/demandbase-api-openapi.yml, openapi/demandbase-b2b-data-openapi.yml, openapi/demandbase-data-export-openapi.yml,
+  openapi/demandbase-data-import-openapi.yml, openapi/demandbase-engagement-openapi.yml, openapi/demandbase-ip-openapi.yml,
+  openapi/demandbase-real-time-identification-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OAuth 2.0 bearer token for API access
+  sources:
+  - openapi/demandbase-account-list-openapi.yml
+  - openapi/demandbase-admin-openapi.yml
+  - openapi/demandbase-advertising-openapi.yml
+  - openapi/demandbase-data-export-openapi.yml
+  - openapi/demandbase-data-import-openapi.yml
+  - openapi/demandbase-engagement-openapi.yml
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: API key provided as a bearer token in the Authorization header
+  sources:
+  - openapi/demandbase-api-openapi.yml
+  - openapi/demandbase-b2b-data-openapi.yml
+- name: apiKeyAuth
+  type: apiKey
+  in: query
+  parameter: key
+  description: Demandbase API key passed as query parameter
+  sources:
+  - openapi/demandbase-ip-openapi.yml
+  - openapi/demandbase-real-time-identification-openapi.yml

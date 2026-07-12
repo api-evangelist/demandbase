@@ -266,6 +266,12 @@ apis:
   - type: Capabilities
     url: capabilities/demandbase-data-import-api-capabilities.yml
 common:
+- type: TrustCenter
+  url: security/demandbase-trust-center.yml
+- type: DomainSecurity
+  url: security/demandbase-domain-security.yml
+- type: Authentication
+  url: authentication/demandbase-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/demandbase
 - type: GettingStarted
