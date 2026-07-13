@@ -2,13 +2,15 @@
   "repo": "demandbase",
   "feeds": [
     {
-      "source": "https://www.demandbase.com/blog/",
-      "feed_url": "",
-      "saved": 0,
-      "method": "agent-scrape"
+      "source": "https://www.demandbase.com/terms-of-service/",
+      "error": "HTTPError"
+    },
+    {
+      "source": "https://www.demandbase.com/feed/",
+      "error": "HTTPError"
     }
   ],
   "post_count": 5,
-  "fetched": "2026-06-27T12:36:49Z",
-  "agent_pulled": "2026-06-27"
+  "fetched": "2026-07-11T11:50:51Z",
+  "agent_pulled": "2026-07-04"
 }
