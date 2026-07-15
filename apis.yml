@@ -266,6 +266,8 @@ apis:
   - type: Capabilities
     url: capabilities/demandbase-data-import-api-capabilities.yml
 common:
+- type: AgenticAccess
+  url: agentic-access/demandbase-agentic-access.yml
 - type: TrustCenter
   url: security/demandbase-trust-center.yml
 - type: DomainSecurity
