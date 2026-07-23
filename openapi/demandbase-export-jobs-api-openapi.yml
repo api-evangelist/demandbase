@@ -1,0 +1,304 @@
+openapi: 3.1.0
+info:
+  title: Demandbase Account List Account Lists Export Jobs API
+  description: Create, manage, and sync target account lists for ABM campaigns and personalization efforts. Build dynamic and static account lists, add or remove accounts, and sync lists with CRM systems.
+  version: '1.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+servers:
+- url: https://api.demandbase.com/accounts
+  description: Demandbase Account List API Production
+security:
+- bearerAuth: []
+tags:
+- name: Export Jobs
+  description: Create and manage data export jobs
+paths:
+  /export/v1/jobs:
+    get:
+      operationId: listExportJobs
+      summary: Demandbase List export jobs
+      description: Retrieve a list of data export jobs with their current status and metadata.
+      tags:
+      - Export Jobs
+      parameters:
+      - name: status
+        in: query
+        required: false
+        description: Filter by job status
+        schema:
+          type: string
+          enum:
+          - pending
+          - processing
+          - completed
+          - failed
+          - cancelled
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 25
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: List of export jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExportJob'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createExportJob
+      summary: Demandbase Create an export job
+      description: Create a new asynchronous data export job. Specify the entity type, fields to export, filters, and date range. Exported data is delivered as downloadable CSV files.
+      tags:
+      - Export Jobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExportJobRequest'
+      responses:
+        '202':
+          description: Export job created and queued for processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportJob'
+        '400':
+          description: Invalid request - check entity type and field names
+        '401':
+          description: Unauthorized
+        '429':
+          description: Daily export quota exceeded (10GB per day limit)
+  /export/v1/jobs/{jobId}:
+    get:
+      operationId: getExportJob
+      summary: Demandbase Get export job status
+      description: Retrieve the current status and details of a specific export job, including progress information and download URLs when complete.
+      tags:
+      - Export Jobs
+      parameters:
+      - $ref: '#/components/parameters/jobId'
+      responses:
+        '200':
+          description: Export job details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportJob'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Export job not found
+    delete:
+      operationId: cancelExportJob
+      summary: Demandbase Cancel an export job
+      description: Cancel a pending or processing export job.
+      tags:
+      - Export Jobs
+      parameters:
+      - $ref: '#/components/parameters/jobId'
+      responses:
+        '200':
+          description: Export job cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportJob'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Export job not found
+        '409':
+          description: Job cannot be cancelled (already completed or failed)
+  /export/v1/entities:
+    get:
+      operationId: listExportableEntities
+      summary: Demandbase List exportable entities
+      description: Retrieve the list of entity types available for export and their supported fields.
+      tags:
+      - Export Jobs
+      responses:
+        '200':
+          description: List of exportable entities
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entities:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExportableEntity'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    ExportableEntity:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Entity type name
+        description:
+          type: string
+          description: Entity description
+        fields:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Field name
+              type:
+                type: string
+                description: Field data type
+              description:
+                type: string
+                description: Field description
+          description: Available fields for export
+    CreateExportJobRequest:
+      type: object
+      required:
+      - entity_type
+      properties:
+        entity_type:
+          type: string
+          enum:
+          - accounts
+          - people
+          - opportunities
+          - activities
+          - campaigns
+          - buying_groups
+          description: Type of entity to export
+        fields:
+          type: array
+          items:
+            type: string
+          description: Fields to include in the export. If omitted, all available fields are exported.
+        filters:
+          type: object
+          description: Filter criteria to limit exported records
+          properties:
+            date_range:
+              type: object
+              properties:
+                field:
+                  type: string
+                  description: Date field to filter on
+                start:
+                  type: string
+                  format: date
+                  description: Start date
+                end:
+                  type: string
+                  format: date
+                  description: End date
+            account_list_id:
+              type: string
+              description: Limit export to a specific account list
+        format:
+          type: string
+          enum:
+          - csv
+          default: csv
+          description: Export file format
+    ExportJob:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Export job unique identifier
+        entity_type:
+          type: string
+          enum:
+          - accounts
+          - people
+          - opportunities
+          - activities
+          - campaigns
+          - buying_groups
+          description: Type of entity being exported
+        status:
+          type: string
+          enum:
+          - pending
+          - processing
+          - completed
+          - failed
+          - cancelled
+          description: Current job status
+        fields:
+          type: array
+          items:
+            type: string
+          description: Fields included in the export
+        filters:
+          type: object
+          description: Applied filters
+        record_count:
+          type: integer
+          description: Total number of records exported
+        file_size_bytes:
+          type: integer
+          description: Size of the exported file in bytes
+        file_parts:
+          type: integer
+          description: Number of file parts for large exports
+        download_url:
+          type: string
+          format: uri
+          description: URL to download the exported file (when completed)
+        created_at:
+          type: string
+          format: date-time
+          description: Job creation timestamp
+        completed_at:
+          type: string
+          format: date-time
+          description: Job completion timestamp
+        expires_at:
+          type: string
+          format: date-time
+          description: When the download URL expires
+        error_message:
+          type: string
+          description: Error details if the job failed
+  parameters:
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      description: Export job unique identifier
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for API access
+externalDocs:
+  description: Demandbase Account List API Documentation
+  url: https://docs.demandbase.com/docs/account-list-api

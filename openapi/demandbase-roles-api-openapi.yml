@@ -1,0 +1,69 @@
+openapi: 3.1.0
+info:
+  title: Demandbase Account List Account Lists Roles API
+  description: Create, manage, and sync target account lists for ABM campaigns and personalization efforts. Build dynamic and static account lists, add or remove accounts, and sync lists with CRM systems.
+  version: '1.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+servers:
+- url: https://api.demandbase.com/accounts
+  description: Demandbase Account List API Production
+security:
+- bearerAuth: []
+tags:
+- name: Roles
+  description: Role and permission management
+paths:
+  /admin/v1/roles:
+    get:
+      operationId: listRoles
+      summary: Demandbase List roles
+      description: Retrieve all available roles and their permissions.
+      tags:
+      - Roles
+      responses:
+        '200':
+          description: List of roles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  roles:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+components:
+  schemas:
+    Role:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Role unique identifier
+        name:
+          type: string
+          description: Role name
+        description:
+          type: string
+          description: Role description
+        permissions:
+          type: array
+          items:
+            type: string
+          description: List of permissions granted by this role
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for API access
+externalDocs:
+  description: Demandbase Account List API Documentation
+  url: https://docs.demandbase.com/docs/account-list-api

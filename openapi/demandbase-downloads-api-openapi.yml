@@ -1,0 +1,66 @@
+openapi: 3.1.0
+info:
+  title: Demandbase Account List Account Lists Downloads API
+  description: Create, manage, and sync target account lists for ABM campaigns and personalization efforts. Build dynamic and static account lists, add or remove accounts, and sync lists with CRM systems.
+  version: '1.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+servers:
+- url: https://api.demandbase.com/accounts
+  description: Demandbase Account List API Production
+security:
+- bearerAuth: []
+tags:
+- name: Downloads
+  description: Download exported data files
+paths:
+  /export/v1/jobs/{jobId}/download:
+    get:
+      operationId: downloadExportFile
+      summary: Demandbase Download export file
+      description: Download the exported CSV file for a completed export job. Returns a redirect to a pre-signed download URL.
+      tags:
+      - Downloads
+      parameters:
+      - $ref: '#/components/parameters/jobId'
+      - name: part
+        in: query
+        required: false
+        description: Part number for multi-part exports (starts at 1)
+        schema:
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: CSV file download
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+        '302':
+          description: Redirect to pre-signed download URL
+        '401':
+          description: Unauthorized
+        '404':
+          description: Export job not found or not yet completed
+components:
+  parameters:
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      description: Export job unique identifier
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for API access
+externalDocs:
+  description: Demandbase Account List API Documentation
+  url: https://docs.demandbase.com/docs/account-list-api

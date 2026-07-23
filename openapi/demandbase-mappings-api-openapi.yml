@@ -1,0 +1,80 @@
+openapi: 3.1.0
+info:
+  title: Demandbase Account List Account Lists Mappings API
+  description: Create, manage, and sync target account lists for ABM campaigns and personalization efforts. Build dynamic and static account lists, add or remove accounts, and sync lists with CRM systems.
+  version: '1.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+servers:
+- url: https://api.demandbase.com/accounts
+  description: Demandbase Account List API Production
+security:
+- bearerAuth: []
+tags:
+- name: Mappings
+  description: Field mapping configuration
+paths:
+  /import/v1/mappings:
+    get:
+      operationId: listFieldMappings
+      summary: Demandbase List field mappings
+      description: Retrieve available field mappings for each entity type, showing which fields can be imported and their requirements.
+      tags:
+      - Mappings
+      parameters:
+      - name: entity_type
+        in: query
+        required: false
+        description: Filter by entity type
+        schema:
+          type: string
+          enum:
+          - accounts
+          - people
+          - opportunities
+          - activities
+      responses:
+        '200':
+          description: Field mapping information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FieldMapping'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    FieldMapping:
+      type: object
+      properties:
+        entity_type:
+          type: string
+          description: Entity type
+        field_name:
+          type: string
+          description: Demandbase field name
+        field_type:
+          type: string
+          description: Field data type
+        required:
+          type: boolean
+          description: Whether the field is required for import
+        description:
+          type: string
+          description: Field description
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for API access
+externalDocs:
+  description: Demandbase Account List API Documentation
+  url: https://docs.demandbase.com/docs/account-list-api

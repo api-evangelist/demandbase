@@ -1,0 +1,331 @@
+openapi: 3.1.0
+info:
+  title: Demandbase Account List Account Lists Enrichment API
+  description: Create, manage, and sync target account lists for ABM campaigns and personalization efforts. Build dynamic and static account lists, add or remove accounts, and sync lists with CRM systems.
+  version: '1.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+servers:
+- url: https://api.demandbase.com/accounts
+  description: Demandbase Account List API Production
+security:
+- bearerAuth: []
+tags:
+- name: Enrichment
+  description: Enrich account and contact records with B2B data
+paths:
+  /enrichment/account:
+    post:
+      operationId: enrichAccount
+      summary: Demandbase Enrich account record
+      description: Enrich an account record with Demandbase firmographic data, intent signals, and technographic information by providing a domain or company name.
+      tags:
+      - Enrichment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrichmentRequest'
+      responses:
+        '200':
+          description: Enriched account data returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized
+        '404':
+          description: No matching account found
+  /data/v1/enrichment/company:
+    post:
+      operationId: enrichCompany
+      summary: Demandbase Enrich company data
+      description: Enrich a company record with Demandbase data by providing a domain, company name, or other identifiers.
+      tags:
+      - Enrichment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                domain:
+                  type: string
+                  description: Company domain
+                company_name:
+                  type: string
+                  description: Company name
+                country:
+                  type: string
+                  description: Country for disambiguation
+      responses:
+        '200':
+          description: Enriched company data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: No matching company found
+  /data/v1/enrichment/contact:
+    post:
+      operationId: enrichContact
+      summary: Demandbase Enrich contact data
+      description: Enrich a contact record with Demandbase data by providing email, name, or other identifiers.
+      tags:
+      - Enrichment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: Contact email address
+                first_name:
+                  type: string
+                  description: Contact first name
+                last_name:
+                  type: string
+                  description: Contact last name
+                company_domain:
+                  type: string
+                  description: Company domain for matching
+      responses:
+        '200':
+          description: Enriched contact data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: No matching contact found
+components:
+  schemas:
+    EnrichmentRequest:
+      type: object
+      properties:
+        domain:
+          type: string
+          description: Company web domain for enrichment
+        company_name:
+          type: string
+          description: Company name for matching
+      description: Provide at least one of domain or company_name
+    Company:
+      type: object
+      properties:
+        company_id:
+          type: string
+          description: Demandbase company identifier
+        company_name:
+          type: string
+          description: Official company name
+        domain:
+          type: string
+          description: Primary web domain
+        website:
+          type: string
+          format: uri
+          description: Company website URL
+        industry:
+          type: string
+          description: Industry classification
+        sub_industry:
+          type: string
+          description: Sub-industry classification
+        sic_code:
+          type: string
+          description: SIC code
+        naics_code:
+          type: string
+          description: NAICS code
+        employee_count:
+          type: integer
+          description: Number of employees
+        employee_range:
+          type: string
+          description: Employee count range
+        revenue:
+          type: number
+          description: Annual revenue in USD
+        revenue_range:
+          type: string
+          description: Revenue range
+        address:
+          type: string
+          description: Street address
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State or province
+        country:
+          type: string
+          description: Country
+        zip:
+          type: string
+          description: Postal code
+        phone:
+          type: string
+          description: Phone number
+        stock_ticker:
+          type: string
+          description: Stock ticker symbol
+        founded_year:
+          type: integer
+          description: Year the company was founded
+        fortune_1000:
+          type: boolean
+          description: Fortune 1000 membership
+        forbes_2000:
+          type: boolean
+          description: Forbes 2000 membership
+        parent_company_id:
+          type: string
+          description: Parent company ID
+        parent_company_name:
+          type: string
+          description: Parent company name
+        ultimate_parent_company_id:
+          type: string
+          description: Ultimate parent company ID
+        ultimate_parent_company_name:
+          type: string
+          description: Ultimate parent company name
+    Account:
+      type: object
+      properties:
+        account_id:
+          type: string
+          description: Unique Demandbase account identifier
+        company_name:
+          type: string
+          description: Official company name
+        domain:
+          type: string
+          description: Primary web domain
+        industry:
+          type: string
+          description: Industry classification
+        sub_industry:
+          type: string
+          description: Sub-industry classification
+        employee_count:
+          type: integer
+          description: Number of employees
+        employee_range:
+          type: string
+          description: Employee count range bucket
+        revenue:
+          type: number
+          description: Annual revenue in USD
+        revenue_range:
+          type: string
+          description: Revenue range bucket
+        address:
+          type: string
+          description: Street address
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State or province
+        country:
+          type: string
+          description: Country
+        zip:
+          type: string
+          description: Postal code
+        phone:
+          type: string
+          description: Primary phone number
+        website:
+          type: string
+          format: uri
+          description: Company website URL
+        stock_ticker:
+          type: string
+          description: Stock ticker symbol
+        fortune_1000:
+          type: boolean
+          description: Whether the company is in the Fortune 1000
+        forbes_2000:
+          type: boolean
+          description: Whether the company is in the Forbes 2000
+        parent_company_id:
+          type: string
+          description: Demandbase ID of parent company
+        ultimate_parent_company_id:
+          type: string
+          description: Demandbase ID of ultimate parent company
+    Contact:
+      type: object
+      properties:
+        contact_id:
+          type: string
+          description: Demandbase contact identifier
+        first_name:
+          type: string
+          description: First name
+        last_name:
+          type: string
+          description: Last name
+        email:
+          type: string
+          format: email
+          description: Email address
+        title:
+          type: string
+          description: Job title
+        department:
+          type: string
+          description: Department
+        seniority:
+          type: string
+          description: Seniority level
+        phone:
+          type: string
+          description: Direct phone number
+        linkedin_url:
+          type: string
+          format: uri
+          description: LinkedIn profile URL
+        company_id:
+          type: string
+          description: Associated Demandbase company ID
+        company_name:
+          type: string
+          description: Company name
+        company_domain:
+          type: string
+          description: Company domain
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for API access
+externalDocs:
+  description: Demandbase Account List API Documentation
+  url: https://docs.demandbase.com/docs/account-list-api

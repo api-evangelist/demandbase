@@ -1,0 +1,169 @@
+openapi: 3.1.0
+info:
+  title: Demandbase Account List Account Lists Contacts API
+  description: Create, manage, and sync target account lists for ABM campaigns and personalization efforts. Build dynamic and static account lists, add or remove accounts, and sync lists with CRM systems.
+  version: '1.0'
+  contact:
+    name: Demandbase Support
+    url: https://support.demandbase.com/
+  termsOfService: https://www.demandbase.com/terms-of-service/
+servers:
+- url: https://api.demandbase.com/accounts
+  description: Demandbase Account List API Production
+security:
+- bearerAuth: []
+tags:
+- name: Contacts
+  description: Contact discovery and lookup
+paths:
+  /data/v1/contacts/search:
+    get:
+      operationId: searchContacts
+      summary: Demandbase Search contacts
+      description: Search for business contacts by name, title, company, or other attributes. Returns matching contact profiles.
+      tags:
+      - Contacts
+      parameters:
+      - name: query
+        in: query
+        required: false
+        description: Free-text search query
+        schema:
+          type: string
+      - name: company_id
+        in: query
+        required: false
+        description: Filter contacts by company ID
+        schema:
+          type: string
+      - name: domain
+        in: query
+        required: false
+        description: Filter contacts by company domain
+        schema:
+          type: string
+      - name: title
+        in: query
+        required: false
+        description: Filter by job title
+        schema:
+          type: string
+      - name: department
+        in: query
+        required: false
+        description: Filter by department
+        schema:
+          type: string
+      - name: seniority
+        in: query
+        required: false
+        description: Filter by seniority level
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Contact search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contact'
+                  total:
+                    type: integer
+        '400':
+          description: Invalid search parameters
+        '401':
+          description: Unauthorized
+  /data/v1/contacts/{contactId}:
+    get:
+      operationId: getContact
+      summary: Demandbase Get contact details
+      description: Retrieve detailed information for a specific contact.
+      tags:
+      - Contacts
+      parameters:
+      - name: contactId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Contact details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Contact not found
+components:
+  schemas:
+    Contact:
+      type: object
+      properties:
+        contact_id:
+          type: string
+          description: Demandbase contact identifier
+        first_name:
+          type: string
+          description: First name
+        last_name:
+          type: string
+          description: Last name
+        email:
+          type: string
+          format: email
+          description: Email address
+        title:
+          type: string
+          description: Job title
+        department:
+          type: string
+          description: Department
+        seniority:
+          type: string
+          description: Seniority level
+        phone:
+          type: string
+          description: Direct phone number
+        linkedin_url:
+          type: string
+          format: uri
+          description: LinkedIn profile URL
+        company_id:
+          type: string
+          description: Associated Demandbase company ID
+        company_name:
+          type: string
+          description: Company name
+        company_domain:
+          type: string
+          description: Company domain
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for API access
+externalDocs:
+  description: Demandbase Account List API Documentation
+  url: https://docs.demandbase.com/docs/account-list-api
