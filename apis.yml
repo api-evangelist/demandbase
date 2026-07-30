@@ -4,10 +4,23 @@ description: Demandbase is the leading Account-Based Marketing (ABM) platform th
   helps B2B companies identify, engage, and convert target accounts through intent
   data, advertising, personalization, and sales intelligence.
 type: Index
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
 kind: company
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/demandbase.png
 url: https://raw.githubusercontent.com/api-evangelist/demandbase/refs/heads/main/apis.yml
 created: '2024-01-20'
 modified: '2026-05-19'
@@ -22,245 +35,2746 @@ tags:
 - Personalization
 - Sales Intelligence
 apis:
-- aid: demandbase:demandbase-api
-  name: Demandbase API
-  description: The Demandbase API provides programmatic access to account identification,
-    firmographic data, and visitor intelligence to enable account-based experiences.
-  image: https://www.demandbase.com/wp-content/themes/demandbase/assets/images/demandbase-logo.svg
+- aid: demandbase:demandbase-account-lists-api
+  name: Demandbase Account Lists API
+  description: Manage target account lists
   humanURL: https://www.demandbase.com
   baseURL: https://api.demandbase.com
   tags:
-  - Accounts
-  - B2B Data
-  - Firmographics
-  - Identification
+  - Account Lists
   properties:
+  - type: OpenAPI
+    url: openapi/demandbase-account-lists-api-openapi.yml
   - type: Documentation
     url: https://docs.demandbase.com/
   - type: Authentication
     url: https://docs.demandbase.com/docs/authentication
-  - type: OpenAPI
-    url: openapi/demandbase-api-openapi.yml
   - type: Rules
     url: rules/demandbase-api-rules.yml
   - type: Capabilities
     url: capabilities/demandbase-api-capabilities.yml
   - type: JSONSchema
     url: json-schema/demandbase-account-schema.json
-  - url: graphql/demandbase-graphql.md
-    type: GraphQL
-- aid: demandbase:demandbase-real-time-identification-api
-  name: Demandbase Real-Time Identification API
-  description: Identifies companies visiting your website in real-time based on IP
-    address and provides firmographic data and intent signals.
-  humanURL: https://www.demandbase.com/solutions/demandbase-one/
-  baseURL: https://api.company-target.com
-  tags:
-  - Identification
-  - IP Intelligence
-  - Real-Time
-  - Visitor Tracking
-  properties:
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
   - type: Documentation
     url: https://docs.demandbase.com/docs/real-time-identification-api
   - type: UseCases
     url: https://www.demandbase.com/use-cases/
-  - type: OpenAPI
-    url: openapi/demandbase-real-time-identification-openapi.yml
   - type: Rules
     url: rules/demandbase-real-time-identification-api-rules.yml
   - type: Capabilities
     url: capabilities/demandbase-real-time-identification-api-capabilities.yml
-- aid: demandbase:demandbase-advertising-api
-  name: Demandbase Advertising API
-  description: Programmatically manage advertising campaigns, audiences, and performance
-    metrics for account-based advertising.
-  humanURL: https://www.demandbase.com/solutions/advertising/
-  baseURL: https://api.demandbase.com/advertising
-  tags:
-  - ABM
-  - Advertising
-  - Audiences
-  - Campaigns
-  properties:
   - type: Documentation
     url: https://docs.demandbase.com/docs/advertising-api
   - type: RateLimits
     url: https://docs.demandbase.com/docs/api-rate-limits
-  - type: OpenAPI
-    url: openapi/demandbase-advertising-openapi.yml
   - type: Rules
     url: rules/demandbase-advertising-api-rules.yml
   - type: Capabilities
     url: capabilities/demandbase-advertising-api-capabilities.yml
   - type: JSONSchema
     url: json-schema/demandbase-campaign-schema.json
-- aid: demandbase:demandbase-engagement-api
-  name: Demandbase Engagement API
-  description: Access engagement data and activity streams for target accounts across
-    web, email, and advertising channels.
-  humanURL: https://www.demandbase.com/solutions/engagement/
-  baseURL: https://api.demandbase.com/engagement
-  tags:
-  - Account Insights
-  - Activity Tracking
-  - Analytics
-  - Engagement
-  properties:
   - type: Documentation
     url: https://docs.demandbase.com/docs/engagement-api
   - type: Webhooks
     url: https://docs.demandbase.com/docs/webhooks
-  - type: OpenAPI
-    url: openapi/demandbase-engagement-openapi.yml
   - type: Rules
     url: rules/demandbase-engagement-api-rules.yml
   - type: Capabilities
     url: capabilities/demandbase-engagement-api-capabilities.yml
   - type: JSONSchema
     url: json-schema/demandbase-engagement-schema.json
-- aid: demandbase:demandbase-account-list-api
-  name: Demandbase Account List API
-  description: Create, manage, and sync target account lists for ABM campaigns and
-    personalization efforts.
-  humanURL: https://www.demandbase.com
-  baseURL: https://api.demandbase.com/accounts
-  tags:
-  - Account Lists
-  - CRM Sync
-  - List Management
-  - Target Accounts
-  properties:
   - type: Documentation
     url: https://docs.demandbase.com/docs/account-list-api
   - type: IntegrationGuides
     url: https://docs.demandbase.com/docs/integrations
-  - type: OpenAPI
-    url: openapi/demandbase-account-list-openapi.yml
   - type: Rules
     url: rules/demandbase-account-list-api-rules.yml
   - type: Capabilities
     url: capabilities/demandbase-account-list-api-capabilities.yml
-- aid: demandbase:demandbase-b2b-data-api
-  name: Demandbase B2B Data API
-  description: REST-based API providing programmatic access to B2B company and contact
-    intelligence, including company search, contact discovery, data enrichment, and
-    firmographic data across millions of businesses.
-  image: https://www.demandbase.com/wp-content/themes/demandbase/assets/images/demandbase-logo.svg
-  humanURL: https://www.demandbase.com/products/data/api-integration/
-  baseURL: https://api.demandbase.com
-  tags:
-  - B2B Data
-  - Company Search
-  - Contact Discovery
-  - Data Enrichment
-  - Firmographics
-  properties:
   - type: Documentation
     url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
   - type: GettingStarted
     url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
-  - type: OpenAPI
-    url: openapi/demandbase-b2b-data-openapi.yml
   - type: Rules
     url: rules/demandbase-b2b-data-api-rules.yml
   - type: Capabilities
     url: capabilities/demandbase-b2b-data-api-capabilities.yml
   - type: JSONSchema
     url: json-schema/demandbase-contact-schema.json
-- aid: demandbase:demandbase-ip-api
-  name: Demandbase IP API
-  description: Returns firmographic data for a specific IP address or cookie, enabling
-    real-time company identification of website visitors with attributes including
-    employee count, revenue, industry, and corporate hierarchy with parent and ultimate
-    parent IDs.
-  image: https://www.demandbase.com/wp-content/themes/demandbase/assets/images/demandbase-logo.svg
-  humanURL: https://www.demandbase.com/products/data/api-integration/
-  baseURL: https://api.demandbase.com
-  tags:
-  - Company Identification
-  - Firmographics
-  - IP Intelligence
-  - Real-Time
-  - Visitor Identification
-  properties:
   - type: Documentation
-    url: https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
   - type: ChangeLog
-    url: https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
-  - type: OpenAPI
-    url: openapi/demandbase-ip-openapi.yml
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
   - type: Rules
     url: rules/demandbase-ip-api-rules.yml
   - type: Capabilities
     url: capabilities/demandbase-ip-api-capabilities.yml
-- aid: demandbase:demandbase-admin-api
-  name: Demandbase Admin API
-  description: Provides programmatic access to user management and platform administration
-    capabilities, including creating, reading, updating, and deleting users and managing
-    API key sets for Demandbase One.
-  image: https://www.demandbase.com/wp-content/themes/demandbase/assets/images/demandbase-logo.svg
-  humanURL: https://www.demandbase.com
-  baseURL: https://api.demandbase.com
-  tags:
-  - Administration
-  - API Keys
-  - Platform Management
-  - User Management
-  properties:
   - type: Documentation
     url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
   - type: Authentication
-    url: https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
-  - type: OpenAPI
-    url: openapi/demandbase-admin-openapi.yml
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
   - type: Rules
     url: rules/demandbase-admin-api-rules.yml
   - type: Capabilities
     url: capabilities/demandbase-admin-api-capabilities.yml
-- aid: demandbase:demandbase-data-export-api
-  name: Demandbase Data Export API
-  description: Enables bulk, asynchronous, programmatic data exports from Demandbase
-    One, supporting extraction of records for accounts, people, opportunities, activities,
-    campaigns, and Buying Groups with full granularity, delivered as downloadable
-    CSVs up to 10GB per day.
-  image: https://www.demandbase.com/wp-content/themes/demandbase/assets/images/demandbase-logo.svg
-  humanURL: https://www.demandbase.com/resources/solution-sheet/data-export-api/
-  baseURL: https://api.demandbase.com
-  tags:
-  - Accounts
-  - Analytics
-  - Bulk Export
-  - Data Export
-  - Reporting
-  properties:
   - type: Documentation
-    url: https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
-  - type: OpenAPI
-    url: openapi/demandbase-data-export-openapi.yml
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
   - type: Rules
     url: rules/demandbase-data-export-api-rules.yml
   - type: Capabilities
     url: capabilities/demandbase-data-export-api-capabilities.yml
-- aid: demandbase:demandbase-data-import-api
-  name: Demandbase Data Import API
-  description: Allows bulk, asynchronous, programmatic import of new data rows into
-    Demandbase One or updates to existing records, supporting data on accounts, people,
-    opportunities, and activities with CSV-based ingestion.
-  image: https://www.demandbase.com/wp-content/themes/demandbase/assets/images/demandbase-logo.svg
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-accounts-api
+  name: Demandbase Accounts API
+  description: Look up and retrieve account information
   humanURL: https://www.demandbase.com
   baseURL: https://api.demandbase.com
   tags:
   - Accounts
-  - Bulk Import
-  - CSV
-  - Data Import
-  - Data Ingestion
   properties:
-  - type: Documentation
-    url: https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
   - type: OpenAPI
-    url: openapi/demandbase-data-import-openapi.yml
+    url: openapi/demandbase-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-activities-api
+  name: Demandbase Activities API
+  description: Activity streams and event tracking
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Activities
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-activities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-analytics-api
+  name: Demandbase Analytics API
+  description: Retrieve campaign performance metrics
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-api-keys-api
+  name: Demandbase API Keys API
+  description: API key set management
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - API Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-api-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-audiences-api
+  name: Demandbase Audiences API
+  description: Create and manage audience segments
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Audiences
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-audiences-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-campaigns-api
+  name: Demandbase Campaigns API
+  description: Manage advertising campaigns
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-company-search-api
+  name: Demandbase Company Search API
+  description: Search and discover companies
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Company Search
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-company-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-contacts-api
+  name: Demandbase Contacts API
+  description: Contact discovery and lookup
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-cookie-identification-api
+  name: Demandbase Cookie Identification API
+  description: Identify companies from cookies
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Cookie Identification
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-cookie-identification-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-downloads-api
+  name: Demandbase Downloads API
+  description: Download exported data files
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Downloads
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-downloads-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-engagement-api
+  name: Demandbase Engagement API
+  description: Account engagement scores and metrics
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Engagement
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-engagement-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-enrichment-api
+  name: Demandbase Enrichment API
+  description: Enrich account and contact records with B2B data
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Enrichment
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-enrichment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-export-jobs-api
+  name: Demandbase Export Jobs API
+  description: Create and manage data export jobs
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Export Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-export-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-firmographics-api
+  name: Demandbase Firmographics API
+  description: Access firmographic data for companies
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Firmographics
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-firmographics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-identification-api
+  name: Demandbase Identification API
+  description: Identify companies from various signals
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Identification
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-identification-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-import-jobs-api
+  name: Demandbase Import Jobs API
+  description: Create and manage data import jobs
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Import Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-import-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-intent-api
+  name: Demandbase Intent API
+  description: Intent signals and buying indicators
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Intent
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-intent-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-ip-identification-api
+  name: Demandbase IP Identification API
+  description: Identify companies from IP addresses
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - IP Identification
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-ip-identification-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-list-members-api
+  name: Demandbase List Members API
+  description: Manage accounts within lists
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - List Members
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-list-members-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-mappings-api
+  name: Demandbase Mappings API
+  description: Field mapping configuration
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Mappings
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-mappings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-roles-api
+  name: Demandbase Roles API
+  description: Role and permission management
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-roles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-sync-api
+  name: Demandbase Sync API
+  description: CRM synchronization operations
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Sync
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-sync-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-technographics-api
+  name: Demandbase Technographics API
+  description: Technology usage data
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Technographics
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-technographics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-uploads-api
+  name: Demandbase Uploads API
+  description: Upload data files for import
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Uploads
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-uploads-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-users-api
+  name: Demandbase Users API
+  description: User management operations
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-visitor-intelligence-api
+  name: Demandbase Visitor Intelligence API
+  description: Visitor tracking and company resolution
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Visitor Intelligence
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-visitor-intelligence-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
+  - type: Rules
+    url: rules/demandbase-data-import-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-import-api-capabilities.yml
+- aid: demandbase:demandbase-webhooks-api
+  name: Demandbase Webhooks API
+  description: Webhook subscription management
+  humanURL: https://www.demandbase.com
+  baseURL: https://api.demandbase.com
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/
+  - type: Authentication
+    url: https://docs.demandbase.com/docs/authentication
+  - type: Rules
+    url: rules/demandbase-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-account-schema.json
+  - type: GraphQL
+    url: graphql/demandbase-graphql.md
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/real-time-identification-api
+  - type: UseCases
+    url: https://www.demandbase.com/use-cases/
+  - type: Rules
+    url: rules/demandbase-real-time-identification-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-real-time-identification-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/advertising-api
+  - type: RateLimits
+    url: https://docs.demandbase.com/docs/api-rate-limits
+  - type: Rules
+    url: rules/demandbase-advertising-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-advertising-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-campaign-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/engagement-api
+  - type: Webhooks
+    url: https://docs.demandbase.com/docs/webhooks
+  - type: Rules
+    url: rules/demandbase-engagement-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-engagement-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-engagement-schema.json
+  - type: Documentation
+    url: https://docs.demandbase.com/docs/account-list-api
+  - type: IntegrationGuides
+    url: https://docs.demandbase.com/docs/integrations
+  - type: Rules
+    url: rules/demandbase-account-list-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-account-list-api-capabilities.yml
+  - type: Documentation
+    url: https://kb.demandbase.com/hc/en-us/categories/6520773158171-API
+  - type: GettingStarted
+    url: https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview
+  - type: Rules
+    url: rules/demandbase-b2b-data-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-b2b-data-api-capabilities.yml
+  - type: JSONSchema
+    url: json-schema/demandbase-contact-schema.json
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  - type: ChangeLog
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+  - type: Rules
+    url: rules/demandbase-ip-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-ip-api-capabilities.yml
+  - type: Documentation
+    url: https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation
+  - type: Authentication
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  - type: Rules
+    url: rules/demandbase-admin-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-admin-api-capabilities.yml
+  - type: Documentation
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP
+  - type: Rules
+    url: rules/demandbase-data-export-api-rules.yml
+  - type: Capabilities
+    url: capabilities/demandbase-data-export-api-capabilities.yml
   - type: Rules
     url: rules/demandbase-data-import-api-rules.yml
   - type: Capabilities
