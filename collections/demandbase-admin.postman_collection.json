@@ -1,194 +1,33 @@
 {
   "item": [
     {
-      "id": "a961be5d-b1b2-4e04-94d5-3f754265da8d",
-      "name": "API Keys",
+      "id": "a8a69f04-7e93-4cda-8f77-16f2c9da854d",
+      "name": "User Management",
       "description": {
-        "content": "API key set management",
+        "content": "",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "14b53983-8589-46e0-8156-ec6699df627b",
-          "name": "Demandbase List API key sets",
+          "id": "e8789ee6-d9b9-430f-a4f6-22c31a9fd1b0",
+          "name": "Create new user",
           "request": {
-            "name": "Demandbase List API key sets",
+            "name": "Create new user",
             "description": {
-              "content": "Retrieve all API key sets for the organization.",
+              "content": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nCreates a new <strong>user</strong> within your Demandbase account.\n</div>",
               "type": "text/plain"
             },
             "url": {
+              "protocol": "https",
               "path": [
                 "admin",
                 "v1",
-                "api-keys"
+                "user"
               ],
               "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "9bbe149e-8bac-4e8c-9b4f-ae53d2f9044f",
-              "name": "List of API key sets",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "api-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"api_keys\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"api_key\": \"string\",\n      \"api_secret\": \"string\",\n      \"scopes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"status\": \"active\",\n      \"created_at\": \"1972-10-25T19:59:39.616Z\",\n      \"created_by\": \"string\",\n      \"last_used\": \"1986-02-19T07:43:46.722Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"api_key\": \"string\",\n      \"api_secret\": \"string\",\n      \"scopes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"status\": \"revoked\",\n      \"created_at\": \"1950-01-22T11:05:47.237Z\",\n      \"created_by\": \"string\",\n      \"last_used\": \"2021-07-20T01:23:06.674Z\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6a5d1a84-1d07-4dfa-9a00-1f62e8dc8c42",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "api-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "11fe7857-6cd7-4144-abad-f7ab53b4c281",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "api-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ea6fe1a8-3146-4299-9aee-5f0a4a4a9276",
-          "name": "Demandbase Create an API key set",
-          "request": {
-            "name": "Demandbase Create an API key set",
-            "description": {
-              "content": "Generate a new API key set for programmatic access to Demandbase APIs.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "v1",
-                "api-keys"
-              ],
-              "host": [
-                "{{baseUrl}}"
+                "uapi",
+                "demandbase",
+                "com"
               ],
               "query": [],
               "variable": []
@@ -204,10 +43,18 @@
               }
             ],
             "method": "POST",
-            "auth": null,
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "raw": "{\n  \"fullName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"permissionSets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"department\": \"<string>\",\n  \"view\": \"<string>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -217,17 +64,20 @@
           },
           "response": [
             {
-              "id": "72ec22af-3d07-45a0-ba0c-c7b4abcc7010",
-              "name": "API key set created",
+              "id": "9ac590a8-442c-4312-b399-fa6884e66f30",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> User successfully created<br>\n<strong>Return:</strong> JSON object representing the new user\n</div>",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "api-keys"
+                    "user"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": []
@@ -249,7 +99,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "raw": "{\n  \"fullName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"permissionSets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"department\": \"<string>\",\n  \"view\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -265,22 +115,25 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"api_key\": \"string\",\n  \"api_secret\": \"string\",\n  \"scopes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"status\": \"active\",\n  \"created_at\": \"2001-08-03T17:22:38.748Z\",\n  \"created_by\": \"string\",\n  \"last_used\": \"1994-02-18T08:07:55.000Z\"\n}",
+              "body": "{\n  \"externalId\": \"ext-123abc\",\n  \"email\": \"user@example.com\",\n  \"fullName\": \"Alex Morgan\",\n  \"permissionSets\": [\n    \"Admin\"\n  ],\n  \"department\": \"Customer Success\",\n  \"view\": \"Standard View\",\n  \"workspaces\": [\n    \"Default workspace\"\n  ],\n  \"jobFunction\": \"Other\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "84cb9819-3567-4531-a29c-e56887c6284a",
-              "name": "Invalid request",
+              "id": "0e7013d7-0798-4ea4-84c5-fccff0597fbf",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Invalid request body or missing required fields<br>\n<strong>Return:</strong> JSON error object\n</div>",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "api-keys"
+                    "user"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": []
@@ -293,12 +146,16 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "raw": "{\n  \"fullName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"permissionSets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"department\": \"<string>\",\n  \"view\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -311,181 +168,31 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"code\": 4544,\n  \"details\": [\n    \"string\",\n    \"string\"\n  ],\n  \"requestId\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "8ff3aa82-718a-47fa-bb10-4d6295893782",
-              "name": "Unauthorized",
+              "id": "e79f66ea-6741-4473-bf35-d43c60340189",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Authentication failed or missing credentials<br>\n<strong>Return:</strong> JSON error status object\n</div>",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "api-keys"
+                    "user"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "695fd493-d50e-41a8-a7f1-6756876f2127",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "api-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ae1efa0e-b150-4427-a0c2-47a73c243b11",
-          "name": "Demandbase Get an API key set",
-          "request": {
-            "name": "Demandbase Get an API key set",
-            "description": {
-              "content": "Retrieve details of a specific API key set.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "v1",
-                "api-keys",
-                ":keyId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "keyId",
-                  "description": "(Required) API key set unique identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "ad7d0052-8456-429c-a917-90706e1c3504",
-              "name": "API key set details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "api-keys",
-                    ":keyId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "keyId",
-                      "description": "(Required) API key set unique identifier"
-                    }
-                  ]
                 },
                 "header": [
                   {
@@ -501,95 +208,103 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"api_key\": \"string\",\n  \"api_secret\": \"string\",\n  \"scopes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"status\": \"active\",\n  \"created_at\": \"2001-08-03T17:22:38.748Z\",\n  \"created_by\": \"string\",\n  \"last_used\": \"1994-02-18T08:07:55.000Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4eeb610e-dd41-492a-98fc-8335ae540251",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "api-keys",
-                    ":keyId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "keyId",
-                      "description": "(Required) API key set unique identifier"
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fullName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"permissionSets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"department\": \"<string>\",\n  \"view\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
                     }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
                   }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "Unauthorized",
               "code": 401,
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"status\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "b225a2b8-9af8-41b9-b89b-1caa54ddfae3",
-              "name": "API key set not found",
+              "id": "8f36ce43-a23d-4bd3-bdf8-6494c8a13259",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Returned if the authenticated credentials lacks the \"User Management\" permission<br>\n<strong>Return:</strong> JSON error object\n</div>",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "api-keys",
-                    ":keyId"
+                    "user"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "keyId",
-                      "description": "(Required) API key set unique identifier"
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fullName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"permissionSets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"department\": \"<string>\",\n  \"view\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
                     }
-                  ]
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3285,\n  \"details\": \"string\",\n  \"requestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d98cb139-481f-4bbd-b380-86ca27358fef",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Returned if there was an issue on the server side and the user could not be created.<br>\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
                 },
                 "header": [
                   {
@@ -601,11 +316,19 @@
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fullName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"permissionSets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"department\": \"<string>\",\n  \"view\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
               },
-              "status": "Not Found",
-              "code": 404,
+              "status": "Internal Server Error",
+              "code": 500,
               "header": [
                 {
                   "key": "Content-Type",
@@ -623,1197 +346,28 @@
           }
         },
         {
-          "id": "deaaf2cc-81c5-4481-b024-905b33a2c9f7",
-          "name": "Demandbase Delete an API key set",
+          "id": "45ed3c2b-e14d-467a-92fe-54660518c652",
+          "name": "Update users",
           "request": {
-            "name": "Demandbase Delete an API key set",
+            "name": "Update users",
             "description": {
-              "content": "Revoke and delete an API key set.",
+              "content": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nUpdates an existing <strong>user</strong> within your Demandbase account.\n</div>",
               "type": "text/plain"
             },
             "url": {
+              "protocol": "https",
               "path": [
                 "admin",
                 "v1",
-                "api-keys",
-                ":keyId"
+                "user"
               ],
               "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "keyId",
-                  "description": "(Required) API key set unique identifier"
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "c4085112-c583-4119-ac1f-27a2267fdc84",
-              "name": "API key set deleted",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "api-keys",
-                    ":keyId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "keyId",
-                      "description": "(Required) API key set unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "a2a0ddc6-ae0c-494a-9b25-a8a267d5ed58",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "api-keys",
-                    ":keyId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "keyId",
-                      "description": "(Required) API key set unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "6ce854a6-917a-49fa-8944-804765ebef6e",
-              "name": "API key set not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "api-keys",
-                    ":keyId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "keyId",
-                      "description": "(Required) API key set unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        }
-      ],
-      "event": []
-    },
-    {
-      "id": "fc22a78f-def2-4603-a8ea-d4ce8eb69e13",
-      "name": "Roles",
-      "description": {
-        "content": "Role and permission management",
-        "type": "text/plain"
-      },
-      "item": [
-        {
-          "id": "cbd09c49-580f-4e87-a94f-f9ce8fbe9770",
-          "name": "Demandbase List roles",
-          "request": {
-            "name": "Demandbase List roles",
-            "description": {
-              "content": "Retrieve all available roles and their permissions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "v1",
-                "roles"
-              ],
-              "host": [
-                "{{baseUrl}}"
+                "uapi",
+                "demandbase",
+                "com"
               ],
               "query": [],
               "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "bd19b82d-4fc6-4a25-9998-008f336b2480",
-              "name": "List of roles",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"roles\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"permissions\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"permissions\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4fd655e1-b3c5-4760-89d0-ab643d6e0a76",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "71566e00-eb0c-40b2-8c25-412b8eaa3bc2",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        }
-      ],
-      "event": []
-    },
-    {
-      "id": "15a2c0fa-a9b9-4838-82a9-794653f47a9f",
-      "name": "Users",
-      "description": {
-        "content": "User management operations",
-        "type": "text/plain"
-      },
-      "item": [
-        {
-          "id": "ef8c96cf-1765-4d3a-ba41-0f7eaf1eb8f2",
-          "name": "Demandbase List users",
-          "request": {
-            "name": "Demandbase List users",
-            "description": {
-              "content": "Retrieve a list of all users in the Demandbase One organization with their roles and status.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "v1",
-                "users"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "status",
-                  "value": "<string>",
-                  "description": "Filter by user status"
-                },
-                {
-                  "disabled": false,
-                  "key": "role",
-                  "value": "<string>",
-                  "description": "Filter by user role"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25"
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "0"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "4241cc61-e4c5-4cde-b399-5ffb43caf808",
-              "name": "List of users",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "status",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "role",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"users\": [\n    {\n      \"id\": \"string\",\n      \"email\": \"l-Ky3@tYNszSbcUxtAh.kj\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"role\": \"string\",\n      \"status\": \"active\",\n      \"last_login\": \"1981-10-15T22:38:38.439Z\",\n      \"created_at\": \"1956-03-02T22:56:41.896Z\",\n      \"updated_at\": \"1988-11-20T14:25:30.552Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"email\": \"OtQXb-vZ11N9X@c.bws\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"role\": \"string\",\n      \"status\": \"inactive\",\n      \"last_login\": \"1968-03-21T10:56:06.763Z\",\n      \"created_at\": \"1951-10-29T22:09:46.149Z\",\n      \"updated_at\": \"1949-09-05T00:22:45.414Z\"\n    }\n  ],\n  \"total\": 2450\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "05f60607-aa07-45a4-a537-23edf5dfaa7a",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "status",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "role",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "67a17872-a311-4a81-bddf-499e2cc4381b",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "status",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "role",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "cc565704-d872-4678-8e64-5f543471a957",
-          "name": "Demandbase Create a user",
-          "request": {
-            "name": "Demandbase Create a user",
-            "description": {
-              "content": "Create a new user in the Demandbase One organization.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "v1",
-                "users"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"role\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "fe7665bc-0eba-426c-ba50-31071b704848",
-              "name": "User created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"role\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"email\": \"5hnZMm2Fl4qy@vFNLi.xex\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"role\": \"string\",\n  \"status\": \"inactive\",\n  \"last_login\": \"1979-07-17T19:32:59.825Z\",\n  \"created_at\": \"1970-12-16T12:34:56.161Z\",\n  \"updated_at\": \"2015-09-01T16:12:53.719Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e5cd180c-fa50-4ba8-ba92-ec8cb5abaa1e",
-              "name": "Invalid request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"role\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "2dbd265f-e73c-4663-80c1-00046ad986a3",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"role\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "89166b09-196a-45fa-ab20-a0ec8777fde6",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"role\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "9c3893c2-07c7-486f-94a8-2412c15d8b56",
-              "name": "User with email already exists",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"role\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e10bcfd0-2584-49dd-a98e-26449f52cfd2",
-          "name": "Demandbase Get a user",
-          "request": {
-            "name": "Demandbase Get a user",
-            "description": {
-              "content": "Retrieve details of a specific user.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "v1",
-                "users",
-                ":userId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) User unique identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "ea949399-d341-4ba5-998c-3317e0a4fbd1",
-              "name": "User details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"email\": \"5hnZMm2Fl4qy@vFNLi.xex\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"role\": \"string\",\n  \"status\": \"inactive\",\n  \"last_login\": \"1979-07-17T19:32:59.825Z\",\n  \"created_at\": \"1970-12-16T12:34:56.161Z\",\n  \"updated_at\": \"2015-09-01T16:12:53.719Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "29805913-6f64-4f0a-90cd-df3872802fc8",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "832e9410-6c74-403e-a115-e0964b869686",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "0d37348c-baf5-4a33-8e36-93aee3885bf1",
-              "name": "User not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "v1",
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "9e8f6c67-f0be-40bf-9005-bc3cb1837f06",
-          "name": "Demandbase Update a user",
-          "request": {
-            "name": "Demandbase Update a user",
-            "description": {
-              "content": "Update an existing user's details and role assignments.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "v1",
-                "users",
-                ":userId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) User unique identifier"
-                }
-              ]
             },
             "header": [
               {
@@ -1826,10 +380,18 @@
               }
             ],
             "method": "PUT",
-            "auth": null,
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"role\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "raw": "{\n  \"fullName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"permissionSets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"department\": \"<string>\",\n  \"view\": \"<string>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1839,29 +401,23 @@
           },
           "response": [
             {
-              "id": "7c8c744a-9a97-42db-8069-fafc5a2fad4f",
-              "name": "User updated",
+              "id": "fa011f86-da77-4578-a5e9-8fe002bf0b28",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> User successfully updated<br>\n<strong>Return:</strong> JSON object representing the updated user\n</div>\n",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "users",
-                    ":userId"
+                    "user"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
-                    }
-                  ]
+                  "variable": []
                 },
                 "header": [
                   {
@@ -1880,7 +436,7 @@
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"role\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"fullName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"permissionSets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"department\": \"<string>\",\n  \"view\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -1896,34 +452,28 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"email\": \"5hnZMm2Fl4qy@vFNLi.xex\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"role\": \"string\",\n  \"status\": \"inactive\",\n  \"last_login\": \"1979-07-17T19:32:59.825Z\",\n  \"created_at\": \"1970-12-16T12:34:56.161Z\",\n  \"updated_at\": \"2015-09-01T16:12:53.719Z\"\n}",
+              "body": "{\n  \"externalId\": \"ext-123abc\",\n  \"email\": \"user@example.com\",\n  \"fullName\": \"Alex Morgan\",\n  \"permissionSets\": [\n    \"Admin\"\n  ],\n  \"department\": \"Customer Success\",\n  \"view\": \"Standard View\",\n  \"workspaces\": [\n    \"global workspace\"\n  ],\n  \"jobFunction\": \"Other\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "1db3c76c-95ba-4f32-b898-e227ac3c2846",
-              "name": "Invalid request",
+              "id": "3b68a648-e9ec-444d-84f4-9dfb9ba0267f",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Invalid request body or missing required fields<br>\n<strong>Return:</strong> JSON error object\n</div>",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "users",
-                    ":userId"
+                    "user"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
-                    }
-                  ]
+                  "variable": []
                 },
                 "header": [
                   {
@@ -1933,12 +483,16 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"role\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"fullName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"permissionSets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"department\": \"<string>\",\n  \"view\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -1951,37 +505,31 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"code\": 59,\n  \"details\": [\n    \"string\",\n    \"string\"\n  ],\n  \"requestId\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "942f6d4f-a97b-4e94-b81a-a2c51d13ed03",
-              "name": "Unauthorized",
+              "id": "d5c43c4b-aaa8-4849-a59c-efa653bf7a42",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Authentication failed or missing credentials<br>\n<strong>Return:</strong> JSON error status object\n</div>",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "users",
-                    ":userId"
+                    "user"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
-                    }
-                  ]
+                  "variable": []
                 },
                 "header": [
                   {
@@ -1991,12 +539,16 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"role\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"fullName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"permissionSets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"department\": \"<string>\",\n  \"view\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -2009,37 +561,31 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"status\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "7e892711-e743-432a-bc57-f3ec5a3c71db",
-              "name": "Forbidden",
+              "id": "901cb1c9-4c88-4287-8bb5-bc910795cc3d",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Returned if the authenticated user lacks the \"User Management\" permission<br>\n<strong>Return:</strong> JSON error object\n</div>\n",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "users",
-                    ":userId"
+                    "user"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
-                    }
-                  ]
+                  "variable": []
                 },
                 "header": [
                   {
@@ -2049,12 +595,16 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"role\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"fullName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"permissionSets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"department\": \"<string>\",\n  \"view\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -2067,37 +617,31 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"code\": \"string\",\n  \"details\": \"string\",\n  \"requestId\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "1bfe6ed2-bcc8-4db4-83d9-ac4f7a334ae6",
-              "name": "User not found",
+              "id": "738ca473-6915-4efe-b41f-1dd6423a7244",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Returned if there was an issue on the server side and user could not be updated.<br>\n</div>\n",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "users",
-                    ":userId"
+                    "user"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
-                    }
-                  ]
+                  "variable": []
                 },
                 "header": [
                   {
@@ -2112,7 +656,7 @@
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"role\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"fullName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"permissionSets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"department\": \"<string>\",\n  \"view\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -2120,8 +664,8 @@
                   }
                 }
               },
-              "status": "Not Found",
-              "code": 404,
+              "status": "Internal Server Error",
+              "code": 500,
               "header": [
                 {
                   "key": "Content-Type",
@@ -2139,23 +683,460 @@
           }
         },
         {
-          "id": "a36e6d8f-180d-4baf-a37d-e5b121710e47",
-          "name": "Demandbase Delete a user",
+          "id": "0be620dc-543b-4ee6-a8b1-f2fcf82e075c",
+          "name": "Get list of users",
           "request": {
-            "name": "Demandbase Delete a user",
+            "name": "Get list of users",
             "description": {
-              "content": "Delete a user from the Demandbase One organization.",
+              "content": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nThis endpoint allows you to retrieve users with pagination (max pageSize 100) and filters for departments, views, permissionSets, and workspaces.\n</div>",
               "type": "text/plain"
             },
             "url": {
+              "protocol": "https",
               "path": [
                 "admin",
                 "v1",
-                "users",
-                ":userId"
+                "users"
               ],
               "host": [
-                "{{baseUrl}}"
+                "uapi",
+                "demandbase",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "departments",
+                  "value": "<string>",
+                  "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">comma separated list of departments<br><strong>Example:</strong> Marketing,Sales</div>"
+                },
+                {
+                  "disabled": false,
+                  "key": "views",
+                  "value": "<string>",
+                  "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">comma separated list of views<br><strong>Example:</strong> Standard View,Marketing View</div>"
+                },
+                {
+                  "disabled": false,
+                  "key": "permissionSets",
+                  "value": "<string>",
+                  "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">comma separated list of permission sets<br><strong>Example:</strong> General User,Admin</div>"
+                },
+                {
+                  "disabled": false,
+                  "key": "workspaces",
+                  "value": "<string>",
+                  "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">comma separated list of workspaces (if enabled)<br><strong>Example:</strong> global workspace</div>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "<integer>",
+                  "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\"><strong>Default:</strong> 1<br><strong>Example:</strong> 5</div>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\"><strong>Default:</strong> 25<br><strong>Example:</strong> 25<br><strong>Max:</strong> 100</div>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7d5492f7-d22a-4198-8185-656a447f382b",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturns a paginated list of users.\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "departments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "views",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "permissionSets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "workspaces",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 2,\n  \"data\": [\n    {\n      \"name\": \"Alex Morgan\",\n      \"email\": \"alex.morgan@example.com\",\n      \"externalIds\": [\n        \"ext-12345\"\n      ],\n      \"permissionSets\": [\n        \"General User\",\n        \"Admin\"\n      ],\n      \"department\": \"Engineering\",\n      \"view\": \"Standard View\",\n      \"workspaces\": [\n        \"Default workspace\"\n      ],\n      \"date_created\": \"2024-01-15T12:34:56Z\",\n      \"jobFunction\": \"Other\"\n    },\n    {\n      \"name\": \"Jordan Lee\",\n      \"email\": \"jordan.lee@example.com\",\n      \"externalIds\": [],\n      \"permissionSets\": [\n        \"General User\"\n      ],\n      \"department\": \"Marketing\",\n      \"view\": \"Standard View\",\n      \"workspaces\": [\n        \"Default workspace\"\n      ],\n      \"date_created\": \"2023-11-02T08:15:30Z\",\n      \"jobFunction\": \"Marketing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4021eb4-f2d0-4796-b133-21eea6b092bf",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the user specification in the request does not match the required format.\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "departments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "views",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "permissionSets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "workspaces",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b1ef095d-3f95-4577-b933-4100fbcf5880",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the authentication credentials are missing or invalid\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "departments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "views",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "permissionSets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "workspaces",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a61ac85b-275b-4482-89a1-a18340fc5976",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the authenticated user lacks the \"User Management\" permission\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "departments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "views",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "permissionSets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "workspaces",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8826aff3-82ac-4f17-b4e9-25980a187ce3",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if there was an issue on the server side and could not get list of users.\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "departments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "views",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "permissionSets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "workspaces",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f47ba0c6-9732-47ef-8deb-1bc4e804d2d2",
+          "name": "Get a user by external id",
+          "request": {
+            "name": "Get a user by external id",
+            "description": {
+              "content": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nThe Get Users By External ID API allows you to retrieve a specific user's data.\n</div>\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "admin",
+                "v1",
+                "user",
+                ":id"
+              ],
+              "host": [
+                "uapi",
+                "demandbase",
+                "com"
               ],
               "query": [],
               "variable": [
@@ -2163,28 +1144,45 @@
                   "disabled": false,
                   "type": "any",
                   "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) User unique identifier"
+                  "key": "id",
+                  "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
                 }
               ]
             },
-            "method": "DELETE",
-            "auth": null
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
           },
           "response": [
             {
-              "id": "dedc447e-6d03-4819-a337-f5564bb553ab",
-              "name": "User deleted",
+              "id": "a1fceac3-fee0-4814-b8da-fb520206671f",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturns the requested user details matching the provided ID\n</div>",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "users",
-                    ":userId"
+                    "user",
+                    ":id"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": [
@@ -2192,8 +1190,391 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
+                      "key": "id",
+                      "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Alex Morgan\",\n  \"email\": \"user@example.com\",\n  \"externalIds\": [\n    \"ext-123abc\"\n  ],\n  \"permissionSets\": [\n    \"Admin\"\n  ],\n  \"department\": \"Customer Success\",\n  \"view\": \"Standard View\",\n  \"workspaces\": [\n    \"Default workspace\"\n  ],\n  \"date_created\": \"2025-08-22T20:43:44.888Z\",\n  \"jobFunction\": \"Other\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45961f69-ab5d-4cd5-b8a8-5d2823e9866c",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the user specification in the request body does not match the required format.\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "user",
+                    ":id"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d2ed4a2b-c40c-4829-8b2c-38c4c46d7508",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the authentication credentials are missing or invalid.\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "user",
+                    ":id"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "baa76689-fae6-4038-8461-a8b3319bc0f5",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the authenticated user lacks the \"User Management\" permission\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "user",
+                    ":id"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0306afa8-dc57-429b-bedd-cecef3132954",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the provided external user id does not exist in DemandBase\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "user",
+                    ":id"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"400-115\",\n  \"errorMessage\": \"No user found with externalId: {NewUserResponse}.externalId\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a7a98c8-30c4-46bd-9476-410e7325f0eb",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if there was an issue on the server side and could not find the user.\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "user",
+                    ":id"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ba013f6-19dc-42f8-9163-a45e804cedeb",
+          "name": "Delete user using external user id",
+          "request": {
+            "name": "Delete user using external user id",
+            "description": {
+              "content": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nDeletes an existing <strong>user</strong> from your Demandbase account.\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "admin",
+                "v1",
+                "user",
+                ":id"
+              ],
+              "host": [
+                "uapi",
+                "demandbase",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "63d6c22d-98f4-4967-a876-7de0f0627250",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the user is successfully deleted.\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "user",
+                    ":id"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
                     }
                   ]
                 },
@@ -2223,18 +1604,21 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "dea3313e-d02c-489a-aaaa-f9c02c6dc7ac",
-              "name": "Unauthorized",
+              "id": "5a4753bb-3fb4-47cb-ac06-f7609236105d",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the user specification in the request body does not match the required format.\n</div>",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "users",
-                    ":userId"
+                    "user",
+                    ":id"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": [
@@ -2242,8 +1626,61 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
+                      "key": "id",
+                      "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb03a5bb-5fbb-484b-82d0-a0e115f2f0dd",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the authentication credentials are missing or invalid.\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "user",
+                    ":id"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
                     }
                   ]
                 },
@@ -2273,18 +1710,21 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "5ed24cc5-4363-4b2c-bb79-ca982a194ee5",
-              "name": "Forbidden",
+              "id": "d40f865c-87af-4e92-8897-f3e200204643",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the authenticated user lacks the \"User Management\" permission\n</div>",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "users",
-                    ":userId"
+                    "user",
+                    ":id"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": [
@@ -2292,8 +1732,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
+                      "key": "id",
+                      "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
                     }
                   ]
                 },
@@ -2323,18 +1763,21 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "4a359cbc-eb2b-46f8-b1aa-bd1b89ed2894",
-              "name": "User not found",
+              "id": "7dee7594-764e-4b47-8d08-bbfea436da6d",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the provided external user id does not exist in DemandBase\n</div>",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "admin",
                     "v1",
-                    "users",
-                    ":userId"
+                    "user",
+                    ":id"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": [
@@ -2342,8 +1785,65 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) User unique identifier"
+                      "key": "id",
+                      "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"400-115\",\n  \"errorMessage\": \"No user found with externalId: {NewUserResponse}.externalId\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92d39e77-6247-4aad-8e54-0a9dd89816a1",
+              "name": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if there was an issue on the server side and user could not be deleted.\n</div>",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "admin",
+                    "v1",
+                    "user",
+                    ":id"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) <div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
                     }
                   ]
                 },
@@ -2360,8 +1860,8 @@
                 "method": "DELETE",
                 "body": {}
               },
-              "status": "Not Found",
-              "code": 404,
+              "status": "Internal Server Error",
+              "code": 500,
               "header": [
                 {
                   "key": "Content-Type",
@@ -2386,7 +1886,7 @@
   "variable": [
     {
       "type": "string",
-      "value": "https://api.demandbase.com",
+      "value": "https://uapi.demandbase.com",
       "key": "baseUrl"
     }
   ],
@@ -2400,11 +1900,11 @@
     ]
   },
   "info": {
-    "_postman_id": "d6a2b9f3-9e2e-47f6-9f38-d7a80237c21b",
-    "name": "Demandbase Admin API",
+    "_postman_id": "12cff6d3-3c9d-4739-8589-db67b61f4c5e",
+    "name": "Admin API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "Provides programmatic access to user management and platform administration capabilities, including creating, reading, updating, and deleting users and managing API key sets for Demandbase One.\n\nContact Support:\n Name: Demandbase Support",
+      "content": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3>\n  Use the <strong>Admin API</strong> to manage users, permissions, and other administrative functions across your Demandbase account.\n</div>\n\n<div style=\"background:#FFFFFF; border-left:4px solid #007acc; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n\n> **Rate Limiting** \n> <br>Admin API endpoints are restricted to 90 requests per minute per HTTP method (e.g., GET, POST, PUT, DELETE).\n> <br>If the limit is exceeded, the API will respond with an HTTP 429 Too Many Requests error.\n> <br><br><strong>Recommendations to Stay Within Limits:</strong><ul>\n> <li>Distribute traffic across time intervals rather than sending bursts</li>\n> <li>Batch operations where possible to reduce request volume</li>\n> <li>Implement exponential backoff when retrying 429 errors</li>\n> <li>Monitor your usage trends and adjust polling or sync frequency accordingly</li>\n> <li>Use idempotent design where applicable to safely retry failed requests</li>\n> </ul>\n\n**Example Use**\n```text\ncurl --location 'https://uapi.demandbase.com/admin/v1/users' \\\n--header 'Authorization: Bearer <your auth token>'\n```\n**Response**\n```json\n{\n    \"totalCount\": 1,\n    \"data\": [\n        {\n            \"name\": \"Test User\",\n            \"email\": \"TestUser@demandbase.com\",\n            \"externalIds\": [],\n            \"permissionSets\": [\n                \"Demandbase One for Sales\",\n                \"General User\"\n            ],\n            \"department\": \"Ad Operations\",\n            \"view\": \"Standard View\",\n            \"workspaces\": [\n                \"Default workspace\"\n            ],\n            \"date_created\": \"2025-03-11T05:38:17.007Z\",\n            \"jobFunction\": \"Other\"\n        }\n    ]\n}\n```\n</div>",
       "type": "text/plain"
     }
   }

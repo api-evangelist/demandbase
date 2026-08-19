@@ -1,0 +1,820 @@
+{
+ "openapi": "3.0.3",
+ "info": {
+  "version": "2.0",
+  "title": "Admin API",
+  "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3>\n  Use the <strong>Admin API</strong> to manage users, permissions, and other administrative functions across your Demandbase account.\n</div>\n\n<div style=\"background:#FFFFFF; border-left:4px solid #007acc; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n\n> **Rate Limiting** \n> <br>Admin API endpoints are restricted to 90 requests per minute per HTTP method (e.g., GET, POST, PUT, DELETE).\n> <br>If the limit is exceeded, the API will respond with an HTTP 429 Too Many Requests error.\n> <br><br><strong>Recommendations to Stay Within Limits:</strong><ul>\n> <li>Distribute traffic across time intervals rather than sending bursts</li>\n> <li>Batch operations where possible to reduce request volume</li>\n> <li>Implement exponential backoff when retrying 429 errors</li>\n> <li>Monitor your usage trends and adjust polling or sync frequency accordingly</li>\n> <li>Use idempotent design where applicable to safely retry failed requests</li>\n> </ul>\n\n**Example Use**\n```text\ncurl --location 'https://uapi.demandbase.com/admin/v1/users' \\\n--header 'Authorization: Bearer <your auth token>'\n```\n**Response**\n```json\n{\n    \"totalCount\": 1,\n    \"data\": [\n        {\n            \"name\": \"Test User\",\n            \"email\": \"TestUser@demandbase.com\",\n            \"externalIds\": [],\n            \"permissionSets\": [\n                \"Demandbase One for Sales\",\n                \"General User\"\n            ],\n            \"department\": \"Ad Operations\",\n            \"view\": \"Standard View\",\n            \"workspaces\": [\n                \"Default workspace\"\n            ],\n            \"date_created\": \"2025-03-11T05:38:17.007Z\",\n            \"jobFunction\": \"Other\"\n        }\n    ]\n}\n```\n</div>"
+ },
+ "servers": [
+  {
+   "url": "https://uapi.demandbase.com"
+  }
+ ],
+ "paths": {
+  "/admin/v1/user": {
+   "post": {
+    "tags": [
+     "User Management"
+    ],
+    "summary": "Create new user",
+    "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nCreates a new <strong>user</strong> within your Demandbase account.\n</div>",
+    "requestBody": {
+     "description": "<div style=\"background:#FFFFFF; border-left:4px solid #4444FF; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Request Body</h3><br>\nThe Create User API request body defines key attributes for a user, including identification, permissions, and default interface (view) preferences.",
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/User"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> User successfully created<br>\n<strong>Return:</strong> JSON object representing the new user\n</div>",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NewUserResponse"
+        },
+        "example": {
+         "externalId": "ext-123abc",
+         "email": "user@example.com",
+         "fullName": "Alex Morgan",
+         "permissionSets": [
+          "Admin"
+         ],
+         "department": "Customer Success",
+         "view": "Standard View",
+         "workspaces": [
+          "Default workspace"
+         ],
+         "jobFunction": "Other"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Invalid request body or missing required fields<br>\n<strong>Return:</strong> JSON error object\n</div>",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "code": {
+           "type": "integer"
+          },
+          "details": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "requestId": {
+           "type": "string"
+          }
+         },
+         "x-examples": {
+          "Example 1": {
+           "code": 400,
+           "details": [
+            "department: test is invalid",
+            "permissionSet: test is invalid"
+           ],
+           "requestId": "cf89308c-7cb9-437a-ac56-2f9804199a3b"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Authentication failed or missing credentials<br>\n<strong>Return:</strong> JSON error status object\n</div>",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "status": {
+           "type": "string"
+          }
+         },
+         "x-examples": {
+          "Example 1": {
+           "status": "Authentication Failed - Unauthorized."
+          }
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Returned if the authenticated credentials lacks the \"User Management\" permission<br>\n<strong>Return:</strong> JSON error object\n</div>",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "code": {
+           "type": "integer"
+          },
+          "details": {
+           "type": "string"
+          },
+          "requestId": {
+           "type": "string"
+          }
+         },
+         "x-examples": {
+          "Example 1": {
+           "code": 403,
+           "details": "You are not authorized to perform this action.",
+           "requestId": "2159a31a-2b41-4672-9e36-596137771cc9"
+          }
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Returned if there was an issue on the server side and the user could not be created.<br>\n</div>"
+     }
+    },
+    "security": [
+     {
+      "token": []
+     }
+    ],
+    "servers": [
+     {
+      "url": "https://uapi.demandbase.com"
+     }
+    ]
+   },
+   "put": {
+    "tags": [
+     "User Management"
+    ],
+    "summary": "Update users",
+    "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nUpdates an existing <strong>user</strong> within your Demandbase account.\n</div>",
+    "operationId": "put-users",
+    "requestBody": {
+     "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Request Body</h3><br>\nThe Update User API request body defines key attributes for a user, including identification, permissions, and default interface (view) preferences.",
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/User"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> User successfully updated<br>\n<strong>Return:</strong> JSON object representing the updated user\n</div>\n",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NewUserResponse"
+        },
+        "example": {
+         "externalId": "ext-123abc",
+         "email": "user@example.com",
+         "fullName": "Alex Morgan",
+         "permissionSets": [
+          "Admin"
+         ],
+         "department": "Customer Success",
+         "view": "Standard View",
+         "workspaces": [
+          "global workspace"
+         ],
+         "jobFunction": "Other"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Invalid request body or missing required fields<br>\n<strong>Return:</strong> JSON error object\n</div>",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "code": {
+           "type": "integer"
+          },
+          "details": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "requestId": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Authentication failed or missing credentials<br>\n<strong>Return:</strong> JSON error status object\n</div>",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "status": {
+           "type": "string"
+          }
+         },
+         "x-examples": {
+          "Example 1": {
+           "status": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Returned if the authenticated user lacks the \"User Management\" permission<br>\n<strong>Return:</strong> JSON error object\n</div>\n",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "code": {
+           "type": "string"
+          },
+          "details": {
+           "type": "string"
+          },
+          "requestId": {
+           "type": "string"
+          }
+         },
+         "x-examples": {
+          "Example 1": {
+           "code": "integer",
+           "details": "string",
+           "requestId": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<strong>Description:</strong> Returned if there was an issue on the server side and user could not be updated.<br>\n</div>\n"
+     }
+    },
+    "security": [
+     {
+      "token": []
+     }
+    ],
+    "servers": [
+     {
+      "url": "https://uapi.demandbase.com"
+     }
+    ]
+   }
+  },
+  "/admin/v1/users": {
+   "get": {
+    "tags": [
+     "User Management"
+    ],
+    "summary": "Get list of users",
+    "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nThis endpoint allows you to retrieve users with pagination (max pageSize 100) and filters for departments, views, permissionSets, and workspaces.\n</div>",
+    "parameters": [
+     {
+      "name": "departments",
+      "in": "query",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">comma separated list of departments<br><strong>Example:</strong> Marketing,Sales</div>",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "views",
+      "in": "query",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">comma separated list of views<br><strong>Example:</strong> Standard View,Marketing View</div>",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "permissionSets",
+      "in": "query",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">comma separated list of permission sets<br><strong>Example:</strong> General User,Admin</div>",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "workspaces",
+      "in": "query",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">comma separated list of workspaces (if enabled)<br><strong>Example:</strong> global workspace</div>",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageNo",
+      "in": "query",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\"><strong>Default:</strong> 1<br><strong>Example:</strong> 5</div>",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\"><strong>Default:</strong> 25<br><strong>Example:</strong> 25<br><strong>Max:</strong> 100</div>",
+      "schema": {
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturns a paginated list of users.\n</div>",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserListResponse"
+        },
+        "example": {
+         "totalCount": 2,
+         "data": [
+          {
+           "name": "Alex Morgan",
+           "email": "alex.morgan@example.com",
+           "externalIds": [
+            "ext-12345"
+           ],
+           "permissionSets": [
+            "General User",
+            "Admin"
+           ],
+           "department": "Engineering",
+           "view": "Standard View",
+           "workspaces": [
+            "Default workspace"
+           ],
+           "date_created": "2024-01-15T12:34:56Z",
+           "jobFunction": "Other"
+          },
+          {
+           "name": "Jordan Lee",
+           "email": "jordan.lee@example.com",
+           "externalIds": [],
+           "permissionSets": [
+            "General User"
+           ],
+           "department": "Marketing",
+           "view": "Standard View",
+           "workspaces": [
+            "Default workspace"
+           ],
+           "date_created": "2023-11-02T08:15:30Z",
+           "jobFunction": "Marketing"
+          }
+         ]
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the user specification in the request does not match the required format.\n</div>"
+     },
+     "401": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the authentication credentials are missing or invalid\n</div>"
+     },
+     "403": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the authenticated user lacks the \"User Management\" permission\n</div>"
+     },
+     "500": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if there was an issue on the server side and could not get list of users.\n</div>"
+     }
+    },
+    "security": [
+     {
+      "token": []
+     }
+    ],
+    "servers": [
+     {
+      "url": "https://uapi.demandbase.com"
+     }
+    ]
+   }
+  },
+  "/admin/v1/user/{id}": {
+   "get": {
+    "tags": [
+     "User Management"
+    ],
+    "summary": "Get a user by external id",
+    "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nThe Get Users By External ID API allows you to retrieve a specific user's data.\n</div>\n",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturns the requested user details matching the provided ID\n</div>",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetUserResponse"
+        },
+        "example": {
+         "name": "Alex Morgan",
+         "email": "user@example.com",
+         "externalIds": [
+          "ext-123abc"
+         ],
+         "permissionSets": [
+          "Admin"
+         ],
+         "department": "Customer Success",
+         "view": "Standard View",
+         "workspaces": [
+          "Default workspace"
+         ],
+         "date_created": "2025-08-22T20:43:44.888Z",
+         "jobFunction": "Other"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the user specification in the request body does not match the required format.\n</div>"
+     },
+     "401": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the authentication credentials are missing or invalid.\n</div>"
+     },
+     "403": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the authenticated user lacks the \"User Management\" permission\n</div>"
+     },
+     "404": {
+      "$ref": "#/components/responses/404errorNoUserFound"
+     },
+     "500": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if there was an issue on the server side and could not find the user.\n</div>"
+     }
+    },
+    "security": [
+     {
+      "token": []
+     }
+    ],
+    "servers": [
+     {
+      "url": "https://uapi.demandbase.com"
+     }
+    ]
+   },
+   "delete": {
+    "tags": [
+     "User Management"
+    ],
+    "summary": "Delete user using external user id",
+    "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nDeletes an existing <strong>user</strong> from your Demandbase account.\n</div>",
+    "operationId": "delete-users",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the user is successfully deleted.\n</div>"
+     },
+     "400": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the user specification in the request body does not match the required format.\n</div>"
+     },
+     "401": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the authentication credentials are missing or invalid.\n</div>"
+     },
+     "403": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the authenticated user lacks the \"User Management\" permission\n</div>"
+     },
+     "404": {
+      "$ref": "#/components/responses/404errorNoUserFound"
+     },
+     "500": {
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if there was an issue on the server side and user could not be deleted.\n</div>"
+     }
+    },
+    "security": [
+     {
+      "token": []
+     }
+    ],
+    "servers": [
+     {
+      "url": "https://uapi.demandbase.com"
+     }
+    ]
+   }
+  }
+ },
+ "components": {
+  "securitySchemes": {
+   "token": {
+    "type": "http",
+    "description": "[<span style=\"text-decoration:underline;color:blue; font-size:1.25em\">How To Generate Bearer Tokens</span>](https://developer.demandbase.com/docs/auth-api)",
+    "scheme": "bearer"
+   }
+  },
+  "responses": {
+   "400errorDescriptionsForMissingRequiredAttribute": {
+    "description": "If any of the user attribute is missing.",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/ErrorDto"
+      },
+      "examples": {
+       "Example 1": {
+        "$ref": "#/components/examples/errorMissingRequiredAttributeExample"
+       }
+      }
+     }
+    }
+   },
+   "404errorNoUserFound": {
+    "description": "<div style=\"background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nReturned if the provided external user id does not exist in DemandBase\n</div>",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/ErrorDto"
+      },
+      "examples": {
+       "Example 1": {
+        "$ref": "#/components/examples/errorNoUserFoundExample"
+       }
+      }
+     }
+    }
+   }
+  },
+  "examples": {
+   "errorInvalidAttributeExample": {
+    "value": {
+     "errorCode": "400-115",
+     "errorMessage": "Invalid user attributes for one or more users: {NewUserResponse}.email, {NewUserResponse}.departments"
+    }
+   },
+   "errorMissingRequiredAttributeExample": {
+    "value": {
+     "errorCode": "400-115",
+     "errorMessage": "Missing required user attributes for one or more users: email, departments"
+    }
+   },
+   "errorNoUserFoundExample": {
+    "value": {
+     "errorCode": "400-115",
+     "errorMessage": "No user found with externalId: {NewUserResponse}.externalId"
+    }
+   }
+  },
+  "schemas": {
+   "User": {
+    "type": "object",
+    "properties": {
+     "fullName": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nThe full name of the user.\n</div>"
+     },
+     "email": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nThe email address of the user\n</div>"
+     },
+     "externalId": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nAn external identifier for the user, such as user id in your user management system.\n</div>"
+     },
+     "permissionSets": {
+      "type": "array",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nAn array of permission sets assigned to the user. These must match the permission sets configured in the DB1 platform.\n<br><strong>More info:</strong> <a href=\"https://support.demandbase.com/hc/en-us/articles/4408096348827-Create-and-Manage-Permission-Sets\" target=\"_blank\"><span style=\"color:blue\">Create and Manage Permission Sets</span></a>\n</div>",
+      "items": {
+       "type": "string"
+      }
+     },
+     "department": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nThe department the user belongs to, used for organizational grouping.\n<br><strong>More info:</strong> <a href=\"https://support.demandbase.com/hc/en-us/articles/19135030630171-Create-and-Manage-Departments\" target=\"_blank\"><span style=\"color:blue\">Create and Manage Departments</span></a>\n</div>"
+     },
+     "view": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nThe default view that defines which interface and columns the user sees upon login.\n<br><strong>More info:</strong> <a href=\"https://support.demandbase.com/hc/en-us/articles/360051564312-Create-and-Manage-User-Views-View-Management\" target=\"_blank\"><span style=\"color:blue;\">Create and Manage User Views</span></a>\n</div>"
+     }
+    },
+    "required": [
+     "fullName",
+     "email",
+     "externalId",
+     "permissionSets",
+     "department",
+     "view"
+    ]
+   },
+   "NewUserResponse": {
+    "type": "object",
+    "properties": {
+     "fullName": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nName of the user\n</div>"
+     },
+     "email": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nEmail address of the user\n</div>"
+     },
+     "externalId": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nUser ID in client's system\n</div>"
+     },
+     "permissionSets": {
+      "type": "array",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nPermissions of the user\n</div>",
+      "items": {
+       "type": "string"
+      }
+     },
+     "department": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nDepartment of the user\n</div>"
+     },
+     "view": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nView of the user\n</div>"
+     },
+     "workspaces": {
+      "type": "array",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nWorkspaces of the user if applicable\n</div>",
+      "items": {
+       "type": "string"
+      }
+     },
+     "jobFunction": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nJob function of the user\n</div>"
+     },
+     "dateCreated": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nDate when the user was created\n</div>",
+      "format": "date"
+     }
+    }
+   },
+   "GetUserResponse": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nThe user's full name\n</div>"
+     },
+     "email": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nThe user's email address\n</div>"
+     },
+     "externalIds": {
+      "type": "array",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nA list of client defined user IDs\n</div>",
+      "items": {
+       "type": "string"
+      }
+     },
+     "permissionSets": {
+      "type": "array",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nPermissions of the user\n</div>",
+      "items": {
+       "type": "string"
+      }
+     },
+     "department": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nDepartment of the user\n</div>"
+     },
+     "view": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nView of the user\n</div>"
+     },
+     "workspaces": {
+      "type": "array",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nWorkspaces of the user if applicable\n</div>",
+      "items": {
+       "type": "string"
+      }
+     },
+     "date_created": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nDate when the user was created\n</div>",
+      "format": "date-time"
+     },
+     "jobFunction": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nJob function of the user\n</div>"
+     }
+    }
+   },
+   "UserListItem": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "email": {
+      "type": "string"
+     },
+     "externalIds": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "permissionSets": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "department": {
+      "type": "string"
+     },
+     "view": {
+      "type": "string"
+     },
+     "workspaces": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "date_created": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "jobFunction": {
+      "type": "string"
+     }
+    }
+   },
+   "UserListResponse": {
+    "type": "object",
+    "properties": {
+     "totalCount": {
+      "type": "integer"
+     },
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/UserListItem"
+      }
+     }
+    },
+    "required": [
+     "totalCount",
+     "data"
+    ]
+   },
+   "ErrorDto": {
+    "type": "object",
+    "properties": {
+     "errorCode": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nThis is a error code\n</div>\n"
+     },
+     "errorMessage": {
+      "type": "string",
+      "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\nA clear text description of the error\n</div>\n"
+     }
+    }
+   }
+  }
+ },
+ "security": [
+  {
+   "token": []
+  }
+ ]
+}

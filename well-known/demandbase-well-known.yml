@@ -1,0 +1,130 @@
+generated: '2026-08-13'
+method: searched
+source: probed /.well-known/* on every Demandbase host named in apis.yml, in the
+  OpenAPI servers[] blocks, and in the developer documentation
+note: >-
+  Demandbase serves real discovery documents on two hosts. gateway.demandbase.com
+  (the MCP gateway) publishes RFC 9728 protected-resource metadata and RFC 8414
+  authorization-server metadata; authentication.demandbase.com (Okta-backed) publishes
+  full OIDC discovery. The API host uapi.demandbase.com and the marketing host
+  www.demandbase.com serve nothing at /.well-known/ — recorded below as honest 404s.
+  No security.txt (RFC 9116) is served on any Demandbase host.
+hosts:
+  - host: https://gateway.demandbase.com
+    role: MCP gateway
+    documents:
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        content_type: application/json
+        file: demandbase-oauth-protected-resource.json
+        spec: RFC 9728
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        file: demandbase-oauth-authorization-server.json
+        spec: RFC 8414
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json
+        file: demandbase-openid-configuration.json
+        spec: OpenID Connect Discovery 1.0
+      - path: /.well-known/agent-card.json
+        status: 401
+      - path: /.well-known/agent.json
+        status: 401
+      - path: /.well-known/security.txt
+        status: 401
+  - host: https://authentication.demandbase.com
+    role: identity provider (Okta)
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json
+        file: demandbase-auth-openid-configuration.json
+        spec: OpenID Connect Discovery 1.0
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        file: demandbase-auth-oauth-authorization-server.json
+        spec: RFC 8414
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/security.txt
+        status: 405
+      - path: /.well-known/api-catalog
+        status: 405
+  - host: https://uapi.demandbase.com
+    role: production API host (all published OpenAPI servers[])
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://www.demandbase.com
+    role: marketing site
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://developer.demandbase.com
+    role: developer portal (ReadMe)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /llms.txt
+        status: 200
+        note: not a /.well-known/ path; captured separately at llms/demandbase-llms.txt
+  - host: https://api.demandbase.com
+    role: legacy/reserved host — answers "404 page not found" on every path probed
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+x-evidence:
+  fetched: '2026-08-13'
+  agent_card_found: false
+  security_txt_found: false

@@ -1,0 +1,127 @@
+generated: '2026-08-13'
+method: searched
+source: https://developer.demandbase.com/docs/handling-errors
+format: vendor-error-code
+note: >-
+  Demandbase publishes a stable numeric error registry, not RFC 9457 problem+json. The
+  envelope is a flat JSON object; the first three digits of errorCode always match the HTTP
+  status, which makes the code both greppable and status-consistent. diagnosticCode is an
+  opaque per-request identifier for support escalation and must not be parsed. The registry
+  below is transcribed verbatim from the Handling Errors reference and is scoped to the Data
+  Export API, which is the only surface for which Demandbase publishes codes; the B2B,
+  Import, Admin, Intent, Usage and Custom Sources APIs return the same HTTP statuses but
+  their code lists are not published.
+envelope:
+  content_type: application/json
+  fields:
+    - name: errorCode
+      description: >-
+        Stable Demandbase error identifier. The first three digits match the HTTP status.
+        Use this value when handling a specific failure in your application.
+    - name: errorMessage
+      description: Human-readable details about the failure. Values from the request may be included.
+    - name: diagnosticCode
+      description: >-
+        Opaque identifier for the individual API request. Record it in your logs and include
+        it when contacting support. Do not parse it or use it for application logic.
+  example: |
+    {
+      "errorCode": "400-115",
+      "errorMessage": "Invalid field names: {Account}.All, {Account}.test",
+      "diagnosticCode": "ce0fc1770e0d425b88892df4f663bf07"
+    }
+statuses:
+  - status: 400
+    meaning: The request is invalid.
+    action: Correct the indicated parameter or payload. Do not retry the same request unchanged.
+    retryable: false
+  - status: 401
+    meaning: Authentication credentials are missing or invalid.
+    action: Obtain a valid access token and retry.
+    retryable: true
+  - status: 403
+    meaning: The authenticated API key or tenant cannot access the requested resource.
+    action: Verify API-key permissions, enabled Export collections, and tenant access.
+    retryable: false
+  - status: 404
+    meaning: The requested resource or job does not exist.
+    action: Verify the identifier and that it belongs to the authenticated tenant.
+    retryable: false
+  - status: 429
+    meaning: A request, concurrency, or export quota was exceeded.
+    action: Back off before retrying.
+    retryable: true
+  - status: 500
+    meaning: Demandbase could not complete the request because of a temporary service failure.
+    action: Retry with backoff; escalate with the diagnosticCode if it persists.
+    retryable: true
+error_code_count: 68
+error_codes:
+  - {code: '400-102', condition: The request body is not a valid JSON object.}
+  - {code: '400-103', condition: A request parameter is invalid.}
+  - {code: '400-104', condition: A required parameter is missing.}
+  - {code: '400-111', condition: A date is not in yyyy-mm-dd or yyyy-mm-ddThh:mm:ssZ format.}
+  - {code: '400-112', condition: Only one of fromDate and toDate was supplied; both are required together.}
+  - {code: '400-113', condition: fromDate is after toDate.}
+  - {code: '400-114', condition: The requested Activity date range is longer than 90 days.}
+  - {code: '400-115', condition: One or more requested field names are invalid. Use GET /v1/fields to retrieve supported fields.}
+  - {code: '400-116', condition: format is not CSV or JSON.}
+  - {code: '400-117', condition: Export results were requested before the job reached finished.}
+  - {code: '400-118', condition: limit is not numeric.}
+  - {code: '400-119', condition: limit is outside the supported range of 1-1,000.}
+  - {code: '400-120', condition: sort is not ascending or descending.}
+  - {code: '400-121', condition: page is not a positive number.}
+  - {code: '400-122', condition: perPage is not a positive number.}
+  - {code: '400-123', condition: The entityType query value is unsupported.}
+  - {code: '400-124', condition: The jobStatus query value is unsupported.}
+  - {code: '400-125', condition: The entityType supplied to the fields endpoint is unsupported.}
+  - {code: '400-126', condition: jobName is missing or longer than 50 characters.}
+  - {code: '400-127', condition: The request body contains an unsupported entityType.}
+  - {code: '400-129', condition: An account-list ID is not numeric.}
+  - {code: '400-130', condition: performance is unsupported.}
+  - {code: '400-131', condition: Neither creativeId nor campaignId was supplied where one is required.}
+  - {code: '400-132', condition: creativeId is not numeric.}
+  - {code: '400-133', condition: campaignId is not numeric.}
+  - {code: '400-134', condition: accountId is not numeric.}
+  - {code: '400-135', condition: A required account or campaign identifier is missing.}
+  - {code: '400-136', condition: The selected campaign export supports only rollup performance.}
+  - {code: '400-137', condition: fromDate is not before toDate.}
+  - {code: '400-138', condition: source contains an unsupported value or data type.}
+  - {code: '400-139', condition: adReportType is invalid for the selected entity type.}
+  - {code: '400-140', condition: The filter operator is invalid for the selected field's data type.}
+  - {code: '400-141', condition: A person-list ID is not numeric.}
+  - {code: '400-142', condition: One or more account-list IDs do not exist.}
+  - {code: '400-143', condition: One or more person-list IDs do not exist.}
+  - {code: '400-144', condition: accountListId and accountListIds were supplied together.}
+  - {code: '400-145', condition: accountListIds contains more than 10,000 IDs.}
+  - {code: '400-146', condition: personListIds contains more than 10,000 IDs.}
+  - {code: '400-147', condition: The request contains an unrecognized property.}
+  - {code: '400-148', condition: One or more accountIds values are not numeric.}
+  - {code: '400-149', condition: accountIds is required for the selected Buying Group entity type.}
+  - {code: '400-150', condition: accountIds contains more than 10,000 IDs.}
+  - {code: '400-151', condition: One or more companyIds values are not numeric.}
+  - {code: '400-152', condition: companyIds is required for the selected Buying Group entity type.}
+  - {code: '400-153', condition: companyIds contains more than 10,000 IDs.}
+  - {code: '400-154', condition: The requested reference-data object is unsupported.}
+  - {code: '400-155', condition: A requested field is outside the tenant's enabled Export collection, or the selected entity type does not support paginated result retrieval.}
+  - {code: '401-100', condition: Authentication credentials are missing or invalid.}
+  - {code: '403-100', condition: The authenticated user is not permitted to perform the requested export.}
+  - {code: '403-101', condition: The tenant cannot access the requested entity type.}
+  - {code: '403-102', condition: The API key cannot access the requested resource.}
+  - {code: '403-103', condition: The tenant does not have an Export collection enabled.}
+  - {code: '403-104', condition: The requested fields are not available in the tenant's enabled Export collection.}
+  - {code: '403-105', condition: The tenant cannot access the requested endpoint.}
+  - {code: '404-301', condition: The requested resource does not exist.}
+  - {code: '404-302', condition: The export job ID is invalid or does not exist.}
+  - {code: '404-303', condition: The requested export-result part is invalid or does not exist.}
+  - {code: '429-100', condition: The concurrent-query limit was exceeded.}
+  - {code: '429-101', condition: The rolling 24-hour export quota was exceeded.}
+  - {code: '429-102', condition: The concurrent export-job limit was exceeded.}
+  - {code: '500-100', condition: Demandbase could not complete the request because of a temporary service failure.}
+escalation: >-
+  When escalating an error, provide the endpoint, UTC timestamp, HTTP status, errorCode and
+  diagnosticCode. Do not send API credentials or access tokens.
+related:
+  - errors/demandbase-problem-types.yml
+  - rate-limits/demandbase-rate-limits.yml
+  - conventions/demandbase-conventions.yml

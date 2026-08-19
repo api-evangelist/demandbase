@@ -1,0 +1,151 @@
+openapi: 3.0.1
+info:
+  version: '1.0'
+  title: Usage API
+  description: 'This API allows authenticated users to retrieve summary-level credit usage and entitlement data for a specified
+    API product. It supports two billing models:
+
+
+    - **Per Record:** Credits are deducted each time a record is returned.
+
+
+    - **RUM (Record Under Management):** Credits are deducted once per unique record per entitlement period.'
+  contact:
+    name: Support
+    url: https://www.demandbase.com/
+    email: support@demandbase.com
+servers:
+- url: https://uapi.demandbase.com
+  description: Server URL in Production environment
+  variables:
+    basePath:
+      default: reporting/v1
+security:
+- bearerAuth: []
+paths:
+  /reporting/v1/usage:
+    get:
+      tags:
+      - Credit Usage
+      summary: Fetch Credit Usage details
+      description: ' Returns a summary of credit usage and entitlements for the specified API category.'
+      operationId: getCreditUsageDetails
+      parameters:
+      - name: apiProduct
+        in: query
+        description: API product name (e.g., b2bApi)
+        required: true
+        schema:
+          type: string
+          enum:
+          - b2bapi
+          example: b2bApi
+        examples:
+          default:
+            value: b2bApi
+      responses:
+        '200':
+          description: Credit usage details fetched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditUsage'
+              examples:
+                Credit Usage Details Response:
+                  description: Credit Usage Details Response
+                  value:
+                    summary:
+                      scope: lifetime
+                      totalCreditsAllocated: 50000
+                      totalCreditsConsumed: 115
+                      totalCreditsAvailable: 49885
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CreditUsage'
+              examples:
+                Credit Usage Details Response:
+                  description: Credit Usage Details Response
+                  value: "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<usage>\n    <summary>\n        <scope>lifetime</scope>\n\
+                    \        <totalCreditsAllocated>50000</totalCreditsAllocated>\n        <totalCreditsConsumed>115</totalCreditsConsumed>\n\
+                    \        <totalCreditsAvailable>49885</totalCreditsAvailable>\n    </summary>\n</usage>\n"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                InvalidAPICategoryErrorResponse:
+                  description: InvalidAPICategoryErrorResponse
+                  value:
+                    errorCode: 400-100
+                    errorMessage: Invalid value for apiCategory. Should be among {b2bApi}
+            application/xml:
+              schema:
+                type: object
+                title: error
+                format: xml
+              examples:
+                InvalidCompanyIdErrorResponseXml:
+                  description: InvalidCompanyIdErrorResponseXml
+                  value: "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<error>\n    <errorCode>400-100</errorCode>\n\
+                    \    <errorMessage>Invalid value for apiCategory. Should be among {b2bApi}</errorMessage>\n</error>\n"
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+      servers:
+      - url: https://uapi.demandbase.com
+        description: Server URL in Production environment
+        variables:
+          basePath:
+            default: reporting/v1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    CreditUsage:
+      type: object
+      properties:
+        summary:
+          $ref: '#/components/schemas/CreditUsageSummary'
+      xml:
+        name: usage
+    CreditUsageSummary:
+      type: object
+      properties:
+        scope:
+          type: string
+          example: lifetime
+        totalCreditsAllocated:
+          type: integer
+          description: Total number of credits provisioned to the tenant for the specified API category.
+          example: 50000
+        totalCreditsConsumed:
+          type: integer
+          description: "Total number of credits consumed during the entitlement period.\n        This value reflects either\
+            \ total API calls (perRecord) or unique records accessed (RUM)."
+          example: 115
+        totalCreditsAvailable:
+          type: integer
+          description: 'Total remaining credits available to the tenant.
+
+            Calculated as: totalCreditsAllocated - totalCreditsConsumed.'
+          example: 49885
+        chargingModel:
+          type: string
+          enum:
+          - perRecord
+          - RUM
+          description: 'Indicates which billing model applies to the tenant:
+
+            - `perRecord`: credits deducted for every record returned, even duplicates
+
+            - `RUM`: credits deducted only for unique records returned within the period'
+          example: perRecord

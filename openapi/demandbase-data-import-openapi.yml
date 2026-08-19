@@ -1,0 +1,823 @@
+openapi: 3.0.3
+info:
+  version: '1.0'
+  title: Data Import API
+  description: This API is designed to facilitate the bulk import of structured data (such as Accounts, People, and Activities)
+    directly into the Demandbase platform. It allows users to programmatically upload files for processing, ensuring that
+    Demandbase targets and segments are consistently updated with the freshest data from your external systems.
+servers:
+- url: https://uapi.demandbase.com/import/v1
+paths:
+  /job:
+    post:
+      tags:
+      - Import Job
+      summary: Create an import job
+      description: Create a new job to perform a Data Import. This is prerequisite before posting a file with records to be
+        imported.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDataImportJob'
+          application/xml: {}
+      responses:
+        '200':
+          description: Returns a JSON object of the newly-created job. The Job ID will be used to upload data and to check
+            on job status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataImportJob'
+              examples:
+                Example 1:
+                  value:
+                    id: 67849
+                    dataImportName: EMEA accounts import
+                    entityType: Account
+                    state: new
+                    updatedAt: '2019-08-24T14:15:22Z'
+                    createdAt: '2019-08-24T14:15:22Z'
+                Example 2:
+                  value:
+                    id: 13
+                    dataImportName: public_email_import
+                    entityType: Activity
+                    state: new
+                    updatedAt: '2024-07-17T14:19:26.74Z'
+                    createdAt: '2024-07-17T14:19:26.74Z'
+                    source: CSV
+                    activityTypeId: 39
+        '400':
+          description: Returned if the job specification in the request body does not match the required format.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Returned if the authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '403':
+          description: Returned if the authenticated user lacks the "Import Data" permission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+  /{entityType}/sources:
+    get:
+      tags:
+      - Import Job
+      summary: Sources
+      description: Returns a list of eligible sources.
+      parameters:
+      - name: entityType
+        in: path
+        description: One of 'Account', 'Opportunity', 'Person' or 'Activity'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                x-examples:
+                  Example 1:
+                    data:
+                    - CSV
+              examples:
+                Example 1:
+                  value:
+                    data:
+                    - CSV
+        '400':
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Returned if the authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '403':
+          description: Returned if the authenticated user lacks the "Import Data" permission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+      x-internal: false
+  /job/{id}/data:
+    put:
+      tags:
+      - Import Job
+      summary: Submit import data
+      description: 'This endpoint is used to submit the data file to an existing import job identified by the path parameter
+        {id}.
+
+
+        Submitting the data file triggers the asynchronous processing of the data. You can monitor the progress and final
+        status of the data processing using the dedicated job status endpoint.
+
+
+        Note: There is currently no limit to the number of rows you can upload per Submit request, however, files are limited
+        to **5GB**.'
+      parameters:
+      - name: listAction
+        in: query
+        description: 'The listAction query parameter specifies how the imported data affects the membership of the account
+          list associated with this job ID.   <table> <tr> <th>Allowed Value</th> <th>Description</th> </tr> <tr> <td>replace
+          (default)</td> <td>Removes all existing members from the associated account list and adds the members from the current
+          import file.</td> </tr> <tr> <td>insert</td> <td>Adds new members from the current import file to the existing account
+          list. If no account list is associated with this job, one will be created.</td> </tr> <tr> <td>delete</td> <td>Removes
+          members from the existing account list if they are matched in the import data.</td> </tr> <tr> <td>noop</td> <td>Processes
+          and imports the data but does not make any changes to the associated account list membership.</td> </tr>  </table> '
+        required: false
+        schema:
+          type: string
+          enum:
+          - replace
+          - insert
+          - delete
+          - noop
+          default: replace
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: 'The request body is expected to be the raw binary content of the data file.
+
+
+          |  Type | Media Type | Description
+
+          | --- | --- | --- |
+
+          | string\<binary\> | application/octet-stream | The binary content of the data file to be imported (e.g., a CSV
+          file).'
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+          application/xml: {}
+      responses:
+        '200':
+          description: Returns the status of the job after successfull upload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataImportJob'
+              examples:
+                Example 1:
+                  value:
+                    id: 67849
+                    dataImportName: EMEA accounts import
+                    entityType: Account
+                    state: processing
+                    createdAt: '2019-08-24T14:15:22Z'
+                    updatedAt: '2019-08-24T17:12:29Z'
+        '400':
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Returned if the authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '403':
+          description: Returned if the authenticated user lacks the "Import Data" permission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Returned if the referenced job is not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+  /job/{id}:
+    get:
+      tags:
+      - Import Job
+      summary: Job status
+      description: 'Use this endpoint to retrieve the current status and relevant details of a specific data import job.
+
+
+        The job is identified by the unique path parameter {id} that was returned when the job was initially created.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: The response body contains the comprehensive details of the job's current status and metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataImportJob'
+              examples:
+                Example 1:
+                  value:
+                    id: 67849
+                    dataImportName: EMEA accounts import
+                    entityType: Account
+                    state: completed
+                    createdAt: '2019-08-24T14:15:22Z'
+                    updatedAt: '2019-08-24T17:53:11Z'
+                Example 2:
+                  value:
+                    id: 114
+                    dataImportName: Import data
+                    entityType: Activity
+                    state: completed
+                    updatedAt: '2024-07-30T07:02:07.692Z'
+                    createdAt: '2024-07-30T07:02:07.465Z'
+                    source: CSV
+                    activityTypeId: 37
+        '400':
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Returned if the authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '403':
+          description: Returned if the authenticated user lacks the "Import Data" permission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Returned if the referenced job is not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+  /jobs:
+    get:
+      tags:
+      - Import Job
+      summary: Jobs list
+      description: Returns a list of import jobs. This provides an overview of all historical and current data import activities
+        within the Demandbase platform.
+      parameters:
+      - name: entityType
+        in: query
+        description: One of 'Account', 'Opportunity', 'Person' or 'Activity', case insensitive
+        required: false
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: One of 'new', 'processing', 'completed', 'failed'
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The response is a JSON object containing a total count and an array of job objects. Each job object
+            in the array contains the full metadata for a specific data import job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataImportJobs'
+              examples:
+                Example 1:
+                  value:
+                    totalCount: 0
+                    data:
+                    - id: 67849
+                      dataImportName: EMEA accounts import
+                      entityType: Account
+                      state: processing
+                      createdAt: '2019-08-24T14:15:22Z'
+                      updatedAt: '2019-08-24T17:12:29Z'
+                Example 2:
+                  value:
+                    totalCount: 1
+                    data:
+                    - id: 114
+                      dataImportName: Import data
+                      entityType: Activity
+                      state: completed
+                      updatedAt: '2024-07-30T07:02:07.692Z'
+                      createdAt: '2024-07-30T07:02:07.465Z'
+                      source: CSV
+                      activityTypeId: 37
+        '400':
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Returned if the authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '403':
+          description: Returned if the authenticated user lacks the "Import Data" permission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+  /activity_type:
+    post:
+      tags:
+      - Activities Management
+      summary: Create New Activity Type
+      description: Create a new activity type on your Demandbase tenant.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activityType:
+                  type: object
+                  properties:
+                    label:
+                      type: string
+                      description: The label of the activity type.
+                    name:
+                      type: string
+                      description: 'The name of the activity type. '
+                    description:
+                      type: string
+                      description: A description of the activity type.
+                  required:
+                  - label
+                fields:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      fieldName:
+                        type: string
+                        description: Name of the custom field.
+                      fieldDataType:
+                        type: string
+                        description: Data type of the custom field (e.g., string, date).
+                      defaultField:
+                        type: boolean
+                        description: Indicates whether this is a default field.
+                      isRequiredForCsvImport:
+                        type: boolean
+                        description: Indicates whether this field is required for CSV import.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityType'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+    get:
+      tags:
+      - Activities Management
+      summary: List Activity Types
+      description: Get all activity types currently configured on your Demandbase tenant
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomActivityType'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+  /activity_type/{identifier}:
+    get:
+      tags:
+      - Activities Management
+      summary: Activity Type Lookup
+      description: Retrieve details of an activity type for data import.
+      parameters:
+      - name: identifier
+        in: path
+        description: 'The unique identifier for the activity type. This should be the activity type ID.
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomActivityData'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+  /activity_type/{activityTypeId}:
+    put:
+      tags:
+      - Activities Management
+      summary: Update Activity Type
+      description: 'Update an existing activity type on your Demandbase tenant. Use the activity type ID in the URI (via `PUT
+        /activity_type/{activityTypeId}`).
+
+        '
+      parameters:
+      - name: activityTypeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activityType:
+                  type: object
+                  properties:
+                    label:
+                      type: string
+                      description: 'The label of the activity type. '
+                    name:
+                      type: string
+                      description: 'The name of the activity type. '
+                    description:
+                      type: string
+                      description: A description of the activity type.
+                  required:
+                  - label
+                fields:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CustomActivityField'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityType'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: 'For instructions on generating API tokens, see the [Auth API](https://developer.demandbase.com/docs/auth-api/t26do264wb0f6-auth-api)
+        article.
+
+        '
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    CreateDataImportJob:
+      type: object
+      properties:
+        dataImportName:
+          type: string
+          description: Data Import name
+        entityType:
+          type: string
+          description: The type of entities to be imported, one of 'Account', 'Opportunity', 'Person' or 'Activity'
+        source:
+          type: string
+          description: source, recieved in GET Sources API response, default 'CSV'
+        activityTypeId:
+          type: integer
+          description: Activity type id, required for entityType Activity, recieved in GET supported_activity_types API response
+          format: int32
+      required:
+      - dataImportName
+      - entityType
+    DataImportJob:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Job Id
+          format: int64
+        dataImportName:
+          type: string
+          description: Data Import Job name
+        entityType:
+          type: string
+          description: The type of entities to be imported, one of 'Account', 'Opportunity', 'Person' or 'Activity'
+        state:
+          type: string
+          description: One of 'new', 'processing', 'completed', 'failed'
+        updatedAt:
+          type: string
+          description: UTC date/time the job was updated at
+          format: date-time
+        createdAt:
+          type: string
+          description: UTC date/time the job was created at
+          format: date-time
+        source:
+          type: string
+          description: Source
+        activityTypeId:
+          type: integer
+          description: Activity type id
+          format: int32
+    BadRequest:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    UnauthorizedError:
+      type: object
+      description: Access token is missing or invalid
+      properties:
+        status:
+          type: string
+      required:
+      - status
+    ForbiddenError:
+      type: object
+      description: The authenticated user is missing the import permission
+      properties:
+        status:
+          type: string
+      required:
+      - status
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    NotFound:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    DataImportJobs:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: Total count of Data Import Jobs
+          format: int64
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataImportJob'
+    ActivityType:
+      type: object
+      title: ActivityType
+      properties:
+        id:
+          type: integer
+          format: int64
+        label:
+          type: string
+      required:
+      - id
+      - label
+    CustomActivityField:
+      type: object
+      title: CustomActivityField
+      properties:
+        fieldName:
+          type: string
+        fieldDataType:
+          type: string
+        defaultField:
+          type: boolean
+        isRequiredForCsvImport:
+          type: boolean
+      required:
+      - fieldName
+    CustomActivityType:
+      type: object
+      title: CustomActivityType
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        activitySource:
+          type: string
+      required:
+      - id
+      - name
+      - description
+      - activitySource
+    CustomActivityData:
+      type: object
+      title: CustomActivityData
+      properties:
+        activityType:
+          $ref: '#/components/schemas/CustomActivity'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomActivityField'
+      required:
+      - activityType
+    CustomActivity:
+      type: object
+      title: CustomActivity
+      properties:
+        name:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+      required:
+      - name
+security:
+- bearerAuth: []

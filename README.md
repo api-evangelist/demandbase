@@ -42,7 +42,7 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Demandbase is the leading Account-Based Marketing (ABM) platform that helps B2B companies identify, engage, and convert target accounts through intent data, advertising, personalization, and sales intelligence.
+Demandbase is a B2B go-to-market platform that unifies account intelligence, intent data, advertising, orchestration, personalization and sales intelligence into a single pipeline engine. Its developer surface is eight OpenAPI-documented REST APIs on uapi.demandbase.com — B2B company/contact intelligence, Data Export, Data Import, Admin, Intent (beta), Usage, Custom Sources and Auth — plus a hosted, OAuth-protected Model Context Protocol server that exposes account, person, intent, buying-group and account-brief capabilities to AI assistants, an official Python SDK, and a change-subscription webhook surface.
 
 **APIs.json:** [https://raw.githubusercontent.com/api-evangelist/demandbase/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/demandbase/refs/heads/main/apis.yml)
 
@@ -58,293 +58,197 @@ Demandbase is the leading Account-Based Marketing (ABM) platform that helps B2B 
 - Advertising
 - AI Agents
 - B2B Marketing
+- Company Data
+- Contact Data
 - Data Enrichment
 - Intent Data
+- MCP
 - Personalization
 - Sales Intelligence
-
-## Timestamps
-
-- **Created:** 2024-01-20
-- **Modified:** 2026-05-19
+- Technographics
 
 ## APIs
 
-### Demandbase API
+### Demandbase B2B API
 
-The Demandbase API provides programmatic access to account identification, firmographic data, and visitor intelligence to enable account-based experiences.
+Company and contact intelligence: search and fetch companies and contacts, company news, logos, installed technologies and corporate hierarchy; synchronous and bulk matching; asynchronous bulk data retrieval; and change subscriptions with webhook alerts for company, company-news, family-tree and person records. 22 operations.
 
-- **Human URL:** [https://www.demandbase.com](https://www.demandbase.com)
-- **Base URL:** `https://api.demandbase.com`
-
-#### Tags
-
-- Accounts
-- B2B Data
-- Firmographics
-- Identification
-
-#### Properties
-
-- [Documentation](https://docs.demandbase.com/)
-- [Authentication](https://docs.demandbase.com/docs/authentication)
-- [OpenAPI](openapi/demandbase-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/demandbase-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/demandbase-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/demandbase-api-rules.yml)
-- [Capabilities](capabilities/demandbase-api-capabilities.yml)
-- [JSON Schema](json-schema/demandbase-account-schema.json) — [JSON Schema](https://json-schema.org/specification)
-
-### Demandbase Real-Time Identification API
-
-Identifies companies visiting your website in real-time based on IP address and provides firmographic data and intent signals.
-
-- **Human URL:** [https://www.demandbase.com/solutions/demandbase-one/](https://www.demandbase.com/solutions/demandbase-one/)
-- **Base URL:** `https://api.company-target.com`
-
-#### Tags
-
-- Identification
-- IP Intelligence
-- Real-Time
-- Visitor Tracking
-
-#### Properties
-
-- [Documentation](https://docs.demandbase.com/docs/real-time-identification-api)
-- [Use Cases](https://www.demandbase.com/use-cases/)
-- [OpenAPI](openapi/demandbase-real-time-identification-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/demandbase-real-time-identification.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/demandbase-real-time-identification.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/demandbase-real-time-identification-api-rules.yml)
-- [Capabilities](capabilities/demandbase-real-time-identification-api-capabilities.yml)
-
-### Demandbase Advertising API
-
-Programmatically manage advertising campaigns, audiences, and performance metrics for account-based advertising.
-
-- **Human URL:** [https://www.demandbase.com/solutions/advertising/](https://www.demandbase.com/solutions/advertising/)
-- **Base URL:** `https://api.demandbase.com/advertising`
-
-#### Tags
-
-- ABM
-- Advertising
-- Audiences
-- Campaigns
-
-#### Properties
-
-- [Documentation](https://docs.demandbase.com/docs/advertising-api)
-- [Rate Limits](https://docs.demandbase.com/docs/api-rate-limits)
-- [OpenAPI](openapi/demandbase-advertising-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/demandbase-advertising.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/demandbase-advertising.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/demandbase-advertising-api-rules.yml)
-- [Capabilities](capabilities/demandbase-advertising-api-capabilities.yml)
-- [JSON Schema](json-schema/demandbase-campaign-schema.json) — [JSON Schema](https://json-schema.org/specification)
-
-### Demandbase Engagement API
-
-Access engagement data and activity streams for target accounts across web, email, and advertising channels.
-
-- **Human URL:** [https://www.demandbase.com/solutions/engagement/](https://www.demandbase.com/solutions/engagement/)
-- **Base URL:** `https://api.demandbase.com/engagement`
-
-#### Tags
-
-- Account Insights
-- Activity Tracking
-- Analytics
-- Engagement
-
-#### Properties
-
-- [Documentation](https://docs.demandbase.com/docs/engagement-api)
-- [Webhooks](https://docs.demandbase.com/docs/webhooks)
-- [OpenAPI](openapi/demandbase-engagement-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/demandbase-engagement.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/demandbase-engagement.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/demandbase-engagement-api-rules.yml)
-- [Capabilities](capabilities/demandbase-engagement-api-capabilities.yml)
-- [JSON Schema](json-schema/demandbase-engagement-schema.json) — [JSON Schema](https://json-schema.org/specification)
-
-### Demandbase Account List API
-
-Create, manage, and sync target account lists for ABM campaigns and personalization efforts.
-
-- **Human URL:** [https://www.demandbase.com](https://www.demandbase.com)
-- **Base URL:** `https://api.demandbase.com/accounts`
-
-#### Tags
-
-- Account Lists
-- CRM Sync
-- List Management
-- Target Accounts
-
-#### Properties
-
-- [Documentation](https://docs.demandbase.com/docs/account-list-api)
-- [Integration Guides](https://docs.demandbase.com/docs/integrations)
-- [OpenAPI](openapi/demandbase-account-list-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/demandbase-account-list.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/demandbase-account-list.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/demandbase-account-list-api-rules.yml)
-- [Capabilities](capabilities/demandbase-account-list-api-capabilities.yml)
-
-### Demandbase B2B Data API
-
-REST-based API providing programmatic access to B2B company and contact intelligence, including company search, contact discovery, data enrichment, and firmographic data across millions of businesses.
-
-- **Human URL:** [https://www.demandbase.com/products/data/api-integration/](https://www.demandbase.com/products/data/api-integration/)
-- **Base URL:** `https://api.demandbase.com`
-
-#### Tags
-
-- B2B Data
-- Company Search
-- Contact Discovery
-- Data Enrichment
-- Firmographics
-
-#### Properties
-
-- [Documentation](https://kb.demandbase.com/hc/en-us/categories/6520773158171-API)
-- [Getting Started](https://kb.demandbase.com/hc/en-us/sections/7272741440667-API-Introduction-and-Overview)
-- [OpenAPI](openapi/demandbase-b2b-data-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/demandbase-b2b-data.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/demandbase-b2b-data.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/demandbase-b2b-data-api-rules.yml)
-- [Capabilities](capabilities/demandbase-b2b-data-api-capabilities.yml)
-- [JSON Schema](json-schema/demandbase-contact-schema.json) — [JSON Schema](https://json-schema.org/specification)
-
-### Demandbase IP API
-
-Returns firmographic data for a specific IP address or cookie, enabling real-time company identification of website visitors with attributes including employee count, revenue, industry, and corporate hierarchy with parent and ultimate parent IDs.
-
-- **Human URL:** [https://www.demandbase.com/products/data/api-integration/](https://www.demandbase.com/products/data/api-integration/)
-- **Base URL:** `https://api.demandbase.com`
-
-#### Tags
-
-- Company Identification
-- Firmographics
-- IP Intelligence
-- Real-Time
-- Visitor Identification
-
-#### Properties
-
-- [Documentation](https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version)
-- [Changelog](https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3)
-- [OpenAPI](openapi/demandbase-ip-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/demandbase-ip.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/demandbase-ip.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/demandbase-ip-api-rules.yml)
-- [Capabilities](capabilities/demandbase-ip-api-capabilities.yml)
-
-### Demandbase Admin API
-
-Provides programmatic access to user management and platform administration capabilities, including creating, reading, updating, and deleting users and managing API key sets for Demandbase One.
-
-- **Human URL:** [https://www.demandbase.com](https://www.demandbase.com)
-- **Base URL:** `https://api.demandbase.com`
-
-#### Tags
-
-- Administration
-- API Keys
-- Platform Management
-- User Management
-
-#### Properties
-
-- [Documentation](https://support.demandbase.com/hc/en-us/sections/360011444531-API-Documentation)
-- [Authentication](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets)
-- [OpenAPI](openapi/demandbase-admin-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/demandbase-admin.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/demandbase-admin.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/demandbase-admin-api-rules.yml)
-- [Capabilities](capabilities/demandbase-admin-api-capabilities.yml)
+- **Human URL:** https://developer.demandbase.com/docs/b2b-overview
+- **Base URL:** `https://uapi.demandbase.com/data/b2b/v1`
+- **OpenAPI:** openapi/demandbase-b2b-openapi.yml
+- **Documentation:** https://developer.demandbase.com/docs/b2b-overview
+- **APIReference:** https://developer.demandbase.com/reference/companysearch_1
+- **GettingStarted:** https://developer.demandbase.com/docs/b2b-make-your-first-request
+- **Authentication:** https://developer.demandbase.com/docs/b2b-authentication
+- **RateLimits:** https://developer.demandbase.com/docs/b2b-rate-limits
+- **Webhooks:** asyncapi/demandbase-webhooks.yml
+- **Overlay:** overlays/demandbase-b2b-overlay.yaml
+- **BestPractices:** https://developer.demandbase.com/docs/b2b-best-practices
+- **FAQ:** https://developer.demandbase.com/docs/faq
 
 ### Demandbase Data Export API
 
-Enables bulk, asynchronous, programmatic data exports from Demandbase One, supporting extraction of records for accounts, people, opportunities, activities, campaigns, and Buying Groups with full granularity, delivered as downloadable CSVs up to 10GB per day.
+Asynchronous export of Demandbase platform data — Account, Opportunity, Person, Activity, Campaign, Creative, Account List and Person List entities — to CSV or JSON behind a signed download URL. Field availability is governed by the tenant Export Collection. 8 operations.
 
-- **Human URL:** [https://www.demandbase.com/resources/solution-sheet/data-export-api/](https://www.demandbase.com/resources/solution-sheet/data-export-api/)
-- **Base URL:** `https://api.demandbase.com`
-
-#### Tags
-
-- Accounts
-- Analytics
-- Bulk Export
-- Data Export
-- Reporting
-
-#### Properties
-
-- [Documentation](https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP)
-- [OpenAPI](openapi/demandbase-data-export-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/demandbase-data-export.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/demandbase-data-export.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/demandbase-data-export-api-rules.yml)
-- [Capabilities](capabilities/demandbase-data-export-api-capabilities.yml)
+- **Human URL:** https://developer.demandbase.com/docs/export-overview
+- **Base URL:** `https://uapi.demandbase.com/data/export`
+- **OpenAPI:** openapi/demandbase-data-export-openapi.yml
+- **Documentation:** https://developer.demandbase.com/docs/export-overview
+- **APIReference:** https://developer.demandbase.com/reference/createexportjob
+- **GettingStarted:** https://developer.demandbase.com/docs/make-your-first-request
+- **Authentication:** https://developer.demandbase.com/docs/authentication
+- **RateLimits:** https://developer.demandbase.com/docs/rate-limits
+- **ErrorCatalog:** https://developer.demandbase.com/docs/handling-errors
+- **Overlay:** overlays/demandbase-data-export-overlay.yaml
+- **Filters:** https://developer.demandbase.com/docs/how-to-use-filters
 
 ### Demandbase Data Import API
 
-Allows bulk, asynchronous, programmatic import of new data rows into Demandbase One or updates to existing records, supporting data on accounts, people, opportunities, and activities with CSV-based ingestion.
+Asynchronous import of customer data and intent activity into the Demandbase platform. Create an import job, submit a data file of up to 5 GB, poll the job, and manage custom activity types and CSV record matching / data mapping. 9 operations.
 
-- **Human URL:** [https://www.demandbase.com](https://www.demandbase.com)
-- **Base URL:** `https://api.demandbase.com`
+- **Human URL:** https://developer.demandbase.com/docs/import-overview
+- **Base URL:** `https://uapi.demandbase.com/import/v1`
+- **OpenAPI:** openapi/demandbase-data-import-openapi.yml
+- **Documentation:** https://developer.demandbase.com/docs/import-overview
+- **APIReference:** https://developer.demandbase.com/reference/post_job
+- **GettingStarted:** https://developer.demandbase.com/docs/make-your-first-request-1
+- **Authentication:** https://developer.demandbase.com/docs/authentication-1
+- **RateLimits:** https://developer.demandbase.com/docs/rate-limits-1
+- **Overlay:** overlays/demandbase-data-import-overlay.yaml
 
-#### Tags
+### Demandbase Intent API
 
-- Accounts
-- Bulk Import
-- CSV
-- Data Import
-- Data Ingestion
+Beta. Company-level intent signals and research activity: query by company IDs, keyword set IDs or keywords over a date range, filtered by intent strength or number of people researching, with cursor-based pagination. 1 operation.
 
-#### Properties
+- **Human URL:** https://developer.demandbase.com/reference/company-intent
+- **Base URL:** `https://uapi.demandbase.com/data/intent/v1`
+- **OpenAPI:** openapi/demandbase-intent-openapi.yml
+- **Documentation:** https://developer.demandbase.com/reference/company-intent
+- **APIReference:** https://developer.demandbase.com/reference/companyintent-1
+- **ChangeLog:** https://developer.demandbase.com/changelog/new-beta-company-intent-api
+- **Overlay:** overlays/demandbase-intent-overlay.yaml
 
-- [Documentation](https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP)
-- [OpenAPI](openapi/demandbase-data-import-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/demandbase-data-import.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/demandbase-data-import.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/demandbase-data-import-api-rules.yml)
-- [Capabilities](capabilities/demandbase-data-import-api-capabilities.yml)
+### Demandbase Admin API
 
-## Common Properties
+User administration for a Demandbase tenant: create, update, retrieve, list and delete users, with filters for departments, views, permission sets and workspaces. 5 operations.
 
-- [GitHub Organization](https://github.com/demandbase)
-- [Getting Started](https://docs.demandbase.com/docs/getting-started)
-- [Authentication](https://docs.demandbase.com/docs/authentication)
-- [Status Page](https://status.demandbase.com/)
-- [Support](https://support.demandbase.com/)
-- [Privacy Policy](https://www.demandbase.com/privacy-policy/)
-- [Terms of Service](https://www.demandbase.com/terms-of-service/)
-- [Blog](https://www.demandbase.com/blog/)
-- [Blog R S S](https://www.demandbase.com/feed/)
-- [Contact](https://www.demandbase.com/contact/)
-- [LinkedIn](https://www.linkedin.com/company/demandbase/)
-- [Twitter](https://twitter.com/Demandbase)
-- [Portal](https://developer.demandbase.com)
-- [Knowledge Base](https://kb.demandbase.com/hc/en-us)
-- [Partners](https://partners.demandbase.com/)
-- [Integrations](https://partners.demandbase.com/t/partners/integrations)
-- [Terms Of Use](https://www.demandbase.com/terms-of-use/)
-- [Sign Up](https://www.demandbase.com/products/data/api-integration/api-trial/)
-- [JSON-LD](json-ld/demandbase-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/demandbase-account-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/demandbase-contact-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/demandbase-campaign-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/demandbase-engagement-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Vocabulary](vocabulary/demandbase-vocabulary.yml)
+- **Human URL:** https://developer.demandbase.com/docs/user-admin-overview
+- **Base URL:** `https://uapi.demandbase.com`
+- **OpenAPI:** openapi/demandbase-admin-openapi.yml
+- **Documentation:** https://developer.demandbase.com/docs/user-admin-overview
+- **APIReference:** https://developer.demandbase.com/reference/post_admin-v1-user
+- **Authentication:** https://developer.demandbase.com/docs/authentication-3
+- **Overlay:** overlays/demandbase-admin-overlay.yaml
 
-## Maintainers
+### Demandbase Usage API
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
-**URL:** https://www.demandbase.com
+Credit usage reporting: returns a summary of credit consumption and entitlements for a given API category, the only runtime signal a consumer has for remaining quota. 1 operation.
+
+- **Human URL:** https://developer.demandbase.com/docs/credit-usage-overview
+- **Base URL:** `https://uapi.demandbase.com`
+- **OpenAPI:** openapi/demandbase-usage-openapi.yml
+- **Documentation:** https://developer.demandbase.com/docs/credit-usage-overview
+- **APIReference:** https://developer.demandbase.com/reference/getcreditusagedetails
+- **Authentication:** https://developer.demandbase.com/docs/authentication-2
+- **Overlay:** overlays/demandbase-usage-overlay.yaml
+
+### Demandbase Custom Sources API
+
+Manage custom data sources and their per-object field mappings so third-party systems can feed the Demandbase platform. 7 operations.
+
+- **Human URL:** https://developer.demandbase.com/docs/custom-sources-overview
+- **Base URL:** `https://uapi.demandbase.com/integration/v1`
+- **OpenAPI:** openapi/demandbase-custom-sources-openapi.yml
+- **Documentation:** https://developer.demandbase.com/docs/custom-sources-overview
+- **APIReference:** https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+- **Overlay:** overlays/demandbase-custom-sources-overlay.yaml
+
+### Demandbase Auth API
+
+Token exchange for every other Demandbase API: POST an API Key Set client ID and client secret with grantType client_credentials and receive a bearer access token valid for 8 hours. 1 operation.
+
+- **Human URL:** https://developer.demandbase.com/docs/authenticating-with-the-apis
+- **Base URL:** `https://uapi.demandbase.com`
+- **OpenAPI:** openapi/demandbase-auth-openapi.yml
+- **Documentation:** https://developer.demandbase.com/docs/authenticating-with-the-apis
+- **APIReference:** https://developer.demandbase.com/reference/generate_access_token
+- **Authentication:** authentication/demandbase-authentication.yml
+- **Overlay:** overlays/demandbase-auth-overlay.yaml
+
+### Demandbase MCP Server
+
+Hosted remote Model Context Protocol server exposing Demandbase account, person, intent, buying-group, account-brief, global company/contact and reference capabilities to AI assistants. OAuth 2.1 authorization-code + PKCE with dynamic client registration; tools/list is tenant-gated.
+
+- **Human URL:** https://developer.demandbase.com/docs/mcp
+- **Base URL:** `https://gateway.demandbase.com/mcp/servers/db-mcp`
+- **MCPServer:** mcp/demandbase-mcp.yml
+- **ToolCrosswalk:** mcp/demandbase-tool-crosswalk.yml
+- **Documentation:** https://developer.demandbase.com/docs/mcp
+- **GettingStarted:** https://developer.demandbase.com/docs/custom-mcp-clients
+- **Authentication:** authentication/demandbase-authentication.yml
+- **OAuthScopes:** scopes/demandbase-scopes.yml
+
+### Demandbase IP-API v3
+
+Real-time visitor identification: resolves a visitor IP address to a Demandbase company ID, firmographics and corporate hierarchy for web personalization, forms enrichment and analytics integrations. No OpenAPI is published for this API and its reference documentation sits on the support knowledge base, which is behind a bot challenge.
+
+- **Human URL:** https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+- **Base URL:** `https://api.company-target.com`
+- **Documentation:** https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+- **Migration:** https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+
+## Common properties
+
+- **AgenticAccess:** agentic-access/demandbase-agentic-access.yml
+- **TrustCenter:** security/demandbase-trust-center.yml
+- **DomainSecurity:** security/demandbase-domain-security.yml
+- **Authentication:** authentication/demandbase-authentication.yml
+- **GitHubOrganization:** https://github.com/demandbase
+- **StatusPage:** https://status.demandbase.com/
+- **Support:** https://support.demandbase.com/
+- **PrivacyPolicy:** https://www.demandbase.com/privacy-policy/
+- **Blog:** https://www.demandbase.com/blog/
+- **LinkedIn:** https://www.linkedin.com/company/demandbase/
+- **Twitter:** https://twitter.com/Demandbase
+- **Portal:** https://developer.demandbase.com
+- **KnowledgeBase:** https://kb.demandbase.com/hc/en-us
+- **Partners:** https://partners.demandbase.com/
+- **Integrations:** https://partners.demandbase.com/t/partners/integrations
+- **TermsOfService:** https://www.demandbase.com/terms-of-use/
+- **Signup:** https://www.demandbase.com/products/data/api-integration/api-trial/
+- **Vocabulary:** vocabulary/demandbase-vocabulary.yml
+- **Packages:** packages/demandbase-packages.yml
+- **SDKs:** packages/demandbase-packages.yml
+- **WellKnown:** well-known/demandbase-well-known.yml
+- **MCPServer:** mcp/demandbase-mcp.yml
+- **ToolCrosswalk:** mcp/demandbase-tool-crosswalk.yml
+- **LLMsTxt:** llms/demandbase-llms.txt
+- **Conformance:** conformance/demandbase-conformance.yml
+- **Compliance:** https://trust.demandbase.com/
+- **ErrorCatalog:** errors/demandbase-error-codes.yml
+- **ErrorCodes:** errors/demandbase-problem-types.yml
+- **Lifecycle:** lifecycle/demandbase-lifecycle.yml
+- **Deprecation:** https://developer.demandbase.com/docs/migrating-from-legacy-tokens-to-api-keysets
+- **OAuthScopes:** scopes/demandbase-scopes.yml
+- **Conventions:** conventions/demandbase-conventions.yml
+- **ChangeLog:** changelog/demandbase-changelog.yml
+- **DataModel:** data-model/demandbase-data-model.yml
+- **Webhooks:** asyncapi/demandbase-webhooks.yml
+- **AgentSkill:** skills/_index.yml
+- **RateLimits:** rate-limits/demandbase-rate-limits.yml
+- **Plans:** plans/demandbase-plans-pricing.yml
+- **FinOps:** finops/demandbase-finops.yml
+- **DeveloperPortal:** https://developer.demandbase.com
+- **Documentation:** https://developer.demandbase.com/docs/welcome
+- **APIReference:** https://developer.demandbase.com/reference/generate_access_token
+- **GettingStarted:** https://developer.demandbase.com/docs/api-getting-started
+- **Pricing:** https://www.demandbase.com/pricing/
+- **SignUp:** https://www.demandbase.com/products/data/api-integration/api-trial/
+- **Login:** https://web.demandbase.com/
+- **HelpCenter:** https://support.demandbase.com/hc/en-us
+- **SDK:** https://pypi.org/project/demandbase-sdk/
+- **Contact:** https://www.demandbase.com/company/contact-us/
+
+## Provenance
+
+All eight OpenAPI definitions in `openapi/` were harvested verbatim on 2026-08-13 from the Demandbase developer portal at https://developer.demandbase.com. They replace 28 scaffolded specifications that a prior bulk pass had written against `api.demandbase.com` — a host that returns "404 page not found" on every path. The real production host is `uapi.demandbase.com`. Artifacts derived from the scaffolds (GraphQL schema, Postman/Open collections, Spectral rules, JSON Schema, JSON Structure, JSON-LD context) were removed in the same pass rather than carried forward.

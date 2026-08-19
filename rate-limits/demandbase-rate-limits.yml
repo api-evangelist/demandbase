@@ -3,53 +3,168 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: Demandbase
 providerId: demandbase
+generated: '2026-08-13'
+method: searched
 created: '2026-05-04'
-modified: '2026-05-05'
-reconciled: false
-notes: Demandbase does not publish a public canonical rate-limit table. Limits are configured per customer
-  contract on the Demandbase One platform and on the Real-Time Identification API. Headers and response
-  codes below are scaffold defaults pending direct doc reconciliation.
+modified: '2026-08-13'
+reconciled: true
+sources:
+  - https://developer.demandbase.com/docs/b2b-rate-limits
+  - https://developer.demandbase.com/docs/rate-limits
+  - https://developer.demandbase.com/docs/rate-limits-1
+  - https://developer.demandbase.com/docs/handling-errors
+description: >-
+  Demandbase publishes per-API rate limits on its developer portal. The B2B API is limited
+  by requests per minute plus a hard concurrency cap on asynchronous jobs; the Data Export
+  API is limited per endpoint per day plus a daily volume ceiling and a single-concurrent-job
+  rule; the Data Import API is limited per endpoint per day plus a file-size ceiling. All
+  three answer HTTP 429 on exhaustion. Demandbase documents no RateLimit-* or
+  X-RateLimit-* response headers and no Retry-After on any surface, so a client cannot read
+  its remaining budget from a response — it must track consumption itself or poll the Usage
+  API. Credits are a separate, orthogonal entitlement from rate limits.
+notes: >-
+  Replaces the 2026-05-04 bulk-sweep scaffold, which recorded "set per platform subscription"
+  because the real limits had not been harvested. Every number below is transcribed from the
+  provider's own documentation.
 tags:
   - Account-Based Marketing
-  - Advertising
   - B2B Marketing
   - Data Enrichment
+  - Intent Data
   - Rate Limiting
-description: Per-customer rate limits configured during platform onboarding. Real-time identification
-  endpoints are tuned per integration to balance latency and protection against scraping. Bulk export
-  / import endpoints have separate quota envelopes from real-time endpoints.
-sources:
-  - https://developer.demandbase.com/
+  - Sales Intelligence
 responseCodes:
   throttled: 429
   quotaExceeded: 429
-  serviceUnavailable: 503
+  concurrencyExceeded: 429
+  serviceUnavailable: 500
+headers:
+  request: []
+  response: []
+  retry_after: false
+  note: >-
+    No rate-limit signalling headers are documented on any Demandbase API. Exhaustion is
+    communicated only by HTTP 429 plus a Demandbase errorCode in the JSON body
+    (429-100 concurrent query, 429-101 rolling 24-hour export quota, 429-102 concurrent
+    export job). Recorded as an honest absence, not as unchecked.
+limit_count: 15
 limits:
-  - tier: customer
-    name: Customer-Negotiated Limit
-    scope: contract
-    metric: varies
-    limit: 'set per platform subscription'
-    applies:
-      - Demandbase Real-Time Identification API
-      - Demandbase Advertising API
-      - Demandbase Engagement API
-      - Demandbase Account List API
-      - Demandbase B2B Data API
-      - Demandbase IP API
-      - Demandbase Admin API
-      - Demandbase Data Export API
-      - Demandbase Data Import API
-policies:
-  - name: Per-Subscription Limits
-    description: Each Demandbase platform subscription has its own request-rate ceiling configured during
-      onboarding; defaults are not published.
-  - name: Real-Time vs Bulk
-    description: Real-time identification and IP-intelligence endpoints are protected with low-latency
-      throttles distinct from bulk export / import jobs that run on separate batch quotas.
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring Retry-After when present.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
-    url: https://www.demandbase.com
+  - api: Demandbase B2B API
+    name: Requests per minute
+    scope: per-tenant
+    window: 1m
+    limit: 1000
+    applies_to: all B2B API endpoints
+    on_exhaustion: 429 Too Many Requests
+    docs: https://developer.demandbase.com/docs/b2b-rate-limits
+  - api: Demandbase B2B API
+    name: Concurrent asynchronous jobs
+    scope: per-tenant
+    window: concurrent
+    limit: 2
+    applies_to: '/job, /match/job, /subscriptions/job'
+    on_exhaustion: '429 Too Many Requests — "Max 2 jobs are allowed at a time"'
+    docs: https://developer.demandbase.com/docs/b2b-rate-limits
+  - api: Demandbase Data Export API
+    name: Submit export job
+    scope: per-tenant
+    window: 1d
+    reset: midnight UTC
+    limit: 60
+    applies_to: POST /v1/job
+    on_exhaustion: 429 Too Many Requests
+    docs: https://developer.demandbase.com/docs/rate-limits
+  - api: Demandbase Data Export API
+    name: List export jobs
+    scope: per-tenant
+    window: 1d
+    reset: midnight UTC
+    limit: 1200
+    applies_to: GET /v1/jobs
+    on_exhaustion: 429 Too Many Requests
+  - api: Demandbase Data Export API
+    name: Export job status
+    scope: per-tenant
+    window: 1d
+    reset: midnight UTC
+    limit: 300
+    applies_to: GET /v1/job/{jobId}
+    on_exhaustion: 429 Too Many Requests
+  - api: Demandbase Data Export API
+    name: Field metadata
+    scope: per-tenant
+    window: 1d
+    reset: midnight UTC
+    limit: 60
+    applies_to: GET /v1/fields
+    on_exhaustion: 429 Too Many Requests
+  - api: Demandbase Data Export API
+    name: Daily export volume
+    scope: per-tenant
+    window: 1d
+    limit: 10 GB combined total size per day
+    on_exhaustion: 429-101
+  - api: Demandbase Data Export API
+    name: Concurrent export jobs
+    scope: per-tenant
+    window: concurrent
+    limit: 1
+    on_exhaustion: 429-102
+  - api: Demandbase Data Export API
+    name: Trial export allowance
+    scope: per-tenant (trial accounts)
+    window: rolling 24h
+    limit: 100 MB
+    on_exhaustion: >-
+      Export is rejected before it runs — "Trial customers are not allowed to export more
+      than 100MB over a rolling 24-hour period."
+    docs: https://developer.demandbase.com/docs/rate-limits
+  - api: Demandbase Data Import API
+    name: Create import job
+    scope: per-tenant
+    window: 1d
+    limit: 1200
+    applies_to: POST /import/v1/job
+    docs: https://developer.demandbase.com/docs/rate-limits-1
+  - api: Demandbase Data Import API
+    name: Submit import data
+    scope: per-tenant
+    window: 1d
+    limit: 1200
+    applies_to: PUT /import/v1/job/{id}/data
+  - api: Demandbase Data Import API
+    name: Import job status
+    scope: per-tenant
+    window: 1d
+    limit: 3600
+    applies_to: GET /import/v1/job/{id}
+  - api: Demandbase Data Import API
+    name: Import jobs list
+    scope: per-tenant
+    window: 1d
+    limit: 3600
+    applies_to: GET /import/v1/jobs
+  - api: Demandbase Data Import API
+    name: Sources and activity metadata
+    scope: per-tenant
+    window: 1d
+    limit: 3600
+    applies_to: >-
+      GET /import/v1/sources, GET /import/v1/supported-activity-types,
+      GET /import/v1/activity-fields, and the Import Activity Type endpoints
+  - api: Demandbase Data Import API
+    name: Maximum upload file size
+    scope: per-request
+    window: per-request
+    limit: 5 GB
+    applies_to: PUT /import/v1/job/{id}/data
+best_practices:
+  - Throttle B2B API requests to stay within 1,000 RPM.
+  - Queue or delay job submissions when two asynchronous jobs are already running.
+  - Use exponential backoff when retrying after a 429.
+  - Monitor consumption through the Usage API (GET /reporting/v1/usage) rather than headers.
+  - Consolidate requests where possible to reduce load.
+related:
+  - errors/demandbase-error-codes.yml
+  - conventions/demandbase-conventions.yml
+  - plans/demandbase-plans-pricing.yml

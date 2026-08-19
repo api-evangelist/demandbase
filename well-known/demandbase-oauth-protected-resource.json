@@ -1,0 +1,1 @@
+{"authorization_servers":["https://gateway.demandbase.com"],"resource":"https://gateway.demandbase.com/mcp/","scopes_supported":["openid","profile","email","offline_access"]}

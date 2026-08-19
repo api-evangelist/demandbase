@@ -1,0 +1,65 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://gateway.demandbase.com/.well-known/oauth-protected-resource and
+  https://gateway.demandbase.com/.well-known/oauth-authorization-server (both HTTP 200,
+  saved verbatim under well-known/)
+docs: https://developer.demandbase.com/docs/custom-mcp-clients
+note: >-
+  The REST platform APIs declare NO oauth2 security scheme and NO scopes — they use an
+  opaque bearer token minted by a client-credentials exchange, with authorization decided
+  server-side by the API Key Set's assigned permissions and the tenant's Export Collection.
+  `python3 0-working/derive-oauth-scopes.py demandbase` therefore finds zero scopes in the
+  OpenAPI, which is correct. The only real scope surface Demandbase publishes belongs to the
+  MCP gateway, and it is recorded here from that server's own RFC 8414 / RFC 9728 metadata.
+surfaces:
+  rest:
+    oauth2: false
+    scopes: []
+    authorization_model: >-
+      Permission Sets in Demandbase One plus per-integration API Key Set permissions plus
+      the tenant's Export Collection entitlement. None of these are expressed as OAuth
+      scopes on the wire.
+  mcp:
+    oauth2: true
+    resource: https://gateway.demandbase.com/mcp/
+    authorization_servers:
+      - https://gateway.demandbase.com
+schemes:
+  - name: MCP gateway OAuth
+    source: well-known/demandbase-oauth-authorization-server.json
+    issuer: https://authentication.demandbase.com/oauth2/aus7fu7m8kDj90Z532p7
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://authentication.demandbase.com/oauth2/aus7fu7m8kDj90Z532p7/v1/authorize
+        tokenUrl: https://authentication.demandbase.com/oauth2/aus7fu7m8kDj90Z532p7/v1/token
+        registrationUrl: https://gateway.demandbase.com/mcp/v1/register
+        pkce: S256
+scope_count: 4
+scopes:
+  - scope: openid
+    description: OpenID Connect authentication of the Demandbase user driving the MCP session.
+    flows: [authorizationCode]
+    sources: [well-known/demandbase-oauth-protected-resource.json, well-known/demandbase-oauth-authorization-server.json]
+  - scope: profile
+    description: Basic profile claims for the authenticated Demandbase user.
+    flows: [authorizationCode]
+    sources: [well-known/demandbase-oauth-protected-resource.json, well-known/demandbase-oauth-authorization-server.json]
+  - scope: email
+    description: Email claim for the authenticated Demandbase user.
+    flows: [authorizationCode]
+    sources: [well-known/demandbase-oauth-protected-resource.json, well-known/demandbase-oauth-authorization-server.json]
+  - scope: offline_access
+    description: Refresh-token issuance so an agent session can outlive the initial access token.
+    flows: [authorizationCode]
+    sources: [well-known/demandbase-oauth-protected-resource.json, well-known/demandbase-oauth-authorization-server.json]
+observation: >-
+  The MCP scope set is identity-only. There is no per-capability scope — nothing that
+  separates "read my accounts" from "read global company data" from "generate an account
+  brief". Data-level authorization is enforced entirely by Demandbase One Permission Sets
+  after the token is presented, so the token itself carries no least-privilege signal an
+  agent operator can reason about or downscope.
+related:
+  - authentication/demandbase-authentication.yml
+  - well-known/demandbase-well-known.yml
+  - mcp/demandbase-mcp.yml

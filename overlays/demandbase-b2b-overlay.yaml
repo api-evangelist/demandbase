@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Demandbase B2B API
+  version: 1.0.0
+extends: openapi/demandbase-b2b-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: openapi/_original/demandbase-b2b-openapi.json (harvested verbatim from https://developer.demandbase.com)
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: demandbase
+    x-apievangelist-harvested: '2026-08-13'
+    x-apievangelist-source: https://developer.demandbase.com/reference
+    x-apievangelist-artifacts:
+      authentication: authentication/demandbase-authentication.yml
+      conventions: conventions/demandbase-conventions.yml
+      errors: errors/demandbase-error-codes.yml
+      rate_limits: rate-limits/demandbase-rate-limits.yml
+      lifecycle: lifecycle/demandbase-lifecycle.yml

@@ -1,0 +1,25 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Demandbase Auth API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Generate an access token",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://uapi.demandbase.com/auth/v1/token",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This endpoint issues an OAuth2 bearer token for authenticating with Demandbase APIs.\n"
+    }
+  ],
+  "bundled": true
+}

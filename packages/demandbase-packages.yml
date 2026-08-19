@@ -1,0 +1,52 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://developer.demandbase.com/docs/getting_started_with_sdk (Demandbase SDK
+  documentation) and the PyPI registry metadata endpoint
+  https://pypi.org/pypi/demandbase-sdk/json
+note: >-
+  Demandbase ships exactly one first-party client library: a Python SDK published to
+  PyPI as demandbase-sdk and documented on its own developer portal under "SDK Reference".
+  npm, RubyGems, Packagist, crates.io, NuGet, Maven Central and pkg.go.dev were all
+  searched and carry no first-party Demandbase package — the only npm result,
+  @pipedream/demandbase, is a third-party Pipedream connector and is recorded as
+  official: false. There is no first-party CLI.
+packages:
+  - language: python
+    registry: pypi
+    name: demandbase-sdk
+    url: https://pypi.org/project/demandbase-sdk/
+    install: pip install demandbase-sdk
+    official: true
+    version: 0.1.7
+    published: '2026-04-07'
+    runtime: Python >= 3.9
+    docs: https://developer.demandbase.com/docs/python-sdk-api-reference
+    covers:
+      - B2B API (company/contact search, fetch, match)
+      - Data Export API (job creation and monitoring)
+      - Data Import API (job submission)
+    note: >-
+      Registry summary reads "Official Demandbase Python SDK for interacting with
+      Demandbase APIs". Authenticates with DEMANDBASE_CLIENT_ID / DEMANDBASE_CLIENT_SECRET
+      environment variables against the Auth API token endpoint. Admin API coverage is
+      listed by the docs as "coming soon".
+  - language: javascript
+    registry: npm
+    name: "@pipedream/demandbase"
+    url: https://www.npmjs.com/package/@pipedream/demandbase
+    official: false
+    version: 0.0.1
+    published: '2025-01-03'
+    note: >-
+      Third-party Pipedream component set, not published by Demandbase. Recorded for
+      completeness only; it does not count toward first-party SDK coverage.
+registries_searched:
+  - {registry: pypi, first_party_hits: 1}
+  - {registry: npm, first_party_hits: 0}
+  - {registry: rubygems, first_party_hits: 0}
+  - {registry: packagist, first_party_hits: 0}
+  - {registry: crates.io, first_party_hits: 0}
+  - {registry: nuget, first_party_hits: 0}
+  - {registry: maven-central, first_party_hits: 0}
+  - {registry: pkg.go.dev, first_party_hits: 0}

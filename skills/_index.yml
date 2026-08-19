@@ -1,0 +1,45 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  Authored from the eight OpenAPI definitions harvested from
+  https://developer.demandbase.com, plus conventions/, errors/, rate-limits/ and
+  asyncapi/ in this repo. Demandbase publishes no AGENTS.md or first-party skill files —
+  searched and not found — so these are API Evangelist skills, not provider-published ones.
+note: >-
+  Every operationId referenced below was verified against openapi/_original/*.json. The
+  Data Import, Admin (partially) and Custom Sources APIs publish no operationIds at all, so
+  no skill is grounded in them; those surfaces are addressable only by method + path.
+skills:
+  - file: demandbase-enrich-company-and-contacts.md
+    name: Enrich a company and its contacts with Demandbase
+    api: openapi/demandbase-b2b-openapi.yml
+    operations: [companySearch_1, companyFetch, contactSearch_1, contactFetch]
+  - file: demandbase-run-a-bulk-match-job.md
+    name: Run a bulk match or bulk retrieval job on Demandbase
+    api: openapi/demandbase-b2b-openapi.yml
+    operations: [match_1, match, createBulkJob, getBulkJobStatus]
+  - file: demandbase-export-platform-data.md
+    name: Export Demandbase platform data
+    api: openapi/demandbase-data-export-openapi.yml
+    operations:
+      - fetchFields
+      - createExportJob
+      - fetchAccountListJob
+      - fetchPersonListJob
+      - checkExportJobStatus
+      - fetchExportJobsInfo
+      - get-reference
+      - get-support-object
+  - file: demandbase-subscribe-to-company-changes.md
+    name: Subscribe to Demandbase company and person changes
+    api: openapi/demandbase-b2b-openapi.yml
+    operations:
+      - updateSubscription_1
+      - updateSubscription
+      - getSubscriptionJobStatus
+      - getSubscriptionDetails
+      - getSubscriptionAlertsList
+      - getSubscriptionAlertDetails
+      - getSubscriptionEntityDetails
+      - getAllSubscriptionsByClientID
+      - deleteSubscription

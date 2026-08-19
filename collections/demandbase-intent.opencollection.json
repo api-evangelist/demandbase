@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Intent API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company Intent",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve company intent data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://uapi.demandbase.com/data/intent/v1/companies/intent/query",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves company intent signals filtered by company IDs, keyword set IDs, or keywords within a specified time range.\n\nYou can optionally filter by intent strength or the number of people researching and control pagination and sorting. At least one of `companyIds`, `keywordSetIds`, or `keywords` is required."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

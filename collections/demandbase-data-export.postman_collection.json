@@ -1,29 +1,26 @@
 {
   "item": [
     {
-      "id": "8eed5531-dd74-4bfb-84c1-72e2729e3ff4",
-      "name": "Downloads",
+      "id": "6ffc3872-0808-48ef-a11a-193f77787940",
+      "name": "Get Fields",
       "description": {
-        "content": "Download exported data files",
+        "content": "",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "64f42e5c-fe7a-45c5-84c3-b83690498d9b",
-          "name": "Demandbase Download export file",
+          "id": "a74d4a85-4a6c-4b13-aeca-c2f4e0906c28",
+          "name": "Export fields",
           "request": {
-            "name": "Demandbase Download export file",
+            "name": "Export fields",
             "description": {
-              "content": "Download the exported CSV file for a completed export job. Returns a redirect to a pre-signed download URL.",
+              "content": "The Fields endpoint returns a list of all fields available for specific data export jobs.\nFor `campaign` and `creative` export jobs, the query parameter `adReportType` is required.\n",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "export",
                 "v1",
-                "jobs",
-                ":jobId",
-                "download"
+                "fields"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -31,310 +28,15 @@
               "query": [
                 {
                   "disabled": false,
-                  "key": "part",
-                  "value": "1",
-                  "description": "Part number for multi-part exports (starts at 1)"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
+                  "key": "entityType",
                   "value": "<string>",
-                  "key": "jobId",
-                  "description": "(Required) Export job unique identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/csv"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d95ec682-9fe8-4500-9744-a29f072c0065",
-              "name": "CSV file download",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "export",
-                    "v1",
-                    "jobs",
-                    ":jobId",
-                    "download"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "part",
-                      "value": "1"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Export job unique identifier"
-                    }
-                  ]
+                  "description": "(Required) Specifies the entity for which to retrieve available export fields."
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/csv"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/csv"
-                }
-              ],
-              "body": "string",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "f602d183-4d67-443b-bdfd-3fd6f14e4ae7",
-              "name": "Redirect to pre-signed download URL",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "export",
-                    "v1",
-                    "jobs",
-                    ":jobId",
-                    "download"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "part",
-                      "value": "1"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Export job unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Found",
-              "code": 302,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "68c765f9-0f3c-4001-9c80-6da7c19dad74",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "export",
-                    "v1",
-                    "jobs",
-                    ":jobId",
-                    "download"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "part",
-                      "value": "1"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Export job unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "b6ba07a8-eb35-465d-aad9-b0abb00b4af8",
-              "name": "Export job not found or not yet completed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "export",
-                    "v1",
-                    "jobs",
-                    ":jobId",
-                    "download"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "part",
-                      "value": "1"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Export job unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        }
-      ],
-      "event": []
-    },
-    {
-      "id": "c42b5733-4aa2-47a5-87b0-3a97827e7dd3",
-      "name": "Export Jobs",
-      "description": {
-        "content": "Create and manage data export jobs",
-        "type": "text/plain"
-      },
-      "item": [
-        {
-          "id": "a97e9b95-f12d-4c5b-82f2-ea6d7a0fbba1",
-          "name": "Demandbase List export jobs",
-          "request": {
-            "name": "Demandbase List export jobs",
-            "description": {
-              "content": "Retrieve a list of data export jobs with their current status and metadata.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "export",
-                "v1",
-                "jobs"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
                 {
                   "disabled": false,
-                  "key": "status",
+                  "key": "adReportType",
                   "value": "<string>",
-                  "description": "Filter by job status"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25"
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "0"
+                  "description": "Specifies the adReportType for which to retrieve available export fields."
                 }
               ],
               "variable": []
@@ -346,34 +48,37 @@
               }
             ],
             "method": "GET",
-            "auth": null
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
           },
           "response": [
             {
-              "id": "97d7072b-604c-4709-845e-bec5cbb962a1",
-              "name": "List of export jobs",
+              "id": "13498ab0-199c-4ec0-ad5b-cb62d0d9e8e8",
+              "name": "An array of fields.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "export",
                     "v1",
-                    "jobs"
+                    "fields"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [
                     {
-                      "key": "status",
+                      "key": "entityType",
                       "value": "<string>"
                     },
                     {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
+                      "key": "adReportType",
+                      "value": "<string>"
                     }
                   ],
                   "variable": []
@@ -403,35 +108,30 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"jobs\": [\n    {\n      \"id\": \"string\",\n      \"entity_type\": \"buying_groups\",\n      \"status\": \"failed\",\n      \"fields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"filters\": {},\n      \"record_count\": 5399,\n      \"file_size_bytes\": 7897,\n      \"file_parts\": 166,\n      \"download_url\": \"http://JWG.kiHBqzpzFicA4mj6y,9A\",\n      \"created_at\": \"1955-07-25T18:12:18.244Z\",\n      \"completed_at\": \"1965-08-13T06:45:48.200Z\",\n      \"expires_at\": \"2019-10-12T22:58:43.365Z\",\n      \"error_message\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"entity_type\": \"activities\",\n      \"status\": \"processing\",\n      \"fields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"filters\": {},\n      \"record_count\": 8800,\n      \"file_size_bytes\": 7857,\n      \"file_parts\": 3563,\n      \"download_url\": \"https://wMktsIpXqHTOtcRWUlJxsCzKnVm.unptbk+g3cYHonQbwSyNSH\",\n      \"created_at\": \"1964-03-17T01:52:30.305Z\",\n      \"completed_at\": \"1959-01-26T15:01:29.165Z\",\n      \"expires_at\": \"1972-11-21T13:29:35.247Z\",\n      \"error_message\": \"string\"\n    }\n  ],\n  \"total\": 66\n}",
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"dataType\": \"string\",\n    \"label\": \"string\",\n    \"description\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"dataType\": \"string\",\n    \"label\": \"string\",\n    \"description\": \"string\"\n  }\n]",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "8ee2f5b8-e8fb-4a58-8dce-360ff4fc3762",
-              "name": "Unauthorized",
+              "id": "62e2f3aa-f4dc-4f53-86d4-5690a6b73668",
+              "name": "Invalid entityType.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "export",
                     "v1",
-                    "jobs"
+                    "fields"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [
                     {
-                      "key": "status",
+                      "key": "entityType",
                       "value": "<string>"
                     },
                     {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
+                      "key": "adReportType",
+                      "value": "<string>"
                     }
                   ],
                   "variable": []
@@ -444,6 +144,63 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"diagnosticCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1069f96f-4cf3-4a35-9e36-7784f6b24253",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "adReportType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "GET",
@@ -454,33 +211,202 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"errorCode\": \"401-100\",\n  \"errorMessage\": \"Authentication credentials are missing or invalid.\",\n  \"diagnosticCode\": \"1e0fc1770e0d425b88892df4f663bf07\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4e3a5b0-c580-4d66-a6ae-617c69ca096e",
+              "name": "The authenticated user does not have permission to access this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "adReportType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"403-100\",\n  \"errorMessage\": \"The authenticated user does not have permission to access this resource.\",\n  \"diagnosticCode\": \"3e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72516a25-1134-43f0-8ed2-9f30a747482f",
+              "name": "An endpoint request limit, concurrent-job limit, or export quota was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "adReportType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"429-100\",\n  \"errorMessage\": \"Rate limit exceeded.\",\n  \"diagnosticCode\": \"ce0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2e2c9e7-3b83-42fc-a67d-272161b32660",
+              "name": "An unexpected internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "adReportType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"500-100\",\n  \"errorMessage\": \"Error while communicating with internal service.\",\n  \"diagnosticCode\": \"de0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
             }
           ],
           "event": [],
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           }
-        },
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1ba6d139-19c7-4b8b-9faa-88c653c5c42d",
+      "name": "Create Export Job",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
         {
-          "id": "71b9c12a-03a7-4360-b630-cce942349bca",
-          "name": "Demandbase Create an export job",
+          "id": "a484b985-3fb3-495c-855c-e3f5b6aaa34d",
+          "name": "Create export job (Account, Opportunity, Person, Activity, Campaign, and Creative)",
           "request": {
-            "name": "Demandbase Create an export job",
+            "name": "Create export job (Account, Opportunity, Person, Activity, Campaign, and Creative)",
             "description": {
-              "content": "Create a new asynchronous data export job. Specify the entity type, fields to export, filters, and date range. Exported data is delivered as downloadable CSV files.",
+              "content": "Creates a data export job for any supported entity type.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "export",
                 "v1",
-                "jobs"
+                "job"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -499,10 +425,18 @@
               }
             ],
             "method": "POST",
-            "auth": null,
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"entity_type\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"date_range\": {\n      \"field\": \"<string>\",\n      \"start\": \"<date>\",\n      \"end\": \"<date>\"\n    },\n    \"account_list_id\": \"<string>\"\n  },\n  \"format\": \"csv\"\n}",
+              "raw": "{\n  \"entityType\": \"<string>\",\n  \"jobName\": \"<string>\",\n  \"fromDate\": \"<date>\",\n  \"toDate\": \"<date>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"operator\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"operator\": \"<string>\"\n    }\n  ],\n  \"source\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"adReportType\": \"<string>\",\n  \"accountListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"personListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"format\": \"<string>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -512,14 +446,13 @@
           },
           "response": [
             {
-              "id": "6067a696-12d8-4686-97e0-8b84902a74a3",
-              "name": "Export job created and queued for processing",
+              "id": "61d59244-c9d9-46f2-8443-a5e2e13ae40c",
+              "name": "Returns job metadata including jobId.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "export",
                     "v1",
-                    "jobs"
+                    "job"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -544,7 +477,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"entity_type\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"date_range\": {\n      \"field\": \"<string>\",\n      \"start\": \"<date>\",\n      \"end\": \"<date>\"\n    },\n    \"account_list_id\": \"<string>\"\n  },\n  \"format\": \"csv\"\n}",
+                  "raw": "{\n  \"entityType\": \"account\",\n  \"jobName\": \"AccountExportJob\",\n  \"fields\": [\n    \"{Account}.name\",\n    \"{Account}.industry\"\n  ],\n  \"format\": \"CSV\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -560,19 +493,18 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"entity_type\": \"people\",\n  \"status\": \"failed\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"filters\": {},\n  \"record_count\": 7853,\n  \"file_size_bytes\": 5417,\n  \"file_parts\": 6904,\n  \"download_url\": \"https://XZrJwDxGCsktcAmRYypfwpzXX.srIaceICCXccTCOYbH-sRsgV\",\n  \"created_at\": \"2025-01-13T12:23:16.896Z\",\n  \"completed_at\": \"2017-01-03T10:31:51.626Z\",\n  \"expires_at\": \"2005-06-03T16:01:15.458Z\",\n  \"error_message\": \"string\"\n}",
+              "body": "{\n  \"jobStatus\": \"string\",\n  \"createdAt\": \"1998-03-03T07:50:12.208Z\",\n  \"jobId\": \"string\",\n  \"entityType\": \"string\",\n  \"jobName\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "1a7a7544-8452-430d-8b50-25f240fdaac5",
-              "name": "Invalid request - check entity type and field names",
+              "id": "2fed535b-63ef-43cb-bb7a-3e9b62858fff",
+              "name": "The request body, path parameter, or query parameter is invalid.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "export",
                     "v1",
-                    "jobs"
+                    "job"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -588,12 +520,16 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"entity_type\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"date_range\": {\n      \"field\": \"<string>\",\n      \"start\": \"<date>\",\n      \"end\": \"<date>\"\n    },\n    \"account_list_id\": \"<string>\"\n  },\n  \"format\": \"csv\"\n}",
+                  "raw": "{\n  \"entityType\": \"account\",\n  \"jobName\": \"AccountExportJob\",\n  \"fields\": [\n    \"{Account}.name\",\n    \"{Account}.industry\"\n  ],\n  \"format\": \"CSV\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -606,22 +542,21 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"errorCode\": \"string\",\n  \"diagnosticCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "7195ebc1-5b6b-489e-86b7-e86f9c945277",
-              "name": "Unauthorized",
+              "id": "f55c6424-3d3a-4e30-92e0-7db867048c09",
+              "name": "Authentication credentials are missing or invalid.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "export",
                     "v1",
-                    "jobs"
+                    "job"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -637,12 +572,16 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"entity_type\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"date_range\": {\n      \"field\": \"<string>\",\n      \"start\": \"<date>\",\n      \"end\": \"<date>\"\n    },\n    \"account_list_id\": \"<string>\"\n  },\n  \"format\": \"csv\"\n}",
+                  "raw": "{\n  \"entityType\": \"account\",\n  \"jobName\": \"AccountExportJob\",\n  \"fields\": [\n    \"{Account}.name\",\n    \"{Account}.industry\"\n  ],\n  \"format\": \"CSV\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -655,22 +594,21 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"errorCode\": \"401-100\",\n  \"errorMessage\": \"Authentication credentials are missing or invalid.\",\n  \"diagnosticCode\": \"1e0fc1770e0d425b88892df4f663bf07\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "2821a371-f5d2-4861-ba96-b408d89d0a2a",
-              "name": "Daily export quota exceeded (10GB per day limit)",
+              "id": "77684cba-647e-407d-9407-714a1fb0938a",
+              "name": "The authenticated user does not have permission to access this resource.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "export",
                     "v1",
-                    "jobs"
+                    "job"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -686,12 +624,68 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"entity_type\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"date_range\": {\n      \"field\": \"<string>\",\n      \"start\": \"<date>\",\n      \"end\": \"<date>\"\n    },\n    \"account_list_id\": \"<string>\"\n  },\n  \"format\": \"csv\"\n}",
+                  "raw": "{\n  \"entityType\": \"account\",\n  \"jobName\": \"AccountExportJob\",\n  \"fields\": [\n    \"{Account}.name\",\n    \"{Account}.industry\"\n  ],\n  \"format\": \"CSV\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"403-100\",\n  \"errorMessage\": \"The authenticated user does not have permission to access this resource.\",\n  \"diagnosticCode\": \"3e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "244b5c50-216c-4390-9fb2-ffaad80dc951",
+              "name": "An endpoint request limit, concurrent-job limit, or export quota was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"account\",\n  \"jobName\": \"AccountExportJob\",\n  \"fields\": [\n    \"{Account}.name\",\n    \"{Account}.industry\"\n  ],\n  \"format\": \"CSV\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -704,12 +698,64 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"errorCode\": \"429-100\",\n  \"errorMessage\": \"Rate limit exceeded.\",\n  \"diagnosticCode\": \"ce0fc1770e0d425b88892df4f663bf07\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fb0d323-f55c-4a61-a57b-4aa13078801a",
+              "name": "An unexpected internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"account\",\n  \"jobName\": \"AccountExportJob\",\n  \"fields\": [\n    \"{Account}.name\",\n    \"{Account}.industry\"\n  ],\n  \"format\": \"CSV\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"500-100\",\n  \"errorMessage\": \"Error while communicating with internal service.\",\n  \"diagnosticCode\": \"de0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
             }
           ],
           "event": [],
@@ -718,19 +764,1232 @@
           }
         },
         {
-          "id": "64bf5315-ab68-41c3-a94e-7eb3311e55a9",
-          "name": "Demandbase Get export job status",
+          "id": "226e664d-07b6-4793-876f-6c82f3ff1994",
+          "name": "Create account list export job",
           "request": {
-            "name": "Demandbase Get export job status",
+            "name": "Create account list export job",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "accountList",
+                "job"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobName\": \"<string>\",\n  \"accountListId\": \"<integer>\",\n  \"accountListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c3109a3-a68c-46e5-9864-36bdcb3aaa17",
+              "name": "Returns the Job ID of the newly-created job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accountList",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobName\": \"<string>\",\n  \"accountListId\": \"<integer>\",\n  \"accountListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobStatus\": \"string\",\n  \"createdAt\": \"1998-03-03T07:50:12.208Z\",\n  \"jobId\": \"string\",\n  \"entityType\": \"string\",\n  \"jobName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14319448-0da2-4199-8cf8-e112f59ceaa2",
+              "name": "The request body, path parameter, or query parameter is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accountList",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobName\": \"<string>\",\n  \"accountListId\": \"<integer>\",\n  \"accountListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"diagnosticCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "780c1264-622c-4615-aec1-a46fc49f2f93",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accountList",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobName\": \"<string>\",\n  \"accountListId\": \"<integer>\",\n  \"accountListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"401-100\",\n  \"errorMessage\": \"Authentication credentials are missing or invalid.\",\n  \"diagnosticCode\": \"1e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b1d380b-2ef3-403d-b2ee-28a9b65a7479",
+              "name": "The authenticated user does not have permission to access this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accountList",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobName\": \"<string>\",\n  \"accountListId\": \"<integer>\",\n  \"accountListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"403-100\",\n  \"errorMessage\": \"The authenticated user does not have permission to access this resource.\",\n  \"diagnosticCode\": \"3e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12a66769-7971-490a-b299-1d5a5f85f0d1",
+              "name": "An endpoint request limit, concurrent-job limit, or export quota was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accountList",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobName\": \"<string>\",\n  \"accountListId\": \"<integer>\",\n  \"accountListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"429-100\",\n  \"errorMessage\": \"Rate limit exceeded.\",\n  \"diagnosticCode\": \"ce0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adfde1cf-879d-4d0b-a4a9-86ce02482c92",
+              "name": "An unexpected internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accountList",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobName\": \"<string>\",\n  \"accountListId\": \"<integer>\",\n  \"accountListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"500-100\",\n  \"errorMessage\": \"Error while communicating with internal service.\",\n  \"diagnosticCode\": \"de0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c48049df-6326-4d58-914a-d890af69e8a1",
+          "name": "Create person list export job",
+          "request": {
+            "name": "Create person list export job",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "personList",
+                "job"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobName\": \"<string>\",\n  \"personListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae62b6d4-e32e-41fe-b799-02c43ab559b1",
+              "name": "Returns the jobId of the newly-created job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "personList",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobName\": \"<string>\",\n  \"personListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobStatus\": \"string\",\n  \"createdAt\": \"1998-03-03T07:50:12.208Z\",\n  \"jobId\": \"string\",\n  \"entityType\": \"string\",\n  \"jobName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "792df93c-e8ed-4496-90c6-5ce6a53fb7bc",
+              "name": "The request body, path parameter, or query parameter is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "personList",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobName\": \"<string>\",\n  \"personListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"diagnosticCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c8b4d81-5b91-4133-aed1-641d33984433",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "personList",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobName\": \"<string>\",\n  \"personListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"401-100\",\n  \"errorMessage\": \"Authentication credentials are missing or invalid.\",\n  \"diagnosticCode\": \"1e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88289530-dd9c-49b5-b74d-c73be167c93b",
+              "name": "The authenticated user does not have permission to access this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "personList",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobName\": \"<string>\",\n  \"personListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"403-100\",\n  \"errorMessage\": \"The authenticated user does not have permission to access this resource.\",\n  \"diagnosticCode\": \"3e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dd90315-0592-43d7-853e-57e2d8bd7aa8",
+              "name": "An endpoint request limit, concurrent-job limit, or export quota was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "personList",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobName\": \"<string>\",\n  \"personListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"429-100\",\n  \"errorMessage\": \"Rate limit exceeded.\",\n  \"diagnosticCode\": \"ce0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84b976ac-5f3b-470a-8f77-788f5508e899",
+              "name": "An unexpected internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "personList",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobName\": \"<string>\",\n  \"personListIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"500-100\",\n  \"errorMessage\": \"Error while communicating with internal service.\",\n  \"diagnosticCode\": \"de0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "32401ed0-0a00-4bb0-99fa-519f3c94807d",
+      "name": "Get Job Details",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7120ac5-3f0a-4c6f-8893-4c0223b2a350",
+          "name": "Returns a list of submitted export jobs.",
+          "request": {
+            "name": "Returns a list of submitted export jobs.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "entityType",
+                  "value": "All"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "descending"
+                },
+                {
+                  "disabled": false,
+                  "key": "jobStatus",
+                  "value": "All"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f41cbf0a-2016-420c-869d-a52958e44b86",
+              "name": "Returns the list of export jobs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "All"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "descending"
+                    },
+                    {
+                      "key": "jobStatus",
+                      "value": "All"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageNo\": 3590,\n  \"pageSize\": 8497,\n  \"data\": [\n    {\n      \"updatedAt\": \"1994-05-26T21:54:12.041Z\",\n      \"createdAt\": \"1995-08-08T19:54:08.727Z\",\n      \"jobName\": \"string\",\n      \"jobId\": \"string\",\n      \"jobStatus\": \"string\",\n      \"entityType\": \"string\"\n    },\n    {\n      \"updatedAt\": \"1962-08-29T21:56:33.207Z\",\n      \"createdAt\": \"1953-03-01T13:45:55.493Z\",\n      \"jobName\": \"string\",\n      \"jobId\": \"string\",\n      \"jobStatus\": \"string\",\n      \"entityType\": \"string\"\n    }\n  ],\n  \"totalCount\": 7929\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f7ec713-e224-4ff8-8dd6-66ca5945604e",
+              "name": "The request body, path parameter, or query parameter is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "All"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "descending"
+                    },
+                    {
+                      "key": "jobStatus",
+                      "value": "All"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"diagnosticCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f850cf95-2ec4-4a47-88d2-f9ea7b94b1f5",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "All"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "descending"
+                    },
+                    {
+                      "key": "jobStatus",
+                      "value": "All"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"401-100\",\n  \"errorMessage\": \"Authentication credentials are missing or invalid.\",\n  \"diagnosticCode\": \"1e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "581a6147-3eaf-43cd-a5e8-5574114a905f",
+              "name": "The authenticated user does not have permission to access this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "All"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "descending"
+                    },
+                    {
+                      "key": "jobStatus",
+                      "value": "All"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"403-100\",\n  \"errorMessage\": \"The authenticated user does not have permission to access this resource.\",\n  \"diagnosticCode\": \"3e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "556c5baf-4268-4849-a0ab-182e45c27ea8",
+              "name": "An endpoint request limit, concurrent-job limit, or export quota was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "All"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "descending"
+                    },
+                    {
+                      "key": "jobStatus",
+                      "value": "All"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"429-100\",\n  \"errorMessage\": \"Rate limit exceeded.\",\n  \"diagnosticCode\": \"ce0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3c7e128-7e74-4e75-b350-3f9314cc39b4",
+              "name": "An unexpected internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "All"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "descending"
+                    },
+                    {
+                      "key": "jobStatus",
+                      "value": "All"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"500-100\",\n  \"errorMessage\": \"Error while communicating with internal service.\",\n  \"diagnosticCode\": \"de0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5384f938-c1c3-4422-8682-db48521c7599",
+          "name": "Check status of a data export job",
+          "request": {
+            "name": "Check status of a data export job",
             "description": {
-              "content": "Retrieve the current status and details of a specific export job, including progress information and download URLs when complete.",
+              "content": "Poll this endpoint until jobStatus is terminal. accepted and processing are non-terminal; continue polling. finished and failed are terminal. A finished job includes its download URL; a failed job does not produce a result file.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "export",
                 "v1",
-                "jobs",
+                "job",
                 ":jobId"
               ],
               "host": [
@@ -743,7 +2002,7 @@
                   "type": "any",
                   "value": "<string>",
                   "key": "jobId",
-                  "description": "(Required) Export job unique identifier"
+                  "description": "(Required) "
                 }
               ]
             },
@@ -754,218 +2013,25 @@
               }
             ],
             "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "bfffc855-bcb5-4f46-8941-d7a232062731",
-              "name": "Export job details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "export",
-                    "v1",
-                    "jobs",
-                    ":jobId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Export job unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"entity_type\": \"people\",\n  \"status\": \"failed\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"filters\": {},\n  \"record_count\": 7853,\n  \"file_size_bytes\": 5417,\n  \"file_parts\": 6904,\n  \"download_url\": \"https://XZrJwDxGCsktcAmRYypfwpzXX.srIaceICCXccTCOYbH-sRsgV\",\n  \"created_at\": \"2025-01-13T12:23:16.896Z\",\n  \"completed_at\": \"2017-01-03T10:31:51.626Z\",\n  \"expires_at\": \"2005-06-03T16:01:15.458Z\",\n  \"error_message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2afc40e6-05a5-4b80-9488-9c7dc6b3e541",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "export",
-                    "v1",
-                    "jobs",
-                    ":jobId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Export job unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "d9f75ab6-dbf0-4760-a82a-7841dd5a7c71",
-              "name": "Export job not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "export",
-                    "v1",
-                    "jobs",
-                    ":jobId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Export job unique identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e0d7a797-1084-4990-97e6-288561355170",
-          "name": "Demandbase Cancel an export job",
-          "request": {
-            "name": "Demandbase Cancel an export job",
-            "description": {
-              "content": "Cancel a pending or processing export job.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "export",
-                "v1",
-                "jobs",
-                ":jobId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "jobId",
-                  "description": "(Required) Export job unique identifier"
+                  "key": "token",
+                  "value": "{{bearerToken}}"
                 }
               ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
+            }
           },
           "response": [
             {
-              "id": "8195c073-a29c-4de8-a5ca-004353450bb6",
-              "name": "Export job cancelled",
+              "id": "5d887a0e-1465-4f23-b8e2-be41e2d3b50c",
+              "name": "Returns status and download URLs.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "export",
                     "v1",
-                    "jobs",
+                    "job",
                     ":jobId"
                   ],
                   "host": [
@@ -978,7 +2044,7 @@
                       "type": "any",
                       "value": "<string>",
                       "key": "jobId",
-                      "description": "(Required) Export job unique identifier"
+                      "description": "(Required) "
                     }
                   ]
                 },
@@ -996,7 +2062,7 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "DELETE",
+                "method": "GET",
                 "body": {}
               },
               "status": "OK",
@@ -1007,19 +2073,18 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"entity_type\": \"people\",\n  \"status\": \"failed\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"filters\": {},\n  \"record_count\": 7853,\n  \"file_size_bytes\": 5417,\n  \"file_parts\": 6904,\n  \"download_url\": \"https://XZrJwDxGCsktcAmRYypfwpzXX.srIaceICCXccTCOYbH-sRsgV\",\n  \"created_at\": \"2025-01-13T12:23:16.896Z\",\n  \"completed_at\": \"2017-01-03T10:31:51.626Z\",\n  \"expires_at\": \"2005-06-03T16:01:15.458Z\",\n  \"error_message\": \"string\"\n}",
+              "body": "{\n  \"resultsUrl\": \"string\",\n  \"updatedAt\": \"1949-01-27T19:09:14.958Z\",\n  \"jobStatus\": \"finished\",\n  \"jobName\": \"string\",\n  \"jobId\": \"string\",\n  \"createdAt\": \"1993-02-18T21:42:28.707Z\",\n  \"entityType\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "ca6ed682-052c-4fb7-b5b2-95e8fb267905",
-              "name": "Unauthorized",
+              "id": "2372d7d8-ee0e-4edd-8abf-202ff5895558",
+              "name": "Authentication credentials are missing or invalid.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "export",
                     "v1",
-                    "jobs",
+                    "job",
                     ":jobId"
                   ],
                   "host": [
@@ -1032,7 +2097,7 @@
                       "type": "any",
                       "value": "<string>",
                       "key": "jobId",
-                      "description": "(Required) Export job unique identifier"
+                      "description": "(Required) "
                     }
                   ]
                 },
@@ -1044,9 +2109,13 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
-                "method": "DELETE",
+                "method": "GET",
                 "body": {}
               },
               "status": "Unauthorized",
@@ -1054,22 +2123,21 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"errorCode\": \"401-100\",\n  \"errorMessage\": \"Authentication credentials are missing or invalid.\",\n  \"diagnosticCode\": \"1e0fc1770e0d425b88892df4f663bf07\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "b915f019-784f-4c06-a36a-da72c0ea4764",
-              "name": "Export job not found",
+              "id": "68493eda-132d-4893-acfe-29620a2ab9e7",
+              "name": "The authenticated user does not have permission to access this resource.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "export",
                     "v1",
-                    "jobs",
+                    "job",
                     ":jobId"
                   ],
                   "host": [
@@ -1082,7 +2150,7 @@
                       "type": "any",
                       "value": "<string>",
                       "key": "jobId",
-                      "description": "(Required) Export job unique identifier"
+                      "description": "(Required) "
                     }
                   ]
                 },
@@ -1094,9 +2162,66 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
-                "method": "DELETE",
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"403-100\",\n  \"errorMessage\": \"The authenticated user does not have permission to access this resource.\",\n  \"diagnosticCode\": \"3e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58f2de86-d02c-4601-a6dd-0ae6a7ccb1eb",
+              "name": "No export job exists for the requested job ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "job",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
                 "body": {}
               },
               "status": "Not Found",
@@ -1104,22 +2229,21 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"errorCode\": \"404-302\",\n  \"errorMessage\": \"Job id invalid\",\n  \"diagnosticCode\": \"4e0fc1770e0d425b88892df4f663bf07\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "88e3da1e-d5b5-4b94-99d9-b80fe1a8d586",
-              "name": "Job cannot be cancelled (already completed or failed)",
+              "id": "1664ddb9-6345-4bf5-8249-0dcc8bfd18a4",
+              "name": "An endpoint request limit, concurrent-job limit, or export quota was exceeded.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "export",
                     "v1",
-                    "jobs",
+                    "job",
                     ":jobId"
                   ],
                   "host": [
@@ -1132,7 +2256,7 @@
                       "type": "any",
                       "value": "<string>",
                       "key": "jobId",
-                      "description": "(Required) Export job unique identifier"
+                      "description": "(Required) "
                     }
                   ]
                 },
@@ -1144,43 +2268,107 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
-                "method": "DELETE",
+                "method": "GET",
                 "body": {}
               },
-              "status": "Conflict",
-              "code": 409,
+              "status": "Too Many Requests",
+              "code": 429,
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"errorCode\": \"429-100\",\n  \"errorMessage\": \"Rate limit exceeded.\",\n  \"diagnosticCode\": \"ce0fc1770e0d425b88892df4f663bf07\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9eeff740-cfb2-4761-b189-75defee59fff",
+              "name": "An unexpected internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "job",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"500-100\",\n  \"errorMessage\": \"Error while communicating with internal service.\",\n  \"diagnosticCode\": \"de0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
             }
           ],
           "event": [],
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           }
-        },
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "126858f4-0634-41b5-8976-b6c522d46137",
+      "name": "Get Reference Data",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
         {
-          "id": "d72a3f79-17b2-472d-b3a4-6fc80fa625c4",
-          "name": "Demandbase List exportable entities",
+          "id": "4c30f6d7-d2b7-48e1-8e01-1a1a34a35644",
+          "name": "Get available reference objects",
           "request": {
-            "name": "Demandbase List exportable entities",
-            "description": {
-              "content": "Retrieve the list of entity types available for export and their supported fields.",
-              "type": "text/plain"
-            },
+            "name": "Get available reference objects",
+            "description": {},
             "url": {
               "path": [
-                "export",
                 "v1",
-                "entities"
+                "references"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -1195,18 +2383,25 @@
               }
             ],
             "method": "GET",
-            "auth": null
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
           },
           "response": [
             {
-              "id": "5292f2a5-8d2e-4756-8d42-61a1eaacf54b",
-              "name": "List of exportable entities",
+              "id": "1076f079-06bf-4ccf-a23f-27101ff181d8",
+              "name": "OK",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "export",
                     "v1",
-                    "entities"
+                    "references"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -1239,19 +2434,18 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"entities\": [\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"fields\": [\n        {\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"description\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"description\": \"string\"\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"fields\": [\n        {\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"description\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"description\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "body": "{\n  \"refObjectsAvailable\": [\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"href\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"href\": \"string\"\n    }\n  ]\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "ec43e23d-deab-4fad-b27e-ba1afa734b44",
-              "name": "Unauthorized",
+              "id": "d2b3ba25-e756-4d11-8670-b5ec000531d1",
+              "name": "Authentication credentials are missing or invalid.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "export",
                     "v1",
-                    "entities"
+                    "references"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -1267,6 +2461,10 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "GET",
@@ -1277,12 +2475,512 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"errorCode\": \"401-100\",\n  \"errorMessage\": \"Authentication credentials are missing or invalid.\",\n  \"diagnosticCode\": \"1e0fc1770e0d425b88892df4f663bf07\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21f4fc0d-3d46-432c-8cf0-a54fe98d9485",
+              "name": "The authenticated user does not have permission to access this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"403-100\",\n  \"errorMessage\": \"The authenticated user does not have permission to access this resource.\",\n  \"diagnosticCode\": \"3e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9188ffe8-742b-4581-8361-5a252aec384c",
+              "name": "An endpoint request limit, concurrent-job limit, or export quota was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"429-100\",\n  \"errorMessage\": \"Rate limit exceeded.\",\n  \"diagnosticCode\": \"ce0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5e11e14-5c75-4467-bfc9-8ffed4d15a15",
+              "name": "An unexpected internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"500-100\",\n  \"errorMessage\": \"Error while communicating with internal service.\",\n  \"diagnosticCode\": \"de0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19458d61-5e01-4c5d-8ba9-8958f4c93877",
+          "name": "Get reference data fields for an object",
+          "request": {
+            "name": "Get reference data fields for an object",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "reference",
+                ":object"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0e8da025-6c6a-486d-ae89-438da0eddf5d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reference",
+                    ":object"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objectType\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d90fae7-7407-412d-86c6-7c1247d68992",
+              "name": "The requested reference object is not supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reference",
+                    ":object"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"400-154\",\n  \"errorMessage\": \"Invalid reference entity type.\",\n  \"diagnosticCode\": \"2e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40de9ad6-8f07-4c2d-a48b-9483fdeb72b7",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reference",
+                    ":object"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"401-100\",\n  \"errorMessage\": \"Authentication credentials are missing or invalid.\",\n  \"diagnosticCode\": \"1e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5b53c29-4ce4-40eb-bc48-445eb65a3601",
+              "name": "The authenticated user does not have permission to access this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reference",
+                    ":object"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"403-100\",\n  \"errorMessage\": \"The authenticated user does not have permission to access this resource.\",\n  \"diagnosticCode\": \"3e0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a13e4dc-538c-4c04-80a1-8da4d4d47f82",
+              "name": "An endpoint request limit, concurrent-job limit, or export quota was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reference",
+                    ":object"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"429-100\",\n  \"errorMessage\": \"Rate limit exceeded.\",\n  \"diagnosticCode\": \"ce0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01bdfb8a-1cd6-48e2-90ae-54bc8810c18f",
+              "name": "An unexpected internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reference",
+                    ":object"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"500-100\",\n  \"errorMessage\": \"Error while communicating with internal service.\",\n  \"diagnosticCode\": \"de0fc1770e0d425b88892df4f663bf07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
             }
           ],
           "event": [],
@@ -1298,7 +2996,7 @@
   "variable": [
     {
       "type": "string",
-      "value": "https://api.demandbase.com",
+      "value": "https://uapi.demandbase.com/data/export",
       "key": "baseUrl"
     }
   ],
@@ -1312,11 +3010,11 @@
     ]
   },
   "info": {
-    "_postman_id": "739d56ce-31e8-40ce-ab53-772e6a0242a5",
-    "name": "Demandbase Data Export API",
+    "_postman_id": "64ab163a-5767-4d64-b980-b1298e3813b1",
+    "name": "Data Export API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "Enables bulk, asynchronous, programmatic data exports from Demandbase One, supporting extraction of records for accounts, people, opportunities, activities, campaigns, and Buying Groups with full granularity, delivered as downloadable CSVs up to 10GB per day.\n\nContact Support:\n Name: Demandbase Support",
+      "content": "Export data in bulk from the Demandbase platform.<br><br>Authenticate using a bearer token. Pass a header like: `Authorization: Bearer v334asfsdfo3241ERqwefe`<br><br>The part after 'Bearer' is your API token. \nFor instructions on generating API tokens, see the [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set) article at the Demandbase Help Center",
       "type": "text/plain"
     }
   }

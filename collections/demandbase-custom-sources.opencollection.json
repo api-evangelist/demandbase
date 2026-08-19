@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Custom Sources API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List custom sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.demandbase.com/integration/v1/custom-sources",
+            "params": [
+              {
+                "name": "group",
+                "value": "",
+                "type": "query",
+                "description": "Filter sources by source group."
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-indexed)."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of sources, optionally filtered by source group."
+        },
+        {
+          "info": {
+            "name": "Create a custom source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://uapi.demandbase.demandbase.com/integration/v1/custom-sources",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom source and returns the created resource."
+        },
+        {
+          "info": {
+            "name": "Get a custom source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.demandbase.com/integration/v1/custom-sources/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the source."
+              }
+            ]
+          },
+          "docs": "Returns a single source by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a custom source",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://uapi.demandbase.demandbase.com/integration/v1/custom-sources/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the source."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing source by its ID and returns the updated resource."
+        },
+        {
+          "info": {
+            "name": "Delete a custom source",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://uapi.demandbase.demandbase.com/integration/v1/custom-sources/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the source."
+              }
+            ]
+          },
+          "docs": "Deletes an existing source by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Field Mappings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get field mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.demandbase.com/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+            "params": [
+              {
+                "name": "source_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the source."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "The object type for which field mappings are configured."
+              }
+            ]
+          },
+          "docs": "Returns the field mappings configured for the given source and object type."
+        },
+        {
+          "info": {
+            "name": "Upsert field mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://uapi.demandbase.demandbase.com/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+            "params": [
+              {
+                "name": "source_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the source."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "The object type for which field mappings are configured."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or replaces the field mappings for the given source and object type.\nThe full set of mappings provided in the request body replaces any existing mappings.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

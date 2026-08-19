@@ -1,0 +1,651 @@
+openapi: 3.0.1
+info:
+  version: '1.0'
+  title: Data Export API
+  description: "Export data in bulk from the Demandbase platform.<br><br>Authenticate using a bearer token. Pass a header\
+    \ like: `Authorization: Bearer v334asfsdfo3241ERqwefe`<br><br>The part after 'Bearer' is your API token. \nFor instructions\
+    \ on generating API tokens, see the [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set)\
+    \ article at the Demandbase Help Center"
+servers:
+- url: https://uapi.demandbase.com/data/export
+paths:
+  /v1/fields:
+    get:
+      tags:
+      - Get Fields
+      summary: Export fields
+      description: 'The Fields endpoint returns a list of all fields available for specific data export jobs.
+
+        For `campaign` and `creative` export jobs, the query parameter `adReportType` is required.
+
+        '
+      operationId: fetchFields
+      parameters:
+      - name: entityType
+        in: query
+        description: Specifies the entity for which to retrieve available export fields.
+        required: true
+        schema:
+          type: string
+          enum:
+          - account
+          - campaign
+          - creative
+          - opportunity
+          - person
+          - activity
+          - accountBuyingGroup
+          - personBuyingGroupMember
+      - name: adReportType
+        in: query
+        description: Specifies the adReportType for which to retrieve available export fields.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An array of fields.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Field'
+        '400':
+          $ref: '#/components/responses/400errorDescriptionsForFetchFields'
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+  /v1/job:
+    post:
+      tags:
+      - Create Export Job
+      summary: Create export job (Account, Opportunity, Person, Activity, Campaign, and Creative)
+      description: Creates a data export job for any supported entity type.
+      operationId: createExportJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobRequestBody'
+            examples:
+              account:
+                value:
+                  entityType: account
+                  jobName: AccountExportJob
+                  fields:
+                  - '{Account}.name'
+                  - '{Account}.industry'
+                  format: CSV
+      responses:
+        '202':
+          description: Returns job metadata including jobId.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobDetails'
+        '400':
+          $ref: '#/components/responses/400errorDescriptionsForAllApi'
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+  /v1/accountList/job:
+    post:
+      tags:
+      - Create Export Job
+      summary: Create account list export job
+      operationId: fetchAccountListJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountListExportJob'
+      responses:
+        '202':
+          description: Returns the Job ID of the newly-created job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobDetails'
+        '400':
+          $ref: '#/components/responses/400errorDescriptionsForAllApi'
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+  /v1/personList/job:
+    post:
+      tags:
+      - Create Export Job
+      summary: Create person list export job
+      operationId: fetchPersonListJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonListExportJob'
+      responses:
+        '202':
+          description: Returns the jobId of the newly-created job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobDetails'
+        '400':
+          $ref: '#/components/responses/400errorDescriptionsForAllApi'
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+  /v1/jobs:
+    get:
+      tags:
+      - Get Job Details
+      summary: Returns a list of submitted export jobs.
+      operationId: fetchExportJobsInfo
+      parameters:
+      - name: entityType
+        in: query
+        schema:
+          type: string
+          default: All
+      - name: page
+        in: query
+        schema:
+          type: string
+          default: '1'
+      - name: perPage
+        in: query
+        schema:
+          type: string
+          default: '10'
+      - name: sort
+        in: query
+        schema:
+          type: string
+          default: descending
+      - name: jobStatus
+        in: query
+        schema:
+          type: string
+          default: All
+      responses:
+        '200':
+          description: Returns the list of export jobs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobDetailsList'
+        '400':
+          $ref: '#/components/responses/400errorDescriptionsForAllApi'
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+  /v1/job/{jobId}:
+    get:
+      tags:
+      - Get Job Details
+      summary: Check status of a data export job
+      operationId: checkExportJobStatus
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns status and download URLs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '404':
+          $ref: '#/components/responses/404errorDescriptionsForStatusApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+      description: Poll this endpoint until jobStatus is terminal. accepted and processing are non-terminal; continue polling.
+        finished and failed are terminal. A finished job includes its download URL; a failed job does not produce a result
+        file.
+  /v1/references:
+    get:
+      tags:
+      - Get Reference Data
+      summary: Get available reference objects
+      operationId: get-reference
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  refObjectsAvailable:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        href:
+                          type: string
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+  /v1/reference/{object}:
+    get:
+      tags:
+      - Get Reference Data
+      summary: Get reference data fields for an object
+      operationId: get-support-object
+      parameters:
+      - name: object
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - persona
+          - buyerRole
+          - idealBuyingGroup
+          - idealBuyingGroupPersonaRole
+          - keywordSet
+          - keywordSetMember
+          - JobFunction
+          - JobLevel
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objectType:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+        '400':
+          $ref: '#/components/responses/400errorDescriptionsForReferenceData'
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+components:
+  securitySchemes:
+    token:
+      type: http
+      scheme: bearer
+  responses:
+    400errorDescriptionsForFetchFields:
+      description: Invalid entityType.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+    400errorDescriptionsForAllApi:
+      description: The request body, path parameter, or query parameter is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+    400errorDescriptionsForReferenceData:
+      description: The requested reference object is not supported.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 400-154
+            errorMessage: Invalid reference entity type.
+            diagnosticCode: 2e0fc1770e0d425b88892df4f663bf07
+    401errorDescriptionsForAllApi:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 401-100
+            errorMessage: Authentication credentials are missing or invalid.
+            diagnosticCode: 1e0fc1770e0d425b88892df4f663bf07
+    403errorDescriptionsForAllApi:
+      description: The authenticated user does not have permission to access this resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 403-100
+            errorMessage: The authenticated user does not have permission to access this resource.
+            diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
+    404errorDescriptionsForStatusApi:
+      description: No export job exists for the requested job ID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 404-302
+            errorMessage: Job id invalid
+            diagnosticCode: 4e0fc1770e0d425b88892df4f663bf07
+    429errorDescriptionsForAllApi:
+      description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 429-100
+            errorMessage: Rate limit exceeded.
+            diagnosticCode: ce0fc1770e0d425b88892df4f663bf07
+    500errorDescriptionsForAllApi:
+      description: An unexpected internal service error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 500-100
+            errorMessage: Error while communicating with internal service.
+            diagnosticCode: de0fc1770e0d425b88892df4f663bf07
+  schemas:
+    Field:
+      type: object
+      properties:
+        name:
+          type: string
+        dataType:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+    JobRequestBody:
+      type: object
+      required:
+      - entityType
+      - jobName
+      properties:
+        entityType:
+          type: string
+          enum:
+          - account
+          - accountBuyingGroup
+          - personBuyingGroupMember
+          - opportunity
+          - person
+          - activity
+          - campaign
+          - creative
+        jobName:
+          type: string
+        fromDate:
+          type: string
+          format: date
+          example: '2023-01-01'
+        toDate:
+          type: string
+          format: date
+          example: '2023-01-31'
+        fields:
+          type: array
+          items:
+            type: string
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        source:
+          type: array
+          items:
+            type: string
+          description: 'Optional (Required for campaign and creative). Source of ad data: demandbase, google, linkedin, or
+            all.'
+        adReportType:
+          type: string
+        accountListIds:
+          type: array
+          items:
+            type: integer
+        personListIds:
+          type: array
+          items:
+            type: integer
+        format:
+          type: string
+    Filter:
+      type: object
+      properties:
+        field:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+        operator:
+          type: string
+          description: One of Equals, Does Not Equal, Contains, Does Not Contain, Begins With, Does Not Begin With, Ends With,
+            Does Not End With, Greater Than, Greater Than or Equal To, Less Than, Less Than or Equal To, Between, Exists,
+            Does Not Exist, In, Not In
+    JobDetails:
+      type: object
+      required:
+      - jobStatus
+      - createdAt
+      - jobId
+      - entityType
+      - jobName
+      properties:
+        jobStatus:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        jobId:
+          type: string
+        entityType:
+          type: string
+        jobName:
+          type: string
+    AccountListExportJob:
+      type: object
+      properties:
+        jobName:
+          type: string
+        accountListId:
+          type: integer
+        accountListIds:
+          type: array
+          items:
+            type: integer
+    PersonListExportJob:
+      type: object
+      properties:
+        jobName:
+          type: string
+        personListIds:
+          type: array
+          items:
+            type: integer
+    JobDetailsList:
+      type: object
+      required:
+      - pageNo
+      - pageSize
+      - data
+      - totalCount
+      properties:
+        pageNo:
+          type: integer
+        pageSize:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              updatedAt:
+                type: string
+                format: date-time
+              createdAt:
+                type: string
+                format: date-time
+              jobName:
+                type: string
+              jobId:
+                type: string
+              jobStatus:
+                type: string
+              entityType:
+                type: string
+        totalCount:
+          type: integer
+    JobStatus:
+      type: object
+      required:
+      - resultsUrl
+      - updatedAt
+      - jobStatus
+      - jobName
+      - jobId
+      - createdAt
+      - entityType
+      - message
+      properties:
+        resultsUrl:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        jobStatus:
+          type: string
+          description: Current processing state. accepted and processing are non-terminal; continue polling. finished and
+            failed are terminal.
+          enum:
+          - accepted
+          - processing
+          - finished
+          - failed
+        jobName:
+          type: string
+        jobId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        entityType:
+          type: string
+        message:
+          type: string
+          nullable: true
+    CampaignExportJob:
+      type: object
+      required:
+      - jobName
+      properties:
+        jobName:
+          type: string
+        campaignId:
+          type: integer
+        accountId:
+          type: integer
+        performance:
+          type: string
+        fromDate:
+          type: string
+          format: date
+        toDate:
+          type: string
+          format: date
+    CreativeExportJob:
+      type: object
+      required:
+      - jobName
+      properties:
+        jobName:
+          type: string
+        creativeId:
+          type: integer
+        campaignId:
+          type: integer
+        performance:
+          type: string
+        fromDate:
+          type: string
+          format: date
+        toDate:
+          type: string
+          format: date
+    ErrorDto:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        diagnosticCode:
+          type: string
+        errorMessage:
+          type: string
+security:
+- token: []

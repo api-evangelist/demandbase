@@ -1,0 +1,25 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Demandbase Custom Sources API
+  version: 1.0.0
+extends: openapi/demandbase-custom-sources-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: openapi/_original/demandbase-custom-sources-openapi.json (harvested verbatim from https://developer.demandbase.com)
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: demandbase
+    x-apievangelist-harvested: '2026-08-13'
+    x-apievangelist-source: https://developer.demandbase.com/reference
+    x-apievangelist-artifacts:
+      authentication: authentication/demandbase-authentication.yml
+      conventions: conventions/demandbase-conventions.yml
+      errors: errors/demandbase-error-codes.yml
+      rate_limits: rate-limits/demandbase-rate-limits.yml
+      lifecycle: lifecycle/demandbase-lifecycle.yml
+- target: $.servers[0]
+  update:
+    x-apievangelist-note: Published server URL is https://uapi.demandbase.demandbase.com, which does not resolve.
+      Every other Demandbase specification names https://uapi.demandbase.com. This is recorded verbatim as a provider
+      defect rather than silently corrected.

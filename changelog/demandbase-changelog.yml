@@ -1,0 +1,81 @@
+generated: '2026-08-13'
+method: searched
+source: https://developer.demandbase.com/changelog
+note: >-
+  Demandbase runs a dated changelog on its ReadMe developer portal, tagged with ReadMe's
+  added / improved / removed labels. Entries are per-API rather than per-release: there is
+  no single platform version number, and the individual APIs carry independent info.version
+  values in their OpenAPI. The recent window is captured below; the live changelog remains
+  the source of truth.
+versioning:
+  scheme: uri-path
+  note: >-
+    Each API pins its major version in the path (/data/b2b/v1, /data/export + /v1/...,
+    /import/v1, /admin/v1, /data/intent/v1, /reporting/v1, /integration/v1, /auth/v1).
+    No date-based or header-based version negotiation is documented.
+  current:
+    - {api: B2B API, version: '1.0', path: /data/b2b/v1}
+    - {api: Data Export API, version: '1.0', path: /data/export/v1}
+    - {api: Data Import API, version: '1.0', path: /import/v1}
+    - {api: Admin API, version: '2.0', path: /admin/v1}
+    - {api: Intent API, version: '1.0', path: /data/intent/v1, stage: beta}
+    - {api: Usage API, version: '1.0', path: /reporting/v1}
+    - {api: Custom Sources API, version: '1.0', path: /integration/v1}
+    - {api: Auth API, version: '1.0', path: /auth/v1}
+entry_count: 7
+entries:
+  - date: '2026-08-11'
+    type: improved
+    title: Developer Portal documentation accuracy improvements
+    url: https://developer.demandbase.com/changelog/developer-portal-documentation-accuracy-improvements
+    breaking: false
+    highlights:
+      - Corrected Export filter fields, operator names and activity-date guidance.
+      - Corrected the case-sensitive Export routes /accountList/job and /personList/job.
+      - Documented all Export job states — non-terminal accepted/processing, terminal finished/failed.
+      - Clarified that the Export API server root is https://uapi.demandbase.com/data/export.
+    note: Documentation-only; no API behavior changed.
+  - date: '2026-07-29'
+    type: added
+    title: Demandbase MCP Adds Intent, Buying Groups, Account Briefs, and Net-New Contacts
+    url: https://developer.demandbase.com/changelog/demandbase-mcp-adds-intent-buying-groups-account-briefs-and-net-new-contacts
+    breaking: false
+    additions:
+      - Account-level Intent through MCP
+      - Buying Group coverage and gap analysis through MCP
+      - Consolidated Account Briefs
+      - Net-new contact discovery
+  - date: '2026-07-27'
+    type: improved
+    title: B2B - Contact Search Response Enhancements
+    url: https://developer.demandbase.com/changelog/contact-search-enhancements
+    breaking: false
+  - date: '2026-07-23'
+    type: added
+    title: New Beta Company Intent API
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+    breaking: false
+    additions:
+      - >-
+        POST /companies/intent/query — query company-level research activity by company,
+        keyword set, keyword, date range, intent strength, or number of people researching.
+      - Responses carry intent strength, trending activity, research volume, keyword details, measurement dates and cursor-based pagination.
+    stage: beta
+  - date: '2026-07-13'
+    type: improved
+    title: B2B API Documentation
+    url: https://developer.demandbase.com/changelog/b2b-api-documentation
+    breaking: false
+  - date: '2026-06-22'
+    type: removed
+    title: Corrected Get Contact Details Documentation
+    url: https://developer.demandbase.com/changelog/corrected-get-contact-details-documentation
+    breaking: false
+  - date: '2026-06-22'
+    type: added
+    title: Account Lists Now Available in Demandbase MCP
+    url: https://developer.demandbase.com/changelog/title-account-lists-now-available-in-demandbase-mcp
+    breaking: false
+related:
+  - lifecycle/demandbase-lifecycle.yml
+  - mcp/demandbase-mcp.yml

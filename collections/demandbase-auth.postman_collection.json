@@ -1,0 +1,155 @@
+{
+  "item": [
+    {
+      "id": "519e2e4f-1d77-4a78-9c7a-96aadd768f8e",
+      "name": "Generate an access token",
+      "request": {
+        "name": "Generate an access token",
+        "description": {
+          "content": "This endpoint issues an OAuth2 bearer token for authenticating with Demandbase APIs.\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "auth",
+            "v1",
+            "token"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"grantType\": \"client_credentials\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "59d22df8-d357-493f-b395-177b93426caf",
+          "name": "Successful token response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "auth",
+                "v1",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"grantType\": \"client_credentials\",\n  \"clientId\": \"123abc\",\n  \"clientSecret\": \"456def\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"accessToken\": \"string\",\n  \"tokenType\": \"bearer\",\n  \"expiresIn\": 28800\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "fe9babb1-5234-49ab-9993-59c58aa29e9c",
+          "name": "Invalid request (missing or incorrect parameters)",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "auth",
+                "v1",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"grantType\": \"client_credentials\",\n  \"clientId\": \"123abc\",\n  \"clientSecret\": \"456def\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://uapi.demandbase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fe5da401-eccf-4e1f-a06f-79e4e308dd01",
+    "name": "Demandbase Auth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Obtain an access token for Demandbase API using client credentials.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+generated: '2026-08-13'
+method: searched
+status: published
+source: https://developer.demandbase.com/docs/custom-mcp-clients
+docs:
+  - https://developer.demandbase.com/docs/mcp
+  - https://developer.demandbase.com/docs/custom-mcp-clients
+  - https://developer.demandbase.com/docs/instructions
+  - https://developer.demandbase.com/docs/credit-consumption
+deployment:
+  mode: remote
+  endpoint: https://gateway.demandbase.com/mcp/servers/db-mcp
+  auth: oauth
+  verified: probed
+server:
+  name: db-mcp
+  vendor: Demandbase
+  transport: http
+  url: https://gateway.demandbase.com/mcp/servers/db-mcp
+  protected_resource_metadata: https://gateway.demandbase.com/.well-known/oauth-protected-resource
+  authorization_server_metadata: https://gateway.demandbase.com/.well-known/oauth-authorization-server
+authentication:
+  scheme: OAuth 2.1 authorization code + PKCE (S256) with dynamic client registration
+  issuer: https://authentication.demandbase.com/oauth2/aus7fu7m8kDj90Z532p7
+  authorization_endpoint: https://authentication.demandbase.com/oauth2/aus7fu7m8kDj90Z532p7/v1/authorize
+  token_endpoint: https://authentication.demandbase.com/oauth2/aus7fu7m8kDj90Z532p7/v1/token
+  registration_endpoint: https://gateway.demandbase.com/mcp/v1/register
+  token_endpoint_auth_methods_supported: [none]
+  scopes_supported: [openid, profile, email, offline_access]
+  resource: https://gateway.demandbase.com/mcp/
+  entitlement: >-
+    MCP is enabled per tenant by the Demandbase account team, and per user through the
+    MCP tab in Demandbase One Permission Sets (Full Access / Limited Access to
+    "Demandbase Data" and/or "Your Data" / No Access). MCP calls draw down the same
+    credit entitlements as the REST APIs.
+introspection:
+  attempted: '2026-08-13'
+  method: 'POST tools/list (JSON-RPC 2.0) with Accept: application/json, text/event-stream'
+  http_status: 401
+  response: '{"status": "Authentication Failed - Unauthorized."}'
+  www_authenticate: >-
+    Bearer resource_metadata="https://gateway.demandbase.com/.well-known/oauth-protected-resource",
+    authorization_uri="https://authentication.demandbase.com/oauth2/aus7fu7m8kDj90Z532p7/v1/authorize"
+  result: >-
+    The live tool list and its inputSchemas are OAuth-gated and require an authenticated
+    tenant session. The server is well-behaved — it returns the RFC 9728 challenge that
+    lets an MCP client bootstrap discovery — but no anonymous tools/list is possible.
+    The capabilities below are transcribed from the provider's own published capability
+    table, NOT from a tools/list response. Tool names and input schemas are unknown and
+    are deliberately not invented here.
+capabilities:
+  - area: Internal account data
+    description: >-
+      Search and prioritize accounts using engagement, journey stage, scores,
+      opportunities, Intent, and Buying Group coverage.
+  - area: Internal person data
+    description: >-
+      Find CRM-known contacts and leads using identity, role, engagement, and Buying
+      Group membership.
+  - area: Account-level Intent
+    description: >-
+      Identify accounts demonstrating recent Intent based on keywords, keyword sets,
+      competitive research, strength, and activity date.
+  - area: Buying Groups
+    description: >-
+      Retrieve configured Buying Groups, personas, and buyer roles; assess coverage and
+      identify gaps.
+  - area: Account Briefs
+    description: >-
+      Generate consolidated, meeting-ready account summaries using available account,
+      opportunity, engagement, Intent, Buying Group, company, and news data.
+  - area: Global company data
+    description: >-
+      Research companies using firmographics, industries, location, size, technologies,
+      news, and corporate hierarchy.
+  - area: Global contact data
+    description: >-
+      Find external contacts using role, seniority, location, employment, and contact
+      criteria.
+  - area: Net-new contacts
+    description: >-
+      Find relevant external contacts for a specific account who are associated with its
+      Buying Groups and are not already represented in CRM.
+  - area: Reference data
+    description: >-
+      Retrieve tenant-configured account lists, keyword sets, keywords, Buying Groups,
+      personas, and buyer roles.
+supported_clients:
+  - ChatGPT
+  - Claude
+  - Gemini
+  - Gong
+  - Microsoft Copilot Studio
+  - Outreach
+  - Sendoso
+  - Visual Studio Code
+  - Custom MCP clients
+tools: []
+x-evidence:
+  fetched: '2026-08-13'
+  endpoint_probe:
+    url: https://gateway.demandbase.com/mcp/servers/db-mcp
+    method: POST
+    http_status: 401
+  metadata_probe:
+    url: https://gateway.demandbase.com/.well-known/oauth-protected-resource
+    http_status: 200

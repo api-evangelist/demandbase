@@ -3,13 +3,30 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
 provider: Demandbase
 providerId: demandbase
+generated: '2026-08-13'
+method: searched
 created: '2026-05-04'
-modified: '2026-05-05'
-reconciled: false
-notes: 'Demandbase does not publish self-serve API pricing. Confirmed on https://www.demandbase.com/pricing/:
-  pricing is "a clear platform fee that covers all the essential software and services" plus "a flat
-  fee per user", scoped to one of three packages (Demandbase One, Advertising, Data). Detailed pricing
-  is custom-quoted via sales engagement form. No public per-call API price exists.'
+modified: '2026-08-13'
+reconciled: true
+sources:
+  - https://www.demandbase.com/pricing/
+  - https://developer.demandbase.com/docs/credit-consumtion-model
+  - https://developer.demandbase.com/docs/credit-consumption
+  - https://developer.demandbase.com/docs/rate-limits
+  - https://developer.demandbase.com/reference/getcreditusagedetails
+description: >-
+  Demandbase publishes no priced, self-serve API plan. The pricing page states the model in
+  words — a platform fee covering the software and services, plus a flat fee per user — and
+  then routes every buyer to a form for a custom quote. API access is bundled into the
+  platform contract rather than sold or metered publicly. What IS metered, and what a
+  developer can actually observe at runtime, is credits: API and MCP calls draw down credit
+  entitlements that are readable through the Usage API. There is also a documented Export
+  API trial (100 MB over a rolling 24-hour window), which is the only quantified, publicly
+  stated allowance on any Demandbase API surface.
+notes: >-
+  Re-searched 2026-08-13, replacing the 2026-05-04 bulk-sweep scaffold. The conclusion is
+  unchanged — no public per-call price exists — but it is now a searched finding with the
+  credit model and the trial allowance attached, rather than an unverified stub.
 tags:
   - Account-Based Marketing
   - Advertising
@@ -17,75 +34,50 @@ tags:
   - Data Enrichment
   - Intent Data
   - Sales Intelligence
-description: Demandbase prices its three commercial packages (Demandbase One, Advertising, Data) as a
-  platform fee plus per-user flat fee, all custom-quoted. API access is included as part of the platform
-  contract rather than priced separately. This artifact retains a single contract-bundled plan stub pending
-  direct customer-agreement reconciliation.
-sources:
-  - https://www.demandbase.com/pricing/
-  - https://developer.demandbase.com/
-plans:
-  - id: demandbase-platform-contract
-    name: Demandbase Platform Contract
-    type: enterprise
-    description: One of three Demandbase packages (Demandbase One, Advertising, or Data) sold as a platform
-      fee plus per-user flat fee. API access is included with the underlying subscription.
-    entries:
-      - label: Platform Fee
-        description: Flat platform fee covering Demandbase software and services, custom-quoted per customer.
-        name: platform_fee
-        type: subscription
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: global
-        domains:
-          - https://api.demandbase.com
-          - https://api.company-target.com
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-      - label: Per-User Fee
-        description: Flat fee per platform user; allows scaling seat counts.
-        name: per_user_fee
-        type: subscription
-        metric: seat
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains:
-          - https://api.demandbase.com
-        unit: 1
-        price: contact sales
-        userMultiplied: true
-      - label: API Access
-        description: API access included as part of the platform subscription; quotas set per contract.
-        name: api_access
-        type: flat
-        metric: varies
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains:
-          - https://api.demandbase.com
-          - https://api.company-target.com
-        unit: 1
-        price: included with platform
-        userMultiplied: false
-    elements:
-      - name: Demandbase One package
-      - name: Demandbase Advertising package
-      - name: Demandbase Data package
-      - name: Demandbase Real-Time Identification API
-      - name: Demandbase Advertising API
-      - name: Demandbase Engagement API
-      - name: Demandbase Account List API
-      - name: Demandbase B2B Data API
-      - name: Demandbase IP API
-      - name: Demandbase Admin API
-      - name: Demandbase Data Export API
-      - name: Demandbase Data Import API
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
-    url: https://www.demandbase.com
+plan_count: 0
+plans: []
+packaging:
+  - name: Demandbase One
+    description: >-
+      Flagship account-based GTM platform for Sales and Marketing, sold as one platform
+      rather than split into separate Sales and Marketing products.
+    pricing_model: platform fee + flat fee per user
+    price: null
+    currency: null
+    billing_period: null
+    availability: contact sales
+  - name: Demandbase Advertising
+    description: B2B-native DSP, offered as a standalone starting point.
+    price: null
+    availability: contact sales
+  - name: Demandbase Data
+    description: >-
+      B2B data solutions usable on their own to integrate Demandbase data and AI-driven
+      insights into existing systems. This is the package the B2B, Export, Import and Intent
+      APIs belong to.
+    price: null
+    availability: contact sales
+metering:
+  unit: credits
+  description: >-
+    API and MCP consumption draws down credit entitlements assigned to the tenant. Credit
+    rates and entitlement sizes are set per contract and are not published.
+  observable_at_runtime: true
+  usage_endpoint: openapi/demandbase-usage-openapi.yml#getCreditUsageDetails
+  usage_path: GET https://uapi.demandbase.com/reporting/v1/usage
+  docs:
+    - https://developer.demandbase.com/docs/credit-consumtion-model
+    - https://developer.demandbase.com/docs/credit-consumption
+trial:
+  name: Export API trial
+  allowance: 100 MB of exported data per rolling 24-hour period
+  scope: shared across all exports; does not reset per request
+  price: null
+  availability: >-
+    Arranged through the Demandbase account team, not self-serve. There is also an API trial
+    signup at https://www.demandbase.com/products/data/api-integration/api-trial/.
+  docs: https://developer.demandbase.com/docs/rate-limits
+signup: https://www.demandbase.com/products/data/api-integration/api-trial/
+related:
+  - rate-limits/demandbase-rate-limits.yml
+  - finops/demandbase-finops.yml

@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Demandbase Data Export API",
+    "name": "Data Export API",
     "version": "1.0"
   },
   "request": {
@@ -13,135 +13,220 @@
   "items": [
     {
       "info": {
-        "name": "Export Jobs",
+        "name": "Get Fields",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "Demandbase List export jobs",
+            "name": "Export fields",
             "type": "http"
           },
           "http": {
             "method": "GET",
-            "url": "https://api.demandbase.com/export/v1/jobs",
+            "url": "https://uapi.demandbase.com/data/export/v1/fields",
             "params": [
               {
-                "name": "status",
+                "name": "entityType",
                 "value": "",
                 "type": "query",
-                "description": "Filter by job status"
+                "description": "Specifies the entity for which to retrieve available export fields."
               },
               {
-                "name": "limit",
+                "name": "adReportType",
                 "value": "",
-                "type": "query"
-              },
-              {
-                "name": "offset",
-                "value": "",
-                "type": "query"
+                "type": "query",
+                "description": "Specifies the adReportType for which to retrieve available export fields."
               }
-            ]
-          },
-          "docs": "Retrieve a list of data export jobs with their current status and metadata."
-        },
-        {
-          "info": {
-            "name": "Demandbase Create an export job",
-            "type": "http"
-          },
-          "http": {
-            "method": "POST",
-            "url": "https://api.demandbase.com/export/v1/jobs",
-            "body": {
-              "type": "json",
-              "data": "{}"
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
             }
           },
-          "docs": "Create a new asynchronous data export job. Specify the entity type, fields to export, filters, and date range. Exported data is delivered as downloadable CSV files."
-        },
-        {
-          "info": {
-            "name": "Demandbase Get export job status",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api.demandbase.com/export/v1/jobs/:jobId",
-            "params": [
-              {
-                "name": "jobId",
-                "value": "",
-                "type": "path",
-                "description": "Export job unique identifier"
-              }
-            ]
-          },
-          "docs": "Retrieve the current status and details of a specific export job, including progress information and download URLs when complete."
-        },
-        {
-          "info": {
-            "name": "Demandbase Cancel an export job",
-            "type": "http"
-          },
-          "http": {
-            "method": "DELETE",
-            "url": "https://api.demandbase.com/export/v1/jobs/:jobId",
-            "params": [
-              {
-                "name": "jobId",
-                "value": "",
-                "type": "path",
-                "description": "Export job unique identifier"
-              }
-            ]
-          },
-          "docs": "Cancel a pending or processing export job."
-        },
-        {
-          "info": {
-            "name": "Demandbase List exportable entities",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api.demandbase.com/export/v1/entities"
-          },
-          "docs": "Retrieve the list of entity types available for export and their supported fields."
+          "docs": "The Fields endpoint returns a list of all fields available for specific data export jobs.\nFor `campaign` and `creative` export jobs, the query parameter `adReportType` is required.\n"
         }
       ]
     },
     {
       "info": {
-        "name": "Downloads",
+        "name": "Create Export Job",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "Demandbase Download export file",
+            "name": "Create export job (Account, Opportunity, Person, Activity, Campaign, and Creative)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://uapi.demandbase.com/data/export/v1/job",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a data export job for any supported entity type."
+        },
+        {
+          "info": {
+            "name": "Create account list export job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://uapi.demandbase.com/data/export/v1/accountList/job",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create account list export job"
+        },
+        {
+          "info": {
+            "name": "Create person list export job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://uapi.demandbase.com/data/export/v1/personList/job",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create person list export job"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Get Job Details",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns a list of submitted export jobs.",
             "type": "http"
           },
           "http": {
             "method": "GET",
-            "url": "https://api.demandbase.com/export/v1/jobs/:jobId/download",
+            "url": "https://uapi.demandbase.com/data/export/v1/jobs",
+            "params": [
+              {
+                "name": "entityType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "jobStatus",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of submitted export jobs."
+        },
+        {
+          "info": {
+            "name": "Check status of a data export job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/export/v1/job/:jobId",
             "params": [
               {
                 "name": "jobId",
                 "value": "",
-                "type": "path",
-                "description": "Export job unique identifier"
-              },
-              {
-                "name": "part",
-                "value": "",
-                "type": "query",
-                "description": "Part number for multi-part exports (starts at 1)"
+                "type": "path"
               }
-            ]
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
           },
-          "docs": "Download the exported CSV file for a completed export job. Returns a redirect to a pre-signed download URL."
+          "docs": "Poll this endpoint until jobStatus is terminal. accepted and processing are non-terminal; continue polling. finished and failed are terminal. A finished job includes its download URL; a failed job does not produce a result file."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Get Reference Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get available reference objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/export/v1/references",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get available reference objects"
+        },
+        {
+          "info": {
+            "name": "Get reference data fields for an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/export/v1/reference/:object",
+            "params": [
+              {
+                "name": "object",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get reference data fields for an object"
         }
       ]
     }

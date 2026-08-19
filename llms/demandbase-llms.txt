@@ -1,0 +1,143 @@
+# Demandbase Documentation
+
+> Documentation for Demandbase
+
+## Guides
+- [Welcome to the Demandbase Developer Help Center](https://developer.demandbase.com/docs/welcome.md)
+- [Getting Started](https://developer.demandbase.com/docs/getting_started_with_sdk.md)
+- [SDK Reference](https://developer.demandbase.com/docs/python-sdk-api-reference.md)
+- [Error Handling](https://developer.demandbase.com/docs/python-sdk-error-handling.md)
+- [Getting Started with Demandbase](https://developer.demandbase.com/docs/api-getting-started.md): This page will help you get started with Demandbase. You'll be up and running in a jiffy!
+- [Authenticating with the APIs](https://developer.demandbase.com/docs/authenticating-with-the-apis.md)
+- [Migrating from Legacy Tokens to API Keysets](https://developer.demandbase.com/docs/migrating-from-legacy-tokens-to-api-keysets.md)
+- [Overview](https://developer.demandbase.com/docs/b2b-overview.md)
+- [Fields Available](https://developer.demandbase.com/docs/fields-available.md)
+- [Authentication](https://developer.demandbase.com/docs/b2b-authentication.md)
+- [Make Your First Request](https://developer.demandbase.com/docs/b2b-make-your-first-request.md)
+- [Rate Limits](https://developer.demandbase.com/docs/b2b-rate-limits.md)
+- [Best Practices](https://developer.demandbase.com/docs/b2b-best-practices.md)
+- [Configuring Webhooks For Subscription API](https://developer.demandbase.com/docs/configuring-webhooks-for-subscription-api.md)
+- [FAQ](https://developer.demandbase.com/docs/faq.md)
+- [Credit Consumption Model](https://developer.demandbase.com/docs/credit-consumtion-model.md)
+- [Available Endpoints](https://developer.demandbase.com/docs/b2b-available-endpoints.md)
+- [Installed Technologies (Technographics)](https://developer.demandbase.com/docs/installed-tech.md)
+- [IV API to B2B API Migration](https://developer.demandbase.com/docs/iv-api-to-b2b-api-migration.md)
+- [Overview](https://developer.demandbase.com/docs/export-overview.md)
+- [Authentication](https://developer.demandbase.com/docs/authentication.md)
+- [Make Your First Request](https://developer.demandbase.com/docs/make-your-first-request.md)
+- [How To Use Filters](https://developer.demandbase.com/docs/how-to-use-filters.md)
+- [Rate Limits](https://developer.demandbase.com/docs/rate-limits.md)
+- [Handling Errors](https://developer.demandbase.com/docs/handling-errors.md)
+- [Available Endpoints](https://developer.demandbase.com/docs/available-endpoints.md)
+- [FAQ](https://developer.demandbase.com/docs/faq-1.md)
+- [Collections](https://developer.demandbase.com/docs/collections.md)
+- [Fields Available For Export](https://developer.demandbase.com/docs/available-fields.md)
+- [Overview](https://developer.demandbase.com/docs/import-overview.md)
+- [Authentication](https://developer.demandbase.com/docs/authentication-1.md)
+- [Make Your First Request](https://developer.demandbase.com/docs/make-your-first-request-1.md): Learn how to create an import job, submit data to it, and check the job status in the Demandbase Import API.
+- [Rate Limits](https://developer.demandbase.com/docs/rate-limits-1.md)
+- [CSV Record Matching And Data Mapping](https://developer.demandbase.com/docs/csv-record-matching-and-data-mapping.md)
+- [Importing Intent Activities](https://developer.demandbase.com/docs/importing-intent-activities.md)
+- [Available Endpoints](https://developer.demandbase.com/docs/copy-of-available-endpoints.md)
+- [Overview](https://developer.demandbase.com/docs/user-admin-overview.md)
+- [Authentication](https://developer.demandbase.com/docs/authentication-3.md)
+- [Available Endpoints](https://developer.demandbase.com/docs/available-endpoints-1.md)
+- [Overview](https://developer.demandbase.com/docs/credit-usage-overview.md)
+- [Authentication](https://developer.demandbase.com/docs/authentication-2.md)
+- [Available Endpoints](https://developer.demandbase.com/docs/available-endpoints-2.md)
+- [Overview](https://developer.demandbase.com/docs/custom-sources-overview.md)
+- [Overview](https://developer.demandbase.com/docs/overview.md)
+- [Authentication](https://developer.demandbase.com/docs/authentication-4.md)
+- [Limits and Pagination](https://developer.demandbase.com/docs/make-your-first-request-2.md)
+- [Make Your First Request](https://developer.demandbase.com/docs/make-your-first-request-3.md)
+- [Handling Errors](https://developer.demandbase.com/docs/handling-errors-1.md)
+- [Available Endpoints](https://developer.demandbase.com/docs/available-endpoints-3.md)
+- [Demandbase Model Context Protocol (MCP)](https://developer.demandbase.com/docs/mcp.md)
+- [ChatGPT](https://developer.demandbase.com/docs/chatgpt-1.md)
+- [Claude](https://developer.demandbase.com/docs/claude.md)
+- [Gemini](https://developer.demandbase.com/docs/gemini.md)
+- [Gong](https://developer.demandbase.com/docs/gong.md)
+- [Microsoft Copilot Studio](https://developer.demandbase.com/docs/copilot.md)
+- [Outreach](https://developer.demandbase.com/docs/outreach.md)
+- [Sendoso](https://developer.demandbase.com/docs/sendoso.md)
+- [VS Code](https://developer.demandbase.com/docs/vs-code.md)
+- [Build a Custom MCP Client](https://developer.demandbase.com/docs/custom-mcp-clients.md)
+- [Recommended AI Agent Instructions for Demandbase MCP](https://developer.demandbase.com/docs/instructions.md)
+- [MCP Credit Management](https://developer.demandbase.com/docs/credit-consumption.md)
+- [Demandbase Partner Tag](https://developer.demandbase.com/docs/partner-tag.md)
+
+## API Reference
+- [Generate an access token](https://developer.demandbase.com/reference/generate_access_token.md): This endpoint issues an OAuth2 bearer token for authenticating with Demandbase APIs.
+- [Search Contacts](https://developer.demandbase.com/reference/1.md)
+- [Search contacts](https://developer.demandbase.com/reference/contactsearch_1.md): Use this endpoint to search for individuals at specific companies.   You can filter contacts by details such as first name, last name, email, location, job title, job level, and job function. Company-level filters include company name, website, location, industry, size, and more. Additional parameters allow you to filter by quality score, email validation status, and phone requirements.  Sorting and pagination are supported. You can sort results by fields such as `companyName`, and control the number of results returned using `page` and `perPage`.  You must include at least one parameter (excluding sorting and pagination) to perform a search.
+- [Search Companies](https://developer.demandbase.com/reference/search-companies.md)
+- [Search companies](https://developer.demandbase.com/reference/companysearch_1.md): Use this endpoint to search for companies based on a variety of attributes.  You can search companies by name, website, ticker, location (city, state, country, ZIP), industry classification (NAICS, SIC), or attributes like fiscal year end, business structure, and fortune ranking.   Additional filters let you set employee or revenue ranges, include only primary industry or SIC classifications, and apply diversity criteria (e.g., minority-owned or women-owned businesses).   Sorting and pagination are supported. You can sort results by fields such as `companyRevenue` and more, and control the number of results returned using `page` and `perPage`.
+- [Fetch Contact Details](https://developer.demandbase.com/reference/fetch-contact-details.md)
+- [Fetch contact details](https://developer.demandbase.com/reference/contactfetch.md): Use this endpoint to fetch detailed employment and personal information for a specific contact.  Retrieve data such as job titles, phone numbers, job levels, salary ranges, social profiles, and education history.  You can control the response using query parameters to include specific fields or additional related data.
+- [Fetch Company Details](https://developer.demandbase.com/reference/fetch-company-details.md)
+- [Fetch company details](https://developer.demandbase.com/reference/companyfetch.md): Use this endpoint to fetch detailed information about a single company, including name, location, phone number, revenue, employee count, industry classification, and social media links.  You can optionally expand the response to include related data such as the company's family tree, competitors, installed technologies, and logos.  Installed technologies are returned under `techUsed`, grouped by category, subcategory, and product. The response includes taxonomy identifiers and display names; it does not include confidence, observation dates, vendor, or product descriptions.
+- [Fetch Company News By Category](https://developer.demandbase.com/reference/fetch-company-news-by-category.md)
+- [Fetch company news by category](https://developer.demandbase.com/reference/companynewscategoryfetch.md): Use this endpoint to fetch recent news articles related to a specific company.  You can filter articles by one or more news categories, such as acquisitions or leadership changes.  Pagination is supported to control the number of results per request.
+- [Fetch Company News Feed](https://developer.demandbase.com/reference/fetch-company-news-feed.md)
+- [Fetch company news feed](https://developer.demandbase.com/reference/companynewsfetch.md): Use this endpoint to return a paginated list of recent news articles for a specific company.  Unlike the `/news` endpoint, this feed does not require specifying news categories. It provides a general stream of company-related articles.
+- [Fetch Company Logo](https://developer.demandbase.com/reference/fetch-company-logo.md)
+- [Fetch company logo](https://developer.demandbase.com/reference/companylogofetch.md): Use this endpoint to fetch a company's logo in PNG format at the requested size.  Supported sizes are 100, 200, or 400 pixels.  If a logo in the specified size is not available, the API returns an error response.
+- [Match Companies and Contacts](https://developer.demandbase.com/reference/match-companies-and-contacts.md)
+- [Match companies and contact](https://developer.demandbase.com/reference/match_1.md): This endpoint matches companies and contacts against Demandbase's database based on provided firmographic and contact details. This endpoint supports batch matching by accepting an array of match requests.  Each object in the requests array must include a unique id and a useful combination of attributes for matching.  At a minimum, at least one of the following company identifiers is required: - `name` - `websites` - `email` - `executiveLinkedInHandle`
+- [Get Bulk Job Status](https://developer.demandbase.com/reference/getbulkjobstatus.md): Check the status of a bulk job using its unique job ID. This endpoint supports all bulk job types, including Company Fetch, Contact Fetch, and Match. Once the job completes successfully, the response will contain a signed `resultsUrl` for downloading the results.  Important notes: - The `resultsUrl` is included **only when the job status is `finished`** - The URL remains valid for **24 hours** - If the job fails, an `errorMessage` field will be present in the response explaining the reason  **CSV Results Format:** - The `resultsUrl` points to a CSV file containing the requested data - CSV column headers correspond exactly to the field names specified in your job request - For detailed information about available fields and their descriptions, refer to the field documentation in the <a href="https://demandbase.stoplight.io/docs/3p-api/zsbobfus3ok0w-create-a-bulk-data-retrieval-job" target="_blank">Create a Bulk Data Retrieval Job</a> endpoint - Array fields (like `titles`, `jobFunctions`) are represented as pipe-separated values (e.g., "VP|Director|Manager")
+- [Match Companies and Contacts in Bulk](https://developer.demandbase.com/reference/match.md): Use this endpoint to enrich company and contact records in bulk using a CSV file upload. Each row in the file represents one enrichment request and must match the supported field structure. This endpoint supports up to 10,000 records per job.  **CSV Results Format:** The completed job will return a CSV file with the following structure: - Input columns from your uploaded CSV are preserved - Additional columns are added for matched company data (companyId, name, city, state, country, matchScore, etc.) - Additional columns are added for matched contact data (contactId, firstName, lastName, title, email, matchScore, etc.) - Multiple matches are returned as separate rows with the same input ID - If no matches are found, the row will contain only the input data with empty match columns
+- [Create a Bulk Data Retrieval Job](https://developer.demandbase.com/reference/createbulkjob.md): # Overview Create and run asynchronous bulk jobs to retrieve company or contact data using entity IDs or search filters. This API is ideal for large data exports with a file-based CSV output.  You can submit up to **10,000 entity IDs** in a single request. The API initiates an asynchronous job and returns a `jobId` to track its status and retrieve results using the <a href="https://developer.demandbase.com/docs/3p-api/3nstx7v40nc9k-get-bulk-job-status" target="_blank">Job Status</a> API.
+- [Update an Existing Subscription](https://developer.demandbase.com/reference/updatesubscription.md): Use this API to update an existing subscription. You must provide both the subscriptionId and subscriptionType to identify which subscription you want to modify. This endpoint supports partial and full updates, including:  - Replacing all associated entity IDs with the subscription (e.g., company IDs or dbPerson IDs). - Incrementally adding or removing entity IDs in the subscription. - Updating other subscription details such as frequency, webhook URL, signing secret, fields, or news categories.  The API responds with a jobId, which can be used to check the job's status. Once the job completes successfully, the subscription is updated accordingly.
+- [Create a New Subscription](https://developer.demandbase.com/reference/updatesubscription_1.md): Use this endpoint to create a subscription for monitoring updates to companies or DB Person records. Subscriptions allow you to receive change alerts via webhook and access historical alerts via API.  Each subscription is processed asynchronously. A jobId is returned on submission. Upon completion, the job will return a subscriptionId which can be used to fetch alerts or manage the subscription.
+- [Get Subscription Entity IDs](https://developer.demandbase.com/reference/getsubscriptionentitydetails.md): Retrieve all entity IDs (company or dbPerson) associated with a given subscription. The response is paginated and depends on the type of subscription:  - For "company" or "companyFamilyTree" subscriptions, it returns Company IDs. - For "dbPerson" subscriptions, it returns Demandbase Person IDs.
+- [Retrieve a Specific Subscription Alert](https://developer.demandbase.com/reference/getsubscriptionalertdetails.md): Retrieve detailed alert updates for a specific subscription using its subscription ID and alert ID. Use `List Subscription Alerts` API to fetch latest alerts.  This endpoint returns the specific fields or news categories that triggered the alert, depending on the type of subscription:  - **company**: Returns a list of company IDs and the fields that changed (e.g., name, address). - **companynews**: Returns company IDs and related news articles with timestamps. - **companyfamilytree**:     - Identifies companies added to or removed from the family tree.     - Includes migration messages if the root company itself was acquired. - **dbPerson**: Returns person IDs with changed fields, as well as detailed employment-level field updates per contact ID.  The response is paginated and supports high-volume results (e.g., up to 5,000 entities per page).
+- [List Subscription Alerts](https://developer.demandbase.com/reference/getsubscriptionalertslist.md): Retrieve a paginated list of alerts generated for the specified subscription ID. Each alert includes: - `alertId`: unique identifier for the alert - `createdAt`: timestamp of when the alert was generated  Results are sorted in descending order of `createdAt` (most recent first).
+- [Retrieve Subscription Details](https://developer.demandbase.com/reference/getsubscriptiondetails.md): Fetch detailed information for a specific subscription using its subscription ID.  The response includes: - Subscription type (e.g., company, dbPerson, companyNews, companyFamilyTree) - Frequency and start date - Next scheduled notification time - Webhook configuration details (if applicable) - Tracked fields or subscribed news categories, depending on the subscription type
+- [Delete a Subscription](https://developer.demandbase.com/reference/deletesubscription.md): Permanently delete a subscription using its subscription ID. This operation removes the subscription from the system and halts all future notifications or alerts related to it.
+- [List Subscription Jobs](https://developer.demandbase.com/reference/subscriptionjobslistfetch.md): Retrieve a paginated list of all subscription jobs created by your tenant. Results are returned in descending order by creation time (`createdAt`). You can apply filters based on time period, date range, job status, and job type.  Period can be specified as `day`, `month`, or `year`. If `day` is selected, you can specify a range of days (e.g., 2024-09-01 to 2024-09-07). For `month`, you can specify a range of months (e.g., 2024-09 to 2024-10). For `year`, you can specify a range of years (e.g., 2024 to 2025 for the entire year).
+- [Check Subscription Job Status](https://developer.demandbase.com/reference/getsubscriptionjobstatus.md): Retrieve the current status of a bulk subscription job using its unique job ID. After you submit a create or update subscription job request, you’ll receive a job ID. This endpoint allows you to monitor that job’s progress and determine whether it has completed successfully.  If the job completes, the response will include the generated subscriptionId—which you can use to manage the subscription. If the job fails, the response will contain error details explaining what went wrong.
+- [List Subscriptions](https://developer.demandbase.com/reference/getallsubscriptionsbyclientid.md): Retrieve a list of all subscriptions associated with your tenant. You can filter results by one or more subscription types and paginate through the results. Results are returned in pages, with support for customizing the number of items per page.
+- [Reference Tables](https://developer.demandbase.com/reference/reference-tables.md)
+- [Get reference data for an object](https://developer.demandbase.com/reference/getreferencedata.md): Returns tenant-specific reference values for the requested object. This B2B API route is backed by the Data Export API reference service and accepts B2B API credentials.  Object names are case-insensitive.
+- [Company Intent](https://developer.demandbase.com/reference/company-intent.md): Retrieve company-level intent signals and research activity.
+- [Retrieve company intent data](https://developer.demandbase.com/reference/companyintent-1.md): Retrieves company intent signals filtered by company IDs, keyword set IDs, or keywords within a specified time range.  You can optionally filter by intent strength or the number of people researching and control pagination and sorting. At least one of `companyIds`, `keywordSetIds`, or `keywords` is required.
+- [Export fields](https://developer.demandbase.com/reference/fetchfields.md): The Fields endpoint returns a list of all fields available for specific data export jobs. For `campaign` and `creative` export jobs, the query parameter `adReportType` is required.
+- [Create export job (Account, Opportunity, Person, Activity, Campaign, and Creative)](https://developer.demandbase.com/reference/createexportjob.md): Creates a data export job for any supported entity type.
+- [Create account list export job](https://developer.demandbase.com/reference/fetchaccountlistjob.md)
+- [Create person list export job](https://developer.demandbase.com/reference/fetchpersonlistjob.md)
+- [Returns a list of submitted export jobs.](https://developer.demandbase.com/reference/fetchexportjobsinfo.md)
+- [Check status of a data export job](https://developer.demandbase.com/reference/checkexportjobstatus.md): Poll this endpoint until jobStatus is terminal. accepted and processing are non-terminal; continue polling. finished and failed are terminal. A finished job includes its download URL; a failed job does not produce a result file.
+- [Get available reference objects](https://developer.demandbase.com/reference/get-reference.md)
+- [Get reference data fields for an object](https://developer.demandbase.com/reference/get-support-object.md)
+- [CSV Record Matching and Data Mapping](https://developer.demandbase.com/reference/csv-data-mapping.md)
+- [Create an import job](https://developer.demandbase.com/reference/post_job.md): Create a new job to perform a Data Import. This is prerequisite before posting a file with records to be imported.
+- [Sources](https://developer.demandbase.com/reference/get_entitytype-sources.md): Returns a list of eligible sources.
+- [Submit import data](https://developer.demandbase.com/reference/put_job-id-data.md): This endpoint is used to submit the data file to an existing import job identified by the path parameter {id}.  Submitting the data file triggers the asynchronous processing of the data. You can monitor the progress and final status of the data processing using the dedicated job status endpoint.  Note: There is currently no limit to the number of rows you can upload per Submit request, however, files are limited to **5GB**.
+- [Job status](https://developer.demandbase.com/reference/get_job-id.md): Use this endpoint to retrieve the current status and relevant details of a specific data import job.  The job is identified by the unique path parameter {id} that was returned when the job was initially created.
+- [Jobs list](https://developer.demandbase.com/reference/get_jobs.md): Returns a list of import jobs. This provides an overview of all historical and current data import activities within the Demandbase platform.
+- [Create New Activity Type](https://developer.demandbase.com/reference/post_activity-type.md): Create a new activity type on your Demandbase tenant.
+- [List Activity Types](https://developer.demandbase.com/reference/get_activity-type.md): Get all activity types currently configured on your Demandbase tenant
+- [Activity Type Lookup](https://developer.demandbase.com/reference/get_activity-type-identifier.md): Retrieve details of an activity type for data import.
+- [Update Activity Type](https://developer.demandbase.com/reference/put_activity-type-activitytypeid.md): Update an existing activity type on your Demandbase tenant. Use the activity type ID in the URI (via `PUT /activity_type/{activityTypeId}`).
+- [Create new user](https://developer.demandbase.com/reference/post_admin-v1-user.md): <div style="background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;"> <h3>Overview</h3><br> Creates a new <strong>user</strong> within your Demandbase account. </div>
+- [Update users](https://developer.demandbase.com/reference/put-users.md): <div style="background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;"> <h3>Overview</h3><br> Updates an existing <strong>user</strong> within your Demandbase account. </div>
+- [Get list of users](https://developer.demandbase.com/reference/get_admin-v1-users.md): <div style="background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;"> <h3>Overview</h3><br> This endpoint allows you to retrieve users with pagination (max pageSize 100) and filters for departments, views, permissionSets, and workspaces. </div>
+- [Get a user by external id](https://developer.demandbase.com/reference/get_admin-v1-user-id.md): <div style="background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;"> <h3>Overview</h3><br> The Get Users By External ID API allows you to retrieve a specific user's data. </div>
+- [Delete user using external user id](https://developer.demandbase.com/reference/delete-users.md): <div style="background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;"> <h3>Overview</h3><br> Deletes an existing <strong>user</strong> from your Demandbase account. </div>
+- [Fetch Credit Usage details](https://developer.demandbase.com/reference/getcreditusagedetails.md): Returns a summary of credit usage and entitlements for the specified API category.
+- [List custom sources](https://developer.demandbase.com/reference/get_integration-v1-custom-sources.md): Returns a paginated list of sources, optionally filtered by source group.
+- [Create a custom source](https://developer.demandbase.com/reference/post_integration-v1-custom-sources.md): Creates a new custom source and returns the created resource.
+- [Get a custom source](https://developer.demandbase.com/reference/get_integration-v1-custom-sources-id.md): Returns a single source by its ID.
+- [Update a custom source](https://developer.demandbase.com/reference/put_integration-v1-custom-sources-id.md): Updates an existing source by its ID and returns the updated resource.
+- [Delete a custom source](https://developer.demandbase.com/reference/delete_integration-v1-custom-sources-id.md): Deletes an existing source by its ID.
+- [Get field mappings](https://developer.demandbase.com/reference/get_integration-v1-custom-sources-source-id-field-mappings-object-type.md): Returns the field mappings configured for the given source and object type.
+- [Upsert field mappings](https://developer.demandbase.com/reference/put_integration-v1-custom-sources-source-id-field-mappings-object-type.md): Creates or replaces the field mappings for the given source and object type. The full set of mappings provided in the request body replaces any existing mappings.
+
+## Changelog
+- [Developer Portal documentation accuracy improvements](https://developer.demandbase.com/changelog/developer-portal-documentation-accuracy-improvements.md)
+- [Demandbase MCP Adds Intent, Buying Groups, Account Briefs, and Net-New Contacts](https://developer.demandbase.com/changelog/demandbase-mcp-adds-intent-buying-groups-account-briefs-and-net-new-contacts.md)
+- [B2B - Contact Search Response Enhancements](https://developer.demandbase.com/changelog/contact-search-enhancements.md)
+- [New Beta Company Intent API](https://developer.demandbase.com/changelog/new-beta-company-intent-api.md)
+- [B2B API Documentation](https://developer.demandbase.com/changelog/b2b-api-documentation.md)
+- [Corrected Get Contact Details Documentation](https://developer.demandbase.com/changelog/corrected-get-contact-details-documentation.md)
+- [Account Lists Now Available in Demandbase MCP](https://developer.demandbase.com/changelog/title-account-lists-now-available-in-demandbase-mcp.md)

@@ -1,0 +1,692 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "B2B API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sync API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/contacts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this endpoint to search for individuals at specific companies. \n\nYou can filter contacts by details such as first name, last name, email, location, job title, job level, and job function. Company-level filters include company name, website, location, industry, size, and more. Additional parameters allow you to filter by quality score, email validation status, and phone requirements.\n\nSorting and pagination are supported. You can sort results by fields such as `companyName`, and control the n"
+        },
+        {
+          "info": {
+            "name": "Search companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/companies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this endpoint to search for companies based on a variety of attributes.\n\nYou can search companies by name, website, ticker, location (city, state, country, ZIP), industry classification (NAICS, SIC), or attributes like fiscal year end, business structure, and fortune ranking. \n\nAdditional filters let you set employee or revenue ranges, include only primary industry or SIC classifications, and apply diversity criteria (e.g., minority-owned or women-owned businesses). \n\nSorting and pagination "
+        },
+        {
+          "info": {
+            "name": "Fetch contact details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/contact/:contactId",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include in the response, e.g., other employment"
+              },
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "path",
+                "description": "Contact ID"
+              },
+              {
+                "name": "contactFields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated contact fields to return."
+              },
+              {
+                "name": "peopleFields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated person fields to return."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this endpoint to fetch detailed employment and personal information for a specific contact.\n\nRetrieve data such as job titles, phone numbers, job levels, salary ranges, social profiles, and education history.\n\nYou can control the response using query parameters to include specific fields or additional related data."
+        },
+        {
+          "info": {
+            "name": "Fetch company details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId",
+            "params": [
+              {
+                "name": "fields",
+                "value": "familytree,competitors",
+                "type": "query",
+                "description": "Comma-separated related-data expansions. Use `installedtech` to include technographics under `techUsed`."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for family tree results."
+              },
+              {
+                "name": "companyFields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated company fields to retrieve."
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Company ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this endpoint to fetch detailed information about a single company, including name, location, phone number, revenue, employee count, industry classification, and social media links.\n\nYou can optionally expand the response to include related data such as the company's family tree, competitors, installed technologies, and logos.\n\nInstalled technologies are returned under `techUsed`, grouped by category, subcategory, and product. The response includes taxonomy identifiers and display names; it "
+        },
+        {
+          "info": {
+            "name": "Fetch company news by category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/news",
+            "params": [
+              {
+                "name": "newsCategories",
+                "value": "",
+                "type": "query",
+                "description": "<a href='https://developer.demandbase.com/reference/reference-tables#news-categories-reference' target='_blank'>Allowed Values</a>"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Company ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this endpoint to fetch recent news articles related to a specific company.\n\nYou can filter articles by one or more news categories, such as acquisitions or leadership changes.\n\nPagination is supported to control the number of results per request."
+        },
+        {
+          "info": {
+            "name": "Fetch company news feed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/newsFeed",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Company ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this endpoint to return a paginated list of recent news articles for a specific company.\n\nUnlike the `/news` endpoint, this feed does not require specifying news categories. It provides a general stream of company-related articles."
+        },
+        {
+          "info": {
+            "name": "Fetch company logo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/logos/:logoSize",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "logoSize",
+                "value": "",
+                "type": "path",
+                "description": "Logo Size"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this endpoint to fetch a company's logo in PNG format at the requested size.\n\nSupported sizes are 100, 200, or 400 pixels.\n\nIf a logo in the specified size is not available, the API returns an error response."
+        },
+        {
+          "info": {
+            "name": "Match companies and contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/match",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint matches companies and contacts against Demandbase's database based on provided firmographic and contact details. This endpoint supports batch matching by accepting an array of match requests.\n\nEach object in the requests array must include a unique id and a useful combination of attributes for matching.\n\nAt a minimum, at least one of the following company identifiers is required:\n- `name`\n- `websites`\n- `email`\n- `executiveLinkedInHandle`"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Asynchronous (Batch) API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bulk Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/job/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the bulk job."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Check the status of a bulk job using its unique job ID. This endpoint supports all bulk job types, including Company Fetch, Contact Fetch, and Match. Once the job completes successfully, the response will contain a signed `resultsUrl` for downloading the results.\n\nImportant notes:\n- The `resultsUrl` is included **only when the job status is `finished`**\n- The URL remains valid for **24 hours**\n- If the job fails, an `errorMessage` field will be present in the response explaining the reason\n\n**CS"
+        },
+        {
+          "info": {
+            "name": "Match Companies and Contacts in Bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/match/job",
+            "params": [
+              {
+                "name": "jobName",
+                "value": "",
+                "type": "query",
+                "description": "Job name for the match job"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this endpoint to enrich company and contact records in bulk using a CSV file upload. Each row in the file represents one enrichment request and must match the supported field structure. This endpoint supports up to 10,000 records per job.\n\n**CSV Results Format:**\nThe completed job will return a CSV file with the following structure:\n- Input columns from your uploaded CSV are preserved\n- Additional columns are added for matched company data (companyId, name, city, state, country, matchScore, "
+        },
+        {
+          "info": {
+            "name": "Create a Bulk Data Retrieval Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/job",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "# Overview\nCreate and run asynchronous bulk jobs to retrieve company or contact data using entity IDs or search filters. This API is ideal for large data exports with a file-based CSV output.\n\nYou can submit up to **10,000 entity IDs** in a single request. The API initiates an asynchronous job and returns a `jobId` to track its status and retrieve results using the <a href=\"https://developer.demandbase.com/docs/3p-api/3nstx7v40nc9k-get-bulk-job-status\" target=\"_blank\">Job Status</a> API.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Subscription API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a New Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this endpoint to create a subscription for monitoring updates to companies or DB Person records. Subscriptions allow you to receive change alerts via webhook and access historical alerts via API.\n\nEach subscription is processed asynchronously. A jobId is returned on submission. Upon completion, the job will return a subscriptionId which can be used to fetch alerts or manage the subscription."
+        },
+        {
+          "info": {
+            "name": "Update an Existing Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this API to update an existing subscription. You must provide both the subscriptionId and subscriptionType to identify which subscription you want to modify. This endpoint supports partial and full updates, including:\n\n- Replacing all associated entity IDs with the subscription (e.g., company IDs or dbPerson IDs).\n- Incrementally adding or removing entity IDs in the subscription.\n- Updating other subscription details such as frequency, webhook URL, signing secret, fields, or news categories."
+        },
+        {
+          "info": {
+            "name": "Get Subscription Entity IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/entityIds",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination. Default is 1."
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page. Default is 5000, maximum is 5000."
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the subscription"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve all entity IDs (company or dbPerson) associated with a given subscription. The response is paginated and depends on the type of subscription:\n\n- For \"company\" or \"companyFamilyTree\" subscriptions, it returns Company IDs.\n- For \"dbPerson\" subscriptions, it returns Demandbase Person IDs.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Specific Subscription Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/alerts/:alertId",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination. Default is 1."
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page. Default is 5000, maximum is 5000."
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the subscription"
+              },
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the alert"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve detailed alert updates for a specific subscription using its subscription ID and alert ID. Use `List Subscription Alerts` API to fetch latest alerts.\n\nThis endpoint returns the specific fields or news categories that triggered the alert, depending on the type of subscription:\n\n- **company**: Returns a list of company IDs and the fields that changed (e.g., name, address).\n- **companynews**: Returns company IDs and related news articles with timestamps.\n- **companyfamilytree**:\n    - Iden"
+        },
+        {
+          "info": {
+            "name": "List Subscription Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/alerts",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination. Default is 1."
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page. Default is 10, maximum is 50."
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the subscription"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of alerts generated for the specified subscription ID. Each alert includes:\n- `alertId`: unique identifier for the alert\n- `createdAt`: timestamp of when the alert was generated\n\nResults are sorted in descending order of `createdAt` (most recent first).\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve Subscription Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the subscription"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch detailed information for a specific subscription using its subscription ID.\n\nThe response includes:\n- Subscription type (e.g., company, dbPerson, companyNews, companyFamilyTree)\n- Frequency and start date\n- Next scheduled notification time\n- Webhook configuration details (if applicable)\n- Tracked fields or subscribed news categories, depending on the subscription type\n"
+        },
+        {
+          "info": {
+            "name": "Delete a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the subscription"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Permanently delete a subscription using its subscription ID. This operation removes the subscription from the system and halts all future notifications or alerts related to it.\n"
+        },
+        {
+          "info": {
+            "name": "List Subscription Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/jobs",
+            "params": [
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "The time period type you want to filter jobs by.\n\nValid values:\n- day\n- month\n- year\n"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start day/month/year(inclusive) for the selected period.\n\nStart format depends on the period type:\n- day: YYYY-MM-DD  (e.g., 2024-09-01)\n- month: YYYY-MM   (e.g., 2024-09)\n- year: YYYY       (e.g., 2024)\n"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End day/month/year(inclusive) for the selected period.\n\nEnd format depends on the period type:\n- day: YYYY-MM-DD  (e.g., 2024-09-30)\n- month: YYYY-MM   (e.g., 2024-10)\n- year: YYYY       (e.g., 2025)\n"
+              },
+              {
+                "name": "jobStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter jobs by their status.\n\nValid values:\n- failed\n- accepted\n- processing\n- finished\n"
+              },
+              {
+                "name": "jobType",
+                "value": "",
+                "type": "query",
+                "description": "Type of subscription job to filter by.\n\nValid values:\n- notificationSubscriptionCreate\n- notificationSubscriptionUpdate\n"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve. Must be 1 or higher."
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 50)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of all subscription jobs created by your tenant. Results are returned in descending order by creation time (`createdAt`). You can apply filters based on time period, date range, job status, and job type.\n\nPeriod can be specified as `day`, `month`, or `year`. If `day` is selected, you can specify a range of days (e.g., 2024-09-01 to 2024-09-07). For `month`, you can specify a range of months (e.g., 2024-09 to 2024-10). For `year`, you can specify a range of years (e.g., "
+        },
+        {
+          "info": {
+            "name": "Check Subscription Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "Job ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the current status of a bulk subscription job using its unique job ID.\nAfter you submit a create or update subscription job request, you’ll receive a job ID.\nThis endpoint allows you to monitor that job’s progress and determine whether it has completed successfully.\n\nIf the job completes, the response will include the generated subscriptionId—which you can use to manage the subscription.\nIf the job fails, the response will contain error details explaining what went wrong.\n"
+        },
+        {
+          "info": {
+            "name": "List Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/subscriptions",
+            "params": [
+              {
+                "name": "subscriptionType",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of subscription types to filter the results. Valid values include: company, companyNews, dbPerson, companyFamilyTree."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination. Default is 1."
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page. Default is 10, maximum is 50."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a list of all subscriptions associated with your tenant.\nYou can filter results by one or more subscription types and paginate through the results.\nResults are returned in pages, with support for customizing the number of items per page.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reference Tables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get reference data for an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/data/b2b/v1/reference/:object",
+            "params": [
+              {
+                "name": "object",
+                "value": "",
+                "type": "path",
+                "description": "Reference object to retrieve."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns tenant-specific reference values for the requested object. This B2B API route is backed by the Data Export API reference service and accepts B2B API credentials.\n\nObject names are case-insensitive."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

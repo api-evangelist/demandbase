@@ -1,42 +1,110 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/demandbase-account-list-openapi.yml, openapi/demandbase-admin-openapi.yml, openapi/demandbase-advertising-openapi.yml,
-  openapi/demandbase-api-openapi.yml, openapi/demandbase-b2b-data-openapi.yml, openapi/demandbase-data-export-openapi.yml,
-  openapi/demandbase-data-import-openapi.yml, openapi/demandbase-engagement-openapi.yml, openapi/demandbase-ip-openapi.yml,
-  openapi/demandbase-real-time-identification-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: openapi/_original/*.json (8 harvested Demandbase OpenAPI definitions)
+docs:
+  - https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - https://developer.demandbase.com/docs/migrating-from-legacy-tokens-to-api-keysets
+  - https://developer.demandbase.com/reference/generate_access_token
+  - https://developer.demandbase.com/docs/custom-mcp-clients
+note: >-
+  Demandbase runs two distinct authentication models on two distinct surfaces, and they do
+  not share credentials. The REST platform APIs use an OAuth 2.0 client-credentials exchange
+  against its own token endpoint and then a plain HTTP bearer token. The MCP gateway uses a
+  full OAuth 2.1 authorization-code + PKCE flow with dynamic client registration against an
+  Okta-backed authorization server. Both are recorded below.
 summary:
-  types:
-  - apiKey
-  - http
-  api_key_in:
-  - header
-  - query
+  types: [http, oauth2]
+  http_schemes: [bearer]
+  oauth2_flows: [clientCredentials, authorizationCode]
+  api_key_in: []
+  mtls: false
+  openid_connect: true
 schemes:
-- name: bearerAuth
-  type: http
-  scheme: bearer
-  bearerFormat: JWT
-  description: OAuth 2.0 bearer token for API access
-  sources:
-  - openapi/demandbase-account-list-openapi.yml
-  - openapi/demandbase-admin-openapi.yml
-  - openapi/demandbase-advertising-openapi.yml
-  - openapi/demandbase-data-export-openapi.yml
-  - openapi/demandbase-data-import-openapi.yml
-  - openapi/demandbase-engagement-openapi.yml
-- name: apiKeyAuth
-  type: apiKey
-  in: header
-  parameter: Authorization
-  description: API key provided as a bearer token in the Authorization header
-  sources:
-  - openapi/demandbase-api-openapi.yml
-  - openapi/demandbase-b2b-data-openapi.yml
-- name: apiKeyAuth
-  type: apiKey
-  in: query
-  parameter: key
-  description: Demandbase API key passed as query parameter
-  sources:
-  - openapi/demandbase-ip-openapi.yml
-  - openapi/demandbase-real-time-identification-openapi.yml
+  - name: token
+    type: http
+    scheme: bearer
+    description: >-
+      Bearer access token obtained from POST /auth/v1/token. Named `token` in the Admin,
+      Data Export and Auth specs and `bearerAuth` in the B2B, Import, Intent, Usage and
+      Custom Sources specs — the same credential either way.
+    sources:
+      - openapi/demandbase-admin-openapi.yml
+      - openapi/demandbase-b2b-openapi.yml
+      - openapi/demandbase-custom-sources-openapi.yml
+      - openapi/demandbase-data-export-openapi.yml
+      - openapi/demandbase-data-import-openapi.yml
+      - openapi/demandbase-intent-openapi.yml
+      - openapi/demandbase-usage-openapi.yml
+    docs: https://developer.demandbase.com/docs/auth-api
+token_exchange:
+  endpoint: https://uapi.demandbase.com/auth/v1/token
+  method: POST
+  operation: openapi/demandbase-auth-openapi.yml#POST /auth/v1/token
+  content_type: application/json
+  request:
+    grantType: client_credentials
+    clientId: <API Key Set client ID>
+    clientSecret: <API Key Set client secret>
+  response:
+    accessToken: bearer token for authenticated API calls
+    tokenType: bearer
+    expiresIn: 28800
+  usage: 'Authorization: Bearer <access-token>'
+  warning: Do not send the Client Secret directly in the Authorization header.
+credentials:
+  container: API Key Set
+  scope: >-
+    Platform-level, not user-level. An API Key Set is a named permission container for one
+    integration; permissions are explicitly assigned to it and survive changes to any
+    individual user.
+  management: https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Sets
+  rotation: >-
+    Demandbase recommends one API Key Set per independent workload or trust boundary so
+    credentials can be rotated per integration.
+  legacy:
+    name: Legacy API token
+    shape: A single user-scoped token sent directly as the bearer token.
+    risk: >-
+      Because it is tied to an individual user's profile, deactivating that user breaks
+      every integration using the token.
+    migration: https://developer.demandbase.com/docs/migrating-from-legacy-tokens-to-api-keysets
+    sunset_date: null
+mcp_authentication:
+  surface: https://gateway.demandbase.com/mcp/servers/db-mcp
+  scheme: OAuth 2.1 authorization code + PKCE (S256)
+  dynamic_client_registration: true
+  registration_endpoint: https://gateway.demandbase.com/mcp/v1/register
+  issuer: https://authentication.demandbase.com/oauth2/aus7fu7m8kDj90Z532p7
+  authorization_endpoint: https://authentication.demandbase.com/oauth2/aus7fu7m8kDj90Z532p7/v1/authorize
+  token_endpoint: https://authentication.demandbase.com/oauth2/aus7fu7m8kDj90Z532p7/v1/token
+  token_endpoint_auth_methods_supported: [none]
+  scopes_supported: [openid, profile, email, offline_access]
+  resource: https://gateway.demandbase.com/mcp/
+  protected_resource_metadata: https://gateway.demandbase.com/.well-known/oauth-protected-resource
+  challenge: >-
+    An unauthenticated request returns HTTP 401 with
+    WWW-Authenticate: Bearer resource_metadata="…/.well-known/oauth-protected-resource",
+    which is the RFC 9728 discovery bootstrap an MCP client needs.
+  guidance: >-
+    Demandbase explicitly instructs clients not to hardcode the authorization or token
+    endpoints, and to key stored registrations and tokens on the discovered issuer.
+  docs: https://developer.demandbase.com/docs/custom-mcp-clients
+identity_provider:
+  host: authentication.demandbase.com
+  vendor: Okta
+  openid_configuration: well-known/demandbase-auth-openid-configuration.json
+  oauth_authorization_server: well-known/demandbase-auth-oauth-authorization-server.json
+authorization:
+  model: >-
+    Access is governed by Permission Sets in Demandbase One, including a dedicated MCP tab
+    with Full Access / Limited Access (Demandbase Data and/or Your Data) / No Access. Data
+    Export access is additionally gated by the tenant's Export Collection (1-4), which
+    determines which entity types and fields may be requested at all.
+  docs:
+    - https://support.demandbase.com/hc/en-us/articles/4408096198811-Understanding-Permission-Sets
+    - https://developer.demandbase.com/docs/collections
+related:
+  - scopes/demandbase-scopes.yml
+  - conventions/demandbase-conventions.yml
+  - well-known/demandbase-well-known.yml
+  - mcp/demandbase-mcp.yml

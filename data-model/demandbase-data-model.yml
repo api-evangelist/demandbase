@@ -1,0 +1,1350 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/*.json (8 harvested Demandbase OpenAPI definitions)
+note: 'Entity-relationship graph derived from $ref links and *Id reference fields across the eight Demandbase OpenAPI definitions.
+  belongs_to rows carrying inferred: true were read from an id-suffixed field name and have no $ref to confirm the target
+  schema exists — they are a naming-convention inference, not a declared relationship. Demandbase publishes no standalone
+  object reference, so nothing here is enriched from docs.'
+core_entities:
+- Company
+- Contact
+- Account
+- Subscription
+- Job
+- ActivityType
+- CustomSource
+- User
+identifiers:
+  companyId: Demandbase company ID (numeric, e.g. 726263)
+  contactId: Demandbase contact ID
+  dbPerson: Demandbase Person ID
+  jobId: Asynchronous job identifier returned on 202
+  subscriptionId: Change-subscription identifier
+  alertId: Subscription alert identifier
+  accountListId: Tenant account-list identifier
+  personListId: Tenant person-list identifier
+  keywordSetId: Intent keyword-set identifier
+entity_count: 118
+relationship_count: 120
+entities:
+- name: CompanySearchRequestDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 40
+  id_fields: []
+- name: CompanyFetchResponseDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 36
+  id_fields:
+  - companyId
+  - equifaxId
+  - companyTaxId
+  - currentCompanyId
+  - companyCompetitorIds
+- name: ContactSearchRequestDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 31
+  id_fields: []
+- name: MatchRequest
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 20
+  id_fields:
+  - id
+- name: EmploymentDetails
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 15
+  id_fields:
+  - contactId
+  - companyId
+- name: UpdateSubscriptionJobRequestDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 15
+  id_fields:
+  - companyIds
+  - addCompanyIds
+  - removeCompanyIds
+  - dbPersonIds
+  - addDBPersonIds
+  - removeDBPersonIds
+  - subscriptionId
+- name: IntentRequest
+  api: Intent API
+  source: openapi/demandbase-intent-openapi.yml
+  field_count: 12
+  id_fields:
+  - companyIds
+  - keywordSetIds
+- name: IntentResult
+  api: Intent API
+  source: openapi/demandbase-intent-openapi.yml
+  field_count: 12
+  id_fields:
+  - companyId
+  - keywordSetId
+- name: CreateSubscriptionJobRequestDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 11
+  id_fields:
+  - companyIds
+  - dbPersonIds
+- name: JobRequestBody
+  api: Data Export API
+  source: openapi/demandbase-data-export-openapi.yml
+  field_count: 11
+  id_fields:
+  - accountListIds
+  - personListIds
+- name: AddressDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 10
+  id_fields: []
+- name: DBPersonDetails
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 10
+  id_fields:
+  - dbPersonId
+- name: EmploymentDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 10
+  id_fields:
+  - contactId
+  - companyId
+- name: SubscriptionDetailsResponse
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 10
+  id_fields: []
+- name: Employments
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 9
+  id_fields:
+  - contactId
+  - companyId
+- name: GetAlertDefinitionDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 9
+  id_fields: []
+- name: GetUserResponse
+  api: Admin API
+  source: openapi/demandbase-admin-openapi.yml
+  field_count: 9
+  id_fields:
+  - externalIds
+- name: NewUserResponse
+  api: Admin API
+  source: openapi/demandbase-admin-openapi.yml
+  field_count: 9
+  id_fields:
+  - externalId
+- name: UserListItem
+  api: Admin API
+  source: openapi/demandbase-admin-openapi.yml
+  field_count: 9
+  id_fields:
+  - externalIds
+- name: BulkJobStatusDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 8
+  id_fields:
+  - jobId
+- name: BulkSubscriptionJobStatusResponseDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 8
+  id_fields:
+  - jobId
+  - subscriptionId
+  - invalidIds
+- name: CompanyAddressDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 8
+  id_fields: []
+- name: DataImportJob
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 8
+  id_fields:
+  - id
+  - activityTypeId
+- name: JobStatus
+  api: Data Export API
+  source: openapi/demandbase-data-export-openapi.yml
+  field_count: 8
+  id_fields:
+  - jobId
+- name: SubscriptionJobResponseDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 7
+  id_fields:
+  - jobId
+  - subscriptionId
+- name: CampaignExportJob
+  api: Data Export API
+  source: openapi/demandbase-data-export-openapi.yml
+  field_count: 6
+  id_fields:
+  - campaignId
+  - accountId
+- name: CompanyNewsArticle
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 6
+  id_fields: []
+- name: CreativeExportJob
+  api: Data Export API
+  source: openapi/demandbase-data-export-openapi.yml
+  field_count: 6
+  id_fields:
+  - creativeId
+  - campaignId
+- name: DiversityCertificationsDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 6
+  id_fields: []
+- name: FamilyTreeChangeEventDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 6
+  id_fields:
+  - companyId
+  - newUltimateParentCompanyId
+  - currentCompanyId
+- name: JobRequestDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 6
+  id_fields: []
+- name: SubscriptionEntityDetailsDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 6
+  id_fields:
+  - companyIds
+  - dbPersonIds
+- name: User
+  api: Admin API
+  source: openapi/demandbase-admin-openapi.yml
+  field_count: 6
+  id_fields:
+  - externalId
+- name: CompanyDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 5
+  id_fields:
+  - companyId
+- name: CompanyNewsResponseDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 5
+  id_fields:
+  - companyId
+- name: CreditUsageSummary
+  api: Usage API
+  source: openapi/demandbase-usage-openapi.yml
+  field_count: 5
+  id_fields: []
+- name: GetAlertsResponseDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 5
+  id_fields: []
+- name: JobDetails
+  api: Data Export API
+  source: openapi/demandbase-data-export-openapi.yml
+  field_count: 5
+  id_fields:
+  - jobId
+- name: MatchRequestDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 5
+  id_fields: []
+- name: PersonDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 5
+  id_fields:
+  - dbPersonId
+- name: SourceItem
+  api: Custom Sources API
+  source: openapi/demandbase-custom-sources-openapi.yml
+  field_count: 5
+  id_fields:
+  - id
+- name: SubscriptionDetailsDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 5
+  id_fields:
+  - subscriptionId
+- name: SubscriptionJobsListDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 5
+  id_fields:
+  - jobId
+  - subscriptionId
+- name: SubscriptionJobsListResponseDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 5
+  id_fields: []
+- name: SubscriptionListResponse
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 5
+  id_fields: []
+- name: BusinessDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 4
+  id_fields: []
+- name: CompanyNewsAlertData
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 4
+  id_fields:
+  - companyId
+- name: CompanySearchResponseDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 4
+  id_fields: []
+- name: ContactAlertData
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 4
+  id_fields:
+  - dbPersonId
+- name: ContactSearchResponseDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 4
+  id_fields: []
+- name: CreateDataImportJob
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 4
+  id_fields:
+  - activityTypeId
+- name: CustomActivityField
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 4
+  id_fields: []
+- name: CustomActivityType
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 4
+  id_fields:
+  - id
+- name: FamilyTreeAlertData
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 4
+  id_fields:
+  - companyId
+  - currentCompanyId
+- name: Field
+  api: Data Export API
+  source: openapi/demandbase-data-export-openapi.yml
+  field_count: 4
+  id_fields: []
+- name: JobDetailsList
+  api: Data Export API
+  source: openapi/demandbase-data-export-openapi.yml
+  field_count: 4
+  id_fields: []
+- name: SocialHandlesDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 4
+  id_fields: []
+- name: WebhookDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 4
+  id_fields: []
+- name: AccountListExportJob
+  api: Data Export API
+  source: openapi/demandbase-data-export-openapi.yml
+  field_count: 3
+  id_fields:
+  - accountListId
+  - accountListIds
+- name: CompanyAlertData
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 3
+  id_fields:
+  - companyId
+- name: ContactFetchResponseDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: CreateSourceRequest
+  api: Custom Sources API
+  source: openapi/demandbase-custom-sources-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: CustomActivity
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: DiversityDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: Education
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: EmploymentAlertData
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 3
+  id_fields:
+  - contactId
+- name: ErrorDto
+  api: Data Export API
+  source: openapi/demandbase-data-export-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: ErrorResponse
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: ErrorResponse
+  api: Intent API
+  source: openapi/demandbase-intent-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: FieldDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: FieldMappingDTO
+  api: Custom Sources API
+  source: openapi/demandbase-custom-sources-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: Filter
+  api: Data Export API
+  source: openapi/demandbase-data-export-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: MatchResponse
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 3
+  id_fields:
+  - id
+- name: Pagination
+  api: Intent API
+  source: openapi/demandbase-intent-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: SocialHandles
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: TechUsedCategoryDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 3
+  id_fields:
+  - categoryId
+- name: TechUsedSubCategoryDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 3
+  id_fields:
+  - subCategoryId
+- name: UpdateSourceRequest
+  api: Custom Sources API
+  source: openapi/demandbase-custom-sources-openapi.yml
+  field_count: 3
+  id_fields: []
+- name: ActivityType
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 2
+  id_fields:
+  - id
+- name: AlertResponseDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields:
+  - alertId
+- name: BritishSicDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: ClassificationDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: ContactResultsDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: CustomActivityData
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: DataImportJobs
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: EmailDetails
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: ErrorDto
+  api: Admin API
+  source: openapi/demandbase-admin-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: FamilyTreeResultDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: GetSourcesResponse
+  api: Custom Sources API
+  source: openapi/demandbase-custom-sources-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: IntentResponse
+  api: Intent API
+  source: openapi/demandbase-intent-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: JobFilter
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: JobFunctions
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields:
+  - id
+- name: JobFunctionsV2
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields:
+  - id
+- name: JobLevels
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields:
+  - id
+- name: JobLevelsV2
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields:
+  - id
+- name: PersonListExportJob
+  api: Data Export API
+  source: openapi/demandbase-data-export-openapi.yml
+  field_count: 2
+  id_fields:
+  - personListIds
+- name: PhoneNumbers
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: ReferenceDataResponseDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: SubscriptionDeleteResponse
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields:
+  - subscriptionId
+- name: TechUsedProductDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields:
+  - productId
+- name: TickerDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: UserListResponse
+  api: Admin API
+  source: openapi/demandbase-admin-openapi.yml
+  field_count: 2
+  id_fields: []
+- name: AcquiredCompanyResultDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: BadRequest
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: CompanyMatchDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: CompanyTechUsedDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: ContactMatchDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: CreditUsage
+  api: Usage API
+  source: openapi/demandbase-usage-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: Error
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: FieldMappingRequest
+  api: Custom Sources API
+  source: openapi/demandbase-custom-sources-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: FieldMappingsResponse
+  api: Custom Sources API
+  source: openapi/demandbase-custom-sources-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: ForbiddenError
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: MatchResponseDTO
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: NotFound
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: StructuredError
+  api: Custom Sources API
+  source: openapi/demandbase-custom-sources-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: UnauthorizedError
+  api: Data Import API
+  source: openapi/demandbase-data-import-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: UnauthorizedResponse
+  api: B2B API
+  source: openapi/demandbase-b2b-openapi.yml
+  field_count: 1
+  id_fields: []
+- name: UnauthorizedResponse
+  api: Intent API
+  source: openapi/demandbase-intent-openapi.yml
+  field_count: 1
+  id_fields: []
+relationships:
+- from: User
+  to: External
+  type: belongs_to
+  via: externalId
+  source: openapi/demandbase-admin-openapi.yml
+  inferred: true
+- from: NewUserResponse
+  to: External
+  type: belongs_to
+  via: externalId
+  source: openapi/demandbase-admin-openapi.yml
+  inferred: true
+- from: UserListResponse
+  to: UserListItem
+  type: has_many
+  via: data
+  source: openapi/demandbase-admin-openapi.yml
+- from: ContactSearchResponseDTO
+  to: ContactResultsDTO
+  type: has_many
+  via: contactResults
+  source: openapi/demandbase-b2b-openapi.yml
+- from: ContactResultsDTO
+  to: PersonDTO
+  type: has_one
+  via: dbPersonDetails
+  source: openapi/demandbase-b2b-openapi.yml
+- from: ContactResultsDTO
+  to: EmploymentDTO
+  type: has_one
+  via: employmentDetails
+  source: openapi/demandbase-b2b-openapi.yml
+- from: PersonDTO
+  to: DbPerson
+  type: belongs_to
+  via: dbPersonId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: EmploymentDTO
+  to: Contact
+  type: belongs_to
+  via: contactId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: EmploymentDTO
+  to: Company
+  type: belongs_to
+  via: companyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: EmploymentDTO
+  to: JobLevelsV2
+  type: has_many
+  via: jobLevels
+  source: openapi/demandbase-b2b-openapi.yml
+- from: EmploymentDTO
+  to: JobFunctionsV2
+  type: has_many
+  via: jobFunctions
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanySearchResponseDTO
+  to: CompanyDTO
+  type: has_many
+  via: companies
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyDTO
+  to: Company
+  type: belongs_to
+  via: companyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: ContactFetchResponseDTO
+  to: DBPersonDetails
+  type: has_one
+  via: dbPersonDetails
+  source: openapi/demandbase-b2b-openapi.yml
+- from: ContactFetchResponseDTO
+  to: EmploymentDetails
+  type: has_one
+  via: employmentDetails
+  source: openapi/demandbase-b2b-openapi.yml
+- from: ContactFetchResponseDTO
+  to: Employments
+  type: has_many
+  via: employmentHistoryList
+  source: openapi/demandbase-b2b-openapi.yml
+- from: DBPersonDetails
+  to: DbPerson
+  type: belongs_to
+  via: dbPersonId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: DBPersonDetails
+  to: Education
+  type: has_many
+  via: educationList
+  source: openapi/demandbase-b2b-openapi.yml
+- from: DBPersonDetails
+  to: SocialHandles
+  type: has_one
+  via: socialHandles
+  source: openapi/demandbase-b2b-openapi.yml
+- from: DBPersonDetails
+  to: AddressDTO
+  type: has_one
+  via: address
+  source: openapi/demandbase-b2b-openapi.yml
+- from: EmploymentDetails
+  to: Contact
+  type: belongs_to
+  via: contactId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: EmploymentDetails
+  to: Company
+  type: belongs_to
+  via: companyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: EmploymentDetails
+  to: EmailDetails
+  type: has_many
+  via: emails
+  source: openapi/demandbase-b2b-openapi.yml
+- from: EmploymentDetails
+  to: PhoneNumbers
+  type: has_one
+  via: phoneNumbers
+  source: openapi/demandbase-b2b-openapi.yml
+- from: EmploymentDetails
+  to: JobLevels
+  type: has_many
+  via: jobLevels
+  source: openapi/demandbase-b2b-openapi.yml
+- from: EmploymentDetails
+  to: JobFunctions
+  type: has_many
+  via: jobFunctions
+  source: openapi/demandbase-b2b-openapi.yml
+- from: Employments
+  to: Contact
+  type: belongs_to
+  via: contactId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: Employments
+  to: Company
+  type: belongs_to
+  via: companyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: Employments
+  to: PhoneNumbers
+  type: has_one
+  via: phoneNumbers
+  source: openapi/demandbase-b2b-openapi.yml
+- from: Employments
+  to: JobLevels
+  type: has_many
+  via: jobLevels
+  source: openapi/demandbase-b2b-openapi.yml
+- from: Employments
+  to: JobFunctions
+  type: has_many
+  via: jobFunctions
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyFetchResponseDTO
+  to: Company
+  type: belongs_to
+  via: companyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: CompanyFetchResponseDTO
+  to: TickerDTO
+  type: has_many
+  via: tickers
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyFetchResponseDTO
+  to: ClassificationDTO
+  type: has_one
+  via: classification
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyFetchResponseDTO
+  to: CompanyAddressDTO
+  type: has_one
+  via: address
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyFetchResponseDTO
+  to: Equifax
+  type: belongs_to
+  via: equifaxId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: CompanyFetchResponseDTO
+  to: CompanyTax
+  type: belongs_to
+  via: companyTaxId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: CompanyFetchResponseDTO
+  to: BritishSicDTO
+  type: has_many
+  via: britishSics
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyFetchResponseDTO
+  to: SocialHandlesDTO
+  type: has_one
+  via: socialHandles
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyFetchResponseDTO
+  to: DiversityDTO
+  type: has_one
+  via: diversity
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyFetchResponseDTO
+  to: CurrentCompany
+  type: belongs_to
+  via: currentCompanyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: CompanyFetchResponseDTO
+  to: FamilyTreeResultDTO
+  type: has_one
+  via: familyTree
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyFetchResponseDTO
+  to: AcquiredCompanyResultDTO
+  type: has_one
+  via: acquisitions
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyFetchResponseDTO
+  to: CompanyTechUsedDTO
+  type: has_one
+  via: techUsed
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyFetchResponseDTO
+  to: CompanyDTO
+  type: has_many
+  via: competitors
+  source: openapi/demandbase-b2b-openapi.yml
+- from: ClassificationDTO
+  to: BusinessDTO
+  type: has_one
+  via: primaryBusiness
+  source: openapi/demandbase-b2b-openapi.yml
+- from: ClassificationDTO
+  to: BusinessDTO
+  type: has_many
+  via: secondaryBusinesses
+  source: openapi/demandbase-b2b-openapi.yml
+- from: DiversityDTO
+  to: DiversityCertificationsDTO
+  type: has_one
+  via: certifications
+  source: openapi/demandbase-b2b-openapi.yml
+- from: FamilyTreeResultDTO
+  to: CompanyDTO
+  type: has_one
+  via: company
+  source: openapi/demandbase-b2b-openapi.yml
+- from: FamilyTreeResultDTO
+  to: FamilyTreeResultDTO
+  type: has_many
+  via: children
+  source: openapi/demandbase-b2b-openapi.yml
+- from: AcquiredCompanyResultDTO
+  to: CompanyDTO
+  type: has_many
+  via: companies
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyTechUsedDTO
+  to: TechUsedCategoryDTO
+  type: has_many
+  via: categories
+  source: openapi/demandbase-b2b-openapi.yml
+- from: TechUsedCategoryDTO
+  to: Category
+  type: belongs_to
+  via: categoryId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: TechUsedCategoryDTO
+  to: TechUsedSubCategoryDTO
+  type: has_many
+  via: subCategories
+  source: openapi/demandbase-b2b-openapi.yml
+- from: TechUsedSubCategoryDTO
+  to: SubCategory
+  type: belongs_to
+  via: subCategoryId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: TechUsedSubCategoryDTO
+  to: TechUsedProductDTO
+  type: has_many
+  via: products
+  source: openapi/demandbase-b2b-openapi.yml
+- from: TechUsedProductDTO
+  to: Product
+  type: belongs_to
+  via: productId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: CompanyNewsResponseDTO
+  to: CompanyNewsArticle
+  type: has_many
+  via: companyNews
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyNewsResponseDTO
+  to: Company
+  type: belongs_to
+  via: companyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: MatchRequestDTO
+  to: MatchRequest
+  type: has_many
+  via: requests
+  source: openapi/demandbase-b2b-openapi.yml
+- from: MatchResponseDTO
+  to: MatchResponse
+  type: has_many
+  via: matches
+  source: openapi/demandbase-b2b-openapi.yml
+- from: MatchResponse
+  to: CompanyMatchDTO
+  type: has_many
+  via: companyMatches
+  source: openapi/demandbase-b2b-openapi.yml
+- from: MatchResponse
+  to: ContactMatchDTO
+  type: has_many
+  via: contactMatches
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyMatchDTO
+  to: CompanyFetchResponseDTO
+  type: has_one
+  via: company
+  source: openapi/demandbase-b2b-openapi.yml
+- from: ContactMatchDTO
+  to: ContactFetchResponseDTO
+  type: has_one
+  via: contact
+  source: openapi/demandbase-b2b-openapi.yml
+- from: BulkJobStatusDTO
+  to: Job
+  type: belongs_to
+  via: jobId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: JobRequestDTO
+  to: JobFilter
+  type: has_many
+  via: filters
+  source: openapi/demandbase-b2b-openapi.yml
+- from: UpdateSubscriptionJobRequestDTO
+  to: Subscription
+  type: belongs_to
+  via: subscriptionId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: SubscriptionJobResponseDTO
+  to: Job
+  type: belongs_to
+  via: jobId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: SubscriptionJobResponseDTO
+  to: Subscription
+  type: belongs_to
+  via: subscriptionId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: GetAlertDefinitionDTO
+  to: CompanyAlertData
+  type: has_many
+  via: companyAlertDetails
+  source: openapi/demandbase-b2b-openapi.yml
+- from: GetAlertDefinitionDTO
+  to: CompanyNewsAlertData
+  type: has_many
+  via: companyNewsAlertDetails
+  source: openapi/demandbase-b2b-openapi.yml
+- from: GetAlertDefinitionDTO
+  to: ContactAlertData
+  type: has_many
+  via: dbPersonAlertDetails
+  source: openapi/demandbase-b2b-openapi.yml
+- from: GetAlertDefinitionDTO
+  to: FamilyTreeAlertData
+  type: has_many
+  via: companyFamilyTreeAlertDetails
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyAlertData
+  to: Company
+  type: belongs_to
+  via: companyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: CompanyAlertData
+  to: FieldDTO
+  type: has_many
+  via: fieldChanges
+  source: openapi/demandbase-b2b-openapi.yml
+- from: CompanyNewsAlertData
+  to: Company
+  type: belongs_to
+  via: companyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: ContactAlertData
+  to: DbPerson
+  type: belongs_to
+  via: dbPersonId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: ContactAlertData
+  to: EmploymentAlertData
+  type: has_many
+  via: employments
+  source: openapi/demandbase-b2b-openapi.yml
+- from: ContactAlertData
+  to: FieldDTO
+  type: has_many
+  via: fieldChanges
+  source: openapi/demandbase-b2b-openapi.yml
+- from: EmploymentAlertData
+  to: Contact
+  type: belongs_to
+  via: contactId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: EmploymentAlertData
+  to: FieldDTO
+  type: has_many
+  via: fieldChanges
+  source: openapi/demandbase-b2b-openapi.yml
+- from: FamilyTreeAlertData
+  to: Company
+  type: belongs_to
+  via: companyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: FamilyTreeAlertData
+  to: CurrentCompany
+  type: belongs_to
+  via: currentCompanyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: FamilyTreeAlertData
+  to: FamilyTreeChangeEventDTO
+  type: has_one
+  via: companyFamilyTreeChanges
+  source: openapi/demandbase-b2b-openapi.yml
+- from: FamilyTreeChangeEventDTO
+  to: Company
+  type: belongs_to
+  via: companyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: FamilyTreeChangeEventDTO
+  to: NewUltimateParentCompany
+  type: belongs_to
+  via: newUltimateParentCompanyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: FamilyTreeChangeEventDTO
+  to: CurrentCompany
+  type: belongs_to
+  via: currentCompanyId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: SubscriptionDetailsResponse
+  to: WebhookDTO
+  type: has_one
+  via: webhook
+  source: openapi/demandbase-b2b-openapi.yml
+- from: GetAlertsResponseDTO
+  to: AlertResponseDTO
+  type: has_many
+  via: alerts
+  source: openapi/demandbase-b2b-openapi.yml
+- from: AlertResponseDTO
+  to: Alert
+  type: belongs_to
+  via: alertId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: SubscriptionDeleteResponse
+  to: Subscription
+  type: belongs_to
+  via: subscriptionId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: SubscriptionJobsListResponseDTO
+  to: SubscriptionJobsListDTO
+  type: has_many
+  via: subscriptionJobs
+  source: openapi/demandbase-b2b-openapi.yml
+- from: SubscriptionJobsListDTO
+  to: Job
+  type: belongs_to
+  via: jobId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: SubscriptionJobsListDTO
+  to: Subscription
+  type: belongs_to
+  via: subscriptionId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: BulkSubscriptionJobStatusResponseDTO
+  to: Job
+  type: belongs_to
+  via: jobId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: BulkSubscriptionJobStatusResponseDTO
+  to: Subscription
+  type: belongs_to
+  via: subscriptionId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: SubscriptionListResponse
+  to: SubscriptionDetailsDTO
+  type: has_many
+  via: subscriptions
+  source: openapi/demandbase-b2b-openapi.yml
+- from: SubscriptionDetailsDTO
+  to: Subscription
+  type: belongs_to
+  via: subscriptionId
+  source: openapi/demandbase-b2b-openapi.yml
+  inferred: true
+- from: GetSourcesResponse
+  to: SourceItem
+  type: has_many
+  via: data
+  source: openapi/demandbase-custom-sources-openapi.yml
+- from: FieldMappingsResponse
+  to: FieldMappingDTO
+  type: has_many
+  via: fieldMappings
+  source: openapi/demandbase-custom-sources-openapi.yml
+- from: FieldMappingRequest
+  to: FieldMappingDTO
+  type: has_many
+  via: fieldMappings
+  source: openapi/demandbase-custom-sources-openapi.yml
+- from: JobRequestBody
+  to: Filter
+  type: has_many
+  via: filters
+  source: openapi/demandbase-data-export-openapi.yml
+- from: JobDetails
+  to: Job
+  type: belongs_to
+  via: jobId
+  source: openapi/demandbase-data-export-openapi.yml
+  inferred: true
+- from: AccountListExportJob
+  to: AccountList
+  type: belongs_to
+  via: accountListId
+  source: openapi/demandbase-data-export-openapi.yml
+  inferred: true
+- from: JobStatus
+  to: Job
+  type: belongs_to
+  via: jobId
+  source: openapi/demandbase-data-export-openapi.yml
+  inferred: true
+- from: CampaignExportJob
+  to: Campaign
+  type: belongs_to
+  via: campaignId
+  source: openapi/demandbase-data-export-openapi.yml
+  inferred: true
+- from: CampaignExportJob
+  to: Account
+  type: belongs_to
+  via: accountId
+  source: openapi/demandbase-data-export-openapi.yml
+  inferred: true
+- from: CreativeExportJob
+  to: Creative
+  type: belongs_to
+  via: creativeId
+  source: openapi/demandbase-data-export-openapi.yml
+  inferred: true
+- from: CreativeExportJob
+  to: Campaign
+  type: belongs_to
+  via: campaignId
+  source: openapi/demandbase-data-export-openapi.yml
+  inferred: true
+- from: CreateDataImportJob
+  to: ActivityType
+  type: belongs_to
+  via: activityTypeId
+  source: openapi/demandbase-data-import-openapi.yml
+  inferred: true
+- from: DataImportJob
+  to: ActivityType
+  type: belongs_to
+  via: activityTypeId
+  source: openapi/demandbase-data-import-openapi.yml
+  inferred: true
+- from: DataImportJobs
+  to: DataImportJob
+  type: has_many
+  via: data
+  source: openapi/demandbase-data-import-openapi.yml
+- from: CustomActivityData
+  to: CustomActivity
+  type: has_one
+  via: activityType
+  source: openapi/demandbase-data-import-openapi.yml
+- from: CustomActivityData
+  to: CustomActivityField
+  type: has_many
+  via: fields
+  source: openapi/demandbase-data-import-openapi.yml
+- from: IntentResponse
+  to: IntentResult
+  type: has_many
+  via: data
+  source: openapi/demandbase-intent-openapi.yml
+- from: IntentResponse
+  to: Pagination
+  type: has_one
+  via: pagination
+  source: openapi/demandbase-intent-openapi.yml
+- from: IntentResult
+  to: Company
+  type: belongs_to
+  via: companyId
+  source: openapi/demandbase-intent-openapi.yml
+  inferred: true
+- from: IntentResult
+  to: KeywordSet
+  type: belongs_to
+  via: keywordSetId
+  source: openapi/demandbase-intent-openapi.yml
+  inferred: true
+- from: CreditUsage
+  to: CreditUsageSummary
+  type: has_one
+  via: summary
+  source: openapi/demandbase-usage-openapi.yml

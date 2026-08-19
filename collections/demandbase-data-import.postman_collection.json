@@ -1,196 +1,33 @@
 {
   "item": [
     {
-      "id": "fc2459a6-d7f0-4ecf-91c1-2039a522ccfb",
-      "name": "Import Jobs",
+      "id": "a0104e23-73c7-401f-a69d-410015179ac2",
+      "name": "Import Job",
       "description": {
-        "content": "Create and manage data import jobs",
+        "content": "",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "f91954a1-4d24-465e-ab4d-6ccc38f027f7",
-          "name": "Demandbase List import jobs",
+          "id": "365ead62-9314-4fb8-9f52-babebe32878e",
+          "name": "Create an import job",
           "request": {
-            "name": "Demandbase List import jobs",
+            "name": "Create an import job",
             "description": {
-              "content": "Retrieve a list of data import jobs with their current status.",
+              "content": "Create a new job to perform a Data Import. This is prerequisite before posting a file with records to be imported.",
               "type": "text/plain"
             },
             "url": {
+              "protocol": "https",
               "path": [
                 "import",
                 "v1",
-                "jobs"
+                "job"
               ],
               "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "status",
-                  "value": "<string>",
-                  "description": "Filter by job status"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25"
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "0"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "796fa9d1-57c8-4c83-891f-5a341aa7493f",
-              "name": "List of import jobs",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "import",
-                    "v1",
-                    "jobs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "status",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"jobs\": [\n    {\n      \"id\": \"string\",\n      \"entity_type\": \"accounts\",\n      \"operation\": \"upsert\",\n      \"status\": \"processing\",\n      \"total_rows\": 1893,\n      \"processed_rows\": 6004,\n      \"success_count\": 9014,\n      \"error_count\": 2327,\n      \"file_name\": \"string\",\n      \"file_size_bytes\": 6335,\n      \"created_at\": \"2016-06-30T19:16:38.690Z\",\n      \"started_at\": \"2004-06-10T12:21:40.493Z\",\n      \"completed_at\": \"1952-08-18T18:51:43.366Z\",\n      \"error_message\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"entity_type\": \"opportunities\",\n      \"operation\": \"insert\",\n      \"status\": \"failed\",\n      \"total_rows\": 7112,\n      \"processed_rows\": 8965,\n      \"success_count\": 1839,\n      \"error_count\": 3814,\n      \"file_name\": \"string\",\n      \"file_size_bytes\": 2410,\n      \"created_at\": \"2026-03-15T20:44:05.329Z\",\n      \"started_at\": \"1951-10-04T11:07:27.077Z\",\n      \"completed_at\": \"2025-11-07T07:09:40.352Z\",\n      \"error_message\": \"string\"\n    }\n  ],\n  \"total\": 3516\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f5c65cfb-8326-4741-80f7-10733e1fedc5",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "import",
-                    "v1",
-                    "jobs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "status",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "163075fc-36c3-41a0-ae3b-4bde23b3baad",
-          "name": "Demandbase Create an import job",
-          "request": {
-            "name": "Demandbase Create an import job",
-            "description": {
-              "content": "Create a new asynchronous data import job. Specify the entity type, operation mode (insert, update, or upsert), and field mappings. Upload the CSV data file after creating the job.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "import",
-                "v1",
-                "jobs"
-              ],
-              "host": [
-                "{{baseUrl}}"
+                "uapi",
+                "demandbase",
+                "com"
               ],
               "query": [],
               "variable": []
@@ -206,10 +43,18 @@
               }
             ],
             "method": "POST",
-            "auth": null,
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"entity_type\": \"<string>\",\n  \"operation\": \"<string>\",\n  \"match_key\": \"<string>\",\n  \"field_mappings\": [\n    {\n      \"csv_column\": \"<string>\",\n      \"demandbase_field\": \"<string>\"\n    },\n    {\n      \"csv_column\": \"<string>\",\n      \"demandbase_field\": \"<string>\"\n    }\n  ]\n}",
+              "raw": "{\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -219,17 +64,20 @@
           },
           "response": [
             {
-              "id": "967419b1-a596-4c6a-8e22-d8a123bfc93c",
-              "name": "Import job created",
+              "id": "802e0c3e-a1b1-4426-a3b0-b05f32f11f56",
+              "name": "Returns a JSON object of the newly-created job. The Job ID will be used to upload data and to check on job status.",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs"
+                    "job"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": []
@@ -251,7 +99,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"entity_type\": \"<string>\",\n  \"operation\": \"<string>\",\n  \"match_key\": \"<string>\",\n  \"field_mappings\": [\n    {\n      \"csv_column\": \"<string>\",\n      \"demandbase_field\": \"<string>\"\n    },\n    {\n      \"csv_column\": \"<string>\",\n      \"demandbase_field\": \"<string>\"\n    }\n  ]\n}",
+                  "raw": "{\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -259,30 +107,33 @@
                   }
                 }
               },
-              "status": "Accepted",
-              "code": 202,
+              "status": "OK",
+              "code": 200,
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"entity_type\": \"people\",\n  \"operation\": \"upsert\",\n  \"status\": \"failed\",\n  \"total_rows\": 1407,\n  \"processed_rows\": 8801,\n  \"success_count\": 2038,\n  \"error_count\": 7944,\n  \"file_name\": \"string\",\n  \"file_size_bytes\": 2317,\n  \"created_at\": \"1962-04-02T00:35:19.543Z\",\n  \"started_at\": \"1958-12-01T04:03:40.061Z\",\n  \"completed_at\": \"1960-02-06T06:03:52.607Z\",\n  \"error_message\": \"string\"\n}",
+              "body": "{\n  \"id\": 67849,\n  \"dataImportName\": \"EMEA accounts import\",\n  \"entityType\": \"Account\",\n  \"state\": \"new\",\n  \"updatedAt\": \"2019-08-24T14:15:22Z\",\n  \"createdAt\": \"2019-08-24T14:15:22Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "470c4c90-4465-41d8-ad17-a82f6cbc3628",
-              "name": "Invalid request",
+              "id": "166851b6-a2ff-49c5-b575-a63f17a356f6",
+              "name": "Returned if the job specification in the request body does not match the required format.",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs"
+                    "job"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": []
@@ -295,12 +146,16 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"entity_type\": \"<string>\",\n  \"operation\": \"<string>\",\n  \"match_key\": \"<string>\",\n  \"field_mappings\": [\n    {\n      \"csv_column\": \"<string>\",\n      \"demandbase_field\": \"<string>\"\n    },\n    {\n      \"csv_column\": \"<string>\",\n      \"demandbase_field\": \"<string>\"\n    }\n  ]\n}",
+                  "raw": "{\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -313,25 +168,28 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "76c42109-f34c-4cb3-978f-7969292cfca3",
-              "name": "Unauthorized",
+              "id": "fc5e8a79-17a6-4222-b0d7-9aa3e5f1eb75",
+              "name": "Returned if the authentication credentials are missing or invalid.",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs"
+                    "job"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": []
@@ -344,12 +202,16 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"entity_type\": \"<string>\",\n  \"operation\": \"<string>\",\n  \"match_key\": \"<string>\",\n  \"field_mappings\": [\n    {\n      \"csv_column\": \"<string>\",\n      \"demandbase_field\": \"<string>\"\n    },\n    {\n      \"csv_column\": \"<string>\",\n      \"demandbase_field\": \"<string>\"\n    }\n  ]\n}",
+                  "raw": "{\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -362,12 +224,124 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"status\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0750a1bc-328b-482f-8108-5dcfabd3c939",
+              "name": "Returned if the authenticated user lacks the \"Import Data\" permission",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "job"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "297c735b-74c4-4337-953e-bc113a8e578a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "job"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
             }
           ],
           "event": [],
@@ -376,23 +350,26 @@
           }
         },
         {
-          "id": "4ea2f454-1294-488b-ac36-89615dde6d34",
-          "name": "Demandbase Get import job status",
+          "id": "a7b6e58a-608f-4644-a9ba-8ab5d5fd63d0",
+          "name": "Sources",
           "request": {
-            "name": "Demandbase Get import job status",
+            "name": "Sources",
             "description": {
-              "content": "Retrieve the current status and details of a specific import job, including processing progress and error summary.",
+              "content": "Returns a list of eligible sources.",
               "type": "text/plain"
             },
             "url": {
+              "protocol": "https",
               "path": [
                 "import",
                 "v1",
-                "jobs",
-                ":jobId"
+                ":entityType",
+                "sources"
               ],
               "host": [
-                "{{baseUrl}}"
+                "uapi",
+                "demandbase",
+                "com"
               ],
               "query": [],
               "variable": [
@@ -400,8 +377,8 @@
                   "disabled": false,
                   "type": "any",
                   "value": "<string>",
-                  "key": "jobId",
-                  "description": "(Required) Import job unique identifier"
+                  "key": "entityType",
+                  "description": "(Required) One of 'Account', 'Opportunity', 'Person' or 'Activity'"
                 }
               ]
             },
@@ -412,22 +389,32 @@
               }
             ],
             "method": "GET",
-            "auth": null
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
           },
           "response": [
             {
-              "id": "8f910b41-b138-4ef9-85a2-f8e77743e90c",
-              "name": "Import job details",
+              "id": "044a4c36-589c-4450-acf4-1a3c50afc1ba",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId"
+                    ":entityType",
+                    "sources"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": [
@@ -435,8 +422,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
+                      "key": "entityType",
+                      "description": "(Required) One of 'Account', 'Opportunity', 'Person' or 'Activity'"
                     }
                   ]
                 },
@@ -465,23 +452,26 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"entity_type\": \"people\",\n  \"operation\": \"upsert\",\n  \"status\": \"failed\",\n  \"total_rows\": 1407,\n  \"processed_rows\": 8801,\n  \"success_count\": 2038,\n  \"error_count\": 7944,\n  \"file_name\": \"string\",\n  \"file_size_bytes\": 2317,\n  \"created_at\": \"1962-04-02T00:35:19.543Z\",\n  \"started_at\": \"1958-12-01T04:03:40.061Z\",\n  \"completed_at\": \"1960-02-06T06:03:52.607Z\",\n  \"error_message\": \"string\"\n}",
+              "body": "{\n  \"data\": [\n    \"CSV\"\n  ]\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "9f47f1d8-cead-46f5-a3c5-ef998e512d06",
-              "name": "Unauthorized",
+              "id": "f36a1b8e-a15b-4886-8da0-861c185e12d0",
+              "name": "Bad Request Error",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId"
+                    ":entityType",
+                    "sources"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": [
@@ -489,8 +479,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
+                      "key": "entityType",
+                      "description": "(Required) One of 'Account', 'Opportunity', 'Person' or 'Activity'"
                     }
                   ]
                 },
@@ -502,6 +492,67 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8aed7b2b-3fd2-4db9-8834-f70c0d346a34",
+              "name": "Returned if the authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    ":entityType",
+                    "sources"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) One of 'Account', 'Opportunity', 'Person' or 'Activity'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "GET",
@@ -512,26 +563,29 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"status\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "8320cb34-0231-4dcb-b6d4-13f07e6c4e23",
-              "name": "Import job not found",
+              "id": "3eeaffd7-98aa-416d-b78e-0fb61ee41004",
+              "name": "Returned if the authenticated user lacks the \"Import Data\" permission",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId"
+                    ":entityType",
+                    "sources"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": [
@@ -539,8 +593,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
+                      "key": "entityType",
+                      "description": "(Required) One of 'Account', 'Opportunity', 'Person' or 'Activity'"
                     }
                   ]
                 },
@@ -552,22 +606,83 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "GET",
                 "body": {}
               },
-              "status": "Not Found",
-              "code": 404,
+              "status": "Forbidden",
+              "code": 403,
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"status\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc1d71f0-535a-4e73-ab0c-90e34aecc4a2",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    ":entityType",
+                    "sources"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) One of 'Account', 'Opportunity', 'Person' or 'Activity'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
             }
           ],
           "event": [],
@@ -576,61 +691,108 @@
           }
         },
         {
-          "id": "86e3f91f-c4aa-4316-ab99-a6486a157c1e",
-          "name": "Demandbase Cancel an import job",
+          "id": "f1ce679e-3b98-49c3-a168-64c9a1aa3eae",
+          "name": "Submit import data",
           "request": {
-            "name": "Demandbase Cancel an import job",
+            "name": "Submit import data",
             "description": {
-              "content": "Cancel a pending or validating import job.",
+              "content": "This endpoint is used to submit the data file to an existing import job identified by the path parameter {id}.\n\nSubmitting the data file triggers the asynchronous processing of the data. You can monitor the progress and final status of the data processing using the dedicated job status endpoint.\n\nNote: There is currently no limit to the number of rows you can upload per Submit request, however, files are limited to **5GB**.",
               "type": "text/plain"
             },
             "url": {
+              "protocol": "https",
               "path": [
                 "import",
                 "v1",
-                "jobs",
-                ":jobId"
+                "job",
+                ":id",
+                "data"
               ],
               "host": [
-                "{{baseUrl}}"
+                "uapi",
+                "demandbase",
+                "com"
               ],
-              "query": [],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "listAction",
+                  "value": "replace",
+                  "description": "The listAction query parameter specifies how the imported data affects the membership of the account list associated with this job ID.   <table> <tr> <th>Allowed Value</th> <th>Description</th> </tr> <tr> <td>replace (default)</td> <td>Removes all existing members from the associated account list and adds the members from the current import file.</td> </tr> <tr> <td>insert</td> <td>Adds new members from the current import file to the existing account list. If no account list is associated with this job, one will be created.</td> </tr> <tr> <td>delete</td> <td>Removes members from the existing account list if they are matched in the import data.</td> </tr> <tr> <td>noop</td> <td>Processes and imports the data but does not make any changes to the associated account list membership.</td> </tr>  </table> "
+                }
+              ],
               "variable": [
                 {
                   "disabled": false,
                   "type": "any",
-                  "value": "<string>",
-                  "key": "jobId",
-                  "description": "(Required) Import job unique identifier"
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
                 }
               ]
             },
-            "method": "DELETE",
-            "auth": null
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
           },
           "response": [
             {
-              "id": "61b1f354-8525-4c90-9c8d-353b9618286b",
-              "name": "Import job cancelled",
+              "id": "44d01686-3f60-404a-9ee1-8d6da05f226a",
+              "name": "Returns the status of the job after successfull upload.",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId"
+                    "job",
+                    ":id",
+                    "data"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "listAction",
+                      "value": "replace"
+                    }
+                  ],
                   "variable": [
                     {
                       "disabled": false,
                       "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
                     }
                   ]
                 },
@@ -642,45 +804,66 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
-                "method": "DELETE",
-                "body": {}
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
               },
               "status": "OK",
               "code": 200,
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"id\": 67849,\n  \"dataImportName\": \"EMEA accounts import\",\n  \"entityType\": \"Account\",\n  \"state\": \"processing\",\n  \"createdAt\": \"2019-08-24T14:15:22Z\",\n  \"updatedAt\": \"2019-08-24T17:12:29Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "0734ac51-c4cf-4774-9bbb-3771993bf31a",
-              "name": "Unauthorized",
+              "id": "9cba54a4-ccd2-4527-9292-30a8b31cbd35",
+              "name": "Bad Request Error",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId"
+                    "job",
+                    ":id",
+                    "data"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "listAction",
+                      "value": "replace"
+                    }
+                  ],
                   "variable": [
                     {
                       "disabled": false,
                       "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
                     }
                   ]
                 },
@@ -692,45 +875,137 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
-                "method": "DELETE",
-                "body": {}
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a3b81a7-01cf-4107-aa04-46721ea8a1e8",
+              "name": "Returned if the authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "job",
+                    ":id",
+                    "data"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "listAction",
+                      "value": "replace"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
               },
               "status": "Unauthorized",
               "code": 401,
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"status\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "031eb42e-a0bb-4fd2-8d87-17ea6339dab0",
-              "name": "Import job not found",
+              "id": "cdd61074-84d6-4230-802b-7352e9b4ce98",
+              "name": "Returned if the authenticated user lacks the \"Import Data\" permission",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId"
+                    "job",
+                    ":id",
+                    "data"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "listAction",
+                      "value": "replace"
+                    }
+                  ],
                   "variable": [
                     {
                       "disabled": false,
                       "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
                     }
                   ]
                 },
@@ -742,45 +1017,137 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
-                "method": "DELETE",
-                "body": {}
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbdf34f8-5da8-4f49-b3df-894457ceae12",
+              "name": "Returned if the referenced job is not found",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "job",
+                    ":id",
+                    "data"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "listAction",
+                      "value": "replace"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
               },
               "status": "Not Found",
               "code": 404,
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "85583ef2-bc7e-43ac-83d4-b3d71609380e",
-              "name": "Job cannot be cancelled",
+              "id": "6059e133-b45b-4b75-bc2c-9ebfc552865c",
+              "name": "Internal Server Error",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId"
+                    "job",
+                    ":id",
+                    "data"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "listAction",
+                      "value": "replace"
+                    }
+                  ],
                   "variable": [
                     {
                       "disabled": false,
                       "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
                     }
                   ]
                 },
@@ -792,22 +1159,34 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
-                "method": "DELETE",
-                "body": {}
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
               },
-              "status": "Conflict",
-              "code": 409,
+              "status": "Internal Server Error",
+              "code": 500,
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             }
           ],
           "event": [],
@@ -816,44 +1195,35 @@
           }
         },
         {
-          "id": "79631510-72f2-4901-8d65-22e88a68a942",
-          "name": "Demandbase Get import errors",
+          "id": "03c3dce9-38f6-40d0-ab48-4225f59df4e3",
+          "name": "Job status",
           "request": {
-            "name": "Demandbase Get import errors",
+            "name": "Job status",
             "description": {
-              "content": "Retrieve detailed error information for rows that failed during import.",
+              "content": "Use this endpoint to retrieve the current status and relevant details of a specific data import job.\n\nThe job is identified by the unique path parameter {id} that was returned when the job was initially created.",
               "type": "text/plain"
             },
             "url": {
+              "protocol": "https",
               "path": [
                 "import",
                 "v1",
-                "jobs",
-                ":jobId",
-                "errors"
+                "job",
+                ":id"
               ],
               "host": [
-                "{{baseUrl}}"
+                "uapi",
+                "demandbase",
+                "com"
               ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "100"
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "0"
-                }
-              ],
+              "query": [],
               "variable": [
                 {
                   "disabled": false,
                   "type": "any",
-                  "value": "<string>",
-                  "key": "jobId",
-                  "description": "(Required) Import job unique identifier"
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
                 }
               ]
             },
@@ -864,41 +1234,42 @@
               }
             ],
             "method": "GET",
-            "auth": null
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
           },
           "response": [
             {
-              "id": "e6513c2b-1395-4974-af6e-d114d58d96df",
-              "name": "Import errors",
+              "id": "978afc6c-e06b-4522-816a-6dee48052753",
+              "name": "The response body contains the comprehensive details of the job's current status and metadata.",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId",
-                    "errors"
+                    "job",
+                    ":id"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    }
-                  ],
+                  "query": [],
                   "variable": [
                     {
                       "disabled": false,
                       "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
                     }
                   ]
                 },
@@ -927,42 +1298,35 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"errors\": [\n    {\n      \"row_number\": 6465,\n      \"field\": \"string\",\n      \"value\": \"string\",\n      \"error_type\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"row_number\": 4768,\n      \"field\": \"string\",\n      \"value\": \"string\",\n      \"error_type\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"total\": 754\n}",
+              "body": "{\n  \"id\": 67849,\n  \"dataImportName\": \"EMEA accounts import\",\n  \"entityType\": \"Account\",\n  \"state\": \"completed\",\n  \"createdAt\": \"2019-08-24T14:15:22Z\",\n  \"updatedAt\": \"2019-08-24T17:53:11Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "e26b4ce5-3951-47e7-9bb3-790e443bc716",
-              "name": "Unauthorized",
+              "id": "61297feb-a84d-4643-a80a-9bab26fd8f8b",
+              "name": "Bad Request Error",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId",
-                    "errors"
+                    "job",
+                    ":id"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    }
-                  ],
+                  "query": [],
                   "variable": [
                     {
                       "disabled": false,
                       "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
                     }
                   ]
                 },
@@ -974,6 +1338,67 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cfb96a0-bd2d-4949-a6a2-8740d95de378",
+              "name": "Returned if the authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "job",
+                    ":id"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "GET",
@@ -984,45 +1409,38 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"status\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "0251863f-7f26-492b-951a-a8f682947a64",
-              "name": "Import job not found",
+              "id": "529a408f-8af0-4426-bbcc-5086f0f49054",
+              "name": "Returned if the authenticated user lacks the \"Import Data\" permission",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId",
-                    "errors"
+                    "job",
+                    ":id"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    }
-                  ],
+                  "query": [],
                   "variable": [
                     {
                       "disabled": false,
                       "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
                     }
                   ]
                 },
@@ -1034,6 +1452,67 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c10e0d0-551f-44a5-b907-13feccae1fc3",
+              "name": "Returned if the referenced job is not found",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "job",
+                    ":id"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "GET",
@@ -1044,54 +1523,124 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e539878-5110-4502-98ea-23e3843064a8",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "job",
+                    ":id"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
             }
           ],
           "event": [],
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           }
-        }
-      ],
-      "event": []
-    },
-    {
-      "id": "3eb6353b-2560-4aa8-9391-66d88ea06017",
-      "name": "Mappings",
-      "description": {
-        "content": "Field mapping configuration",
-        "type": "text/plain"
-      },
-      "item": [
+        },
         {
-          "id": "f51b9782-d4e5-4f8a-8210-bfa4db5f7702",
-          "name": "Demandbase List field mappings",
+          "id": "98c050a4-e2e9-44f4-a4c2-03a8eff13d57",
+          "name": "Jobs list",
           "request": {
-            "name": "Demandbase List field mappings",
+            "name": "Jobs list",
             "description": {
-              "content": "Retrieve available field mappings for each entity type, showing which fields can be imported and their requirements.",
+              "content": "Returns a list of import jobs. This provides an overview of all historical and current data import activities within the Demandbase platform.",
               "type": "text/plain"
             },
             "url": {
+              "protocol": "https",
               "path": [
                 "import",
                 "v1",
-                "mappings"
+                "jobs"
               ],
               "host": [
-                "{{baseUrl}}"
+                "uapi",
+                "demandbase",
+                "com"
               ],
               "query": [
                 {
                   "disabled": false,
-                  "key": "entity_type",
+                  "key": "entityType",
                   "value": "<string>",
-                  "description": "Filter by entity type"
+                  "description": "One of 'Account', 'Opportunity', 'Person' or 'Activity', case insensitive"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "One of 'new', 'processing', 'completed', 'failed'"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "<integer>"
                 }
               ],
               "variable": []
@@ -1103,26 +1652,53 @@
               }
             ],
             "method": "GET",
-            "auth": null
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
           },
           "response": [
             {
-              "id": "07e0126f-0e7f-4159-b858-64364443ec69",
-              "name": "Field mapping information",
+              "id": "66d4644f-4c30-4a71-bcc7-5fe4614d0b8a",
+              "name": "The response is a JSON object containing a total count and an array of job objects. Each job object in the array contains the full metadata for a specific data import job.",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "mappings"
+                    "jobs"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [
                     {
-                      "key": "entity_type",
+                      "key": "entityType",
                       "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
                     }
                   ],
                   "variable": []
@@ -1152,27 +1728,46 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"mappings\": [\n    {\n      \"entity_type\": \"string\",\n      \"field_name\": \"string\",\n      \"field_type\": \"string\",\n      \"required\": false,\n      \"description\": \"string\"\n    },\n    {\n      \"entity_type\": \"string\",\n      \"field_name\": \"string\",\n      \"field_type\": \"string\",\n      \"required\": false,\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "body": "{\n  \"totalCount\": 0,\n  \"data\": [\n    {\n      \"id\": 67849,\n      \"dataImportName\": \"EMEA accounts import\",\n      \"entityType\": \"Account\",\n      \"state\": \"processing\",\n      \"createdAt\": \"2019-08-24T14:15:22Z\",\n      \"updatedAt\": \"2019-08-24T17:12:29Z\"\n    }\n  ]\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "720a9776-3828-433d-93e0-683602a10b34",
-              "name": "Unauthorized",
+              "id": "88370e21-71f2-4dc1-a01c-cf112b07eb69",
+              "name": "Bad Request Error",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "mappings"
+                    "jobs"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [
                     {
-                      "key": "entity_type",
+                      "key": "entityType",
                       "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
                     }
                   ],
                   "variable": []
@@ -1185,6 +1780,79 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f2b50e3-76a1-4579-9614-f9dfce6176ca",
+              "name": "Returned if the authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "GET",
@@ -1195,12 +1863,150 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"status\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a88e5207-24f3-44e8-99ec-467b956a143f",
+              "name": "Returned if the authenticated user lacks the \"Import Data\" permission",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2808e68-b240-49ad-8aff-99db6a0413a2",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
             }
           ],
           "event": [],
@@ -1212,48 +2018,41 @@
       "event": []
     },
     {
-      "id": "b7179d69-4516-45fc-8d87-e61e6c15f3a3",
-      "name": "Uploads",
+      "id": "3c0d0e33-83f7-4725-9b7a-aa95b2474fa5",
+      "name": "Activities Management",
       "description": {
-        "content": "Upload data files for import",
+        "content": "",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "166804f9-ec27-4f5d-b565-171522275953",
-          "name": "Demandbase Upload import file",
+          "id": "aa7d4532-e417-4db0-8f60-92208372c3d9",
+          "name": "Create New Activity Type",
           "request": {
-            "name": "Demandbase Upload import file",
+            "name": "Create New Activity Type",
             "description": {
-              "content": "Upload a CSV file for an import job. The file must match the field mappings specified when creating the job.",
+              "content": "Create a new activity type on your Demandbase tenant.",
               "type": "text/plain"
             },
             "url": {
+              "protocol": "https",
               "path": [
                 "import",
                 "v1",
-                "jobs",
-                ":jobId",
-                "upload"
+                "activity_type"
               ],
               "host": [
-                "{{baseUrl}}"
+                "uapi",
+                "demandbase",
+                "com"
               ],
               "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "jobId",
-                  "description": "(Required) Import job unique identifier"
-                }
-              ]
+              "variable": []
             },
             "header": [
               {
                 "key": "Content-Type",
-                "value": "multipart/form-data"
+                "value": "application/json"
               },
               {
                 "key": "Accept",
@@ -1261,44 +2060,43 @@
               }
             ],
             "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "formdata",
-              "formdata": [
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "file",
-                  "type": "file",
-                  "description": "(Required) CSV file to import"
+                  "key": "token",
+                  "value": "{{bearerToken}}"
                 }
               ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activityType\": {\n    \"label\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"fields\": [\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    },\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             }
           },
           "response": [
             {
-              "id": "0372c3a2-6ad7-4d14-a379-939dff0454d8",
-              "name": "File uploaded and validation started",
+              "id": "19048106-e213-4e58-9b0d-10258ef47007",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId",
-                    "upload"
+                    "activity_type"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
-                    }
-                  ]
+                  "variable": []
                 },
                 "header": [
                   {
@@ -1316,18 +2114,13 @@
                 ],
                 "method": "POST",
                 "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "description": {
-                        "content": "(Required) CSV file to import",
-                        "type": "text/plain"
-                      },
-                      "key": "file",
-                      "value": "<binary>",
-                      "type": "text"
+                  "mode": "raw",
+                  "raw": "{\n  \"activityType\": {\n    \"label\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"fields\": [\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    },\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
                     }
-                  ]
+                  }
                 }
               },
               "status": "OK",
@@ -1338,35 +2131,27 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"entity_type\": \"people\",\n  \"operation\": \"upsert\",\n  \"status\": \"failed\",\n  \"total_rows\": 1407,\n  \"processed_rows\": 8801,\n  \"success_count\": 2038,\n  \"error_count\": 7944,\n  \"file_name\": \"string\",\n  \"file_size_bytes\": 2317,\n  \"created_at\": \"1962-04-02T00:35:19.543Z\",\n  \"started_at\": \"1958-12-01T04:03:40.061Z\",\n  \"completed_at\": \"1960-02-06T06:03:52.607Z\",\n  \"error_message\": \"string\"\n}",
+              "body": "{\n  \"id\": 3030,\n  \"label\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "2bd8f8d0-a39f-45bf-9ab5-1eafe9127283",
-              "name": "Invalid file format or content",
+              "id": "539f1abc-9902-4952-85d1-6cc1bd83d2d7",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId",
-                    "upload"
+                    "activity_type"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
-                    }
-                  ]
+                  "variable": []
                 },
                 "header": [
                   {
@@ -1376,22 +2161,21 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "POST",
                 "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "description": {
-                        "content": "(Required) CSV file to import",
-                        "type": "text/plain"
-                      },
-                      "key": "file",
-                      "value": "<binary>",
-                      "type": "text"
+                  "mode": "raw",
+                  "raw": "{\n  \"activityType\": {\n    \"label\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"fields\": [\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    },\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
                     }
-                  ]
+                  }
                 }
               },
               "status": "Bad Request",
@@ -1399,38 +2183,30 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "ceeacfad-d5a5-4598-82f7-d5b9a98e8478",
-              "name": "Unauthorized",
+              "id": "4448264b-db8b-4dee-8052-23b0bf046fb0",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId",
-                    "upload"
+                    "activity_type"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
-                    }
-                  ]
+                  "variable": []
                 },
                 "header": [
                   {
@@ -1440,86 +2216,21 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "description": {
-                        "content": "(Required) CSV file to import",
-                        "type": "text/plain"
-                      },
-                      "key": "file",
-                      "value": "<binary>",
-                      "type": "text"
-                    }
-                  ]
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "3c2ee4c4-4e86-476f-9092-0c8b38d07915",
-              "name": "Import job not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "import",
-                    "v1",
-                    "jobs",
-                    ":jobId",
-                    "upload"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
-                    }
-                  ]
-                },
-                "header": [
+                  },
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
                 "method": "POST",
                 "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "description": {
-                        "content": "(Required) CSV file to import",
-                        "type": "text/plain"
-                      },
-                      "key": "file",
-                      "value": "<binary>",
-                      "type": "text"
+                  "mode": "raw",
+                  "raw": "{\n  \"activityType\": {\n    \"label\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"fields\": [\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    },\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
                     }
-                  ]
+                  }
                 }
               },
               "status": "Not Found",
@@ -1527,27 +2238,376 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "1e86014d-8ff9-436c-9feb-627a0e8fd50b",
-              "name": "File too large",
+              "id": "966ac9a2-be11-4043-97a7-05532c6563ba",
               "originalRequest": {
                 "url": {
+                  "protocol": "https",
                   "path": [
                     "import",
                     "v1",
-                    "jobs",
-                    ":jobId",
-                    "upload"
+                    "activity_type"
                   ],
                   "host": [
-                    "{{baseUrl}}"
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityType\": {\n    \"label\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"fields\": [\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    },\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb7342a5-410f-4171-b5e6-052efdbd7611",
+          "name": "List Activity Types",
+          "request": {
+            "name": "List Activity Types",
+            "description": {
+              "content": "Get all activity types currently configured on your Demandbase tenant",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "import",
+                "v1",
+                "activity_type"
+              ],
+              "host": [
+                "uapi",
+                "demandbase",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9d362d1b-cde4-4333-bd1c-679e72c3d638",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "activity_type"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 6811,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"activitySource\": \"string\"\n  },\n  {\n    \"id\": 3319,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"activitySource\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77250fe3-cd3e-432b-a421-320940869f22",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "activity_type"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f15a9105-feb2-4cea-9277-aabc421a85a5",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "activity_type"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04219013-0784-47bf-9eb7-a39f918cd36e",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "activity_type"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "577a83cf-f769-4ea5-a2c4-7fecf2ca03a0",
+          "name": "Activity Type Lookup",
+          "request": {
+            "name": "Activity Type Lookup",
+            "description": {
+              "content": "Retrieve details of an activity type for data import.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "import",
+                "v1",
+                "activity_type",
+                ":identifier"
+              ],
+              "host": [
+                "uapi",
+                "demandbase",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identifier",
+                  "description": "(Required) The unique identifier for the activity type. This should be the activity type ID.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2f47ee3a-8349-4c59-b1ba-262a9c085f9d",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "activity_type",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
                   ],
                   "query": [],
                   "variable": [
@@ -1555,8 +2615,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "jobId",
-                      "description": "(Required) Import job unique identifier"
+                      "key": "identifier",
+                      "description": "(Required) The unique identifier for the activity type. This should be the activity type ID.\n"
                     }
                   ]
                 },
@@ -1568,35 +2628,520 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
-                "method": "POST",
-                "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "description": {
-                        "content": "(Required) CSV file to import",
-                        "type": "text/plain"
-                      },
-                      "key": "file",
-                      "value": "<binary>",
-                      "type": "text"
-                    }
-                  ]
-                }
+                "method": "GET",
+                "body": {}
               },
-              "status": "Request Entity Too Large",
-              "code": 413,
+              "status": "OK",
+              "code": 200,
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "application/json"
                 }
               ],
-              "body": "",
+              "body": "{\n  \"activityType\": {\n    \"name\": \"string\",\n    \"label\": \"string\",\n    \"description\": \"string\"\n  },\n  \"fields\": [\n    {\n      \"fieldName\": \"string\",\n      \"fieldDataType\": \"string\",\n      \"defaultField\": true,\n      \"isRequiredForCsvImport\": true\n    },\n    {\n      \"fieldName\": \"string\",\n      \"fieldDataType\": \"string\",\n      \"defaultField\": true,\n      \"isRequiredForCsvImport\": true\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "283d4b3a-5261-4e85-922a-aedd9e6d6a4e",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "activity_type",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) The unique identifier for the activity type. This should be the activity type ID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f078a8f-7979-4d05-ae0d-740d8f7da397",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "activity_type",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) The unique identifier for the activity type. This should be the activity type ID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2590b17e-9c3b-4b2a-a79f-125ca1b9a00a",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "activity_type",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) The unique identifier for the activity type. This should be the activity type ID.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81b3c804-b624-4a60-a5fa-5c2ab0ef296c",
+          "name": "Update Activity Type",
+          "request": {
+            "name": "Update Activity Type",
+            "description": {
+              "content": "Update an existing activity type on your Demandbase tenant. Use the activity type ID in the URI (via `PUT /activity_type/{activityTypeId}`).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "import",
+                "v1",
+                "activity_type",
+                ":activityTypeId"
+              ],
+              "host": [
+                "uapi",
+                "demandbase",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "activityTypeId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activityType\": {\n    \"label\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"fields\": [\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    },\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8af14dbf-ff24-47d0-8630-3976d6abc39c",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "activity_type",
+                    ":activityTypeId"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "activityTypeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityType\": {\n    \"label\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"fields\": [\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    },\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3030,\n  \"label\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af6c4db6-67eb-41fc-a375-4eb6b010beb7",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "activity_type",
+                    ":activityTypeId"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "activityTypeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityType\": {\n    \"label\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"fields\": [\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    },\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce84d2f7-6a84-45cd-a725-f57a4aec0ea5",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "activity_type",
+                    ":activityTypeId"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "activityTypeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityType\": {\n    \"label\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"fields\": [\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    },\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d2dcd83-a016-4d4b-b43a-7df0b581f59a",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "import",
+                    "v1",
+                    "activity_type",
+                    ":activityTypeId"
+                  ],
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "activityTypeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityType\": {\n    \"label\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"fields\": [\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    },\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldDataType\": \"<string>\",\n      \"defaultField\": \"<boolean>\",\n      \"isRequiredForCsvImport\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
             }
           ],
           "event": [],
@@ -1612,7 +3157,7 @@
   "variable": [
     {
       "type": "string",
-      "value": "https://api.demandbase.com",
+      "value": "https://uapi.demandbase.com/import/v1",
       "key": "baseUrl"
     }
   ],
@@ -1626,11 +3171,11 @@
     ]
   },
   "info": {
-    "_postman_id": "a118e270-408c-4b60-9c10-47b75a00e521",
-    "name": "Demandbase Data Import API",
+    "_postman_id": "af38f3ec-04ee-48a1-9e6e-7577ee789ce1",
+    "name": "Data Import API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "Allows bulk, asynchronous, programmatic import of new data rows into Demandbase One or updates to existing records, supporting data on accounts, people, opportunities, and activities with CSV-based ingestion.\n\nContact Support:\n Name: Demandbase Support",
+      "content": "This API is designed to facilitate the bulk import of structured data (such as Accounts, People, and Activities) directly into the Demandbase platform. It allows users to programmatically upload files for processing, ensuring that Demandbase targets and segments are consistently updated with the freshest data from your external systems.",
       "type": "text/plain"
     }
   }

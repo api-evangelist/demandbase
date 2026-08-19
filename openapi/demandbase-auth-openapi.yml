@@ -1,0 +1,58 @@
+openapi: 3.0.1
+info:
+  title: Demandbase Auth API
+  version: '1.0'
+  description: Obtain an access token for Demandbase API using client credentials.
+servers:
+- url: https://uapi.demandbase.com
+- url: https://uapi.demandbase.com
+paths:
+  /auth/v1/token:
+    post:
+      summary: Generate an access token
+      description: 'This endpoint issues an OAuth2 bearer token for authenticating with Demandbase APIs.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - grantType
+              - clientId
+              - clientSecret
+              properties:
+                grantType:
+                  type: string
+                  example: client_credentials
+                  default: client_credentials
+                  description: Must be set to client_credentials to indicate client-based authentication.
+                clientId:
+                  type: string
+                  example: 123abc
+                clientSecret:
+                  type: string
+                  example: 456def
+      responses:
+        '200':
+          description: Successful token response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    description: Bearer token for authenticated API calls
+                  tokenType:
+                    type: string
+                    example: bearer
+                  expiresIn:
+                    type: integer
+                    example: 28800
+        '400':
+          description: Invalid request (missing or incorrect parameters)
+components: {}
+x-readme: {}

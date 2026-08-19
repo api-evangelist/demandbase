@@ -1,0 +1,78 @@
+generated: '2026-08-13'
+method: searched
+source: https://developer.demandbase.com/docs/configuring-webhooks-for-subscription-api
+spec_type: none
+note: >-
+  Demandbase publishes NO AsyncAPI document. It does publish a real, documented push
+  surface: the B2B Subscription API, which watches company / company-news /
+  company-family-tree / dbPerson records for change and delivers alerts to a customer-hosted
+  webhook. This artifact captures that webhook catalog. The event payload schemas are the
+  subscription-alert schemas in openapi/demandbase-b2b-openapi.yml — Demandbase describes
+  the alert shape per subscription type but does not publish a standalone event schema
+  registry, so no channel/message schemas are asserted here beyond what the OpenAPI carries.
+surface: webhooks
+delivery:
+  transport: HTTPS POST to a customer-supplied callback URL
+  registration: >-
+    The webhook URL and signing secret are supplied when creating or updating a
+    subscription (POST /subscriptions/job, PUT /subscriptions/job). Subscription changes are
+    asynchronous and return a jobId.
+  required_methods: [HEAD, POST]
+  validation:
+    header: X-DemandbaseAPI-ValidationCode
+    procedure: >-
+      Demandbase sends a HEAD request to the registered callback URL carrying the
+      X-DemandbaseAPI-ValidationCode request header. The receiving server must echo the same
+      value back as a response header of the same name. Validation may lag subscription
+      creation by up to 2-3 minutes.
+    states: [VERIFICATION_PENDING, VERIFICATION_RUNNING, ACTIVE, DISABLED]
+    failure_behavior: >-
+      A subscription is still created if validation fails, but its webhook status becomes
+      DISABLED and no callbacks are delivered.
+  authenticity:
+    signing_secret: supplied by the subscriber on the subscription
+    note: >-
+      Demandbase documents a signingSecret field on the subscription for verifying the
+      authenticity of its calls to the webhook, in addition to the validation-code handshake.
+subscription_types:
+  - type: company
+    trigger: Tracked company fields change.
+    payload: A list of company IDs and the fields that changed (e.g. name, address).
+  - type: companynews
+    trigger: New news articles are published for a tracked company.
+    payload: Company IDs and related news articles with timestamps.
+  - type: companyfamilytree
+    trigger: A tracked company's corporate family tree changes.
+    payload: >-
+      Companies added to or removed from the family tree, plus migration messages if the
+      root company itself was acquired.
+  - type: dbPerson
+    trigger: Tracked Demandbase Person records change.
+    payload: >-
+      Person IDs with changed fields, plus detailed employment-level field updates per
+      contact ID.
+polling_alternative:
+  note: >-
+    Every alert is also readable over REST, so a consumer that cannot host a webhook can
+    poll instead.
+  operations:
+    - openapi/demandbase-b2b-openapi.yml#getSubscriptionAlertsList
+    - openapi/demandbase-b2b-openapi.yml#getSubscriptionAlertDetails
+    - openapi/demandbase-b2b-openapi.yml#getSubscriptionDetails
+    - openapi/demandbase-b2b-openapi.yml#getSubscriptionEntityDetails
+  pagination: Up to 5,000 entities per page; alerts sorted by createdAt descending.
+management_operations:
+  create: openapi/demandbase-b2b-openapi.yml#updateSubscription_1
+  update: openapi/demandbase-b2b-openapi.yml#updateSubscription
+  delete: openapi/demandbase-b2b-openapi.yml#deleteSubscription
+  list: openapi/demandbase-b2b-openapi.yml#getAllSubscriptionsByClientID
+  job_status: openapi/demandbase-b2b-openapi.yml#getSubscriptionJobStatus
+  job_list: openapi/demandbase-b2b-openapi.yml#subscriptionJobsListFetch
+asyncapi_document: null
+x-evidence:
+  fetched: '2026-08-13'
+  url: https://developer.demandbase.com/docs/configuring-webhooks-for-subscription-api
+  http_status: 200
+  asyncapi_probed:
+    - {url: 'https://developer.demandbase.com/asyncapi.yaml', http_status: 404}
+    - {url: 'https://uapi.demandbase.com/asyncapi.yaml', http_status: 404}

@@ -1,0 +1,154 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  mcp/demandbase-mcp.yml (published capability areas) bound against the operationIds in
+  openapi/demandbase-b2b-openapi.yml, openapi/demandbase-intent-openapi.yml and
+  openapi/demandbase-data-export-openapi.yml
+note: >-
+  Demandbase's MCP tools/list is OAuth-gated (401, see mcp/demandbase-mcp.yml), so no tool
+  NAMES or inputSchemas are published. This crosswalk therefore binds the provider's own
+  published MCP CAPABILITY AREAS to the REST operations that expose the same data, rather
+  than pretending to know tool identifiers. Confidence is set accordingly — nothing here is
+  a verified tool-to-operation binding, and no tool name has been invented. Re-run this
+  derivation with an authenticated tools/list to upgrade it.
+surfaces:
+  openapi:
+    files:
+      - openapi/demandbase-b2b-openapi.yml
+      - openapi/demandbase-data-export-openapi.yml
+      - openapi/demandbase-data-import-openapi.yml
+      - openapi/demandbase-admin-openapi.yml
+      - openapi/demandbase-intent-openapi.yml
+      - openapi/demandbase-usage-openapi.yml
+      - openapi/demandbase-custom-sources-openapi.yml
+      - openapi/demandbase-auth-openapi.yml
+    gated: false
+    note: Harvested from the ReadMe developer portal; the API itself requires a bearer token.
+  graphql:
+    endpoint: null
+    note: >-
+      Demandbase publishes no GraphQL endpoint. The graphql/ directory in this repo
+      predates this pass and is not sourced from a live introspection.
+  mcp:
+    url: https://gateway.demandbase.com/mcp/servers/db-mcp
+    gated: true
+    note: tools/list returns HTTP 401 with an RFC 9728 WWW-Authenticate challenge.
+crosswalk:
+  - tool: null
+    capability: Global company data
+    category: company-intelligence
+    rest:
+      - companySearch_1
+      - companyFetch
+      - companyNewsCategoryFetch
+      - companyNewsFetch
+      - companyLogoFetch
+    binding: rest
+    confidence: medium
+    note: >-
+      Capability-level binding. The B2B API exposes exactly this data set (firmographics,
+      industry, location, size, installed technologies, news, corporate hierarchy) and is
+      the only public surface that does.
+  - tool: null
+    capability: Global contact data
+    category: contact-intelligence
+    rest:
+      - contactSearch_1
+      - contactFetch
+    binding: rest
+    confidence: medium
+  - tool: null
+    capability: Net-new contacts
+    category: contact-intelligence
+    rest:
+      - contactSearch_1
+    binding: rest
+    confidence: low
+    note: >-
+      The "not already in CRM" filter is a server-side composite over tenant CRM data. The
+      public REST surface can search contacts but cannot subtract CRM-known records.
+  - tool: null
+    capability: Account-level Intent
+    category: intent
+    rest:
+      - companyIntent
+    binding: rest
+    confidence: high
+    note: >-
+      One-to-one. POST /companies/intent/query in openapi/demandbase-intent-openapi.yml is
+      the only public intent operation, and the MCP changelog entry that added Intent
+      coincides with the Intent API beta.
+  - tool: null
+    capability: Reference data
+    category: reference
+    rest:
+      - getReferenceData
+      - get-reference
+      - get-support-object
+    binding: rest
+    confidence: medium
+    note: >-
+      Tenant-configured account lists / keyword sets / keywords are reference objects; the
+      B2B and Export reference endpoints return tenant-scoped reference values.
+mcp_only:
+  - capability: Internal account data
+    reason: >-
+      Tenant CRM/journey-stage/engagement/opportunity data. No public REST operation returns
+      it — the Data Export API can EXPORT account and opportunity entities asynchronously to
+      a file, but there is no synchronous read.
+  - capability: Internal person data
+    reason: Same as above; person and lead records are export-only over REST.
+  - capability: Buying Groups
+    reason: >-
+      Buying Group membership, personas and buyer roles are exposed only as Export API
+      entity types (Collection 1) and through MCP. No synchronous REST read exists.
+  - capability: Account Briefs
+    reason: >-
+      A server-side composite that fuses account, opportunity, engagement, Intent, Buying
+      Group, company and news data into one summary. No REST equivalent.
+rest_only:
+  - capability: Authentication
+    operations: ['POST /auth/v1/token']
+    note: Token exchange; not an agent-facing data capability.
+  - capability: Bulk / asynchronous jobs
+    operations: [createBulkJob, match, getBulkJobStatus, match_1]
+    note: File-based bulk enrichment and matching. No MCP analogue.
+  - capability: Change subscriptions and webhooks
+    operations:
+      - updateSubscription
+      - updateSubscription_1
+      - getSubscriptionDetails
+      - getSubscriptionEntityDetails
+      - getSubscriptionAlertsList
+      - getSubscriptionAlertDetails
+      - getAllSubscriptionsByClientID
+      - getSubscriptionJobStatus
+      - subscriptionJobsListFetch
+      - deleteSubscription
+    note: Push/event surface. Not exposed through MCP.
+  - capability: Data export jobs
+    operations:
+      - fetchFields
+      - createExportJob
+      - fetchAccountListJob
+      - fetchPersonListJob
+      - fetchExportJobsInfo
+      - checkExportJobStatus
+  - capability: Data import jobs
+    operations: ['POST /job', 'PUT /job/{id}/data', 'GET /job/{id}', 'GET /jobs', 'GET /{entityType}/sources']
+    note: The Data Import API publishes no operationIds; paths are used as identifiers.
+  - capability: User administration
+    operations: [put-users, delete-users, 'POST /admin/v1/user', 'GET /admin/v1/users', 'GET /admin/v1/user/{id}']
+  - capability: Custom sources and field mappings
+    operations: ['GET /integration/v1/custom-sources', 'POST /integration/v1/custom-sources', 'GET /integration/v1/custom-sources/{id}', 'PUT /integration/v1/custom-sources/{id}', 'DELETE /integration/v1/custom-sources/{id}', 'GET /integration/v1/custom-sources/{source_id}/field-mappings/{object_type}', 'PUT /integration/v1/custom-sources/{source_id}/field-mappings/{object_type}']
+    note: The Custom Sources API publishes no operationIds.
+  - capability: Credit usage reporting
+    operations: [getCreditUsageDetails]
+coverage:
+  mcp_tools_named: 0
+  mcp_capability_areas_published: 9
+  capability_areas_bound_to_rest: 5
+  mcp_only_capability_areas: 4
+  rest_operations_total: 53
+  rest_operations_with_operationid: 33
+  rest_operations_reachable_via_mcp_capability: 11

@@ -1,0 +1,68 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://developer.demandbase.com/changelog,
+  https://developer.demandbase.com/docs/migrating-from-legacy-tokens-to-api-keysets,
+  https://developer.demandbase.com/docs/iv-api-to-b2b-api-migration,
+  https://status.demandbase.com/
+versioning:
+  scheme: uri-path
+  docs: https://developer.demandbase.com/docs/api-getting-started
+  note: >-
+    Every Demandbase API pins a major version in the request path. There is no header-based
+    or date-based version negotiation, and no version discovery endpoint. Each API carries
+    its own info.version in its OpenAPI (see changelog/demandbase-changelog.yml).
+  current:
+    b2b: v1
+    data_export: v1
+    data_import: v1
+    admin: v1
+    intent: v1
+    usage: v1
+    custom_sources: v1
+    auth: v1
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    Demandbase publishes no formal deprecation policy, no RFC 8594 Sunset/Deprecation header
+    support, and no dated end-of-life calendar. What it does publish is per-migration
+    guidance when a surface is superseded, which is a weaker but real signal.
+  observed_migrations:
+    - from: Legacy user-scoped API tokens
+      to: API Key Sets (client ID + client secret exchanged for a bearer access token)
+      docs: https://developer.demandbase.com/docs/migrating-from-legacy-tokens-to-api-keysets
+      note: >-
+        Legacy tokens are created under an individual user's profile and break when that
+        user is deactivated. No sunset date is published for legacy tokens.
+    - from: Visitor Intelligence (IV) API
+      to: B2B API
+      docs: https://developer.demandbase.com/docs/iv-api-to-b2b-api-migration
+    - from: Demandbase IP-API v2
+      to: Demandbase IP-API v3
+      docs: https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+      note: >-
+        Documented on the support knowledge base, which is behind a Cloudflare bot challenge
+        (HTTP 403 to non-browser clients) and could not be read by this pass.
+deprecated_operations: []
+beta_operations:
+  - openapi/demandbase-intent-openapi.yml#companyIntent
+stages:
+  - {stage: beta, api: Intent API, since: '2026-07-23'}
+  - {stage: coming-soon, surface: Admin API coverage in the Python SDK, source: https://developer.demandbase.com/docs/getting_started_with_sdk}
+status_page: https://status.demandbase.com/
+status_page_status: 200
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime commitment is published. Availability terms sit inside the
+    customer platform contract.
+changelog: https://developer.demandbase.com/changelog
+support:
+  - https://support.demandbase.com/hc/en-us
+  - support@demandbase.com
+related:
+  - changelog/demandbase-changelog.yml
+  - authentication/demandbase-authentication.yml

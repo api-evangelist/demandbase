@@ -1,0 +1,292 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/*.json (8 harvested Demandbase OpenAPI definitions)
+format: vendor-error-code
+note: Derived from the 4xx/5xx responses declared in the eight OpenAPI definitions Demandbase publishes on its developer
+  portal. Demandbase does NOT use RFC 9457 application/problem+json; every error response is a plain application/json
+  object carrying errorCode / errorMessage / diagnosticCode. The published numeric code registry is captured separately
+  in errors/demandbase-error-codes.yml.
+envelope_reference: errors/demandbase-error-codes.yml
+problem_count: 56
+problems:
+- status: 400
+  title: HTTP 400
+  api: Admin API
+  content_type: application/json
+  source_operation: openapi/demandbase-admin-openapi.yml#POST /admin/v1/user
+- status: 400
+  title: Bad Request because required query params are missing, perPage must be greater than 0 and less than equal
+    to 50, or page number must be greater than or equal to 1.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#contactSearch_1
+- status: 400
+  title: Bad Request
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#companySearch_1
+- status: 400
+  title: Bad request. For example, job id is missing or invalid.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getBulkJobStatus
+- status: 400
+  title: Bad Request - Invalid input parameters
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#createBulkJob
+- status: 400
+  title: The subscription exists but is not accessible by the current user.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getSubscriptionDetails
+- status: 400
+  title: Invalid input or unsupported query parameters.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#subscriptionJobsListFetch
+- status: 400
+  title: Invalid job ID or request format.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getSubscriptionJobStatus
+- status: 400
+  title: Results per page value is invalid.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getAllSubscriptionsByClientID
+- status: 400
+  title: The requested reference object is invalid.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getReferenceData
+- status: 400
+  title: HTTP 400
+  api: Custom Sources API
+  content_type: null
+  source_operation: openapi/demandbase-custom-sources-openapi.yml#GET /integration/v1/custom-sources
+- status: 400
+  title: HTTP 400
+  api: Data Export API
+  content_type: null
+  source_operation: openapi/demandbase-data-export-openapi.yml#fetchFields
+- status: 400
+  title: Returned if the job specification in the request body does not match the required format.
+  api: Data Import API
+  content_type: application/json
+  source_operation: openapi/demandbase-data-import-openapi.yml#POST /job
+- status: 400
+  title: Bad Request Error
+  api: Data Import API
+  content_type: application/json
+  source_operation: openapi/demandbase-data-import-openapi.yml#GET /{entityType}/sources
+- status: 400
+  title: HTTP 400
+  api: Data Import API
+  content_type: application/json
+  source_operation: openapi/demandbase-data-import-openapi.yml#POST /activity_type
+- status: 400
+  title: Invalid request (missing or incorrect parameters)
+  api: Demandbase Auth API
+  content_type: null
+  source_operation: openapi/demandbase-auth-openapi.yml#POST /auth/v1/token
+- status: 400
+  title: The request is invalid.
+  api: Intent API
+  content_type: application/json
+  source_operation: openapi/demandbase-intent-openapi.yml#companyIntent
+- status: 400
+  title: Bad Request
+  api: Usage API
+  content_type: application/json
+  source_operation: openapi/demandbase-usage-openapi.yml#getCreditUsageDetails
+- status: 401
+  title: HTTP 401
+  api: Admin API
+  content_type: application/json
+  source_operation: openapi/demandbase-admin-openapi.yml#POST /admin/v1/user
+- status: 401
+  title: Unauthorized because the user is not authenticated.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#contactSearch_1
+- status: 401
+  title: Unauthorized - Missing or invalid tenant ID
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getBulkJobStatus
+- status: 401
+  title: Unauthorized. Access token is missing or invalid.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getSubscriptionEntityDetails
+- status: 401
+  title: Unauthorized. Authentication credentials are missing or invalid.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getSubscriptionAlertDetails
+- status: 401
+  title: Unauthorized. The request lacks valid authentication credentials.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getSubscriptionDetails
+- status: 401
+  title: Authentication is required or token is invalid.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#subscriptionJobsListFetch
+- status: 401
+  title: Unauthorized. Access token missing or invalid.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getSubscriptionJobStatus
+- status: 401
+  title: HTTP 401
+  api: Custom Sources API
+  content_type: null
+  source_operation: openapi/demandbase-custom-sources-openapi.yml#GET /integration/v1/custom-sources
+- status: 401
+  title: HTTP 401
+  api: Data Export API
+  content_type: null
+  source_operation: openapi/demandbase-data-export-openapi.yml#fetchFields
+- status: 401
+  title: Returned if the authentication credentials are missing or invalid.
+  api: Data Import API
+  content_type: application/json
+  source_operation: openapi/demandbase-data-import-openapi.yml#POST /job
+- status: 401
+  title: Authentication credentials are missing or invalid.
+  api: Intent API
+  content_type: application/json
+  source_operation: openapi/demandbase-intent-openapi.yml#companyIntent
+- status: 401
+  title: Unauthorized because the user is not authenticated.
+  api: Usage API
+  content_type: application/json
+  source_operation: openapi/demandbase-usage-openapi.yml#getCreditUsageDetails
+- status: 403
+  title: HTTP 403
+  api: Admin API
+  content_type: application/json
+  source_operation: openapi/demandbase-admin-openapi.yml#POST /admin/v1/user
+- status: 403
+  title: The API key does not have permission to access this resource.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getReferenceData
+- status: 403
+  title: HTTP 403
+  api: Data Export API
+  content_type: null
+  source_operation: openapi/demandbase-data-export-openapi.yml#fetchFields
+- status: 403
+  title: Returned if the authenticated user lacks the "Import Data" permission
+  api: Data Import API
+  content_type: application/json
+  source_operation: openapi/demandbase-data-import-openapi.yml#POST /job
+- status: 403
+  title: The API key does not include Intent API access.
+  api: Intent API
+  content_type: application/json
+  source_operation: openapi/demandbase-intent-openapi.yml#companyIntent
+- status: 404
+  title: HTTP 404
+  api: Admin API
+  content_type: null
+  source_operation: openapi/demandbase-admin-openapi.yml#GET /admin/v1/user/{id}
+- status: 404
+  title: Not Found
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#contactFetch
+- status: 404
+  title: Bad request because the company does not exist.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#companyFetch
+- status: 404
+  title: Not found
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#companyNewsCategoryFetch
+- status: 404
+  title: Job not found. Invalid job id.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getBulkJobStatus
+- status: 404
+  title: The subscription ID was not found.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getSubscriptionEntityDetails
+- status: 404
+  title: The subscription or alert ID was not found.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getSubscriptionAlertDetails
+- status: 404
+  title: Subscription not found or already deleted.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#deleteSubscription
+- status: 404
+  title: The specified job ID was not found.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getSubscriptionJobStatus
+- status: 404
+  title: HTTP 404
+  api: Custom Sources API
+  content_type: null
+  source_operation: openapi/demandbase-custom-sources-openapi.yml#GET /integration/v1/custom-sources/{id}
+- status: 404
+  title: HTTP 404
+  api: Data Export API
+  content_type: null
+  source_operation: openapi/demandbase-data-export-openapi.yml#checkExportJobStatus
+- status: 404
+  title: Returned if the referenced job is not found
+  api: Data Import API
+  content_type: application/json
+  source_operation: openapi/demandbase-data-import-openapi.yml#PUT /job/{id}/data
+- status: 404
+  title: HTTP 404
+  api: Data Import API
+  content_type: application/json
+  source_operation: openapi/demandbase-data-import-openapi.yml#POST /activity_type
+- status: 429
+  title: HTTP 429
+  api: Data Export API
+  content_type: null
+  source_operation: openapi/demandbase-data-export-openapi.yml#fetchFields
+- status: 500
+  title: HTTP 500
+  api: Admin API
+  content_type: null
+  source_operation: openapi/demandbase-admin-openapi.yml#POST /admin/v1/user
+- status: 500
+  title: Internal server error.
+  api: B2B API
+  content_type: application/json
+  source_operation: openapi/demandbase-b2b-openapi.yml#getBulkJobStatus
+- status: 500
+  title: HTTP 500
+  api: Custom Sources API
+  content_type: null
+  source_operation: openapi/demandbase-custom-sources-openapi.yml#GET /integration/v1/custom-sources
+- status: 500
+  title: HTTP 500
+  api: Data Export API
+  content_type: null
+  source_operation: openapi/demandbase-data-export-openapi.yml#fetchFields
+- status: 500
+  title: Internal Server Error
+  api: Data Import API
+  content_type: application/json
+  source_operation: openapi/demandbase-data-import-openapi.yml#POST /job
+- status: 500
+  title: HTTP 500
+  api: Data Import API
+  content_type: application/json
+  source_operation: openapi/demandbase-data-import-openapi.yml#POST /activity_type

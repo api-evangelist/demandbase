@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Demandbase Data Import API",
+    "name": "Data Import API",
     "version": "1.0"
   },
   "request": {
@@ -13,184 +13,236 @@
   "items": [
     {
       "info": {
-        "name": "Import Jobs",
+        "name": "Import Job",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "Demandbase List import jobs",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api.demandbase.com/import/v1/jobs",
-            "params": [
-              {
-                "name": "status",
-                "value": "",
-                "type": "query",
-                "description": "Filter by job status"
-              },
-              {
-                "name": "limit",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "offset",
-                "value": "",
-                "type": "query"
-              }
-            ]
-          },
-          "docs": "Retrieve a list of data import jobs with their current status."
-        },
-        {
-          "info": {
-            "name": "Demandbase Create an import job",
+            "name": "Create an import job",
             "type": "http"
           },
           "http": {
             "method": "POST",
-            "url": "https://api.demandbase.com/import/v1/jobs",
+            "url": "https://uapi.demandbase.com/import/v1/job",
             "body": {
               "type": "json",
               "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
             }
           },
-          "docs": "Create a new asynchronous data import job. Specify the entity type, operation mode (insert, update, or upsert), and field mappings. Upload the CSV data file after creating the job."
+          "docs": "Create a new job to perform a Data Import. This is prerequisite before posting a file with records to be imported."
         },
         {
           "info": {
-            "name": "Demandbase Get import job status",
+            "name": "Sources",
             "type": "http"
           },
           "http": {
             "method": "GET",
-            "url": "https://api.demandbase.com/import/v1/jobs/:jobId",
+            "url": "https://uapi.demandbase.com/import/v1/:entityType/sources",
             "params": [
               {
-                "name": "jobId",
+                "name": "entityType",
                 "value": "",
                 "type": "path",
-                "description": "Import job unique identifier"
+                "description": "One of 'Account', 'Opportunity', 'Person' or 'Activity'"
               }
-            ]
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
           },
-          "docs": "Retrieve the current status and details of a specific import job, including processing progress and error summary."
+          "docs": "Returns a list of eligible sources."
         },
         {
           "info": {
-            "name": "Demandbase Cancel an import job",
+            "name": "Submit import data",
             "type": "http"
           },
           "http": {
-            "method": "DELETE",
-            "url": "https://api.demandbase.com/import/v1/jobs/:jobId",
+            "method": "PUT",
+            "url": "https://uapi.demandbase.com/import/v1/job/:id/data",
             "params": [
               {
-                "name": "jobId",
+                "name": "listAction",
                 "value": "",
-                "type": "path",
-                "description": "Import job unique identifier"
+                "type": "query",
+                "description": "The listAction query parameter specifies how the imported data affects the membership of the account list associated with this job ID.   <table> <tr> <th>Allowed Value</th> <th>Description</th> </tr> <tr> <td>replace (default)</td> <td>Removes all existing members from the associated account list and adds the members from the current import file.</td> </tr> <tr> <td>insert</td> <td>Adds new members from the current import file to the existing account list. If no account list is associated with this job, one will be created.</td> </tr> <tr> <td>delete</td> <td>Removes members from the existing account list if they are matched in the import data.</td> </tr> <tr> <td>noop</td> <td>Processes and imports the data but does not make any changes to the associated account list membership.</td> </tr>  </table> "
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
               }
-            ]
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
           },
-          "docs": "Cancel a pending or validating import job."
+          "docs": "This endpoint is used to submit the data file to an existing import job identified by the path parameter {id}.\n\nSubmitting the data file triggers the asynchronous processing of the data. You can monitor the progress and final status of the data processing using the dedicated job status endpoint.\n\nNote: There is currently no limit to the number of rows you can upload per Submit request, however, files are limited to **5GB**."
         },
         {
           "info": {
-            "name": "Demandbase Get import errors",
+            "name": "Job status",
             "type": "http"
           },
           "http": {
             "method": "GET",
-            "url": "https://api.demandbase.com/import/v1/jobs/:jobId/errors",
+            "url": "https://uapi.demandbase.com/import/v1/job/:id",
             "params": [
               {
-                "name": "jobId",
+                "name": "id",
                 "value": "",
-                "type": "path",
-                "description": "Import job unique identifier"
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this endpoint to retrieve the current status and relevant details of a specific data import job.\n\nThe job is identified by the unique path parameter {id} that was returned when the job was initially created."
+        },
+        {
+          "info": {
+            "name": "Jobs list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/import/v1/jobs",
+            "params": [
+              {
+                "name": "entityType",
+                "value": "",
+                "type": "query",
+                "description": "One of 'Account', 'Opportunity', 'Person' or 'Activity', case insensitive"
               },
               {
-                "name": "limit",
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "One of 'new', 'processing', 'completed', 'failed'"
+              },
+              {
+                "name": "sort",
                 "value": "",
                 "type": "query"
               },
               {
-                "name": "offset",
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
                 "value": "",
                 "type": "query"
               }
-            ]
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
           },
-          "docs": "Retrieve detailed error information for rows that failed during import."
+          "docs": "Returns a list of import jobs. This provides an overview of all historical and current data import activities within the Demandbase platform."
         }
       ]
     },
     {
       "info": {
-        "name": "Uploads",
+        "name": "Activities Management",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "Demandbase Upload import file",
+            "name": "List Activity Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/import/v1/activity_type",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all activity types currently configured on your Demandbase tenant"
+        },
+        {
+          "info": {
+            "name": "Create New Activity Type",
             "type": "http"
           },
           "http": {
             "method": "POST",
-            "url": "https://api.demandbase.com/import/v1/jobs/:jobId/upload",
-            "params": [
-              {
-                "name": "jobId",
-                "value": "",
-                "type": "path",
-                "description": "Import job unique identifier"
-              }
-            ],
+            "url": "https://uapi.demandbase.com/import/v1/activity_type",
             "body": {
-              "type": "multipart-form",
-              "data": [
-                {
-                  "name": "file",
-                  "type": "text",
-                  "value": ""
-                }
-              ]
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
             }
           },
-          "docs": "Upload a CSV file for an import job. The file must match the field mappings specified when creating the job."
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "Mappings",
-        "type": "folder"
-      },
-      "items": [
+          "docs": "Create a new activity type on your Demandbase tenant."
+        },
         {
           "info": {
-            "name": "Demandbase List field mappings",
+            "name": "Activity Type Lookup",
             "type": "http"
           },
           "http": {
             "method": "GET",
-            "url": "https://api.demandbase.com/import/v1/mappings",
+            "url": "https://uapi.demandbase.com/import/v1/activity_type/:identifier",
             "params": [
               {
-                "name": "entity_type",
+                "name": "identifier",
                 "value": "",
-                "type": "query",
-                "description": "Filter by entity type"
+                "type": "path",
+                "description": "The unique identifier for the activity type. This should be the activity type ID.\n"
               }
-            ]
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
           },
-          "docs": "Retrieve available field mappings for each entity type, showing which fields can be imported and their requirements."
+          "docs": "Retrieve details of an activity type for data import."
+        },
+        {
+          "info": {
+            "name": "Update Activity Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://uapi.demandbase.com/import/v1/activity_type/:activityTypeId",
+            "params": [
+              {
+                "name": "activityTypeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing activity type on your Demandbase tenant. Use the activity type ID in the URI (via `PUT /activity_type/{activityTypeId}`).\n"
         }
       ]
     }

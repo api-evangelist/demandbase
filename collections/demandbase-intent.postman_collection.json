@@ -1,0 +1,592 @@
+{
+  "item": [
+    {
+      "id": "0e77f2ac-e632-4d5c-b0d6-73c3e397c751",
+      "name": "Company Intent",
+      "description": {
+        "content": "Retrieve company-level intent signals and research activity.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ef39c75c-ee2a-4e8a-a0aa-610adea0e5c2",
+          "name": "Retrieve company intent data",
+          "request": {
+            "name": "Retrieve company intent data",
+            "description": {
+              "content": "Retrieves company intent signals filtered by company IDs, keyword set IDs, or keywords within a specified time range.\n\nYou can optionally filter by intent strength or the number of people researching and control pagination and sorting. At least one of `companyIds`, `keywordSetIds`, or `keywords` is required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                "intent",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"companyIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywordSetIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"intentStrength\": \"<string>\",\n  \"minNumPeopleResearching\": \"<integer>\",\n  \"maxNumPeopleResearching\": \"<integer>\",\n  \"pageSize\": 25,\n  \"pageToken\": \"<string>\",\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cda9ca1e-5a2f-4f82-9b58-77901d00e3ed",
+              "name": "Intent records fetched successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    "intent",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyIds\": [\n    \"726263\"\n  ],\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-22\",\n  \"pageSize\": 5,\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"companyId\": \"726263\",\n      \"domain\": \"microsoft.com\",\n      \"keyword\": \"Zero Trust\",\n      \"numPeopleResearching\": 8,\n      \"intentStrength\": \"HIGH\",\n      \"isTrending\": true,\n      \"trendingScore\": 72,\n      \"numTrendingDays\": 3,\n      \"startDate\": \"2026-07-12\",\n      \"endDate\": \"2026-07-18\",\n      \"keywordSetId\": 7303,\n      \"keywordSetName\": \"Security Keywords\"\n    }\n  ],\n  \"pagination\": {\n    \"after\": \"Tzo1MDoyNQ==\",\n    \"before\": \"TzowOjI1\",\n    \"totalCount\": 142\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba15a0ea-2782-4c20-986b-293159d188b2",
+              "name": "The request is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    "intent",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyIds\": [\n    \"726263\"\n  ],\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-22\",\n  \"pageSize\": 5,\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"400-218\",\n  \"errorMessage\": \"At least one of companyIds, keywordSetIds, or keywords must be provided for intent search.\",\n  \"diagnosticCode\": \"ccb84f25-236e-4bcf-be01-88b7dd673fb4\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e138fd01-1337-481d-aa7d-b2f843569536",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    "intent",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyIds\": [\n    \"726263\"\n  ],\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-22\",\n  \"pageSize\": 5,\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"Authentication Failed - Unauthorized.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0ee9dda-d3f6-41cc-9db9-f55dd58273de",
+              "name": "The API key does not include Intent API access.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    "intent",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyIds\": [\n    \"726263\"\n  ],\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-22\",\n  \"pageSize\": 5,\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"403-100\",\n  \"errorMessage\": \"API Key does not have privilege to access the requested resource\",\n  \"diagnosticCode\": \"ccb84f25-236e-4bcf-be01-88b7dd673fb4\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a8f7adb6-6f34-4e0d-8c46-62b641875861",
+      "name": "Beta",
+      "description": {
+        "content": "APIs currently available as beta and subject to change before general availability.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "81a1034e-e374-47f3-9619-8c1f00f2dff6",
+          "name": "Retrieve company intent data",
+          "request": {
+            "name": "Retrieve company intent data",
+            "description": {
+              "content": "Retrieves company intent signals filtered by company IDs, keyword set IDs, or keywords within a specified time range.\n\nYou can optionally filter by intent strength or the number of people researching and control pagination and sorting. At least one of `companyIds`, `keywordSetIds`, or `keywords` is required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                "intent",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"companyIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywordSetIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"intentStrength\": \"<string>\",\n  \"minNumPeopleResearching\": \"<integer>\",\n  \"maxNumPeopleResearching\": \"<integer>\",\n  \"pageSize\": 25,\n  \"pageToken\": \"<string>\",\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f1ba8146-4fa6-40f3-acda-62d8e819e8e7",
+              "name": "Intent records fetched successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    "intent",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyIds\": [\n    \"726263\"\n  ],\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-22\",\n  \"pageSize\": 5,\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"companyId\": \"726263\",\n      \"domain\": \"microsoft.com\",\n      \"keyword\": \"Zero Trust\",\n      \"numPeopleResearching\": 8,\n      \"intentStrength\": \"HIGH\",\n      \"isTrending\": true,\n      \"trendingScore\": 72,\n      \"numTrendingDays\": 3,\n      \"startDate\": \"2026-07-12\",\n      \"endDate\": \"2026-07-18\",\n      \"keywordSetId\": 7303,\n      \"keywordSetName\": \"Security Keywords\"\n    }\n  ],\n  \"pagination\": {\n    \"after\": \"Tzo1MDoyNQ==\",\n    \"before\": \"TzowOjI1\",\n    \"totalCount\": 142\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18ed542e-1c9a-4a44-bb5e-89418b2eb7c5",
+              "name": "The request is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    "intent",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyIds\": [\n    \"726263\"\n  ],\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-22\",\n  \"pageSize\": 5,\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"400-218\",\n  \"errorMessage\": \"At least one of companyIds, keywordSetIds, or keywords must be provided for intent search.\",\n  \"diagnosticCode\": \"ccb84f25-236e-4bcf-be01-88b7dd673fb4\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0576bf10-064f-40ac-9a9d-9d350705e338",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    "intent",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyIds\": [\n    \"726263\"\n  ],\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-22\",\n  \"pageSize\": 5,\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"Authentication Failed - Unauthorized.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ddaf394-3da1-4d67-9f40-52c150980abb",
+              "name": "The API key does not include Intent API access.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    "intent",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyIds\": [\n    \"726263\"\n  ],\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-22\",\n  \"pageSize\": 5,\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"403-100\",\n  \"errorMessage\": \"API Key does not have privilege to access the requested resource\",\n  \"diagnosticCode\": \"ccb84f25-236e-4bcf-be01-88b7dd673fb4\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://uapi.demandbase.com/data/intent/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8eefa6c7-7b04-43e6-b30a-1ceb94e5bfa9",
+    "name": "Intent API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Intent API provides company-level intent signals, including keyword research activity, intent strength, and trending behavior.\n\n> **Beta:** This API is currently in beta and may change before general availability.\n\n## Authentication\nAll requests must be authenticated using a valid API token. Include the token in the `Authorization` header using the Bearer scheme.\n\nFor instructions on generating API tokens, see [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set).\n\n```text\nAuthorization: Bearer YOUR_API_KEY_HERE\nContent-Type: application/json\n```\n\nContact Support:\n Name: Support\n Email: support@demandbase.com",
+      "type": "text/plain"
+    }
+  }
+}

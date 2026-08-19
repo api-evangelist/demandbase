@@ -1,8 +1,8 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Demandbase Admin API",
-    "version": "1.0"
+    "name": "Admin API",
+    "version": "2.0"
   },
   "request": {
     "auth": {
@@ -13,211 +13,146 @@
   "items": [
     {
       "info": {
-        "name": "Users",
+        "name": "User Management",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "Demandbase List users",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api.demandbase.com/admin/v1/users",
-            "params": [
-              {
-                "name": "status",
-                "value": "",
-                "type": "query",
-                "description": "Filter by user status"
-              },
-              {
-                "name": "role",
-                "value": "",
-                "type": "query",
-                "description": "Filter by user role"
-              },
-              {
-                "name": "limit",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "offset",
-                "value": "",
-                "type": "query"
-              }
-            ]
-          },
-          "docs": "Retrieve a list of all users in the Demandbase One organization with their roles and status."
-        },
-        {
-          "info": {
-            "name": "Demandbase Create a user",
+            "name": "Create new user",
             "type": "http"
           },
           "http": {
             "method": "POST",
-            "url": "https://api.demandbase.com/admin/v1/users",
+            "url": "https://uapi.demandbase.com/admin/v1/user",
             "body": {
               "type": "json",
               "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
             }
           },
-          "docs": "Create a new user in the Demandbase One organization."
+          "docs": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nCreates a new <strong>user</strong> within your Demandbase account.\n</div>"
         },
         {
           "info": {
-            "name": "Demandbase Get a user",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api.demandbase.com/admin/v1/users/:userId",
-            "params": [
-              {
-                "name": "userId",
-                "value": "",
-                "type": "path",
-                "description": "User unique identifier"
-              }
-            ]
-          },
-          "docs": "Retrieve details of a specific user."
-        },
-        {
-          "info": {
-            "name": "Demandbase Update a user",
+            "name": "Update users",
             "type": "http"
           },
           "http": {
             "method": "PUT",
-            "url": "https://api.demandbase.com/admin/v1/users/:userId",
+            "url": "https://uapi.demandbase.com/admin/v1/user",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nUpdates an existing <strong>user</strong> within your Demandbase account.\n</div>"
+        },
+        {
+          "info": {
+            "name": "Get list of users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/admin/v1/users",
             "params": [
               {
-                "name": "userId",
+                "name": "departments",
                 "value": "",
-                "type": "path",
-                "description": "User unique identifier"
+                "type": "query",
+                "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">comma separated list of departments<br><strong>Example:</strong> Marketing,Sales</div>"
+              },
+              {
+                "name": "views",
+                "value": "",
+                "type": "query",
+                "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">comma separated list of views<br><strong>Example:</strong> Standard View,Marketing View</div>"
+              },
+              {
+                "name": "permissionSets",
+                "value": "",
+                "type": "query",
+                "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">comma separated list of permission sets<br><strong>Example:</strong> General User,Admin</div>"
+              },
+              {
+                "name": "workspaces",
+                "value": "",
+                "type": "query",
+                "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">comma separated list of workspaces (if enabled)<br><strong>Example:</strong> global workspace</div>"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\"><strong>Default:</strong> 1<br><strong>Example:</strong> 5</div>"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\"><strong>Default:</strong> 25<br><strong>Example:</strong> 25<br><strong>Max:</strong> 100</div>"
               }
             ],
-            "body": {
-              "type": "json",
-              "data": "{}"
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
             }
           },
-          "docs": "Update an existing user's details and role assignments."
+          "docs": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nThis endpoint allows you to retrieve users with pagination (max pageSize 100) and filters for departments, views, permissionSets, and workspaces.\n</div>"
         },
         {
           "info": {
-            "name": "Demandbase Delete a user",
+            "name": "Get a user by external id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://uapi.demandbase.com/admin/v1/user/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nThe Get Users By External ID API allows you to retrieve a specific user's data.\n</div>\n"
+        },
+        {
+          "info": {
+            "name": "Delete user using external user id",
             "type": "http"
           },
           "http": {
             "method": "DELETE",
-            "url": "https://api.demandbase.com/admin/v1/users/:userId",
+            "url": "https://uapi.demandbase.com/admin/v1/user/:id",
             "params": [
               {
-                "name": "userId",
+                "name": "id",
                 "value": "",
                 "type": "path",
-                "description": "User unique identifier"
+                "description": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">An external client defined identifier for the user (set when creating the user)<br><strong>Example:</strong> dcb34525-2baa-4f54-8c11-9e6175ecbc74</div>"
               }
-            ]
-          },
-          "docs": "Delete a user from the Demandbase One organization."
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "API Keys",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "Demandbase List API key sets",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api.demandbase.com/admin/v1/api-keys"
-          },
-          "docs": "Retrieve all API key sets for the organization."
-        },
-        {
-          "info": {
-            "name": "Demandbase Create an API key set",
-            "type": "http"
-          },
-          "http": {
-            "method": "POST",
-            "url": "https://api.demandbase.com/admin/v1/api-keys",
-            "body": {
-              "type": "json",
-              "data": "{}"
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
             }
           },
-          "docs": "Generate a new API key set for programmatic access to Demandbase APIs."
-        },
-        {
-          "info": {
-            "name": "Demandbase Get an API key set",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api.demandbase.com/admin/v1/api-keys/:keyId",
-            "params": [
-              {
-                "name": "keyId",
-                "value": "",
-                "type": "path",
-                "description": "API key set unique identifier"
-              }
-            ]
-          },
-          "docs": "Retrieve details of a specific API key set."
-        },
-        {
-          "info": {
-            "name": "Demandbase Delete an API key set",
-            "type": "http"
-          },
-          "http": {
-            "method": "DELETE",
-            "url": "https://api.demandbase.com/admin/v1/api-keys/:keyId",
-            "params": [
-              {
-                "name": "keyId",
-                "value": "",
-                "type": "path",
-                "description": "API key set unique identifier"
-              }
-            ]
-          },
-          "docs": "Revoke and delete an API key set."
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "Roles",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "Demandbase List roles",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api.demandbase.com/admin/v1/roles"
-          },
-          "docs": "Retrieve all available roles and their permissions."
+          "docs": "<div style=\"background:#FFFFFF; border-left:4px solid #3bb273; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;\">\n<h3>Overview</h3><br>\nDeletes an existing <strong>user</strong> from your Demandbase account.\n</div>"
         }
       ]
     }

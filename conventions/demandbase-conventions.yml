@@ -1,0 +1,148 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://developer.demandbase.com/docs/handling-errors,
+  https://developer.demandbase.com/docs/migrating-from-legacy-tokens-to-api-keysets,
+  https://developer.demandbase.com/docs/b2b-rate-limits,
+  https://developer.demandbase.com/docs/configuring-webhooks-for-subscription-api,
+  and derived from the eight harvested OpenAPI definitions in openapi/
+note: >-
+  Cross-cutting request/response semantics for the Demandbase platform APIs. Where a
+  convention is genuinely absent it is recorded as absent rather than omitted — the two
+  most consequential absences for an agent are idempotency (none) and rate-limit response
+  headers (none).
+authentication:
+  style: OAuth 2.0 client-credentials token exchange, then HTTP bearer
+  flow: >-
+    POST https://uapi.demandbase.com/auth/v1/token with a JSON body
+    {grantType: client_credentials, clientId, clientSecret}. The response returns
+    accessToken, tokenType "bearer" and expiresIn (28800 seconds / 8 hours in the published
+    example). Send the access token as `Authorization: Bearer <access-token>` on every
+    resource request.
+  credential_container: API Key Set (platform-level, permission-scoped, not user-scoped)
+  legacy: >-
+    Legacy user-scoped API tokens are sent directly as the bearer token. Demandbase
+    recommends migrating to API Key Sets; no sunset date is published.
+  never: Do not send the Client Secret directly in the Authorization header.
+  docs: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  detail: authentication/demandbase-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    Demandbase documents no idempotency key, no request-replay semantics, and no
+    Idempotency-Key parameter appears in any of the eight published OpenAPI definitions.
+    Retrying a POST /job, POST /match/job or POST /subscriptions/job after a timeout will
+    create a second job and consume a second slot against the 2-concurrent-job cap.
+    Recorded as a real absence — no Idempotency pointer is emitted for this provider.
+pagination:
+  styles:
+    - style: page-number
+      params: {page: 1-based page number, perPage: page size}
+      applies_to: >-
+        B2B API search, subscription listing and alert endpoints (contactSearch_1,
+        companySearch_1, getSubscriptionEntityDetails, getSubscriptionAlertsList,
+        subscriptionJobsListFetch, getAllSubscriptionsByClientID and others)
+      constraints: >-
+        perPage must be greater than 0 and less than or equal to 50 on contact search;
+        page must be >= 1. Violations return 400 (see errors/demandbase-error-codes.yml
+        400-118 through 400-122).
+    - style: page-number
+      params: {pageNo: page number, pageSize: page size}
+      applies_to: Admin API GET /admin/v1/users (max pageSize 100)
+    - style: cursor
+      params: {pageSize: page size, sortBy: sort field, sortOrder: ASC|DESC}
+      applies_to: Intent API POST /companies/intent/query
+      note: The Intent API changelog describes the response as cursor-based.
+    - style: none
+      applies_to: >-
+        Data Export API — results are delivered as a downloadable CSV/JSON file behind a
+        signed URL rather than paged over the wire.
+  sort:
+    params: [sort, sortBy, sortOrder]
+    values: [ascending, descending, ASC, DESC]
+    note: >-
+      The Export API accepts `sort` with values ascending/descending (400-120 otherwise);
+      the Intent API uses sortBy + sortOrder with ASC/DESC.
+field_selection:
+  supported: true
+  params: [fields, companyFields, contactFields, peopleFields, include, expand]
+  note: >-
+    The B2B API takes explicit field lists per entity (companyFields, contactFields,
+    peopleFields) and an `include` parameter for related data such as family tree,
+    competitors, installed technologies and logos. The Export API takes a `fields` array and
+    validates it against the tenant's enabled Export collection — a field outside the
+    collection returns 400-155 or 403-104, not an empty column.
+  entitlement_coupling: >-
+    Field availability is contractual, not just schematic. Which entity types and fields a
+    tenant may request depends on its Export Collection (1-4); see
+    https://developer.demandbase.com/docs/collections.
+metadata:
+  supported: false
+  note: No user-defined metadata / custom-attribute bag is documented on any resource.
+request_tracing:
+  request_id_header: null
+  response_field: diagnosticCode
+  note: >-
+    Demandbase returns a per-request opaque identifier in the ERROR BODY as
+    `diagnosticCode`, not in a response header, and only on failure. There is no
+    request-id header to correlate successful calls. Log the diagnosticCode and quote it
+    when escalating; do not parse it.
+versioning:
+  scheme: uri-path
+  detail: lifecycle/demandbase-lifecycle.yml
+error_envelope:
+  format: vendor-error-code
+  content_type: application/json
+  rfc9457: false
+  fields: [errorCode, errorMessage, diagnosticCode]
+  code_shape: >-
+    <http-status>-<sequence>, e.g. 400-115. The first three digits always match the HTTP
+    status, so a client can branch on the status and still pin an exact condition.
+  detail: errors/demandbase-error-codes.yml
+rate_limit_signalling:
+  response_headers: []
+  retry_after: false
+  status_on_exhaustion: 429
+  codes: ['429-100', '429-101', '429-102']
+  note: >-
+    No RateLimit-* or X-RateLimit-* headers and no Retry-After are documented or observed.
+    A client cannot read its remaining budget from a response; Demandbase directs callers
+    to throttle client-side, use exponential backoff, and monitor consumption through the
+    Usage API (GET /reporting/v1/usage).
+  detail: rate-limits/demandbase-rate-limits.yml
+asynchronous_jobs:
+  pattern: submit-then-poll
+  note: >-
+    Bulk enrichment, match, export, import and subscription changes are all asynchronous.
+    Submit returns 202 with a jobId; poll the job-status endpoint until a terminal state.
+  states:
+    non_terminal: [accepted, processing]
+    terminal: [finished, failed]
+  result_delivery: >-
+    A finished job carries a signed resultsUrl. The Export/B2B signed URL is valid for
+    24 hours. A failed job carries errorMessage and produces no result file.
+  concurrency: >-
+    At most 2 B2B asynchronous jobs and 1 export job may be in flight at a time.
+webhooks:
+  validation_header: X-DemandbaseAPI-ValidationCode
+  handshake: >-
+    Demandbase sends a HEAD request to the registered callback URL carrying
+    X-DemandbaseAPI-ValidationCode; the server must echo the same value back as a response
+    header. Validation may lag subscription creation by up to 2-3 minutes.
+  states: [VERIFICATION_PENDING, VERIFICATION_RUNNING, ACTIVE, DISABLED]
+  signing: signing secret supplied on the subscription
+  detail: asyncapi/demandbase-webhooks.yml
+consumption_model:
+  unit: credits
+  note: >-
+    API and MCP calls draw down credit entitlements that are separate from rate limits.
+    Remaining entitlement is readable through the Usage API.
+  docs: https://developer.demandbase.com/docs/credit-consumtion-model
+related:
+  - authentication/demandbase-authentication.yml
+  - errors/demandbase-error-codes.yml
+  - errors/demandbase-problem-types.yml
+  - lifecycle/demandbase-lifecycle.yml
+  - rate-limits/demandbase-rate-limits.yml
+  - asyncapi/demandbase-webhooks.yml

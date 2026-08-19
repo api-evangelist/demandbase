@@ -1,0 +1,125 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  Derived from the eight harvested OpenAPI definitions in openapi/_original/ and the
+  /.well-known/ documents in well-known/, plus the published trust center at
+  https://trust.demandbase.com/
+note: >-
+  Standards conformance is asserted only where there is evidence in a document this repo
+  holds. Where a standard is not implemented it is recorded as conforms: false rather than
+  omitted, because an absence is a measurement.
+standards:
+  - id: openapi-3.0
+    conforms: true
+    evidence: >-
+      Eight definitions published on developer.demandbase.com, six at OpenAPI 3.0.1 /
+      3.0.3 (B2B, Data Export, Auth, Usage at 3.0.1; Admin, Data Import, Intent, Custom
+      Sources at 3.0.3). No 3.1 document.
+  - id: openapi-3.1
+    conforms: false
+  - id: asyncapi
+    conforms: false
+    evidence: >-
+      No AsyncAPI document is published; /asyncapi.yaml returns 404 on the docs and API
+      hosts. Demandbase does publish a real webhook surface — see
+      asyncapi/demandbase-webhooks.yml.
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      Two flows. REST uses client_credentials against
+      https://uapi.demandbase.com/auth/v1/token; the MCP gateway advertises RFC 8414
+      authorization-server metadata for an authorization_code flow.
+  - id: oauth2-pkce-rfc7636
+    conforms: true
+    evidence: gateway metadata declares code_challenge_methods_supported ["S256"].
+  - id: oauth2-dynamic-client-registration-rfc7591
+    conforms: true
+    evidence: >-
+      registration_endpoint https://gateway.demandbase.com/mcp/v1/register advertised in
+      /.well-known/oauth-authorization-server; the docs walk a client through DCR.
+  - id: oauth2-authorization-server-metadata-rfc8414
+    conforms: true
+    evidence: well-known/demandbase-oauth-authorization-server.json (HTTP 200)
+  - id: oauth2-protected-resource-metadata-rfc9728
+    conforms: true
+    evidence: >-
+      well-known/demandbase-oauth-protected-resource.json (HTTP 200), and an unauthenticated
+      MCP call returns a WWW-Authenticate header carrying resource_metadata.
+  - id: oidc-discovery
+    conforms: true
+    evidence: >-
+      /.well-known/openid-configuration served on both gateway.demandbase.com and the
+      Okta-backed authentication.demandbase.com.
+  - id: mcp
+    conforms: true
+    evidence: >-
+      Hosted remote MCP server at https://gateway.demandbase.com/mcp/servers/db-mcp with
+      published client integration guidance for ChatGPT, Claude, Gemini, Copilot Studio,
+      VS Code and custom clients.
+  - id: a2a
+    conforms: false
+    evidence: >-
+      No agent card at /.well-known/agent-card.json or /.well-known/agent.json on any
+      Demandbase host (404 on www, developer, uapi, api, authentication; 401 on gateway).
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors are application/json with a vendor envelope {errorCode, errorMessage,
+      diagnosticCode}. No application/problem+json media type appears in any specification.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: /.well-known/security.txt returns 404 or 401 on every Demandbase host probed.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: No Sunset or Deprecation header support is documented, and no deprecation policy exists.
+  - id: rfc9111-http-caching
+    conforms: false
+    evidence: No cache-control guidance or conditional-request support is documented.
+  - id: idempotency-key
+    conforms: false
+    evidence: >-
+      No idempotency key, header or parameter appears in any specification or documentation
+      page. See conventions/demandbase-conventions.yml.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      page/perPage on the B2B API, pageNo/pageSize on the Admin API, pageSize + sortBy +
+      sortOrder (cursor-based) on the Intent API. Not uniform across APIs.
+  - id: json-schema
+    conforms: true
+    evidence: components.schemas declared in seven of eight specifications (118 schemas total).
+  - id: llms-txt
+    conforms: true
+    evidence: >-
+      https://developer.demandbase.com/llms.txt (HTTP 200, 143 links) and
+      https://www.demandbase.com/llms.txt (HTTP 200). Saved at llms/demandbase-llms.txt.
+  - id: webhook-verification-handshake
+    conforms: true
+    evidence: >-
+      HEAD-request echo of X-DemandbaseAPI-ValidationCode plus a subscription signing
+      secret. Vendor-specific, not a standard.
+  - id: fhir
+    conforms: false
+  - id: scim
+    conforms: false
+    evidence: >-
+      Admin API manages users but at /admin/v1/user with a Demandbase-native shape, not
+      SCIM 2.0 /Users.
+  - id: odata
+    conforms: false
+  - id: json-api
+    conforms: false
+  - id: graphql
+    conforms: false
+    evidence: No GraphQL endpoint is published or documented.
+  - id: grpc
+    conforms: false
+compliance_program:
+  published: true
+  url: https://trust.demandbase.com/
+  certifications: [SOC 2, ISO 27001]
+  detail: security/demandbase-trust-center.yml
+related:
+  - security/demandbase-trust-center.yml
+  - well-known/demandbase-well-known.yml
+  - authentication/demandbase-authentication.yml
