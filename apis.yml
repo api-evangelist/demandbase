@@ -55,160 +55,9 @@ tags_raw:
 - Sales Intelligence
 - Technographics
 apis:
-- name: Demandbase B2B API
-  description: 'Company and contact intelligence: search and fetch companies and contacts, company news, logos,
-    installed technologies and corporate hierarchy; synchronous and bulk matching; asynchronous bulk data retrieval;
-    and change subscriptions with webhook alerts for company, company-news, family-tree and person records. 22 operations.'
-  humanURL: https://developer.demandbase.com/docs/b2b-overview
-  baseURL: https://uapi.demandbase.com/data/b2b/v1
-  properties:
-  - type: OpenAPI
-    url: openapi/demandbase-b2b-openapi.yml
-  - type: Documentation
-    url: https://developer.demandbase.com/docs/b2b-overview
-  - type: APIReference
-    url: https://developer.demandbase.com/reference/companysearch_1
-  - type: GettingStarted
-    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
-  - type: Authentication
-    url: https://developer.demandbase.com/docs/b2b-authentication
-  - type: RateLimits
-    url: https://developer.demandbase.com/docs/b2b-rate-limits
-  - type: Webhooks
-    url: asyncapi/demandbase-webhooks.yml
-  - type: Overlay
-    url: overlays/demandbase-b2b-overlay.yaml
-  - type: BestPractices
-    url: https://developer.demandbase.com/docs/b2b-best-practices
-  - type: FAQ
-    url: https://developer.demandbase.com/docs/faq
-- name: Demandbase Data Export API
-  description: Asynchronous export of Demandbase platform data — Account, Opportunity, Person, Activity, Campaign,
-    Creative, Account List and Person List entities — to CSV or JSON behind a signed download URL. Field availability
-    is governed by the tenant Export Collection. 8 operations.
-  humanURL: https://developer.demandbase.com/docs/export-overview
-  baseURL: https://uapi.demandbase.com/data/export
-  properties:
-  - type: OpenAPI
-    url: openapi/demandbase-data-export-openapi.yml
-  - type: Documentation
-    url: https://developer.demandbase.com/docs/export-overview
-  - type: APIReference
-    url: https://developer.demandbase.com/reference/createexportjob
-  - type: GettingStarted
-    url: https://developer.demandbase.com/docs/make-your-first-request
-  - type: Authentication
-    url: https://developer.demandbase.com/docs/authentication
-  - type: RateLimits
-    url: https://developer.demandbase.com/docs/rate-limits
-  - type: ErrorCatalog
-    url: https://developer.demandbase.com/docs/handling-errors
-  - type: Overlay
-    url: overlays/demandbase-data-export-overlay.yaml
-  - type: Filters
-    url: https://developer.demandbase.com/docs/how-to-use-filters
-- name: Demandbase Data Import API
-  description: Asynchronous import of customer data and intent activity into the Demandbase platform. Create an
-    import job, submit a data file of up to 5 GB, poll the job, and manage custom activity types and CSV record
-    matching / data mapping. 9 operations.
-  humanURL: https://developer.demandbase.com/docs/import-overview
-  baseURL: https://uapi.demandbase.com/import/v1
-  properties:
-  - type: OpenAPI
-    url: openapi/demandbase-data-import-openapi.yml
-  - type: Documentation
-    url: https://developer.demandbase.com/docs/import-overview
-  - type: APIReference
-    url: https://developer.demandbase.com/reference/post_job
-  - type: GettingStarted
-    url: https://developer.demandbase.com/docs/make-your-first-request-1
-  - type: Authentication
-    url: https://developer.demandbase.com/docs/authentication-1
-  - type: RateLimits
-    url: https://developer.demandbase.com/docs/rate-limits-1
-  - type: Overlay
-    url: overlays/demandbase-data-import-overlay.yaml
-- name: Demandbase Intent API
-  description: 'Beta. Company-level intent signals and research activity: query by company IDs, keyword set IDs
-    or keywords over a date range, filtered by intent strength or number of people researching, with cursor-based
-    pagination. 1 operation.'
-  humanURL: https://developer.demandbase.com/reference/company-intent
-  baseURL: https://uapi.demandbase.com/data/intent/v1
-  properties:
-  - type: OpenAPI
-    url: openapi/demandbase-intent-openapi.yml
-  - type: Documentation
-    url: https://developer.demandbase.com/reference/company-intent
-  - type: APIReference
-    url: https://developer.demandbase.com/reference/companyintent-1
-  - type: ChangeLog
-    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
-  - type: Overlay
-    url: overlays/demandbase-intent-overlay.yaml
-- name: Demandbase Admin API
-  description: 'User administration for a Demandbase tenant: create, update, retrieve, list and delete users, with
-    filters for departments, views, permission sets and workspaces. 5 operations.'
-  humanURL: https://developer.demandbase.com/docs/user-admin-overview
-  baseURL: https://uapi.demandbase.com
-  properties:
-  - type: OpenAPI
-    url: openapi/demandbase-admin-openapi.yml
-  - type: Documentation
-    url: https://developer.demandbase.com/docs/user-admin-overview
-  - type: APIReference
-    url: https://developer.demandbase.com/reference/post_admin-v1-user
-  - type: Authentication
-    url: https://developer.demandbase.com/docs/authentication-3
-  - type: Overlay
-    url: overlays/demandbase-admin-overlay.yaml
-- name: Demandbase Usage API
-  description: 'Credit usage reporting: returns a summary of credit consumption and entitlements for a given API
-    category, the only runtime signal a consumer has for remaining quota. 1 operation.'
-  humanURL: https://developer.demandbase.com/docs/credit-usage-overview
-  baseURL: https://uapi.demandbase.com
-  properties:
-  - type: OpenAPI
-    url: openapi/demandbase-usage-openapi.yml
-  - type: Documentation
-    url: https://developer.demandbase.com/docs/credit-usage-overview
-  - type: APIReference
-    url: https://developer.demandbase.com/reference/getcreditusagedetails
-  - type: Authentication
-    url: https://developer.demandbase.com/docs/authentication-2
-  - type: Overlay
-    url: overlays/demandbase-usage-overlay.yaml
-- name: Demandbase Custom Sources API
-  description: Manage custom data sources and their per-object field mappings so third-party systems can feed the
-    Demandbase platform. 7 operations.
-  humanURL: https://developer.demandbase.com/docs/custom-sources-overview
-  baseURL: https://uapi.demandbase.com/integration/v1
-  properties:
-  - type: OpenAPI
-    url: openapi/demandbase-custom-sources-openapi.yml
-  - type: Documentation
-    url: https://developer.demandbase.com/docs/custom-sources-overview
-  - type: APIReference
-    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
-  - type: Overlay
-    url: overlays/demandbase-custom-sources-overlay.yaml
-- name: Demandbase Auth API
-  description: 'Token exchange for every other Demandbase API: POST an API Key Set client ID and client secret with
-    grantType client_credentials and receive a bearer access token valid for 8 hours. 1 operation.'
-  humanURL: https://developer.demandbase.com/docs/authenticating-with-the-apis
-  baseURL: https://uapi.demandbase.com
-  properties:
-  - type: OpenAPI
-    url: openapi/demandbase-auth-openapi.yml
-  - type: Documentation
-    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
-  - type: APIReference
-    url: https://developer.demandbase.com/reference/generate_access_token
-  - type: Authentication
-    url: authentication/demandbase-authentication.yml
-  - type: Overlay
-    url: overlays/demandbase-auth-overlay.yaml
 - name: Demandbase MCP Server
-  description: Hosted remote Model Context Protocol server exposing Demandbase account, person, intent, buying-group,
+  description: >-
+    Hosted remote Model Context Protocol server exposing Demandbase account, person, intent, buying-group,
     account-brief, global company/contact and reference capabilities to AI assistants. OAuth 2.1 authorization-code
     + PKCE with dynamic client registration; tools/list is tenant-gated.
   humanURL: https://developer.demandbase.com/docs/mcp
@@ -227,18 +76,1287 @@ apis:
   - type: OAuthScopes
     url: scopes/demandbase-scopes.yml
 - name: Demandbase IP-API v3
-  description: 'Real-time visitor identification: resolves a visitor IP address to a Demandbase company ID, firmographics
-    and corporate hierarchy for web personalization, forms enrichment and analytics integrations. No OpenAPI is
-    published for this API and its reference documentation sits on the support knowledge base, which is behind a
-    bot challenge.'
-  humanURL: https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+  description: >-
+    Real-time visitor identification: resolves a visitor IP address to a Demandbase company ID, firmographics
+    and corporate hierarchy for web personalization, forms enrichment and analytics integrations. No OpenAPI
+    is published for this API and its reference documentation sits on the support knowledge base, which
+    is behind a bot challenge.
+  humanURL: >-
+    https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
   baseURL: https://api.company-target.com
   properties:
   - type: Documentation
-    url: https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
   - type: Migration
-    url: https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+    url: >-
+      https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+- aid: demandbase:demandbase-activities-management-api
+  name: Demandbase Activities Management API
+  description: >-
+    The Activities Management API from Demandbase — 3 operation(s) for activities management.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Activities Management
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-activities-management-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-asynchronous-batch-api-api
+  name: Demandbase Asynchronous (Batch) API
+  description: Asynchronous bulk jobs for high-volume data retrieval and matching.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Asynchronous (Batch) API
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-asynchronous-batch-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-auth-api
+  name: Demandbase Auth API
+  description: The Auth API from Demandbase — 1 operation(s) for auth.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-auth-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-company-intent-api
+  name: Demandbase Company Intent API
+  description: Retrieve company-level intent signals and research activity.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Company Intent
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-company-intent-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-create-export-job-api
+  name: Demandbase Create Export Job API
+  description: The Create Export Job API from Demandbase — 3 operation(s) for create export job.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Create Export Job
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-create-export-job-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-credit-usage-api
+  name: Demandbase Credit Usage API
+  description: The Credit Usage API from Demandbase — 1 operation(s) for credit usage.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Credit Usage
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-credit-usage-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-custom-sources-api
+  name: Demandbase Custom Sources API
+  description: Create and manage custom sources.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Custom Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-custom-sources-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-field-mappings-api
+  name: Demandbase Field Mappings API
+  description: Configure field mappings for a source and object type.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Field Mappings
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-field-mappings-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-get-fields-api
+  name: Demandbase Get Fields API
+  description: The Get Fields API from Demandbase — 1 operation(s) for get fields.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Get Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-get-fields-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-get-job-details-api
+  name: Demandbase Get Job Details API
+  description: The Get Job Details API from Demandbase — 2 operation(s) for get job details.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Get Job Details
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-get-job-details-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-get-reference-data-api
+  name: Demandbase Get Reference Data API
+  description: The Get Reference Data API from Demandbase — 2 operation(s) for get reference data.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Get Reference Data
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-get-reference-data-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-import-job-api
+  name: Demandbase Import Job API
+  description: The Import Job API from Demandbase — 5 operation(s) for import job.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Import Job
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-import-job-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-reference-tables-api
+  name: Demandbase Reference Tables API
+  description: Reference schemas and allowed values used by the B2B API.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Reference Tables
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-reference-tables-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-subscription-api-api
+  name: Demandbase Subscription API
+  description: Subscription creation, updates, status, alerts, and lifecycle operations.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Subscription API
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-subscription-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-sync-api-api
+  name: Demandbase Sync API
+  description: Synchronous company, contact, matching, news, and logo operations.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - Sync API
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-sync-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
+- aid: demandbase:demandbase-user-management-api
+  name: Demandbase User Management API
+  description: The User Management API from Demandbase — 3 operation(s) for user management.
+  humanURL: https://developer.demandbase.com/docs/b2b-overview
+  baseURL: https://uapi.demandbase.com/data/b2b/v1
+  tags:
+  - User Management
+  properties:
+  - type: OpenAPI
+    url: openapi/demandbase-user-management-api-openapi.yml
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/b2b-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companysearch_1
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/b2b-make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/b2b-authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/b2b-rate-limits
+  - type: Webhooks
+    url: asyncapi/demandbase-webhooks.yml
+  - type: BestPractices
+    url: https://developer.demandbase.com/docs/b2b-best-practices
+  - type: FAQ
+    url: https://developer.demandbase.com/docs/faq
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/export-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/createexportjob
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits
+  - type: ErrorCatalog
+    url: https://developer.demandbase.com/docs/handling-errors
+  - type: Filters
+    url: https://developer.demandbase.com/docs/how-to-use-filters
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/import-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_job
+  - type: GettingStarted
+    url: https://developer.demandbase.com/docs/make-your-first-request-1
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-1
+  - type: RateLimits
+    url: https://developer.demandbase.com/docs/rate-limits-1
+  - type: Documentation
+    url: https://developer.demandbase.com/reference/company-intent
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/companyintent-1
+  - type: ChangeLog
+    url: https://developer.demandbase.com/changelog/new-beta-company-intent-api
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/user-admin-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/post_admin-v1-user
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-3
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/credit-usage-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/getcreditusagedetails
+  - type: Authentication
+    url: https://developer.demandbase.com/docs/authentication-2
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/custom-sources-overview
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/get_integration-v1-custom-sources
+  - type: Documentation
+    url: https://developer.demandbase.com/docs/authenticating-with-the-apis
+  - type: APIReference
+    url: https://developer.demandbase.com/reference/generate_access_token
+  - type: Authentication
+    url: authentication/demandbase-authentication.yml
 common:
+- type: Overlay
+  url: overlays/demandbase-b2b-overlay.yaml
+- type: Overlay
+  url: overlays/demandbase-data-export-overlay.yaml
+- type: Overlay
+  url: overlays/demandbase-data-import-overlay.yaml
+- type: Overlay
+  url: overlays/demandbase-intent-overlay.yaml
+- type: Overlay
+  url: overlays/demandbase-admin-overlay.yaml
+- type: Overlay
+  url: overlays/demandbase-usage-overlay.yaml
+- type: Overlay
+  url: overlays/demandbase-custom-sources-overlay.yaml
+- type: Overlay
+  url: overlays/demandbase-auth-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/demandbase-agentic-access.yml
 - type: TrustCenter
