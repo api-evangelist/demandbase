@@ -7,6 +7,18 @@ description: Demandbase is a B2B go-to-market platform that unifies account inte
   server that exposes account, person, intent, buying-group and account-brief capabilities to AI assistants, an
   official Python SDK, and a change-subscription webhook surface.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
