@@ -1,0 +1,238 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: Data Export Get Job Details API
+  description: "Export data in bulk from the Demandbase platform.<br><br>Authenticate using a bearer token. Pass a header like: `Authorization: Bearer v334asfsdfo3241ERqwefe`<br><br>The part after 'Bearer' is your API token. \nFor instructions on generating API tokens, see the [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set) article at the Demandbase Help Center"
+servers:
+- url: https://uapi.demandbase.com/data/export
+security:
+- token: []
+tags:
+- name: Get Job Details
+paths:
+  /v1/jobs:
+    get:
+      tags:
+      - Get Job Details
+      summary: Returns a list of submitted export jobs.
+      operationId: fetchExportJobsInfo
+      parameters:
+      - name: entityType
+        in: query
+        schema:
+          type: string
+          default: All
+      - name: page
+        in: query
+        schema:
+          type: string
+          default: '1'
+      - name: perPage
+        in: query
+        schema:
+          type: string
+          default: '10'
+      - name: sort
+        in: query
+        schema:
+          type: string
+          default: descending
+      - name: jobStatus
+        in: query
+        schema:
+          type: string
+          default: All
+      responses:
+        '200':
+          description: Returns the list of export jobs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobDetailsList'
+        '400':
+          $ref: '#/components/responses/400errorDescriptionsForAllApi'
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+  /v1/job/{jobId}:
+    get:
+      tags:
+      - Get Job Details
+      summary: Check status of a data export job
+      operationId: checkExportJobStatus
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns status and download URLs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '404':
+          $ref: '#/components/responses/404errorDescriptionsForStatusApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+      description: Poll this endpoint until jobStatus is terminal. accepted and processing are non-terminal; continue polling. finished and failed are terminal. A finished job includes its download URL; a failed job does not produce a result file.
+components:
+  responses:
+    429errorDescriptionsForAllApi:
+      description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 429-100
+            errorMessage: Rate limit exceeded.
+            diagnosticCode: ce0fc1770e0d425b88892df4f663bf07
+    400errorDescriptionsForAllApi:
+      description: The request body, path parameter, or query parameter is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+    500errorDescriptionsForAllApi:
+      description: An unexpected internal service error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 500-100
+            errorMessage: Error while communicating with internal service.
+            diagnosticCode: de0fc1770e0d425b88892df4f663bf07
+    401errorDescriptionsForAllApi:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 401-100
+            errorMessage: Authentication credentials are missing or invalid.
+            diagnosticCode: 1e0fc1770e0d425b88892df4f663bf07
+    404errorDescriptionsForStatusApi:
+      description: No export job exists for the requested job ID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 404-302
+            errorMessage: Job id invalid
+            diagnosticCode: 4e0fc1770e0d425b88892df4f663bf07
+    403errorDescriptionsForAllApi:
+      description: The authenticated user does not have permission to access this resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 403-100
+            errorMessage: The authenticated user does not have permission to access this resource.
+            diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
+  schemas:
+    ErrorDto:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        diagnosticCode:
+          type: string
+        errorMessage:
+          type: string
+    JobDetailsList:
+      type: object
+      required:
+      - pageNo
+      - pageSize
+      - data
+      - totalCount
+      properties:
+        pageNo:
+          type: integer
+        pageSize:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              updatedAt:
+                type: string
+                format: date-time
+              createdAt:
+                type: string
+                format: date-time
+              jobName:
+                type: string
+              jobId:
+                type: string
+              jobStatus:
+                type: string
+              entityType:
+                type: string
+        totalCount:
+          type: integer
+    JobStatus:
+      type: object
+      required:
+      - resultsUrl
+      - updatedAt
+      - jobStatus
+      - jobName
+      - jobId
+      - createdAt
+      - entityType
+      - message
+      properties:
+        resultsUrl:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        jobStatus:
+          type: string
+          description: Current processing state. accepted and processing are non-terminal; continue polling. finished and failed are terminal.
+          enum:
+          - accepted
+          - processing
+          - finished
+          - failed
+        jobName:
+          type: string
+        jobId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        entityType:
+          type: string
+        message:
+          type:
+          - string
+          - 'null'
+  securitySchemes:
+    token:
+      type: http
+      scheme: bearer

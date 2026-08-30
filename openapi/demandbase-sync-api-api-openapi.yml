@@ -1,0 +1,3478 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: B2B Sync API
+  description: 'The B2B API provides access to endpoints for searching, retrieving, and matching company and contact data.
+
+
+    It includes support for:
+
+    - **Company records:** Firmographic details, news, technologies, and more.
+
+    - **Contact records:** Current role, employment history, and professional details.
+
+    - **Demandbase Person profiles:** Persistent identities tied to individuals across multiple roles or companies.
+
+    - **Subscriptions:** Monitoring updates to companies and DB Person records.
+
+    ## Authentication
+
+    All requests to the B2B API must be authenticated using a valid API token. If authentication fails, the API will respond with a `401 Unauthorized` status code.
+
+    ### Obtaining an API Token
+
+    For instructions on generating API tokens, see the [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set) article at the Demandbase Help Center.
+
+    ### Authorization Header
+
+    Include your API token in the `Authorization` header of each request using the Bearer token scheme. Also set the `Content-Type` header to `application/json` when sending JSON payloads.
+
+    #### Example
+
+    ```
+
+    Authorization: Bearer YOUR_API_KEY_HERE
+
+    Content-Type: application/json
+
+    ```
+
+
+    > **Note:** Tokens should be treated as sensitive credentials. Do not expose them in public code repositories or client-side applications.'
+  contact:
+    name: Support
+    url: https://www.demandbase.com/
+    email: support@demandbase.com
+servers:
+- url: https://uapi.demandbase.com/data/b2b/v1
+  description: Server URL in Production environment
+security:
+- bearerAuth: []
+tags:
+- name: Sync API
+  description: Synchronous company, contact, matching, news, and logo operations.
+paths:
+  /contacts:
+    post:
+      tags:
+      - Sync API
+      summary: Search contacts
+      description: "Use this endpoint to search for individuals at specific companies. \n\nYou can filter contacts by details such as first name, last name, email, location, job title, job level, and job function. Company-level filters include company name, website, location, industry, size, and more. Additional parameters allow you to filter by quality score, email validation status, and phone requirements.\n\nSorting and pagination are supported. You can sort results by fields such as `companyName`, and control the number of results returned using `page` and `perPage`.\n\nYou must include at least one parameter (excluding sorting and pagination) to perform a search."
+      operationId: contactSearch_1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactSearchRequestDTO'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContactSearchRequestDTO'
+      responses:
+        '200':
+          description: Successful operation or No contacts found for query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactSearchResponseDTO'
+              examples:
+                SuccessResponse:
+                  description: SuccessResponse
+                  value:
+                    contactResults:
+                    - dbPersonDetails:
+                        dbPersonId: 15568398
+                        firstName: Jamie
+                        lastName: Taylor
+                        country: United States
+                        city: Seattle
+                      employmentDetails:
+                        contactId: 17864319
+                        companyId: 731691
+                        companyName: Example Corp
+                        titles:
+                        - Senior Security Officer
+                        jobLevels:
+                        - id: '3'
+                          name: Vice President
+                        jobFunctions:
+                        - id: '9'
+                          name: Information Technology
+                        active: true
+                        hasPhone: true
+                        hasEmail: true
+                        contactQualityScore: A
+                    - dbPersonDetails:
+                        dbPersonId: 124458755
+                        firstName: Morgan
+                        lastName: Lee
+                        country: Canada
+                        city: Toronto
+                      employmentDetails:
+                        contactId: 171412410
+                        companyId: 990700
+                        companyName: Sample Industries
+                        titles:
+                        - Senior Director, Technology
+                        jobLevels:
+                        - id: '2'
+                          name: Senior Executive
+                        - id: '4'
+                          name: Director
+                        jobFunctions:
+                        - id: '9'
+                          name: Information Technology
+                        active: true
+                        hasPhone: false
+                        hasEmail: true
+                        contactQualityScore: C
+                    totalCount: 233
+                    pageNo: 1
+                    pageSize: 10
+                EmptyCompaniesResponse:
+                  description: EmptyCompaniesResponse
+                  value:
+                    contactResults: []
+                    totalCount: 0
+                    pageNo: 1
+                    pageSize: 10
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ContactSearchResponseDTO'
+              examples:
+                SuccessResponseXml:
+                  description: SuccessResponseXml
+                  value:
+                    contactResults:
+                    - dbPersonDetails:
+                        dbPersonId: 15568398
+                        firstName: Jamie
+                        lastName: Taylor
+                        country: United States
+                        city: Seattle
+                      employmentDetails:
+                        contactId: 17864319
+                        companyId: 731691
+                        companyName: Example Corp
+                        titles:
+                        - Senior Security Officer
+                        jobLevels:
+                        - id: '3'
+                          name: Vice President
+                        jobFunctions:
+                        - id: '9'
+                          name: Information Technology
+                        active: true
+                        hasPhone: true
+                        hasEmail: true
+                        contactQualityScore: A
+                    totalCount: 233
+                    pageNo: 1
+                    pageSize: 10
+                EmptyCompaniesResponseXml:
+                  description: EmptyCompaniesResponseXml
+                  value:
+                    contactResults: []
+                    totalCount: 0
+                    pageNo: 1
+                    pageSize: 10
+        '400':
+          description: Bad Request because required query params are missing, perPage must be greater than 0 and less than equal to 50, or page number must be greater than or equal to 1.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestResponse:
+                  description: BadRequestResponse
+                  value:
+                    errorCode: 400-107
+                    errorMessage: At least one parameter must be provided.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidSortByParam:
+                  description: InvalidSortByParam
+                  value:
+                    errorCode: 400-108
+                    errorMessage: Sorting is allowed only on active, title and companyName.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidSortOrder:
+                  description: InvalidSortOrder
+                  value:
+                    errorCode: 400-109
+                    errorMessage: Sorting order can be either asc or desc.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidCompanyCountryId:
+                  description: InvalidCompanyCountryId
+                  value:
+                    errorCode: 400-111
+                    errorMessage: Invalid companyCountry. Please enter valid country ID in  companyCountry.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidContactCountryId:
+                  description: InvalidContactCountryId
+                  value:
+                    errorCode: 400-110
+                    errorMessage: Invalid contactCountry. Please enter valid country ID in contactCountry.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                ResultsPerPageErrorResponse:
+                  description: ResultsPerPageErrorResponse
+                  value:
+                    errorCode: 400-101
+                    errorMessage: perPage must be between 1 and 50.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                PageNumberErrorResponse:
+                  description: PageNumberErrorResponse
+                  value:
+                    errorCode: 400-100
+                    errorMessage: page number must be greater than or equal to 1.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidJobLevels:
+                  description: InvalidJobLevels
+                  value:
+                    errorCode: 400-124
+                    errorMessage: 'jobLevel must be an integer. '
+                    diagnosticCode: 8ee03d66-a07b-43bd-9bd0-eee448ed7a98
+                InvalidMinContactQualityScore:
+                  description: InvalidMinContactQualityScore
+                  value:
+                    errorCode: 400-123
+                    errorMessage: 'minContactQualityScore must one of: [A+, A, B, C]'
+                    diagnosticCode: 467e469f-2146-4af8-ac0f-5fb487fbba02
+                InvalidFunction:
+                  description: InvalidFunction
+                  value:
+                    errorCode: 400-125
+                    errorMessage: 'jobFunction must be an integer. '
+                    diagnosticCode: 3640f569-4d90-40cd-b0c6-2c72f671ab72
+                InvalidPhoneType:
+                  description: InvalidPhoneType
+                  value:
+                    errorCode: 400-137
+                    errorMessage: 'phoneType must be one of: [DIRECT, CORP, MOBILE, ANY, DIRECTORCORP]'
+                    diagnosticCode: 8ee03d66-a07b-43bd-9bd0-eee448ed7a98
+                InvalidEmployeeRange:
+                  description: InvalidEmployeeRange
+                  value:
+                    errorCode: 400-126
+                    errorMessage: minEmployees must be less than or equal to maxEmployees.
+                    diagnosticCode: ddda8332-696c-4e74-897b-f5cc5525ddbe
+                InvalidIndustries:
+                  description: InvalidIndustries
+                  value:
+                    errorCode: 400-114
+                    errorMessage: Industry Id must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidMaxEmployees:
+                  description: InvalidMaxEmployees
+                  value:
+                    errorCode: 400-121
+                    errorMessage: maxEmployees must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                InvalidMinEmployees:
+                  description: InvalidMinEmployees
+                  value:
+                    errorCode: 400-120
+                    errorMessage: minEmployees must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                InvalidEmailValidationStatus:
+                  description: InvalidEmailValidationStatus
+                  value:
+                    errorCode: 400-138
+                    errorMessage: 'emailValidationStatus must be one of: [ValidEmail, ValidDomain]'
+                    diagnosticCode: e32c6e5e-29cb-40c0-a37a-2c8e8213a477
+                InvalidCompanyId:
+                  description: InvalidCompanyId
+                  value:
+                    errorCode: 400-122
+                    errorMessage: Invalid companyId in companyIdsInclude. companyId must be an integer.
+                    diagnosticCode: ffa69cf0-b316-4a12-84d5-e4afb6bb23ee
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestResponseXml:
+                  description: BadRequestResponseXml
+                  value:
+                    errorCode: 400-107
+                    errorMessage: At least one parameter must be provided.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidSortByParam:
+                  description: InvalidSortByParam
+                  value:
+                    errorCode: 400-108
+                    errorMessage: Sorting is allowed only on active, title and companyName.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidSortOrder:
+                  description: InvalidSortOrder
+                  value:
+                    errorCode: 400-109
+                    errorMessage: Sorting order can be either asc or desc.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidCompanyCountryId:
+                  description: InvalidCompanyCountryId
+                  value:
+                    errorCode: 400-111
+                    errorMessage: Invalid companyCountry. Please enter valid country ID in  companyCountry.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidContactCountryId:
+                  description: InvalidContactCountryId
+                  value:
+                    errorCode: 400-110
+                    errorMessage: Invalid contactCountry. Please enter valid country ID in contactCountry.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                ResultsPerPageErrorResponseXml:
+                  description: ResultsPerPageErrorResponseXml
+                  value:
+                    errorCode: 400-101
+                    errorMessage: perPage must be between 1 and 50.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                PageNumberErrorResponseXml:
+                  description: PageNumberErrorResponseXml
+                  value:
+                    errorCode: 400-100
+                    errorMessage: page number must be greater than or equal to 1.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidJobLevels:
+                  description: InvalidJobLevels
+                  value:
+                    errorCode: 400-124
+                    errorMessage: 'jobLevel must be an integer. '
+                    diagnosticCode: 8ee03d66-a07b-43bd-9bd0-eee448ed7a98
+                InvalidMinContactQualityScore:
+                  description: InvalidMinContactQualityScore
+                  value:
+                    errorCode: 400-123
+                    errorMessage: 'minContactQualityScore must one of: [A+, A, B, C]'
+                    diagnosticCode: 467e469f-2146-4af8-ac0f-5fb487fbba02
+                InvalidFunction:
+                  description: InvalidFunction
+                  value:
+                    errorCode: 400-125
+                    errorMessage: 'jobFunction must be an integer. '
+                    diagnosticCode: 3640f569-4d90-40cd-b0c6-2c72f671ab72
+                InvalidPhoneType:
+                  description: InvalidPhoneType
+                  value:
+                    errorCode: 400-137
+                    errorMessage: 'phoneType must be one of: [DIRECT, CORP, MOBILE, ANY, DIRECTORCORP]'
+                    diagnosticCode: 8ee03d66-a07b-43bd-9bd0-eee448ed7a98
+                InvalidEmployeeRange:
+                  description: InvalidEmployeeRange
+                  value:
+                    errorCode: 400-126
+                    errorMessage: minEmployees must be less than or equal to maxEmployees.
+                    diagnosticCode: ddda8332-696c-4e74-897b-f5cc5525ddbe
+                InvalidIndustries:
+                  description: InvalidIndustries
+                  value:
+                    errorCode: 400-114
+                    errorMessage: Industry Id must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidMaxEmployees:
+                  description: InvalidMaxEmployees
+                  value:
+                    errorCode: 400-121
+                    errorMessage: maxEmployees must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                InvalidMinEmployees:
+                  description: InvalidMinEmployees
+                  value:
+                    errorCode: 400-120
+                    errorMessage: minEmployees must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                InvalidEmailValidationStatus:
+                  description: InvalidEmailValidationStatus
+                  value:
+                    errorCode: 400-138
+                    errorMessage: 'emailValidationStatus must be one of: [ValidEmail, ValidDomain]'
+                    diagnosticCode: e32c6e5e-29cb-40c0-a37a-2c8e8213a477
+                InvalidCompanyId:
+                  description: InvalidCompanyId
+                  value:
+                    errorCode: 400-122
+                    errorMessage: Invalid companyId in companyIdsInclude. companyId must be an integer.
+                    diagnosticCode: ffa69cf0-b316-4a12-84d5-e4afb6bb23ee
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /companies:
+    post:
+      tags:
+      - Sync API
+      summary: Search companies
+      description: "Use this endpoint to search for companies based on a variety of attributes.\n\nYou can search companies by name, website, ticker, location (city, state, country, ZIP), industry classification (NAICS, SIC), or attributes like fiscal year end, business structure, and fortune ranking. \n\nAdditional filters let you set employee or revenue ranges, include only primary industry or SIC classifications, and apply diversity criteria (e.g., minority-owned or women-owned businesses). \n\nSorting and pagination are supported. You can sort results by fields such as `companyRevenue` and more, and control the number of results returned using `page` and `perPage`."
+      operationId: companySearch_1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanySearchRequestDTO'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CompanySearchRequestDTO'
+      responses:
+        '200':
+          description: Successful operation or No companies found for query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanySearchResponseDTO'
+              examples:
+                SuccessResponse:
+                  description: SuccessResponse
+                  value:
+                    companies:
+                    - name: Northgate Logistics LLC
+                      city: New Plymouth
+                      state: ID
+                      country: US
+                      companyId: 406321
+                    - name: Blue Ridge Transport Inc.
+                      city: Walcott
+                      state: IA
+                      country: US
+                      companyId: 1013683
+                    - name: Horizon Freight Services
+                      city: North Baltimore
+                      state: OH
+                      country: US
+                      companyId: 8664201
+                    - name: Summit Distribution Co.
+                      city: Johnstown
+                      state: CO
+                      country: US
+                      companyId: 9557195
+                    - name: Granite Commerce Group
+                      city: New Plymouth
+                      state: ID
+                      country: US
+                      companyId: 284576424
+                    - name: Lakeside Operations LLC
+                      city: Oak Grove
+                      state: MO
+                      country: US
+                      companyId: 8679793
+                    - name: Pioneer Mobility Partners
+                      city: Mineral Wells
+                      state: WV
+                      country: US
+                      companyId: 6242601
+                    - name: Meridian Media Group
+                      city: New York
+                      state: NY
+                      country: US
+                      companyId: 8108950
+                    - name: Redwood Industrial Supply
+                      city: Pine Bluffs
+                      state: WY
+                      country: US
+                      companyId: 5914035
+                    - name: Willow Creek Services
+                      city: Calhoun City
+                      state: MS
+                      country: US
+                      companyId: 6632012
+                    totalCount: 165
+                    pageNo: 1
+                    pageSize: 10
+                EmptyCompaniesResponse:
+                  description: EmptyCompaniesResponse
+                  value:
+                    companies: []
+                    totalCount: 0
+                    pageNo: 1
+                    pageSize: 10
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CompanySearchResponseDTO'
+              examples:
+                SuccessResponseXml:
+                  description: SuccessResponseXml
+                  value:
+                    companies:
+                    - name: Northgate Logistics LLC
+                      city: New Plymouth
+                      state: ID
+                      country: US
+                      companyId: 406321
+                    - name: Blue Ridge Transport Inc.
+                      city: Walcott
+                      state: IA
+                      country: US
+                      companyId: 1013683
+                    totalCount: 165
+                    pageNo: 1
+                    pageSize: 10
+                EmptyCompaniesResponseXml:
+                  description: EmptyCompaniesResponseXml
+                  value:
+                    companies: []
+                    totalCount: 0
+                    pageNo: 1
+                    pageSize: 10
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestResponse:
+                  description: BadRequestResponse
+                  value:
+                    errorCode: 400-102
+                    errorMessage: At least one parameter must be provided for company search.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                ResultsPerPageErrorResponse:
+                  description: ResultsPerPageErrorResponse
+                  value:
+                    errorCode: 400-101
+                    errorMessage: perPage must be between 1 and 50.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                PageNumberErrorResponse:
+                  description: PageNumberErrorResponse
+                  value:
+                    errorCode: 400-100
+                    errorMessage: page number must be greater than or equal to 1.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidSortByParam:
+                  description: InvalidSortByParam
+                  value:
+                    errorCode: 400-135
+                    errorMessage: Sorting is allowed only on employeeCount, businessType, companyRevenue and location
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidSortOrder:
+                  description: InvalidSortOrder
+                  value:
+                    errorCode: 400-109
+                    errorMessage: Sorting order can be either asc or desc.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidCompanyCountryId:
+                  description: InvalidCompanyCountryId
+                  value:
+                    errorCode: 400-214
+                    errorMessage: Invalid country. Please enter valid country ID in country.
+                    diagnosticCode: 2ec12de8-1000-4620-8757-6091a1cffab7
+                InvalidNewsCategories:
+                  description: InvalidNewsCategories
+                  value:
+                    errorCode: 400-112
+                    errorMessage: 'Invalid newsCategories. Valid values are: leadership Changes, new Offerings, acquisitions, partnerships, expanding operations, cost cutting, outperforming, underperforming, company presentation, litigation, compliance, research and development, data security, funding developments, bankruptcy and restructuring, real estate: deals, real estate: construction, corporate challenges'
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidNewsDuration:
+                  description: InvalidNewsDuration
+                  value:
+                    errorCode: 400-113
+                    errorMessage: Invalid newsDuration. Valid values are between 1 and 30
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidIndustry:
+                  description: InvalidIndustry
+                  value:
+                    errorCode: 400-114
+                    errorMessage: Industry Id must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidMaxEmployees:
+                  description: InvalidMaxEmployees
+                  value:
+                    errorCode: 400-121
+                    errorMessage: maxEmployees must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                InvalidMinEmployees:
+                  description: InvalidMinEmployees
+                  value:
+                    errorCode: 400-120
+                    errorMessage: minEmployees must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                InvalidMaxRevenue:
+                  description: InvalidMaxRevenue
+                  value:
+                    errorCode: 400-119
+                    errorMessage: maxRevenue must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                InvalidMinRevenue:
+                  description: InvalidMinRevenue
+                  value:
+                    errorCode: 400-118
+                    errorMessage: minRevenue must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                InvalidBusinessStructure:
+                  description: InvalidBusinessStructure
+                  value:
+                    errorCode: 400-128
+                    errorMessage: 'Invalid businessStructure. Valid values are: uncategorized, globalParent, subsidiary, group, branch, independent'
+                    diagnosticCode: cebdea29-25ac-40e5-af41-0626e34e6f46
+                InvalidBusinessType:
+                  description: InvalidBusinessType
+                  value:
+                    errorCode: 400-129
+                    errorMessage: 'Invalid businessType. Valid values are: public, private, school, government, organization'
+                    diagnosticCode: 2b7cd799-e532-46a4-bc4e-e967b0a40f4b
+                InvalidCompanyStatus:
+                  description: InvalidCompanyStatus
+                  value:
+                    errorCode: 400-130
+                    errorMessage: 'Invalid companyStatus. Valid values are: unassigned, operating, non-operating, acquired, liquidating, outOfBusiness'
+                    diagnosticCode: bb841d37-ed8f-4a82-a5c5-fd11ea6d8e3d
+                InvalidFiscalYearEnd:
+                  description: InvalidFiscalYearEnd
+                  value:
+                    errorCode: 400-131
+                    errorMessage: Invalid fiscalYearEnd. fiscalYearEnd should be a valid month name.
+                    diagnosticCode: 67521433-a92b-49ee-9d21-21d4007f8486
+                InvalidFortuneRanking:
+                  description: InvalidFortuneRanking
+                  value:
+                    errorCode: 400-132
+                    errorMessage: 'Invalid fortuneRanking. Valid values are: fortune500, fortune1000'
+                    diagnosticCode: 1921c127-a8e6-4685-aaa0-1f6bce967a18
+                InvalidEmployeeRange:
+                  description: InvalidEmployeeRange
+                  value:
+                    errorCode: 400-126
+                    errorMessage: minEmployees must be less than or equal to maxEmployees.
+                    diagnosticCode: ddda8332-696c-4e74-897b-f5cc5525ddbe
+                InvalidRevenueRange:
+                  description: InvalidRevenueRange
+                  value:
+                    errorCode: 400-127
+                    errorMessage: minRevenue must be less than or equal to minRevenue.
+                    diagnosticCode: cbc2bbd0-a801-41c1-a546-be6ea0e75797
+                InvalidRegions:
+                  description: InvalidRegions
+                  value:
+                    errorCode: 400-133
+                    errorMessage: 'Invalid region. Valid values are: Africa, Asia, Europe, MiddleEast, NorthAmerica, Oceania, SouthAmerica'
+                    diagnosticCode: 88d76e2d-6f09-4018-97fe-b41c64f5ac67
+                InvalidCompanyType:
+                  description: InvalidCompanyType
+                  value:
+                    errorCode: 400-134
+                    errorMessage: 'Invalid companyType. Valid values are: unknown, public, private, government, organization'
+                    diagnosticCode: ed1cfeb5-a7bf-4621-a4f3-51b1e8f106ae
+                InvalidGender:
+                  description: InvalidGender
+                  value:
+                    errorCode: 400-117
+                    errorMessage: Invalid gender. Valid values are male and female
+                    diagnosticCode: fa7db512-d0ef-4c9d-aa8b-6e6bc21a61bc
+                InvalidEthnicity:
+                  description: InvalidEthnicity
+                  value:
+                    errorCode: 400-136
+                    errorMessage: Invalid Ethnicity Ids. Ethnicity Ids should be between 1 and 7
+                    diagnosticCode: 126df328-b3d1-4d62-9464-e435aa706805
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestResponseXml:
+                  description: BadRequestResponseXml
+                  value:
+                    errorCode: 400-102
+                    errorMessage: At least one parameter must be provided for company search.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                ResultsPerPageErrorResponseXml:
+                  description: ResultsPerPageErrorResponseXml
+                  value:
+                    errorCode: 400-101
+                    errorMessage: perPage must be between 1 and 50.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                PageNumberErrorResponseXml:
+                  description: PageNumberErrorResponseXml
+                  value:
+                    errorCode: 400-100
+                    errorMessage: page number must be greater than or equal to 1.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidSortByParam:
+                  description: InvalidSortByParam
+                  value:
+                    errorCode: 400-135
+                    errorMessage: Sorting is allowed only on employeeCount, businessType, companyRevenue and location
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidSortOrder:
+                  description: InvalidSortOrder
+                  value:
+                    errorCode: 400-109
+                    errorMessage: Sorting order can be either asc or desc.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidCompanyCountryId:
+                  description: InvalidCompanyCountryId
+                  value:
+                    errorCode: 400-214
+                    errorMessage: Invalid country. Please enter valid country ID in country.
+                    diagnosticCode: 2ec12de8-1000-4620-8757-6091a1cffab7
+                InvalidNewsCategories:
+                  description: InvalidNewsCategories
+                  value:
+                    errorCode: 400-112
+                    errorMessage: 'Invalid newsCategories. Valid values are: leadership Changes, new Offerings, acquisitions, partnerships, expanding operations, cost cutting, outperforming, underperforming, company presentation, litigation, compliance, research and development, data security, funding developments, bankruptcy and restructuring, real estate: deals, real estate: construction, corporate challenges'
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidNewsDuration:
+                  description: InvalidNewsDuration
+                  value:
+                    errorCode: 400-113
+                    errorMessage: Invalid newsDuration. Valid values are between 1 and 30
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidIndustry:
+                  description: InvalidIndustry
+                  value:
+                    errorCode: 400-114
+                    errorMessage: Industry Id must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidMaxEmployees:
+                  description: InvalidMaxEmployees
+                  value:
+                    errorCode: 400-121
+                    errorMessage: maxEmployees must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                InvalidMinEmployees:
+                  description: InvalidMinEmployees
+                  value:
+                    errorCode: 400-120
+                    errorMessage: minEmployees must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                InvalidMaxRevenue:
+                  description: InvalidMaxRevenue
+                  value:
+                    errorCode: 400-119
+                    errorMessage: maxRevenue must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                InvalidMinRevenue:
+                  description: InvalidMinRevenue
+                  value:
+                    errorCode: 400-118
+                    errorMessage: minRevenue must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                InvalidBusinessStructure:
+                  description: InvalidBusinessStructure
+                  value:
+                    errorCode: 400-128
+                    errorMessage: 'Invalid businessStructure. Valid values are: uncategorized, globalParent, subsidiary, group, branch, independent'
+                    diagnosticCode: cebdea29-25ac-40e5-af41-0626e34e6f46
+                InvalidBusinessType:
+                  description: InvalidBusinessType
+                  value:
+                    errorCode: 400-129
+                    errorMessage: 'Invalid businessType. Valid values are: public, private, school, government, organization'
+                    diagnosticCode: 2b7cd799-e532-46a4-bc4e-e967b0a40f4b
+                InvalidCompanyStatus:
+                  description: InvalidCompanyStatus
+                  value:
+                    errorCode: 400-130
+                    errorMessage: 'Invalid companyStatus. Valid values are: unassigned, operating, non-operating, acquired, liquidating, outOfBusiness'
+                    diagnosticCode: bb841d37-ed8f-4a82-a5c5-fd11ea6d8e3d
+                InvalidFiscalYearEnd:
+                  description: InvalidFiscalYearEnd
+                  value:
+                    errorCode: 400-131
+                    errorMessage: Invalid fiscalYearEnd. fiscalYearEnd should be a valid month name.
+                    diagnosticCode: 67521433-a92b-49ee-9d21-21d4007f8486
+                InvalidFortuneRanking:
+                  description: InvalidFortuneRanking
+                  value:
+                    errorCode: 400-132
+                    errorMessage: 'Invalid fortuneRanking. Valid values are: fortune500, fortune1000'
+                    diagnosticCode: 1921c127-a8e6-4685-aaa0-1f6bce967a18
+                InvalidEmployeeRange:
+                  description: InvalidEmployeeRange
+                  value:
+                    errorCode: 400-126
+                    errorMessage: minEmployees must be less than or equal to maxEmployees.
+                    diagnosticCode: ddda8332-696c-4e74-897b-f5cc5525ddbe
+                InvalidRevenueRange:
+                  description: InvalidRevenueRange
+                  value:
+                    errorCode: 400-127
+                    errorMessage: minRevenue must be less than or equal to minRevenue.
+                    diagnosticCode: cbc2bbd0-a801-41c1-a546-be6ea0e75797
+                InvalidRegions:
+                  description: InvalidRegions
+                  value:
+                    errorCode: 400-133
+                    errorMessage: 'Invalid region. Valid values are: Africa, Asia, Europe, MiddleEast, NorthAmerica, Oceania, SouthAmerica'
+                    diagnosticCode: 88d76e2d-6f09-4018-97fe-b41c64f5ac67
+                InvalidCompanyType:
+                  description: InvalidCompanyType
+                  value:
+                    errorCode: 400-134
+                    errorMessage: 'Invalid companyType. Valid values are: unknown, public, private, government, organization'
+                    diagnosticCode: ed1cfeb5-a7bf-4621-a4f3-51b1e8f106ae
+                InvalidGender:
+                  description: InvalidGender
+                  value:
+                    errorCode: 400-117
+                    errorMessage: Invalid gender. Valid values are male and female
+                    diagnosticCode: fa7db512-d0ef-4c9d-aa8b-6e6bc21a61bc
+                InvalidEthnicity:
+                  description: InvalidEthnicity
+                  value:
+                    errorCode: 400-136
+                    errorMessage: Invalid Ethnicity Ids. Ethnicity Ids should be between 1 and 7
+                    diagnosticCode: 126df328-b3d1-4d62-9464-e435aa706805
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /contact/{contactId}:
+    get:
+      tags:
+      - Sync API
+      summary: Fetch contact details
+      description: 'Use this endpoint to fetch detailed employment and personal information for a specific contact.
+
+
+        Retrieve data such as job titles, phone numbers, job levels, salary ranges, social profiles, and education history.
+
+
+        You can control the response using query parameters to include specific fields or additional related data.'
+      operationId: contactFetch
+      parameters:
+      - name: include
+        in: query
+        description: Additional data to include in the response, e.g., other employment
+        required: false
+        schema:
+          type: string
+          enum:
+          - other_employments
+          example: other_employments
+      - name: contactId
+        in: path
+        description: Contact ID
+        required: true
+        schema:
+          type: string
+          example: '725771'
+      - name: contactFields
+        in: query
+        description: Comma-separated contact fields to return.
+        required: false
+        schema:
+          type: string
+      - name: peopleFields
+        in: query
+        description: Comma-separated person fields to return.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Contact details fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactFetchResponseDTO'
+              examples:
+                Success Response:
+                  description: Success Response
+                  value:
+                    dbPersonDetails:
+                      firstName: Darren
+                      lastName: Jackson
+                      age: 68
+                      educationList:
+                      - degree: Masters of Business Administration
+                        university: Wharton School of Business at the University of Pennsylvania
+                      - degree: Bachelors
+                        university: Indian Institute of Technology
+                      - degree: Master of Science
+                        major: Materials Science and Engineering
+                        university: Stanford University
+                      socialHandles:
+                        twitter: http://twitter.com/andyhongim
+                      address: {}
+                      mobileNumber: +1 425 707 0564
+                    employmentDetails:
+                      contactId: 215
+                      companyId: 734887
+                      companyName: Advance Auto Parts, Inc.
+                      contactQualityScore: A+
+                      description: Mr. Darren R. Jackson is Chief Executive Officer, Director of Advance Auto Parts Inc. Since January 2008, Mr. Jackson has continuously served as our Chief Executive Officer. During that time period, Mr. Jackson also served as President from January 2008 to January 2009 and from January 1, 2012 to April 21, 2013, when George E. Sherman became our President. Prior to becoming our Chief Executive Officer, Mr. Jackson served in various executive positions with Best Buy Co., Inc., a specialty retailer of consumer electronics, office products, appliances and software, ultimately serving from July 2007 to December 2007 as Executive Vice President of Customer Operating Groups. He joined Best Buy in 2000 and was appointed as its Executive Vice President-Finance and Chief Financial Officer in February of 2001. Prior to 2000, he served as Vice President and Chief Financial Officer of Nordstrom, Inc., Full-line Stores, a fashion specialty retailer, and held various senior positions, including Chief Financial Officer of Carson Pirie Scott & Company, a regional department store company. He began his career at KPMG. Mr. Jackson has served as a director of Fastenal Company, which sells industrial and construction supplies, since July 2012. Mr. Jackson has served as a member of our Board for over ten years and as the Company's Chief Executive Officer for over seven years.
+                      startDate: N/A
+                      salary: '930'
+                      salaryCurrency: USD
+                      phoneNumbers:
+                        directNumber: +1 540 362 4911
+                        corporateNumber: +1 425 882 8080
+                      emails:
+                      - email: djackson@advanceautoparts.com
+                        validationStatus: VALID
+                      lastValidatedDate: Aug 15, 2019
+                      jobLevels:
+                      - id: '1'
+                        name: C Level
+                      - id: '3'
+                        name: Vice President
+                      jobFunctions:
+                      - id: '22'
+                        name: Others
+                      titles:
+                      - Chief Executive Officer and President
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ContactFetchResponseDTO'
+              examples:
+                Success Response:
+                  description: Success Response
+                  value:
+                    dbPersonDetails:
+                      firstName: Darren
+                      lastName: Jackson
+                      age: 68
+                      educationList:
+                      - degree: Masters of Business Administration
+                        university: Wharton School of Business at the University of Pennsylvania
+                      - degree: Bachelors
+                        university: Indian Institute of Technology
+                      - degree: Master of Science
+                        major: Materials Science and Engineering
+                        university: Stanford University
+                      socialHandles:
+                        twitter: http://twitter.com/andyhongim
+                      address: {}
+                      mobileNumber: +1 425 707 0564
+                    employmentDetails:
+                      contactId: 215
+                      companyId: 734887
+                      companyName: Advance Auto Parts, Inc.
+                      contactQualityScore: A+
+                      description: Mr. Darren R. Jackson is Chief Executive Officer, Director of Advance Auto Parts Inc. Since January 2008, Mr. Jackson has continuously served as our Chief Executive Officer. During that time period, Mr. Jackson also served as President from January 2008 to January 2009 and from January 1, 2012 to April 21, 2013, when George E. Sherman became our President. Prior to becoming our Chief Executive Officer, Mr. Jackson served in various executive positions with Best Buy Co., Inc., a specialty retailer of consumer electronics, office products, appliances and software, ultimately serving from July 2007 to December 2007 as Executive Vice President of Customer Operating Groups. He joined Best Buy in 2000 and was appointed as its Executive Vice President-Finance and Chief Financial Officer in February of 2001. Prior to 2000, he served as Vice President and Chief Financial Officer of Nordstrom, Inc., Full-line Stores, a fashion specialty retailer, and held various senior positions, including Chief Financial Officer of Carson Pirie Scott & Company, a regional department store company. He began his career at KPMG. Mr. Jackson has served as a director of Fastenal Company, which sells industrial and construction supplies, since July 2012. Mr. Jackson has served as a member of our Board for over ten years and as the Company's Chief Executive Officer for over seven years.
+                      startDate: N/A
+                      salary: '930'
+                      salaryCurrency: USD
+                      phoneNumbers:
+                        directNumber: +1 540 362 4911
+                        corporateNumber: +1 425 882 8080
+                      emails:
+                      - email: djackson@advanceautoparts.com
+                        validationStatus: VALID
+                      lastValidatedDate: Aug 15, 2019
+                      jobLevels:
+                      - id: '1'
+                        name: C Level
+                      - id: '3'
+                        name: Vice President
+                      jobFunctions:
+                      - id: '22'
+                        name: Others
+                      titles:
+                      - Chief Executive Officer and President
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidContactIdResponse:
+                  description: InvalidContactIdResponse
+                  value:
+                    errorCode: 400-104
+                    errorMessage: ContactId must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidFieldResponse:
+                  description: InvalidFieldResponse
+                  value:
+                    errorCode: 400-106
+                    errorMessage: Invalid field name.
+                    diagnosticCode: ab24b1a4-1cd0-41ab-bcfa-018f13fc6707
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidContactIdResponseXml:
+                  description: InvalidContactIdResponseXml
+                  value:
+                    errorCode: 400-104
+                    errorMessage: ContactId must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidFieldResponseXml:
+                  description: InvalidFieldResponseXml
+                  value:
+                    errorCode: 400-106
+                    errorMessage: Invalid field name.
+                    diagnosticCode: ab24b1a4-1cd0-41ab-bcfa-018f13fc6707
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                ContactNotFoundErrorResponse:
+                  description: ContactNotFoundErrorResponse
+                  value:
+                    errorCode: 404-100
+                    errorMessage: Invalid ID, record not found.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                ContactNotFoundErrorResponseXml:
+                  description: ContactNotFoundErrorResponseXml
+                  value:
+                    errorCode: 404-100
+                    errorMessage: Invalid ID, record not found.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /company/{companyId}:
+    get:
+      tags:
+      - Sync API
+      summary: Fetch company details
+      description: 'Use this endpoint to fetch detailed information about a single company, including name, location, phone number, revenue, employee count, industry classification, and social media links.
+
+
+        You can optionally expand the response to include related data such as the company''s family tree, competitors, installed technologies, and logos.
+
+
+        Installed technologies are returned under `techUsed`, grouped by category, subcategory, and product. The response includes taxonomy identifiers and display names; it does not include confidence, observation dates, vendor, or product descriptions.'
+      operationId: companyFetch
+      parameters:
+      - name: fields
+        in: query
+        description: Comma-separated related-data expansions. Use `installedtech` to include technographics under `techUsed`.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - familytree
+            - competitors
+            - logos
+            - installedtech
+        example:
+        - familytree
+        - competitors
+      - name: sortBy
+        in: query
+        description: Sort order for family tree results.
+        required: false
+        schema:
+          type: string
+          enum:
+          - popularity
+      - name: companyFields
+        in: query
+        description: Comma-separated company fields to retrieve.
+        required: false
+        schema:
+          type: string
+      - name: companyId
+        in: path
+        description: Company ID
+        required: true
+        schema:
+          type: string
+          example: '725771'
+      responses:
+        '200':
+          description: Company details fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyFetchResponseDTO'
+              examples:
+                Company Details Response:
+                  $ref: '#/components/examples/CompanyDetailsResponse'
+                Company Family Tree Response:
+                  $ref: '#/components/examples/CompanyFamilyTreeResponse'
+                Company Competitors Response:
+                  $ref: '#/components/examples/CompanyCompetitorsResponse'
+                Company Installed Tech Response:
+                  $ref: '#/components/examples/CompanyInstalledTechResponse'
+                Company Logos Response:
+                  $ref: '#/components/examples/CompanyLogosResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CompanyFetchResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidCompanyIdErrorResponse:
+                  description: InvalidCompanyIdErrorResponse
+                  value:
+                    errorCode: 400-103
+                    errorMessage: companyId must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidFieldErrorResponse:
+                  description: InvalidFieldErrorResponse
+                  value:
+                    errorCode: 400-106
+                    errorMessage: Invalid field name.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidCompanyIdErrorResponseXml:
+                  description: InvalidCompanyIdErrorResponseXml
+                  value:
+                    errorCode: 400-103
+                    errorMessage: companyId must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidFieldErrorResponseXml:
+                  description: InvalidFieldErrorResponseXml
+                  value:
+                    errorCode: 400-106
+                    errorMessage: Invalid field name.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+        '404':
+          description: Bad request because the company does not exist.
+          content:
+            application/json:
+              examples:
+                CompanyNotFoundErrorResponse:
+                  description: CompanyNotFoundErrorResponse
+                  value:
+                    errorCode: 404-100
+                    errorMessage: Invalid ID, record not found.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+            application/xml:
+              schema:
+                type: object
+                title: error
+                format: xml
+              examples:
+                CompanyNotFoundErrorResponseXml:
+                  description: CompanyNotFoundErrorResponseXml
+                  value:
+                    errorCode: 404-100
+                    errorMessage: Invalid ID, record not found.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /company/{companyId}/news:
+    get:
+      tags:
+      - Sync API
+      summary: Fetch company news by category
+      description: 'Use this endpoint to fetch recent news articles related to a specific company.
+
+
+        You can filter articles by one or more news categories, such as acquisitions or leadership changes.
+
+
+        Pagination is supported to control the number of results per request.'
+      operationId: companyNewsCategoryFetch
+      parameters:
+      - name: newsCategories
+        in: query
+        description: <a href='https://developer.demandbase.com/reference/reference-tables#news-categories-reference' target='_blank'>Allowed Values</a>
+        required: true
+        schema:
+          type: string
+          example: LEADERSHIP_CHANGES
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: string
+          example: '1'
+      - name: perPage
+        in: query
+        description: Results per page
+        required: false
+        schema:
+          type: string
+          example: '10'
+      - name: companyId
+        in: path
+        description: Company ID
+        required: true
+        schema:
+          type: string
+          example: '725771'
+      responses:
+        '200':
+          description: Company news fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyNewsResponseDTO'
+              examples:
+                Success Response:
+                  description: Success Response
+                  value:
+                    companyNews:
+                    - title: 'Virtual Reality in Gaming Market: Global Size, Share, Status, Analysis & Forecast to 2030- Report By Introspective Market Research'
+                      url: http://ct.moreover.com/?a=51894730831&p=1l3&v=1&x=jT7RQPStyxrE2tvW4y9p6g
+                      source: PrSync.com
+                    pageNo: 1
+                    pageSize: 1
+                    totalCount: 4
+                    companyId: '726263'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CompanyNewsResponseDTO'
+              examples:
+                Success Response:
+                  description: Success Response
+                  value:
+                    companyNews:
+                    - title: 'Virtual Reality in Gaming Market: Global Size, Share, Status, Analysis & Forecast to 2030- Report By Introspective Market Research'
+                      url: http://ct.moreover.com/?a=51894730831&p=1l3&v=1&x=jT7RQPStyxrE2tvW4y9p6g
+                      source: PrSync.com
+                    pageNo: 1
+                    pageSize: 1
+                    totalCount: 4
+                    companyId: '726263'
+        '400':
+          description: Bad Request because required query params are missing, perPage must be greater than 0 and less than equal to 50, or page number must be greater than or equal to 1.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestResponse:
+                  description: BadRequestResponse
+                  value:
+                    errorCode: 400-103
+                    errorMessage: companyId must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                ResultsPerPageErrorResponse:
+                  description: ResultsPerPageErrorResponse
+                  value:
+                    errorCode: 400-101
+                    errorMessage: perPage must be between 1 and 50.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                PageNumberErrorResponse:
+                  description: PageNumberErrorResponse
+                  value:
+                    errorCode: 400-100
+                    errorMessage: page number must be greater than or equal to 1.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidNewsCategoryErrorResponse:
+                  description: InvalidNewsCategoryErrorResponse
+                  value:
+                    errorCode: 400-112
+                    errorMessage: 'Invalid news category. Valid values are: leadership Changes, new Offerings, acquisitions, partnerships, expanding operations, cost cutting, outperforming, underperforming, company presentation, litigation, compliance, research and development, data security, funding developments, bankruptcy and restructuring, real estate: deals, real estate: construction, corporate challenges.'
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestResponseXml:
+                  description: BadRequestResponseXml
+                  value:
+                    errorCode: 400-103
+                    errorMessage: companyId must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                ResultsPerPageErrorResponse:
+                  description: ResultsPerPageErrorResponse
+                  value:
+                    errorCode: 400-101
+                    errorMessage: perPage must be between 1 and 50.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                PageNumberErrorResponse:
+                  description: PageNumberErrorResponse
+                  value:
+                    errorCode: 400-100
+                    errorMessage: page number must be greater than or equal to 1.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidNewsCategoryErrorResponse:
+                  description: InvalidNewsCategoryErrorResponse
+                  value:
+                    errorCode: 400-112
+                    errorMessage: 'Invalid news category. Valid values are: leadership Changes, new Offerings, acquisitions, partnerships, expanding operations, cost cutting, outperforming, underperforming, company presentation, litigation, compliance, research and development, data security, funding developments, bankruptcy and restructuring, real estate: deals, real estate: construction, corporate challenges.'
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                CompanyNotFoundErrorResponse:
+                  description: CompanyNotFoundErrorResponse
+                  value:
+                    errorCode: 404-100
+                    errorMessage: Invalid ID, record not found.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                CompanyNotFoundErrorResponseXml:
+                  description: CompanyNotFoundErrorResponseXml
+                  value:
+                    errorCode: 404-100
+                    errorMessage: Invalid ID, record not found.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /company/{companyId}/newsFeed:
+    get:
+      tags:
+      - Sync API
+      summary: Fetch company news feed
+      description: 'Use this endpoint to return a paginated list of recent news articles for a specific company.
+
+
+        Unlike the `/news` endpoint, this feed does not require specifying news categories. It provides a general stream of company-related articles.'
+      operationId: companyNewsFetch
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: string
+          example: '1'
+      - name: perPage
+        in: query
+        description: Results per page
+        required: false
+        schema:
+          type: string
+          example: '10'
+      - name: companyId
+        in: path
+        description: Company ID
+        required: true
+        schema:
+          type: string
+          example: '725771'
+      responses:
+        '200':
+          description: Company news fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyNewsResponseDTO'
+              examples:
+                Success Response:
+                  description: Success Response
+                  value:
+                    companyNews:
+                    - title: 'Virtual Reality in Gaming Market: Global Size, Share, Status, Analysis & Forecast to 2030- Report By Introspective Market Research'
+                      url: http://ct.moreover.com/?a=51894730831&p=1l3&v=1&x=jT7RQPStyxrE2tvW4y9p6g
+                      source: PrSync.com
+                    pageNo: 1
+                    pageSize: 1
+                    totalCount: 4
+                    companyId: '726263'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CompanyNewsResponseDTO'
+              examples:
+                Success Response:
+                  description: Success Response
+                  value:
+                    companyNews:
+                    - title: 'Virtual Reality in Gaming Market: Global Size, Share, Status, Analysis & Forecast to 2030- Report By Introspective Market Research'
+                      url: http://ct.moreover.com/?a=51894730831&p=1l3&v=1&x=jT7RQPStyxrE2tvW4y9p6g
+                      source: PrSync.com
+                    pageNo: 1
+                    pageSize: 1
+                    totalCount: 4
+                    companyId: '726263'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestResponse:
+                  description: BadRequestResponse
+                  value:
+                    errorCode: 400-103
+                    errorMessage: companyId must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                ResultsPerPageErrorResponse:
+                  description: ResultsPerPageErrorResponse
+                  value:
+                    errorCode: 400-101
+                    errorMessage: perPage must be between 1 and 50.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                PageNumberErrorResponse:
+                  description: PageNumberErrorResponse
+                  value:
+                    errorCode: 400-100
+                    errorMessage: page number must be greater than or equal to 1.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestResponseXml:
+                  description: BadRequestResponseXml
+                  value:
+                    errorCode: 400-103
+                    errorMessage: companyId must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                ResultsPerPageErrorResponse:
+                  description: ResultsPerPageErrorResponse
+                  value:
+                    errorCode: 400-101
+                    errorMessage: perPage must be between 1 and 50.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                PageNumberErrorResponse:
+                  description: PageNumberErrorResponse
+                  value:
+                    errorCode: 400-100
+                    errorMessage: page number must be greater than or equal to 1.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                CompanyNotFoundErrorResponse:
+                  description: CompanyNotFoundErrorResponse
+                  value:
+                    errorCode: 404-100
+                    errorMessage: Invalid ID, record not found.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+            application/xml:
+              schema:
+                type: object
+                title: error
+                format: xml
+              examples:
+                CompanyNotFoundErrorResponseXml:
+                  description: CompanyNotFoundErrorResponseXml
+                  value:
+                    errorCode: 404-100
+                    errorMessage: Invalid ID, record not found.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /company/{companyId}/logos/{logoSize}:
+    get:
+      tags:
+      - Sync API
+      summary: Fetch company logo
+      description: 'Use this endpoint to fetch a company''s logo in PNG format at the requested size.
+
+
+        Supported sizes are 100, 200, or 400 pixels.
+
+
+        If a logo in the specified size is not available, the API returns an error response.'
+      operationId: companyLogoFetch
+      parameters:
+      - name: companyId
+        in: path
+        description: Company ID
+        required: true
+        schema:
+          type: string
+          example: '725771'
+      - name: logoSize
+        in: path
+        description: Logo Size
+        required: true
+        schema:
+          type: string
+          example: '100'
+      responses:
+        '200':
+          description: A png image of the company logo is returned.
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidCompanyIdErrorResponse:
+                  description: InvalidCompanyIdErrorResponse
+                  value:
+                    errorCode: 400-103
+                    errorMessage: companyId must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidLogoSizeErrorResponse:
+                  description: InvalidLogoSizeErrorResponse
+                  value:
+                    errorCode: 400-108
+                    errorMessage: Invalid value for size. Should be among {100,200,400}
+                    diagnosticCode: 0fb42a2c-65c3-4e11-93d0-ba973503bd3d
+                LogoNotFoundErrorResponse:
+                  description: LogoNotFoundErrorResponse
+                  value:
+                    errorCode: 404-103
+                    errorMessage: Company logo for the given company ID is not present.
+                    diagnosticCode: ebdfc380-0241-4be4-b801-bde781cbbfe1
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidCompanyIdErrorResponseXml:
+                  description: InvalidCompanyIdErrorResponseXml
+                  value:
+                    errorCode: 400-103
+                    errorMessage: companyId must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidLogoSizeErrorResponseXml:
+                  description: InvalidLogoSizeErrorResponseXml
+                  value:
+                    errorCode: 400-108
+                    errorMessage: Invalid value for size. Should be among {100,200,400}
+                    diagnosticCode: 0fb42a2c-65c3-4e11-93d0-ba973503bd3d
+                LogoNotFoundErrorResponseXml:
+                  description: LogoNotFoundErrorResponseXml
+                  value:
+                    errorCode: 404-103
+                    errorMessage: Company logo for the given company ID is not present.
+                    diagnosticCode: ebdfc380-0241-4be4-b801-bde781cbbfe1
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /match:
+    post:
+      tags:
+      - Sync API
+      summary: Match companies and contact
+      description: 'This endpoint matches companies and contacts against Demandbase''s database based on provided firmographic and contact details. This endpoint supports batch matching by accepting an array of match requests.
+
+
+        Each object in the requests array must include a unique id and a useful combination of attributes for matching.
+
+
+        At a minimum, at least one of the following company identifiers is required:
+
+        - `name`
+
+        - `websites`
+
+        - `email`
+
+        - `executiveLinkedInHandle`'
+      operationId: match_1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchRequestDTO'
+      responses:
+        '200':
+          description: Successful operation or No companies found for query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponseDTO'
+              examples:
+                SuccessResponse:
+                  description: SuccessResponse
+                  value:
+                    matches:
+                    - id: id
+                      companyMatches:
+                      - company:
+                          companyId: 726263
+                          companyName: Microsoft Corporation
+                          address:
+                            street: 1 Microsoft Way
+                            city: Redmond
+                            state: WA
+                            country: United States
+                      contactMatches:
+                      - contact:
+                          dbPersonDetails:
+                            dbPersonId: 243908534
+                            firstName: Satya
+                            lastName: Nadella
+                          employmentDetails:
+                            contactId: 310227204
+                            companyId: 726263
+                            companyName: Microsoft Corporation
+                            titles:
+                            - Chairman and CEO
+                            contactQualityScore: A+
+                EmptyCompaniesResponse:
+                  description: EmptyCompaniesResponse
+                  value:
+                    matches:
+                    - id: '2'
+                      companyMatches: []
+                      contactMatches: []
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MatchResponseDTO'
+              examples:
+                SuccessResponseXml:
+                  description: SuccessResponseXml
+                  value:
+                    matches:
+                    - id: '1'
+                      companyMatches:
+                      - company:
+                          companyId: 7573216
+                          companyName: Google LLC
+                          address:
+                            city: Mountain View
+                            state: CA
+                            country: United States
+                      contactMatches:
+                      - contact:
+                          dbPersonDetails:
+                            dbPersonId: 50823422
+                            firstName: Stefano
+                            lastName: Gessati
+                          employmentDetails:
+                            contactId: 96208084
+                            companyId: 7573216
+                            companyName: Google LLC
+                            titles:
+                            - IT Resident
+                    - id: '2'
+                      companyMatches:
+                      - company:
+                          companyId: 724468
+                          companyName: Apple Inc.
+                          address:
+                            city: Cupertino
+                            state: CA
+                            country: United States
+                      contactMatches:
+                      - contact:
+                          dbPersonDetails:
+                            dbPersonId: 215
+                            firstName: Tim
+                            lastName: Cook
+                          employmentDetails:
+                            contactId: 317995637
+                            companyId: 724468
+                            companyName: Apple Inc.
+                            titles:
+                            - CEO
+                            contactQualityScore: A+
+                EmptyCompaniesResponseXml:
+                  description: EmptyCompaniesResponseXml
+                  value:
+                    matches:
+                    - id: '2'
+                      companyMatches: []
+                      contactMatches: []
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidRequestsErrorResponse:
+                  description: InvalidRequestsErrorResponse
+                  value:
+                    errorCode: 400-165
+                    errorMessage: The  match request should have non empty requests list.
+                    diagnosticCode: 88c27a04-bd7c-43d6-b133-b0990572e0d2
+                InvalidRequestBodyErrorResponse:
+                  description: InvalidRequestBodyErrorResponse
+                  value:
+                    errorCode: 400-166
+                    errorMessage: The request cannot be null.
+                    diagnosticCode: 58d73e23-2ade-48de-bab1-8bb91f8593eb
+                RequiredParamMissingErrorResponse:
+                  description: RequiredParamMissingErrorResponse
+                  value:
+                    errorCode: 400-164
+                    errorMessage: 'At least one of the following parameters: name, website, email or ticker must be provided for a match.'
+                    diagnosticCode: 8a780506-a4ea-47c0-9837-3ae20d5f8849
+                InvalidRequestIdErrorResponse:
+                  description: InvalidRequestIdErrorResponse
+                  value:
+                    errorCode: 400-167
+                    errorMessage: Each request should have a unique ID.
+                    diagnosticCode: cca619c0-6f2c-476d-bf9e-916c7e33e90e
+                InvalidRequestsSizeErrorResponse:
+                  description: InvalidRequestsSizeErrorResponse
+                  value:
+                    errorCode: 400-168
+                    errorMessage: The match request size should be less than or equal to 30.
+                    diagnosticCode: a9f35a64-5d7c-40d9-949d-6b3d440732f4
+                InvalidFieldNameErrorResponse:
+                  description: InvalidFieldNameErrorResponse
+                  value:
+                    errorCode: 400-106
+                    errorMessage: '{invalidFieldName} Invalid field name.'
+                    diagnosticCode: 3295f2e8-b794-4646-a805-b573e69d43fb
+                InvalidMinMatchScoreErrorResponse:
+                  description: InvalidMinMatchScoreErrorResponse
+                  value:
+                    errorCode: 400-170
+                    errorMessage: The minimumMatchScore should be between 0 and 1.
+                    diagnosticCode: b823b5fe-0862-4ea5-bb18-cee2d8a69782
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidRequestsErrorResponseXML:
+                  description: InvalidRequestsErrorResponseXML
+                  value:
+                    errorCode: 400-165
+                    errorMessage: The  match request should have non empty requests list.
+                    diagnosticCode: 88c27a04-bd7c-43d6-b133-b0990572e0d2
+                InvalidRequestBodyErrorResponseXML:
+                  description: InvalidRequestBodyErrorResponseXML
+                  value:
+                    errorCode: 400-166
+                    errorMessage: The request cannot be null.
+                    diagnosticCode: 58d73e23-2ade-48de-bab1-8bb91f8593eb
+                RequiredParamMissingErrorResponseXML:
+                  description: RequiredParamMissingErrorResponseXML
+                  value:
+                    errorCode: 400-164
+                    errorMessage: 'At least one of the following parameters: name, website, email or ticker must be provided for a match.'
+                    diagnosticCode: 8a780506-a4ea-47c0-9837-3ae20d5f8849
+                InvalidRequestIdErrorResponseXML:
+                  description: InvalidRequestIdErrorResponseXML
+                  value:
+                    errorCode: 400-167
+                    errorMessage: Each request should have a unique ID.
+                    diagnosticCode: cca619c0-6f2c-476d-bf9e-916c7e33e90e
+                InvalidRequestsSizeErrorResponseXML:
+                  description: InvalidRequestsSizeErrorResponseXML
+                  value:
+                    errorCode: 400-168
+                    errorMessage: The match request size should be less than or equal to 30.
+                    diagnosticCode: a9f35a64-5d7c-40d9-949d-6b3d440732f4
+                InvalidFieldNameErrorResponseXML:
+                  description: InvalidFieldNameErrorResponseXML
+                  value:
+                    errorCode: 400-106
+                    errorMessage: '{invalidFieldName} Invalid field name.'
+                    diagnosticCode: 3295f2e8-b794-4646-a805-b573e69d43fb
+                InvalidMinMatchScoreErrorResponseXML:
+                  description: InvalidMinMatchScoreErrorResponseXML
+                  value:
+                    errorCode: 400-170
+                    errorMessage: The minimumMatchScore should be between 0 and 1.
+                    diagnosticCode: b823b5fe-0862-4ea5-bb18-cee2d8a69782
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+components:
+  schemas:
+    AddressDTO:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        stateCode:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        countryCode:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        area:
+          type: string
+    ContactSearchRequestDTO:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        email:
+          type: string
+          example: john.doe@example.com
+        contactCity:
+          type: string
+          example: New York
+        contactState:
+          type: string
+          example: NY
+        contactCountry:
+          type: string
+          description: Country Id
+          example: '1'
+        titles:
+          type: array
+          items:
+            type: string
+          example:
+          - Manager
+          - Director
+        companyName:
+          type: string
+          example: Demandbase
+        companyCity:
+          type: string
+          example: San Francisco
+        companyState:
+          type: string
+          example: CA
+        companyCountry:
+          type: string
+          description: Country Id
+          example: '1'
+        companyWebsite:
+          type: string
+          example: demandbase.com
+        jobLevels:
+          type: array
+          items:
+            type: string
+          example:
+          - '1'
+          - '2'
+        jobFunctions:
+          type: array
+          items:
+            type: string
+          example:
+          - '1'
+          - '2'
+        active:
+          type: string
+          default: 'true'
+        emailRequired:
+          type: string
+          default: 'false'
+        phoneRequired:
+          type: string
+          default: 'false'
+        phoneType:
+          type: string
+          enum:
+          - direct
+          - corp
+          - mobile
+          - any
+          example: mobile
+        emailValidationStatus:
+          type: string
+          example: ValidEmail
+        minContactQualityScore:
+          type: string
+          example: A
+        companyIdsToInclude:
+          type: array
+          items:
+            type: string
+          default:
+          - '726263'
+          example:
+          - '726263'
+          - '726256'
+        contactIdsToExclude:
+          type: array
+          items:
+            type: string
+          example:
+          - '726263'
+          - '726256'
+        primaryIndustryOnly:
+          type: string
+          default: 'false'
+        sortBy:
+          type: string
+          example: companyName
+        sortOrder:
+          type: string
+          enum:
+          - asc
+          - desc
+          example: asc
+        maxEmployees:
+          type: string
+          example: '100'
+        minEmployees:
+          type: string
+          example: '10'
+        industries:
+          type: array
+          items:
+            type: string
+          example:
+          - '1'
+          - '2'
+        subIndustries:
+          type: array
+          items:
+            type: string
+          example:
+          - '1_1'
+          - '2_1'
+        page:
+          type: string
+          default: '1'
+        perPage:
+          type: string
+          default: '10'
+    JobLevelsV2:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Education:
+      type: object
+      properties:
+        degree:
+          type: string
+        major:
+          type: string
+        university:
+          type: string
+    MatchResponseDTO:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchResponse'
+          xml:
+            wrapped: true
+      xml:
+        name: MatchResults
+    MatchRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Microsoft
+        country:
+          type: string
+          example: United States
+        state:
+          type: string
+          example: WA
+        city:
+          type: string
+          example: Redmond
+        street:
+          type: string
+          example: 1 Microsoft Way
+        zip:
+          type: string
+          example: '90301'
+        websites:
+          type: array
+          items:
+            type: string
+            example: '["www.microsoft.com"]'
+          example:
+          - www.microsoft.com
+        ticker:
+          type: string
+          example: MSFT
+        phone:
+          type: string
+          example: +1 650 253 0000
+        id:
+          type: string
+          example: id
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        title:
+          type: string
+          example: CEO
+        fullName:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john.doe@example.com
+        isPhoneRequired:
+          type: boolean
+          example: true
+        isEmailRequired:
+          type: boolean
+          example: true
+        executiveLinkedInHandle:
+          type: string
+          example: john-doe
+        contactMatching:
+          type: string
+          example: active
+        contactStatus:
+          type: string
+          example: current
+      required:
+      - id
+    TickerDTO:
+      type: object
+      properties:
+        tickerName:
+          type: string
+        exchange:
+          type: string
+    DiversityCertificationsDTO:
+      type: object
+      properties:
+        wbe:
+          type: boolean
+        mbe:
+          type: boolean
+        vbe:
+          type: boolean
+        disabled:
+          type: boolean
+        dbe:
+          type: boolean
+        lgbt:
+          type: boolean
+    BusinessDTO:
+      type: object
+      properties:
+        industry:
+          type: string
+        industryCode:
+          type: string
+        subIndustry:
+          type: string
+        subIndustryCode:
+          type: string
+    ContactMatchDTO:
+      type: object
+      properties:
+        contact:
+          $ref: '#/components/schemas/ContactFetchResponseDTO'
+    CompanyNewsArticle:
+      type: object
+      properties:
+        title:
+          type: string
+        url:
+          type: string
+        publicationDate:
+          type: string
+        source:
+          type: string
+        imageUrl:
+          type: string
+        newsCategory:
+          type: string
+    PhoneNumbers:
+      type: object
+      properties:
+        directNumber:
+          type: string
+        corporateNumber:
+          type: string
+    JobFunctionsV2:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    CompanyNewsResponseDTO:
+      type: object
+      properties:
+        companyNews:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyNewsArticle'
+          xml:
+            wrapped: true
+        pageNo:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int64
+        companyId:
+          type: string
+      xml:
+        name: news
+    TechUsedProductDTO:
+      type: object
+      description: A product detected for the company.
+      properties:
+        productId:
+          type: string
+          description: Demandbase identifier for the product.
+          example: DM01069
+        productName:
+          type: string
+          description: Display name of the product.
+          example: Axio
+    CompanyMatchDTO:
+      type: object
+      properties:
+        company:
+          $ref: '#/components/schemas/CompanyFetchResponseDTO'
+    TechUsedSubCategoryDTO:
+      type: object
+      description: A technology subcategory and its detected products.
+      properties:
+        subCategoryId:
+          type: string
+          description: Demandbase identifier for the technology subcategory.
+          example: '5000076'
+        subCategoryName:
+          type: string
+          description: Display name of the technology subcategory.
+          example: Business Intelligence Software
+        products:
+          type: array
+          description: Products detected for the company within the subcategory.
+          items:
+            $ref: '#/components/schemas/TechUsedProductDTO'
+          xml:
+            wrapped: true
+    SocialHandlesDTO:
+      type: object
+      properties:
+        twitter:
+          type: string
+        facebook:
+          type: string
+        blog:
+          type: string
+        linkedIn:
+          type: string
+    JobLevels:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    TechUsedCategoryDTO:
+      type: object
+      description: A technology category and its subcategories.
+      properties:
+        categoryId:
+          type: string
+          description: Demandbase identifier for the technology category.
+          example: '61'
+        categoryName:
+          type: string
+          description: Display name of the technology category.
+          example: Analytics
+        subCategories:
+          type: array
+          description: Technology subcategories within the category.
+          items:
+            $ref: '#/components/schemas/TechUsedSubCategoryDTO'
+          xml:
+            wrapped: true
+    EmploymentDetails:
+      type: object
+      properties:
+        contactId:
+          type: integer
+          format: int32
+        companyId:
+          type: integer
+          format: int32
+        companyName:
+          type: string
+        contactQualityScore:
+          type: string
+        description:
+          type: string
+        startDate:
+          type: string
+        salary:
+          type: string
+        salaryCurrency:
+          type: string
+        active:
+          type: string
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailDetails'
+          xml:
+            wrapped: true
+        lastValidatedDate:
+          type: string
+        phoneNumbers:
+          $ref: '#/components/schemas/PhoneNumbers'
+        jobLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobLevels'
+          xml:
+            wrapped: true
+        jobFunctions:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobFunctions'
+          xml:
+            wrapped: true
+        titles:
+          type: array
+          items:
+            type: string
+            xml:
+              name: title
+          xml:
+            wrapped: true
+    JobFunctions:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Employments:
+      type: object
+      properties:
+        contactId:
+          type: integer
+          format: int32
+        companyId:
+          type: integer
+          format: int32
+        companyName:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+            xml:
+              name: email
+          xml:
+            wrapped: true
+        phoneNumbers:
+          $ref: '#/components/schemas/PhoneNumbers'
+        active:
+          type: string
+        jobLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobLevels'
+          xml:
+            wrapped: true
+        jobFunctions:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobFunctions'
+          xml:
+            wrapped: true
+        titles:
+          type: array
+          items:
+            type: string
+            xml:
+              name: title
+          xml:
+            wrapped: true
+    CompanyDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        companyId:
+          type: integer
+          format: int32
+    DBPersonDetails:
+      type: object
+      properties:
+        dbPersonId:
+          type: integer
+          format: int32
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: integer
+          format: int32
+        mobileNumber:
+          type: string
+        educationList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Education'
+          xml:
+            wrapped: true
+        imageUrl:
+          type: string
+        socialHandles:
+          $ref: '#/components/schemas/SocialHandles'
+        address:
+          $ref: '#/components/schemas/AddressDTO'
+    CompanyTechUsedDTO:
+      type: object
+      description: Installed technology information grouped by category and subcategory.
+      properties:
+        categories:
+          type: array
+          description: Technology categories associated with the company.
+          items:
+            $ref: '#/components/schemas/TechUsedCategoryDTO'
+          xml:
+            wrapped: true
+    SocialHandles:
+      type: object
+      properties:
+        twitter:
+          type: string
+        facebook:
+          type: string
+        linkedIn:
+          type: string
+    MatchResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        companyMatches:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyMatchDTO'
+          xml:
+            wrapped: true
+        contactMatches:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactMatchDTO'
+          xml:
+            wrapped: true
+    ContactFetchResponseDTO:
+      type: object
+      properties:
+        dbPersonDetails:
+          $ref: '#/components/schemas/DBPersonDetails'
+        employmentDetails:
+          $ref: '#/components/schemas/EmploymentDetails'
+        employmentHistoryList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employments'
+          xml:
+            wrapped: true
+      xml:
+        name: contact
+    MatchRequestDTO:
+      type: object
+      properties:
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchRequest'
+        fields:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            example: '["name","city"]'
+          example:
+          - name
+          - city
+        limitResults:
+          type: string
+          example: '10'
+        matchBranch:
+          type: string
+          example: 'true'
+        minContactQualityScore:
+          type: string
+          example: A+
+      required:
+      - requests
+    CompanySearchRequestDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Demandbase
+        website:
+          type: string
+          example: demandbase.com
+        ticker:
+          type: string
+          example: MSFT
+        state:
+          type: string
+          example: CA
+        areaCodes:
+          type: array
+          items:
+            type: string
+          example:
+          - '415'
+          - '628'
+        cities:
+          type: string
+          example: San Francisco,New York
+        businessTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - public
+            - private
+            - school
+            - government
+            - organization
+          example:
+          - public
+          - private
+        country:
+          type: string
+          description: Country Id
+          example: '1'
+        companyStatus:
+          type: array
+          items:
+            type: string
+            enum:
+            - unassigned
+            - operating
+            - non-operating
+            - acquired
+            - liquidating
+            - outOfBusiness
+          example:
+          - unassigned
+          - operating
+        fiscalYearEnd:
+          type: string
+          example: january
+        fortuneRanking:
+          type: string
+          enum:
+          - fortune500
+          - fortune1000
+          example: fortune500
+        industries:
+          type: array
+          items:
+            type: string
+          example:
+          - '1'
+          - '2'
+        subIndustries:
+          type: array
+          items:
+            type: string
+          example:
+          - '1_1'
+          - '2_1'
+        keywords:
+          type: array
+          items:
+            type: string
+          example:
+          - keyword1
+          - keyword2
+        minEmployees:
+          type: string
+          example: '10'
+        maxEmployees:
+          type: string
+          example: '1000'
+        minRevenue:
+          type: string
+          description: Minimum annual revenue in millions.
+          example: '1'
+        maxRevenue:
+          type: string
+          description: Maximum annual revenue in millions.
+          example: '50'
+        naics:
+          type: array
+          items:
+            type: string
+          example:
+          - '511210'
+          - 5415*
+        sicCodes:
+          type: array
+          items:
+            type: string
+          example:
+          - '7375'
+          - '5678'
+        regions:
+          type: array
+          items:
+            type: string
+            enum:
+            - asia
+            - africa
+            - europe
+            - middleeast
+            - northamerica
+            - oceania
+            - southamerica
+          example:
+          - asia
+          - africa
+        street:
+          type: array
+          items:
+            type: string
+          example:
+          - 123 Main St
+          - 456 Elm St
+        companyType:
+          type: array
+          items:
+            type: string
+            enum:
+            - public
+            - private
+            - government
+            - organization
+          example:
+          - public
+          - private
+        businessStructure:
+          type: string
+          enum:
+          - uncategorized
+          - globalParent
+          - subsidiary
+          - group
+          - branch
+          - independent
+          example: globalParent
+        zipCodes:
+          type: array
+          items:
+            type: string
+          example:
+          - '500001'
+          - '500002'
+        sortBy:
+          type: string
+          example: companyRevenue
+        sortOrder:
+          type: string
+          enum:
+          - asc
+          - desc
+          example: asc
+        primaryIndustryOnly:
+          type: string
+          default: 'false'
+        primarySICOnly:
+          type: string
+          default: 'false'
+        gender:
+          type: string
+          enum:
+          - male
+          - female
+          example: male
+        ethnicity:
+          type: array
+          items:
+            type: string
+            enum:
+            - '1'
+            - '2'
+            - '3'
+            - '4'
+            - '5'
+            - '6'
+            - '7'
+          example:
+          - '1'
+          - '2'
+        wbe:
+          type: string
+          example: 'true'
+        vbe:
+          type: string
+          example: 'true'
+        dbe:
+          type: string
+          example: 'true'
+        mbe:
+          type: string
+          example: 'true'
+        lgbt:
+          type: string
+          example: 'true'
+        disabled:
+          type: string
+          example: 'true'
+        companyIdsToExclude:
+          type: array
+          items:
+            type: string
+          example:
+          - '726263'
+          - '726256'
+        page:
+          type: string
+          example: '1'
+        perPage:
+          type: string
+          example: '10'
+    EmailDetails:
+      type: object
+      properties:
+        email:
+          type: string
+        validationStatus:
+          type: string
+    FamilyTreeResultDTO:
+      type: object
+      properties:
+        company:
+          $ref: '#/components/schemas/CompanyDTO'
+        children:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/FamilyTreeResultDTO'
+          xml:
+            wrapped: true
+    DiversityDTO:
+      type: object
+      properties:
+        gender:
+          type: string
+        ethnicity:
+          type: string
+        certifications:
+          $ref: '#/components/schemas/DiversityCertificationsDTO'
+    CompanySearchResponseDTO:
+      type: object
+      properties:
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyDTO'
+          xml:
+            name: company
+        totalCount:
+          type: integer
+          format: int64
+        pageNo:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int64
+      xml:
+        name: companies
+    PersonDTO:
+      type: object
+      properties:
+        dbPersonId:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+    EmploymentDTO:
+      type: object
+      properties:
+        contactId:
+          type: integer
+          format: int64
+        companyId:
+          type: integer
+          format: int64
+        companyName:
+          type: string
+        titles:
+          type: array
+          items:
+            type: string
+            xml:
+              name: title
+          xml:
+            wrapped: true
+        jobLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobLevelsV2'
+          xml:
+            wrapped: true
+        jobFunctions:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobFunctionsV2'
+          xml:
+            wrapped: true
+        active:
+          type: boolean
+        hasPhone:
+          type: boolean
+        hasEmail:
+          type: boolean
+        contactQualityScore:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        diagnosticCode:
+          type: string
+      xml:
+        name: error
+    ContactResultsDTO:
+      type: object
+      properties:
+        dbPersonDetails:
+          $ref: '#/components/schemas/PersonDTO'
+        employmentDetails:
+          $ref: '#/components/schemas/EmploymentDTO'
+    CompanyFetchResponseDTO:
+      type: object
+      properties:
+        companyId:
+          type: integer
+          format: int32
+        companyName:
+          type: string
+        description:
+          type: string
+        companyType:
+          type: string
+        companyStatus:
+          type: string
+        tickers:
+          type: array
+          items:
+            $ref: '#/components/schemas/TickerDTO'
+          xml:
+            wrapped: true
+        classification:
+          $ref: '#/components/schemas/ClassificationDTO'
+        address:
+          $ref: '#/components/schemas/CompanyAddressDTO'
+        phone:
+          type: string
+        revenue:
+          type: number
+          format: double
+          description: Annual revenue in millions.
+        revenueCurrency:
+          type: string
+        employeeCount:
+          type: integer
+          format: int32
+        sic:
+          type: string
+        sicDescription:
+          type: string
+        naics:
+          type: string
+        naicsDescription:
+          type: string
+        financialYearEnd:
+          type: string
+        equifaxId:
+          type: string
+        companyTaxId:
+          type: string
+        fortuneRanking:
+          type: string
+        britishSics:
+          type: array
+          items:
+            $ref: '#/components/schemas/BritishSicDTO'
+          xml:
+            wrapped: true
+        foundedIn:
+          type: string
+        socialHandles:
+          $ref: '#/components/schemas/SocialHandlesDTO'
+        diversity:
+          $ref: '#/components/schemas/DiversityDTO'
+        siteTypes:
+          type: array
+          items:
+            type: string
+            xml:
+              name: siteType
+          xml:
+            wrapped: true
+        siteCount:
+          type: integer
+          format: int32
+        siteLocationCount:
+          type: integer
+          format: int32
+        businessStructure:
+          type: string
+        currentCompanyId:
+          type: integer
+          format: int32
+        websites:
+          type: array
+          items:
+            type: string
+            xml:
+              name: website
+          xml:
+            wrapped: true
+        companyCompetitorIds:
+          type: array
+          items:
+            type: string
+        familyTree:
+          $ref: '#/components/schemas/FamilyTreeResultDTO'
+        acquisitions:
+          $ref: '#/components/schemas/AcquiredCompanyResultDTO'
+        techUsed:
+          $ref: '#/components/schemas/CompanyTechUsedDTO'
+        companyLogos:
+          type: array
+          items:
+            type: string
+            xml:
+              name: companyLogo
+          xml:
+            wrapped: true
+        competitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyDTO'
+          xml:
+            wrapped: true
+      xml:
+        name: company
+    ClassificationDTO:
+      type: object
+      properties:
+        primaryBusiness:
+          $ref: '#/components/schemas/BusinessDTO'
+        secondaryBusinesses:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessDTO'
+          xml:
+            wrapped: true
+    BritishSicDTO:
+      type: object
+      properties:
+        britishSic:
+          type: string
+        description:
+          type: string
+    CompanyAddressDTO:
+      type: object
+      description: Company address. State and country are returned as codes when available.
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          description: State or province code.
+          example: WA
+        zip:
+          type: string
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code.
+          example: US
+        latitude:
+          type: string
+        longitude:
+          type: string
+        area:
+          type: string
+    AcquiredCompanyResultDTO:
+      type: object
+      properties:
+        companies:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/CompanyDTO'
+          xml:
+            wrapped: true
+    ContactSearchResponseDTO:
+      type: object
+      properties:
+        contactResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactResultsDTO'
+          xml:
+            name: contactResult
+        totalCount:
+          type: integer
+          format: int64
+        pageNo:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int64
+      xml:
+        name: contactResults
+  examples:
+    CompanyLogosResponse:
+      description: Company Logos Response
+      value:
+        companyId: 578458
+        companyName: Analysis Group, Inc.
+        companyType: Private
+        companyStatus: Operating
+        tickers: []
+        classification:
+          primaryBusiness:
+            industry: Corporate Services
+            industryCode: '229'
+            subIndustry: Management Consulting
+            subIndustryCode: '257'
+          secondaryBusinesses: []
+        address:
+          street: 111 Huntington Avenue Tenth Floor
+          city: Boston
+          state: MA
+          zip: 02199
+          country: US
+        phone: +1 617 425 8000
+        revenue: 43.75
+        revenueCurrency: USD
+        employeeCount: 500
+        sic: '8742'
+        sicDescription: Services-Management Consulting Services
+        naics: '541611'
+        naicsDescription: Administrative Management and General Management Consulting Services
+        equifaxId: 049615062
+        britishSics:
+        - britishSic: '71122'
+          description: Engineering related scientific and technical consulting activities
+        - britishSic: '70229'
+          description: Management consultancy activities other than financial management
+        foundedIn: '1981'
+        socialHandles:
+          twitter: https://twitter.com/analysisgroup
+          facebook: https://www.facebook.com/analysisgroup
+          linkedIn: https://www.linkedin.com/company/analysis-group
+        diversity:
+          gender: Female
+          ethnicity: African American
+          certifications:
+            wbe: true
+            mbe: true
+            vbe: true
+            disabled: false
+            dbe: true
+            lgbt: false
+        siteTypes:
+        - Uncategorized
+        businessStructure: Independent
+        websites:
+        - https://www.analysisgroup.com/
+        companyLogos:
+        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/100
+        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/200
+        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/400
+    CompanyInstalledTechResponse:
+      description: Company Installed Tech Response
+      value:
+        companyId: 726263
+        companyName: Microsoft Corporation
+        companyType: Public
+        companyStatus: Operating
+        tickers:
+        - tickerName: MSFT
+          exchange: NASD
+        classification:
+          primaryBusiness:
+            industry: Computer Software
+            industryCode: '8'
+          secondaryBusinesses:
+          - industry: Computer Software
+            industryCode: '8'
+            subIndustry: Enterprise Resource Planning Software
+            subIndustryCode: '8_32'
+        address:
+          street: One Microsoft Way
+          city: Redmond
+          state: WA
+          zip: 98052-6399
+          country: US
+          latitude: '47.6400493830442'
+          longitude: '-122.129796892405'
+        phone: +1 425 882 8080
+        revenue: 245122
+        revenueCurrency: USD
+        employeeCount: 228000
+        sic: '7371'
+        sicDescription: Services-Computer Programming Services
+        naics: '5132'
+        naicsDescription: Software Publishers
+        financialYearEnd: '6'
+        equifaxId: 049615062
+        companyTaxId: '911144442'
+        britishSics:
+        - britishSic: '58290'
+          description: Other software publishing
+        - britishSic: '46510'
+          description: Wholesale of computers, computer peripheral equipment and software
+        - britishSic: '62011'
+          description: Ready-made interactive leisure and entertainment software development
+        - britishSic: '58210'
+          description: Publishing of computer games
+        foundedIn: '1975'
+        socialHandles:
+          twitter: https://twitter.com/microsoftindia
+          facebook: https://www.facebook.com/microsoft
+          blog: https://news.microsoft.com/feed/
+          linkedIn: https://www.linkedin.com/company/microsoft
+        siteTypes:
+        - Uncategorized
+        siteCount: 276
+        siteLocationCount: 82
+        businessStructure: Global Parent
+        websites:
+        - https://www.microsoft.com/en-us/
+        techUsed:
+          categories:
+          - categoryId: '52'
+            categoryName: AR/VR
+            subCategories:
+            - subCategoryId: '5000773'
+              subCategoryName: AR/VR Wearable
+              products:
+              - productId: DM17112
+                productName: Hololens2
+              - productId: DM10556
+                productName: Oculus Rift
+            - subCategoryId: '5000160'
+              subCategoryName: Augmented Reality Software
+              products:
+              - productId: DM10598
+                productName: Microsoft Dynamics 365 Product Visualize
+            - subCategoryId: '5000388'
+              subCategoryName: Virtual Reality Software
+              products:
+              - productId: DM02373
+                productName: Cryengine
+          - categoryId: '61'
+            categoryName: Analytics
+            subCategories:
+            - subCategoryId: '5000076'
+              subCategoryName: Business Intelligence Software
+              products:
+              - productId: DM01069
+                productName: Axio
+              - productId: DM02743
+                productName: Domo
+              - productId: DM12976
+                productName: Halo
+              - productId: DM05198
+                productName: Kxen
+              - productId: DM05911
+                productName: Microsoft Power Bi
+              - productId: DM12721
+                productName: Nicepeopleatwork
+              - productId: DM07982
+                productName: SAP Visual Intelligence
+              - productId: DM09374
+                productName: Twitter Website Universal Tag
+            - subCategoryId: '5000854'
+              subCategoryName: Data Science and Machine Learning
+              products:
+              - productId: DM20720
+                productName: Google Cloud AI Platform
+            - subCategoryId: '5000506'
+              subCategoryName: Data Virtualization Software
+              products:
+              - productId: DM12093
+                productName: Grafana
+            - subCategoryId: '5000020'
+              subCategoryName: Enterprise Search Software
+              products:
+              - productId: DM02319
+                productName: Coveo
+              - productId: DM02928
+                productName: Elasticsearch
+              - productId: DM07989
+                productName: SAS
+            - subCategoryId: '5000857'
+              subCategoryName: Image and Video Analysis
+              products:
+              - productId: DM20735
+                productName: Google Cloud Translation API
+            - subCategoryId: '5000482'
+              subCategoryName: Information Technology Management
+              products:
+              - productId: DM03655
+                productName: Gist
+            - subCategoryId: '5000033'
+              subCategoryName: Other Analytics Software
+              products:
+              - productId: DM16925
+                productName: ELK Stack
+              - productId: DM17008
+                productName: Google Crashlytics
+              - productId: DM20375
+                productName: Microsoft Azure Data Explorer
+            - subCategoryId: '5000078'
+              subCategoryName: Predictive Analytics Software
+              products:
+              - productId: DM04367
+                productName: IBM Spss
+              - productId: DM04631
+                productName: Innovyze
+              - productId: DM05089
+                productName: Kaggle
+            - subCategoryId: '5000232'
+              subCategoryName: Professional Services
+              products:
+              - productId: DM01294
+                productName: Bloomberg
+              - productId: DM09095
+                productName: Thomson Reuters
+            - subCategoryId: '5000365'
+              subCategoryName: Reporting
+              products:
+              - productId: DM17811
+                productName: Servicenow Reporting
+            - subCategoryId: '5000552'
+              subCategoryName: Social Media Marketing
+              products:
+              - productId: DM13407
+                productName: Socialbakers
+              - productId: DM15002
+                productName: Talkwalker
+    CompanyFamilyTreeResponse:
+      description: Company Family Tree Response
+      value:
+        companyId: 726263
+        companyName: Microsoft Corporation
+        companyType: Public
+        companyStatus: Operating
+        tickers:
+        - tickerName: MSFT
+          exchange: NASD
+        classification:
+          primaryBusiness:
+            industry: Computer Software
+            industryCode: '8'
+          secondaryBusinesses:
+          - industry: Computer Software
+            industryCode: '8'
+            subIndustry: Enterprise Resource Planning Software
+            subIndustryCode: '8_32'
+        address:
+          street: One Microsoft Way
+          city: Redmond
+          state: WA
+          zip: 98052-6399
+          country: US
+          latitude: '47.6400493830442'
+          longitude: '-122.129796892405'
+        phone: +1 425 882 8080
+        revenue: 245122
+        revenueCurrency: USD
+        employeeCount: 228000
+        sic: '7371'
+        sicDescription: Services-Computer Programming Services
+        naics: '5132'
+        naicsDescription: Software Publishers
+        financialYearEnd: '6'
+        equifaxId: 049615062
+        companyTaxId: '911144442'
+        britishSics:
+        - britishSic: '58290'
+          description: Other software publishing
+        - britishSic: '46510'
+          description: Wholesale of computers, computer peripheral equipment and software
+        foundedIn: '1975'
+        socialHandles:
+          twitter: https://twitter.com/microsoftindia
+          facebook: https://www.facebook.com/microsoft
+          blog: https://news.microsoft.com/feed/
+          linkedIn: https://www.linkedin.com/company/microsoft
+        siteTypes:
+        - Uncategorized
+        siteCount: 276
+        siteLocationCount: 82
+        businessStructure: Global Parent
+        websites:
+        - https://www.microsoft.com/en-us/
+        familyTree:
+          company:
+            companyId: 1
+            name: Microsoft
+            city: Redmond
+            state: WA
+            country: US
+          children:
+          - company:
+              companyId: 2
+              name: Microsoft India
+              city: Bangalore
+              state: KA
+              country: IN
+            children:
+            - company:
+                companyId: 3
+                name: Microsoft India Pvt Ltd
+                city: Bangalore
+                state: KA
+                country: IN
+        acquisitions:
+          companies:
+          - companyId: 2
+            name: Microsoft India
+            city: Bangalore
+            state: KA
+            country: IN
+    CompanyDetailsResponse:
+      description: Company Details Response
+      value:
+        companyId: 726263
+        companyName: Microsoft Corporation
+        companyType: Public
+        companyStatus: Operating
+        tickers:
+        - tickerName: MSFT
+          exchange: NASD
+        classification:
+          primaryBusiness:
+            industry: Computer Software
+            industryCode: '8'
+          secondaryBusinesses:
+          - industry: Computer Software
+            industryCode: '8'
+            subIndustry: Enterprise Resource Planning Software
+            subIndustryCode: '8_32'
+        address:
+          street: One Microsoft Way
+          city: Redmond
+          state: WA
+          zip: 98052-6399
+          country: US
+          latitude: '47.6400493830442'
+          longitude: '-122.129796892405'
+        phone: +1 425 882 8080
+        revenue: 245122
+        revenueCurrency: USD
+        employeeCount: 228000
+        sic: '7371'
+        sicDescription: Services-Computer Programming Services
+        naics: '5132'
+        naicsDescription: Software Publishers
+        financialYearEnd: '6'
+        equifaxId: 049615062
+        companyTaxId: '911144442'
+        britishSics:
+        - britishSic: '58290'
+          description: Other software publishing
+        - britishSic: '46510'
+          description: Wholesale of computers, computer peripheral equipment and software
+        foundedIn: '1975'
+        socialHandles:
+          twitter: https://twitter.com/microsoftindia
+          facebook: https://www.facebook.com/microsoft
+          blog: https://news.microsoft.com/feed/
+          linkedIn: https://www.linkedin.com/company/microsoft
+        siteTypes:
+        - Uncategorized
+        siteCount: 276
+        siteLocationCount: 82
+        businessStructure: Global Parent
+        websites:
+        - https://www.microsoft.com/en-us/
+    CompanyCompetitorsResponse:
+      description: Company Competitors Response
+      value:
+        companyId: 726263
+        companyName: Microsoft Corporation
+        companyType: Public
+        companyStatus: Operating
+        tickers:
+        - tickerName: MSFT
+          exchange: NASD
+        classification:
+          primaryBusiness:
+            industry: Computer Software
+            industryCode: '8'
+          secondaryBusinesses:
+          - industry: Computer Software
+            industryCode: '8'
+            subIndustry: Enterprise Resource Planning Software
+            subIndustryCode: '8_32'
+        address:
+          street: One Microsoft Way
+          city: Redmond
+          state: WA
+          zip: 98052-6399
+          country: US
+          latitude: '47.6400493830442'
+          longitude: '-122.129796892405'
+        phone: +1 425 882 8080
+        revenue: 245122
+        revenueCurrency: USD
+        employeeCount: 228000
+        sic: '7371'
+        sicDescription: Services-Computer Programming Services
+        naics: '5132'
+        naicsDescription: Software Publishers
+        financialYearEnd: '6'
+        equifaxId: 049615062
+        companyTaxId: '911144442'
+        britishSics:
+        - britishSic: '58290'
+          description: Other software publishing
+        - britishSic: '46510'
+          description: Wholesale of computers, computer peripheral equipment and software
+        foundedIn: '1975'
+        socialHandles:
+          twitter: https://twitter.com/microsoftindia
+          facebook: https://www.facebook.com/microsoft
+          blog: https://news.microsoft.com/feed/
+          linkedIn: https://www.linkedin.com/company/microsoft
+        siteTypes:
+        - Uncategorized
+        siteCount: 276
+        siteLocationCount: 82
+        businessStructure: Global Parent
+        websites:
+        - https://www.microsoft.com/en-us/
+        competitors:
+        - name: Red Hat Inc
+          city: Raleigh
+          state: NC
+          country: US
+          companyId: 732237
+        - name: Adobe Systems Incorporated
+          city: San Jose
+          state: CA
+          country: US
+          companyId: 724292
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: '[<span style="text-decoration:underline;color:blue; font-size:1.25em">How To Generate Bearer Tokens</span>](https://developer.demandbase.com/reference/generate_access_token)'
+      scheme: bearer

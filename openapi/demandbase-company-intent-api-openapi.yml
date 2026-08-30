@@ -1,0 +1,420 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: Company Intent API
+  license:
+    name: Proprietary
+    url: https://www.demandbase.com/terms-of-use/
+  description: 'The Intent API provides company-level intent signals, including keyword research activity, intent strength, and trending behavior.
+
+
+    > **Beta:** This API is currently in beta and may change before general availability.
+
+
+    ## Authentication
+
+    All requests must be authenticated using a valid API token. Include the token in the `Authorization` header using the Bearer scheme.
+
+
+    For instructions on generating API tokens, see [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set).
+
+
+    ```text
+
+    Authorization: Bearer YOUR_API_KEY_HERE
+
+    Content-Type: application/json
+
+    ```'
+  contact:
+    name: Support
+    url: https://www.demandbase.com/
+    email: support@demandbase.com
+servers:
+- url: https://uapi.demandbase.com/data/intent/v1
+  description: Server URL in Production environment
+security:
+- bearerAuth: []
+tags:
+- name: Company Intent
+  description: Retrieve company-level intent signals and research activity.
+paths:
+  /companies/intent/query:
+    post:
+      tags:
+      - Company Intent
+      summary: Retrieve company intent data
+      description: 'Retrieves company intent signals filtered by company IDs, keyword set IDs, or keywords within a specified time range.
+
+
+        You can optionally filter by intent strength or the number of people researching and control pagination and sorting. At least one of `companyIds`, `keywordSetIds`, or `keywords` is required.'
+      operationId: companyIntent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntentRequest'
+            example:
+              companyIds:
+              - '726263'
+              startDate: '2026-07-01'
+              endDate: '2026-07-22'
+              pageSize: 5
+              sortBy: endDate
+              sortOrder: DESC
+      responses:
+        '200':
+          description: Intent records fetched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntentResponse'
+              examples:
+                SuccessResponse:
+                  summary: Successful response with intent results
+                  value:
+                    data:
+                    - companyId: '726263'
+                      domain: microsoft.com
+                      keyword: Zero Trust
+                      numPeopleResearching: 8
+                      intentStrength: HIGH
+                      isTrending: true
+                      trendingScore: 72
+                      numTrendingDays: 3
+                      startDate: '2026-07-12'
+                      endDate: '2026-07-18'
+                      keywordSetId: 7303
+                      keywordSetName: Security Keywords
+                    pagination:
+                      after: Tzo1MDoyNQ==
+                      before: TzowOjI1
+                      totalCount: 142
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/IntentResponse'
+        '400':
+          description: The request is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                MissingFilters:
+                  summary: At least one intent filter is required
+                  value:
+                    errorCode: 400-218
+                    errorMessage: At least one of companyIds, keywordSetIds, or keywords must be provided for intent search.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidCompanyIdsSize:
+                  summary: Too many company IDs
+                  value:
+                    errorCode: 400-219
+                    errorMessage: companyIds must contain no more than 10 items.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidStartDate:
+                  summary: Invalid start date
+                  value:
+                    errorCode: 400-220
+                    errorMessage: startDate must be a valid date in yyyy-MM-dd format.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidEndDate:
+                  summary: Invalid end date
+                  value:
+                    errorCode: 400-221
+                    errorMessage: endDate must be a valid date in yyyy-MM-dd format.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidDateRange:
+                  summary: Start date is after end date
+                  value:
+                    errorCode: 400-222
+                    errorMessage: startDate must be on or before endDate.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidDateWindow:
+                  summary: Date range exceeds 12 months
+                  value:
+                    errorCode: 400-223
+                    errorMessage: Date range must be 12 months or less.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidIntentStrength:
+                  summary: Invalid intent strength
+                  value:
+                    errorCode: 400-224
+                    errorMessage: 'intentStrength must be one of: LOW, MED, HIGH.'
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidNumPeopleRange:
+                  summary: Invalid people-researching range
+                  value:
+                    errorCode: 400-225
+                    errorMessage: minNumPeopleResearching must be less than or equal to maxNumPeopleResearching.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidPageSize:
+                  summary: Page size is outside the allowed range
+                  value:
+                    errorCode: 400-226
+                    errorMessage: pageSize must be between 1 and 100.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidSortBy:
+                  summary: Invalid sort field
+                  value:
+                    errorCode: 400-227
+                    errorMessage: 'sortBy must be one of: startDate, endDate, intentStrength, numPeopleResearching, trendingScore.'
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidPageToken:
+                  summary: Invalid pagination token
+                  value:
+                    errorCode: 400-228
+                    errorMessage: pageToken is invalid.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidKeywordSetIdsSize:
+                  summary: Too many keyword set IDs
+                  value:
+                    errorCode: 400-229
+                    errorMessage: keywordSetIds must contain no more than 10 items.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                InvalidKeywordsSize:
+                  summary: Too many keywords
+                  value:
+                    errorCode: 400-230
+                    errorMessage: keywords must contain no more than 50 items.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+        '401':
+          description: Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+              examples:
+                UnauthorizedResponse:
+                  summary: Authentication failed
+                  value:
+                    status: Authentication Failed - Unauthorized.
+        '403':
+          description: The API key does not include Intent API access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                ForbiddenResponse:
+                  summary: Intent API permission is missing
+                  value:
+                    errorCode: 403-100
+                    errorMessage: API Key does not have privilege to access the requested resource
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+      security:
+      - bearerAuth: []
+components:
+  schemas:
+    IntentResult:
+      type: object
+      properties:
+        companyId:
+          type: string
+          description: Demandbase Company ID.
+          example: '726263'
+        domain:
+          type: string
+          description: Company domain.
+          example: microsoft.com
+        keyword:
+          type: string
+          description: Keyword associated with the intent signal.
+          example: Zero Trust
+        numPeopleResearching:
+          type: integer
+          description: Number of people researching the keyword.
+          example: 8
+        intentStrength:
+          type: string
+          enum:
+          - LOW
+          - MED
+          - HIGH
+          description: Intent strength classification.
+          example: HIGH
+        isTrending:
+          type: boolean
+          description: Whether research activity for the keyword is currently trending.
+          example: true
+        trendingScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Computed trend strength score from 0 through 100.
+          example: 72
+        numTrendingDays:
+          type: integer
+          description: Number of consecutive days the keyword has been trending.
+          example: 3
+        startDate:
+          type: string
+          format: date
+          description: Start of the measurement period.
+          example: '2026-07-12'
+        endDate:
+          type: string
+          format: date
+          description: End of the measurement period.
+          example: '2026-07-18'
+        keywordSetId:
+          type: integer
+          format: int64
+          description: Keyword Set identifier.
+          example: 7303
+        keywordSetName:
+          type: string
+          description: Keyword Set name.
+          example: Security Keywords
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Structured error code.
+          example: 400-218
+        errorMessage:
+          type: string
+          description: Human-readable error message.
+          example: At least one of companyIds, keywordSetIds, or keywords must be provided for intent search.
+        diagnosticCode:
+          type: string
+          format: uuid
+          description: Unique diagnostic identifier for troubleshooting.
+          example: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+      xml:
+        name: error
+    IntentRequest:
+      type: object
+      required:
+      - startDate
+      - endDate
+      properties:
+        companyIds:
+          type: array
+          maxItems: 10
+          description: Demandbase Company IDs. At least one of companyIds, keywordSetIds, or keywords must be provided.
+          items:
+            type: string
+          example:
+          - '726263'
+        keywordSetIds:
+          type: array
+          maxItems: 10
+          description: Keyword Set IDs to filter by.
+          items:
+            type: integer
+            format: int64
+          example:
+          - 9190
+          - 9191
+        keywords:
+          type: array
+          maxItems: 50
+          description: Keywords to filter intent signals by.
+          items:
+            type: string
+          example:
+          - Zero Trust
+          - SASE
+        startDate:
+          type: string
+          format: date
+          description: Inclusive start date in yyyy-MM-dd format.
+          example: '2026-07-01'
+        endDate:
+          type: string
+          format: date
+          description: Inclusive end date in yyyy-MM-dd format. The date range must be 12 months or less.
+          example: '2026-07-22'
+        intentStrength:
+          type: string
+          enum:
+          - LOW
+          - MED
+          - HIGH
+          description: Filter results by intent strength.
+          example: HIGH
+        minNumPeopleResearching:
+          type: integer
+          minimum: 0
+          description: Minimum number of people researching the keyword.
+          example: 2
+        maxNumPeopleResearching:
+          type: integer
+          minimum: 0
+          description: Maximum number of people researching the keyword. Must be greater than or equal to minNumPeopleResearching.
+          example: 10
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 25
+          description: Number of results per page.
+          example: 25
+        pageToken:
+          type: string
+          description: Cursor token returned by a previous request.
+          example: Tzo1MDoyNQ==
+        sortBy:
+          type: string
+          enum:
+          - startDate
+          - endDate
+          - intentStrength
+          - numPeopleResearching
+          - trendingScore
+          default: endDate
+          description: Field used to sort the results.
+          example: endDate
+        sortOrder:
+          type: string
+          enum:
+          - ASC
+          - DESC
+          default: DESC
+          description: Sort direction.
+          example: DESC
+    IntentResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Intent result records.
+          items:
+            $ref: '#/components/schemas/IntentResult'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    UnauthorizedResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Authentication failure status.
+          example: Authentication Failed - Unauthorized.
+    Pagination:
+      type: object
+      properties:
+        after:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page. Null when no additional page is available.
+          example: Tzo1MDoyNQ==
+        before:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the previous page. Null when the current page is the first page.
+          example: TzowOjI1
+        totalCount:
+          type: integer
+          format: int64
+          description: Total number of matching records.
+          example: 142
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: '[How to generate Bearer tokens](https://developer.demandbase.com/docs/auth-api)'

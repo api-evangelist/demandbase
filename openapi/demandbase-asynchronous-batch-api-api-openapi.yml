@@ -1,0 +1,1421 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: B2B Asynchronous (Batch) API
+  description: 'The B2B API provides access to endpoints for searching, retrieving, and matching company and contact data.
+
+
+    It includes support for:
+
+    - **Company records:** Firmographic details, news, technologies, and more.
+
+    - **Contact records:** Current role, employment history, and professional details.
+
+    - **Demandbase Person profiles:** Persistent identities tied to individuals across multiple roles or companies.
+
+    - **Subscriptions:** Monitoring updates to companies and DB Person records.
+
+    ## Authentication
+
+    All requests to the B2B API must be authenticated using a valid API token. If authentication fails, the API will respond with a `401 Unauthorized` status code.
+
+    ### Obtaining an API Token
+
+    For instructions on generating API tokens, see the [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set) article at the Demandbase Help Center.
+
+    ### Authorization Header
+
+    Include your API token in the `Authorization` header of each request using the Bearer token scheme. Also set the `Content-Type` header to `application/json` when sending JSON payloads.
+
+    #### Example
+
+    ```
+
+    Authorization: Bearer YOUR_API_KEY_HERE
+
+    Content-Type: application/json
+
+    ```
+
+
+    > **Note:** Tokens should be treated as sensitive credentials. Do not expose them in public code repositories or client-side applications.'
+  contact:
+    name: Support
+    url: https://www.demandbase.com/
+    email: support@demandbase.com
+servers:
+- url: https://uapi.demandbase.com/data/b2b/v1
+  description: Server URL in Production environment
+security:
+- bearerAuth: []
+tags:
+- name: Asynchronous (Batch) API
+  description: Asynchronous bulk jobs for high-volume data retrieval and matching.
+paths:
+  /job/{jobId}:
+    get:
+      tags:
+      - Asynchronous (Batch) API
+      summary: Get Bulk Job Status
+      description: 'Check the status of a bulk job using its unique job ID. This endpoint supports all bulk job types, including Company Fetch, Contact Fetch, and Match. Once the job completes successfully, the response will contain a signed `resultsUrl` for downloading the results.
+
+
+        Important notes:
+
+        - The `resultsUrl` is included **only when the job status is `finished`**
+
+        - The URL remains valid for **24 hours**
+
+        - If the job fails, an `errorMessage` field will be present in the response explaining the reason
+
+
+        **CSV Results Format:**
+
+        - The `resultsUrl` points to a CSV file containing the requested data
+
+        - CSV column headers correspond exactly to the field names specified in your job request
+
+        - For detailed information about available fields and their descriptions, refer to the field documentation in the <a href="https://demandbase.stoplight.io/docs/3p-api/zsbobfus3ok0w-create-a-bulk-data-retrieval-job" target="_blank">Create a Bulk Data Retrieval Job</a> endpoint
+
+        - Array fields (like `titles`, `jobFunctions`) are represented as pipe-separated values (e.g., "VP|Director|Manager")
+
+        '
+      operationId: getBulkJobStatus
+      parameters:
+      - name: jobId
+        in: path
+        description: Unique identifier of the bulk job.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Bulk job status fetched successfully. Results URL is present only for finished jobs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkJobStatusDTO'
+              examples:
+                Finished Bulk Job:
+                  summary: A finished bulk job with results URL.
+                  description: Finished Bulk Job
+                  value:
+                    jobName: jobNameTest
+                    jobStatus: finished
+                    jobType: contactfetch
+                    jobId: f546c341-2dc3-4797-b43d-59ac0d334346
+                    createdAt: '2024-09-16T04:46:21.684Z'
+                    updatedAt: '2024-09-02T06:07:44.550Z'
+                    resultsUrl: https://uapi-results.db-data-api-dev.demandbase.com/bulkjobs/companyfetch/0ab5c350-c6d2-4dcc-a9cd-dbba521f468d/response/c1ebe044-0c93-4643-b4bf-9ab1ea9b4ee3.csv?Policy=...
+                Processing Bulk Job:
+                  summary: A bulk job that is still processing.
+                  description: Processing Bulk Job
+                  value:
+                    jobName: jobNameTest
+                    jobStatus: processing
+                    jobType: companyfetch
+                    jobId: f546c341-2dc3-4797-b43d-59ac0d334346
+                    createdAt: '2024-09-16T04:46:21.684Z'
+                    updatedAt: '2024-09-02T06:07:44.550Z'
+                Failed Bulk Job:
+                  summary: A bulk job that failed with an error message.
+                  description: Failed Bulk Job
+                  value:
+                    jobName: jobNameTest
+                    jobStatus: failed
+                    jobType: match
+                    jobId: f546c341-2dc3-4797-b43d-59ac0d334346
+                    createdAt: '2024-09-16T04:46:21.684Z'
+                    updatedAt: '2024-09-02T06:07:44.550Z'
+                    message: Error processing job. Please try again later.
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BulkJobStatusDTO'
+              examples:
+                Finished Bulk Job XML:
+                  summary: A finished bulk job with results URL (XML).
+                  description: Finished Bulk Job XML
+                  value:
+                    jobName: jobNameTest
+                    jobStatus: finished
+                    jobType: contactfetch
+                    jobId: f546c341-2dc3-4797-b43d-59ac0d334346
+                    createdAt: '2024-09-16T04:46:21.684Z'
+                    updatedAt: '2024-09-02T06:07:44.550Z'
+                    resultsUrl: https://uapi-results.db-data-api-dev.demandbase.com/bulkjobs/companyfetch/0ab5c350-c6d2-4dcc-a9cd-dbba521f468d/response/c1ebe044-0c93-4643-b4bf-9ab1ea9b4ee3.csv?Policy=...
+                Processing Bulk Job XML:
+                  summary: A bulk job that is still processing (XML).
+                  description: Processing Bulk Job XML
+                  value:
+                    jobName: jobNameTest
+                    jobStatus: processing
+                    jobType: companyfetch
+                    jobId: f546c341-2dc3-4797-b43d-59ac0d334346
+                    createdAt: '2024-09-16T04:46:21.684Z'
+                    updatedAt: '2024-09-02T06:07:44.550Z'
+                Failed Bulk Job XML:
+                  summary: A bulk job that failed with an error message (XML).
+                  description: Failed Bulk Job XML
+                  value:
+                    jobName: jobNameTest
+                    jobStatus: failed
+                    jobType: match
+                    jobId: f546c341-2dc3-4797-b43d-59ac0d334346
+                    createdAt: '2024-09-16T04:46:21.684Z'
+                    updatedAt: '2024-09-02T06:07:44.550Z'
+                    message: Error processing job. Please try again later.
+        '400':
+          description: Bad request. For example, job id is missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Bad Request:
+                  summary: Job Id should not be empty.
+                  description: Bad Request
+                  value:
+                    errorCode: 400-139
+                    errorMessage: Job Id should not be empty.
+                    diagnosticCode: 15d8774c-f2a1-4352-ba65-386bf8d04ecf
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Bad Request XML:
+                  summary: Job Id should not be empty (XML).
+                  description: Bad Request XML
+                  value:
+                    errorCode: 400-139
+                    errorMessage: Job Id should not be empty.
+                    diagnosticCode: 15d8774c-f2a1-4352-ba65-386bf8d04ecf
+        '401':
+          description: Unauthorized - Missing or invalid tenant ID
+          content:
+            application/json:
+              examples:
+                Unauthorized Response:
+                  summary: Authentication Failed - Unauthorized.
+                  description: Unauthorized Response
+                  value:
+                    status: Authentication Failed - Unauthorized.
+        '404':
+          description: Job not found. Invalid job id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Not Found:
+                  summary: Invalid job ID, job not found.
+                  description: Not Found
+                  value:
+                    errorCode: 404-101
+                    errorMessage: Invalid job ID, job not found.
+                    diagnosticCode: 92ce43d0-a861-4394-b44d-420d114dcfcb
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Not Found XML:
+                  summary: Invalid job ID, job not found (XML).
+                  description: Not Found XML
+                  value:
+                    errorCode: 404-101
+                    errorMessage: Invalid job ID, job not found.
+                    diagnosticCode: 92ce43d0-a861-4394-b44d-420d114dcfcb
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              examples:
+                Internal Server Error:
+                  summary: Internal server exception occurred.
+                  description: Internal Server Error
+                  value:
+                    errorCode: '500'
+                    errorMessage: Internal server exception occurred.
+                    diagnosticCode: 15d8774c-f2a1-4352-ba65-386bf8d04ecf
+            application/xml:
+              examples:
+                Internal Server Error XML:
+                  summary: Internal server exception occurred (XML).
+                  description: Internal Server Error XML
+                  value: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  <error>\n      <errorCode>500</errorCode>\n      <errorMessage>Internal server exception occurred.</errorMessage>\n      <diagnosticCode>15d8774c-f2a1-4352-ba65-386bf8d04ecf</diagnosticCode>\n  </error>\n"
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /match/job:
+    post:
+      tags:
+      - Asynchronous (Batch) API
+      summary: Match Companies and Contacts in Bulk
+      description: 'Use this endpoint to enrich company and contact records in bulk using a CSV file upload. Each row in the file represents one enrichment request and must match the supported field structure. This endpoint supports up to 10,000 records per job.
+
+
+        **CSV Results Format:**
+
+        The completed job will return a CSV file with the following structure:
+
+        - Input columns from your uploaded CSV are preserved
+
+        - Additional columns are added for matched company data (companyId, name, city, state, country, matchScore, etc.)
+
+        - Additional columns are added for matched contact data (contactId, firstName, lastName, title, email, matchScore, etc.)
+
+        - Multiple matches are returned as separate rows with the same input ID
+
+        - If no matches are found, the row will contain only the input data with empty match columns'
+      operationId: match
+      parameters:
+      - name: jobName
+        in: query
+        description: Job name for the match job
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+            examples:
+              SampleCSV:
+                description: SampleCSV
+                value: 'id,city,companyName,country,email,firstName,lastName,state,street,ticker,title,url,zip,minimumMatchScore,isContactRequired,isPhoneRequired,isEmailRequired,fullName,contactMatching,executiveLinkedInHandle,phone
+
+                  row2,MOUNTAIN VIEW,Alphabet Inc,USA,ashishk@google.com,Ashish,Kumar,CA,1600 Amphitheatre Parkway,GOOG,Director,https://abc.xyz/,94301,.50,,True,,,all,https://linkedin.com/in/johndoe,123-456-7890'
+          text/plain:
+            schema:
+              type: string
+            examples:
+              SampleText:
+                description: SampleText
+                value: 'id,city,companyName,country,email,firstName,lastName,state,street,ticker,title,url,zip,minimumMatchScore,isContactRequired,isPhoneRequired,isEmailRequired,fullName,contactMatching,executiveLinkedInHandle,phone
+
+                  row2,MOUNTAIN VIEW,Alphabet Inc,USA,ashishk@google.com,Ashish,Kumar,CA,1600 Amphitheatre Parkway,GOOG,Director,https://abc.xyz/,94301,.50,,True,,,all,https://linkedin.com/in/johndoe,123-456-7890'
+      responses:
+        '202':
+          description: 'Successful submission of match job
+
+
+            Response File (CSV Output)
+
+            Upon job completion, the downloadable results file will include:
+
+            | Field Name              | Description                                                             |
+
+            | ----------------------- | ----------------------------------------------------------------------- |
+
+            | `ID`                    | Row-level identifier submitted in the request CSV                       |
+
+            | `City`                  | Matched company''s city                                                  |
+
+            | `Company ID`            | Unique identifier of the matched company                                |
+
+            | `Country`               | Matched company''s country                                               |
+
+            | `Company Name`          | Name of the matched company                                             |
+
+            | `State`                 | Matched company''s state or region                                       |
+
+            | `Employment ID`         | Matched employment/contact ID                                           |
+
+            | `First Name`            | Matched contact''s first name                                            |
+
+            | `Last Name`             | Matched contact''s last name                                             |
+
+            | `Job Titles`            | List of job titles associated with the contact                          |
+
+            | `Match Score`           | Confidence score for the matched record                                 |
+
+            | `DB Person ID`          | Unique Demandbase person identifier                                     |
+
+            | `Employment Status`     | Indicates if the contact is currently employed (`current` or `past`) |
+
+            | `Job Levels`            | Job level(s) associated with the contact (e.g., `C Level`, `Manager`)   |
+
+            | `Job Functions`         | Job function(s) associated with the contact (e.g., `Marketing`, `IT`)   |
+
+            | `Contact Quality Score` | Contact quality rating (e.g., `A+`, `B`)                                |
+
+            | `DB Person Country`     | Contact''s country based on person-level data                            |
+
+            | `DB Person State`       | Contact''s state based on person-level data                              |
+
+            | `DB Person City`        | Contact''s city based on person-level data                               |
+
+            | `Street`                | Street address for the company                                          |
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkJobStatusDTO'
+              examples:
+                SuccessResponse:
+                  description: SuccessResponse
+                  value:
+                    jobName: Hello2
+                    jobStatus: accepted
+                    jobType: match
+                    jobId: ac6f75e1-84c3-47f8-a64f-5bf90459da7b
+                    createdAt: '2025-06-02T20:31:35.063Z'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BulkJobStatusDTO'
+              examples:
+                SuccessResponseXml:
+                  description: SuccessResponseXml
+                  value:
+                    jobName: Hello2
+                    jobStatus: accepted
+                    jobType: match
+                    jobId: ac6f75e1-84c3-47f8-a64f-5bf90459da7b
+                    createdAt: '2025-06-02T20:31:35.063Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InputFileTooManyLinesErrorResponse:
+                  description: InputFileTooManyLinesErrorResponse
+                  value:
+                    errorCode: 400-186
+                    errorMessage: Input file exceeds the maximum allowed number of lines (10000).
+                    diagnosticCode: 110f32ef-9c50-4564-8533-c9d5f05b5ee8
+                JobNameRequiredErrorResponse:
+                  description: JobNameRequiredErrorResponse
+                  value:
+                    errorCode: 400-190
+                    errorMessage: jobName is required and cannot be empty.
+                    diagnosticCode: 66f362a8-2840-4830-91fa-0e0971c39b08
+                IncorrectFieldsInLineErrorResponse:
+                  description: IncorrectFieldsInLineErrorResponse
+                  value:
+                    errorCode: 400-188
+                    errorMessage: 'Incorrect number of fields at line number: 2'
+                    diagnosticCode: a24ae602-ee56-49b2-a43d-f641096acf5b
+                JobLimitExceededErrorResponse:
+                  description: JobLimitExceededErrorResponse
+                  value:
+                    errorCode: 400-184
+                    errorMessage: 'Job limit exceeded: A maximum of 2 jobs can run at the same time.'
+                    diagnosticCode: b9a2947a-cb5b-41c5-81e4-ea2a3ed15811
+                InputFileTooLargeErrorResponse:
+                  description: InputFileTooLargeErrorResponse
+                  value:
+                    errorCode: 400-185
+                    errorMessage: Input file size exceeds the maximum allowed limit of 10 MB.
+                    diagnosticCode: 6b5d2113-dd57-4f69-b408-4fd2e6750460
+                MissingRequiredHeaderIdErrorResponse:
+                  description: MissingRequiredHeaderIdErrorResponse
+                  value:
+                    errorCode: 400-191
+                    errorMessage: 'Missing required header: id'
+                    diagnosticCode: 99a3097a-b328-4f2b-a6bc-02faf0c7e2ed
+                UnknownHeaderErrorResponse:
+                  description: UnknownHeaderErrorResponse
+                  value:
+                    errorCode: 400-192
+                    errorMessage: 'Unknown header: header-1'
+                    diagnosticCode: 62bdf6db-5607-4506-9395-89bdc00c19b6
+                IdCannotBeEmptyErrorResponse:
+                  description: IdCannotBeEmptyErrorResponse
+                  value:
+                    errorCode: 400-187
+                    errorMessage: 'ID cannot be empty at line number: 1'
+                    diagnosticCode: 71410e6f-bd77-41d4-9d91-a8ff9bf11301
+                InvalidContactMatchingErrorResponse:
+                  description: InvalidContactMatchingErrorResponse
+                  value:
+                    errorCode: 400-206
+                    errorMessage: 'Invalid value for ''contactMatching'' at line number: 1. Allowed values: active, all, or empty.'
+                    diagnosticCode: b7a299b1-6ac5-44b9-89d2-af94c341e5f6
+                InvalidBooleanIsEmailRequiredErrorResponse:
+                  description: InvalidBooleanIsEmailRequiredErrorResponse
+                  value:
+                    errorCode: 400-205
+                    errorMessage: 'Invalid boolean value for ''isEmailRequired'' at line number: 1. Allowed values: True, False, or empty.'
+                    diagnosticCode: f4412b32-5b17-4a90-b7b9-9716580683b2
+                InvalidBooleanIsPhoneRequiredErrorResponse:
+                  description: InvalidBooleanIsPhoneRequiredErrorResponse
+                  value:
+                    errorCode: 400-205
+                    errorMessage: 'Invalid boolean value for ''isPhoneRequired'' at line number: 1. Allowed values: True, False, or empty.'
+                    diagnosticCode: 357b9683-b539-4864-96c9-ab6d4f5b9dec
+                InvalidBooleanIsContactRequiredErrorResponse:
+                  description: InvalidBooleanIsContactRequiredErrorResponse
+                  value:
+                    errorCode: 400-205
+                    errorMessage: 'Invalid boolean value for ''isContactRequired'' at line number: 1. Allowed values: True, False, or empty.'
+                    diagnosticCode: 4650b191-f6ae-400b-895e-68b1749c787e
+                InvalidMinimumMatchScoreRangeErrorResponse:
+                  description: InvalidMinimumMatchScoreRangeErrorResponse
+                  value:
+                    errorCode: 400-207
+                    errorMessage: 'Invalid value for ''minimumMatchScore'' at line number: 1. Allowed range: 0 to 1 (inclusive), or empty.'
+                    diagnosticCode: 6fb2da1b-4ddc-4512-b47e-dd4398e16974
+                MissingRequiredAnyHeaderErrorResponse:
+                  description: MissingRequiredAnyHeaderErrorResponse
+                  value:
+                    errorCode: 400-204
+                    errorMessage: 'At least one of the following headers must be present: [email, companyName, url, executiveLinkedInHandle]'
+                    diagnosticCode: c713a41f-c5c4-45a4-a2aa-bbd99fd58aba
+                InvalidMinimumMatchScoreNotNumberErrorResponse:
+                  description: InvalidMinimumMatchScoreNotNumberErrorResponse
+                  value:
+                    errorCode: 400-208
+                    errorMessage: 'Invalid value for ''minimumMatchScore'' at line number: 1. Must be a number between 0 and 1, or empty.'
+                    diagnosticCode: f5c0b967-3917-4f4c-8382-a950c9d92284
+                RowMustHaveAnyHeaderErrorResponse:
+                  description: RowMustHaveAnyHeaderErrorResponse
+                  value:
+                    errorCode: 400-209
+                    errorMessage: 'A row must have a non-empty value for one of: [email, companyName, url, executiveLinkedInHandle]'
+                    diagnosticCode: 0c857928-ca5d-4820-b90e-8de5ead9c575
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InputFileTooManyLinesErrorResponseXML:
+                  description: InputFileTooManyLinesErrorResponseXML
+                  value:
+                    errorCode: 400-186
+                    errorMessage: Input file exceeds the maximum allowed number of lines (10000).
+                    diagnosticCode: 110f32ef-9c50-4564-8533-c9d5f05b5ee8
+                JobNameRequiredErrorResponseXML:
+                  description: JobNameRequiredErrorResponseXML
+                  value:
+                    errorCode: 400-190
+                    errorMessage: jobName is required and cannot be empty.
+                    diagnosticCode: 66f362a8-2840-4830-91fa-0e0971c39b08
+                IncorrectFieldsInLineErrorResponseXML:
+                  description: IncorrectFieldsInLineErrorResponseXML
+                  value:
+                    errorCode: 400-188
+                    errorMessage: 'Incorrect number of fields at line number: 2'
+                    diagnosticCode: a24ae602-ee56-49b2-a43d-f641096acf5b
+                JobLimitExceededErrorResponseXML:
+                  description: JobLimitExceededErrorResponseXML
+                  value:
+                    errorCode: 400-184
+                    errorMessage: 'Job limit exceeded: A maximum of 2 jobs can run at the same time.'
+                    diagnosticCode: b9a2947a-cb5b-41c5-81e4-ea2a3ed15811
+                InputFileTooLargeErrorResponseXML:
+                  description: InputFileTooLargeErrorResponseXML
+                  value:
+                    errorCode: 400-185
+                    errorMessage: Input file size exceeds the maximum allowed limit of 10 MB.
+                    diagnosticCode: 6b5d2113-dd57-4f69-b408-4fd2e6750460
+                MissingRequiredHeaderIdErrorResponseXML:
+                  description: MissingRequiredHeaderIdErrorResponseXML
+                  value:
+                    errorCode: 400-191
+                    errorMessage: 'Missing required header: id'
+                    diagnosticCode: 99a3097a-b328-4f2b-a6bc-02faf0c7e2ed
+                UnknownHeaderErrorResponseXML:
+                  description: UnknownHeaderErrorResponseXML
+                  value:
+                    errorCode: 400-192
+                    errorMessage: 'Unknown header: header-1'
+                    diagnosticCode: 62bdf6db-5607-4506-9395-89bdc00c19b6
+                IdCannotBeEmptyErrorResponseXML:
+                  description: IdCannotBeEmptyErrorResponseXML
+                  value:
+                    errorCode: 400-187
+                    errorMessage: 'ID cannot be empty at line number: 1'
+                    diagnosticCode: 71410e6f-bd77-41d4-9d91-a8ff9bf11301
+                InvalidContactMatchingErrorResponseXML:
+                  description: InvalidContactMatchingErrorResponseXML
+                  value:
+                    errorCode: 400-206
+                    errorMessage: 'Invalid value for ''contactMatching'' at line number: 1. Allowed values: active, all, or empty.'
+                    diagnosticCode: b7a299b1-6ac5-44b9-89d2-af94c341e5f6
+                InvalidBooleanIsEmailRequiredErrorResponseXML:
+                  description: InvalidBooleanIsEmailRequiredErrorResponseXML
+                  value:
+                    errorCode: 400-205
+                    errorMessage: 'Invalid boolean value for ''isEmailRequired'' at line number: 1. Allowed values: True, False, or empty.'
+                    diagnosticCode: f4412b32-5b17-4a90-b7b9-9716580683b2
+                InvalidBooleanIsPhoneRequiredErrorResponseXML:
+                  description: InvalidBooleanIsPhoneRequiredErrorResponseXML
+                  value:
+                    errorCode: 400-205
+                    errorMessage: 'Invalid boolean value for ''isPhoneRequired'' at line number: 1. Allowed values: True, False, or empty.'
+                    diagnosticCode: 357b9683-b539-4864-96c9-ab6d4f5b9dec
+                InvalidBooleanIsContactRequiredErrorResponseXML:
+                  description: InvalidBooleanIsContactRequiredErrorResponseXML
+                  value:
+                    errorCode: 400-205
+                    errorMessage: 'Invalid boolean value for ''isContactRequired'' at line number: 1. Allowed values: True, False, or empty.'
+                    diagnosticCode: 4650b191-f6ae-400b-895e-68b1749c787e
+                InvalidMinimumMatchScoreRangeErrorResponseXML:
+                  description: InvalidMinimumMatchScoreRangeErrorResponseXML
+                  value:
+                    errorCode: 400-207
+                    errorMessage: 'Invalid value for ''minimumMatchScore'' at line number: 1. Allowed range: 0 to 1 (inclusive), or empty.'
+                    diagnosticCode: 6fb2da1b-4ddc-4512-b47e-dd4398e16974
+                MissingRequiredAnyHeaderErrorResponseXML:
+                  description: MissingRequiredAnyHeaderErrorResponseXML
+                  value:
+                    errorCode: 400-204
+                    errorMessage: 'At least one of the following headers must be present: [email, companyName, url, executiveLinkedInHandle]'
+                    diagnosticCode: c713a41f-c5c4-45a4-a2aa-bbd99fd58aba
+                InvalidMinimumMatchScoreNotNumberErrorResponseXML:
+                  description: InvalidMinimumMatchScoreNotNumberErrorResponseXML
+                  value:
+                    errorCode: 400-208
+                    errorMessage: 'Invalid value for ''minimumMatchScore'' at line number: 1. Must be a number between 0 and 1, or empty.'
+                    diagnosticCode: f5c0b967-3917-4f4c-8382-a950c9d92284
+                RowMustHaveAnyHeaderErrorResponseXML:
+                  description: RowMustHaveAnyHeaderErrorResponseXML
+                  value:
+                    errorCode: 400-209
+                    errorMessage: 'A row must have a non-empty value for one of: [email, companyName, url, executiveLinkedInHandle]'
+                    diagnosticCode: 0c857928-ca5d-4820-b90e-8de5ead9c575
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /job:
+    post:
+      tags:
+      - Asynchronous (Batch) API
+      summary: Create a Bulk Data Retrieval Job
+      description: '# Overview
+
+        Create and run asynchronous bulk jobs to retrieve company or contact data using entity IDs or search filters. This API is ideal for large data exports with a file-based CSV output.
+
+
+        You can submit up to **10,000 entity IDs** in a single request. The API initiates an asynchronous job and returns a `jobId` to track its status and retrieve results using the <a href="https://developer.demandbase.com/docs/3p-api/3nstx7v40nc9k-get-bulk-job-status" target="_blank">Job Status</a> API.
+
+        '
+      operationId: createBulkJob
+      requestBody:
+        description: "**NOTE:** You may submit up to 10,000 IDs or filter values per request\n\n### Filter Fields\n<details>\n <summary><strong>Company Search</strong> (click to expand)</summary>\n\n- `areaCodes`\n- `businessStructure`\n- `businessTypes`\n- `categoryIds`\n- `cities`\n- `companyStatus`\n- `companyType`\n- `country`\n- `dbe`\n- `disabled`\n- `ethnicity`\n- `fiscalYearEnd`\n- `fortuneRanking`\n- `gender`\n- `hasPhone`\n- `hasWebsite`\n- `industries`\n- `keywords`\n- `lgbt`\n- `maxEmployees`\n- `maxRevenue`\n- `mbe`\n- `minEmployees`\n- `minRevenue`\n- `naics`\n- `newsCategories`\n- `newsDuration`\n- `primaryIndustryOnly`\n- `primaryNAICSOnly`\n- `primarySICOnly`\n- `productIds`\n- `regions`\n- `sicCodes`\n- `state`\n- `street`\n- `subCategoryIds`\n- `subIndustries`\n- `ticker`\n- `vbe`\n- `website`\n- `wbe`\n- `zipCodes`\n</details>\n\n<details>\n  <summary><strong>Contact Search</strong> (click to expand)</summary>\n\n- `active`\n- `companyCity`\n- `companyCountry`\n- `companyIdsToInclude`\n- `companyName`\n- `companyState`\n- `companyWebsite`\n- `contactCity`\n- `contactCountry`\n- `contactState`\n- `email`\n- `emailRequired`\n- `emailValidationStatus`\n- `firstName`\n- `industries`\n- `jobFunctions`\n- `jobLevels`\n- `lastName`\n- `maxEmployees`\n- `minContactQualityScore`\n- `minEmployees`\n- `phoneRequired`\n- `phoneType`\n- `primaryIndustryOnly`\n- `subIndustries`\n- `titles`\n\n</details>\n\n### Available Output Fields by Job Type\n<details>\n  <summary>Output Fields for <strong>companyFetch</strong> (click to expand)</summary>\n\n- `britishSics`\n- `businessStructure`\n- `city`\n- `companyBlogProfile`\n- `companyId`\n- `companyLinkedInProfile`\n- `companyStatus`\n- `companyTwitterProfile`\n- `companyType`\n- `currentCompanyId`\n- `description`\n- `employees`\n- `fiscalYearEnd`\n- `fortuneRanking`\n- `industry`\n- `industryCode`\n- `latitude`\n- `longitude`\n- `naics`\n- `naicsDescription`\n- `name`\n- `phone`\n- `revenue`\n- `revenueCurrency`\n- `sic`\n- `sicDescription`\n- `siteCount`\n- `siteLocationCount`\n- `siteType`\n- `state`\n- `street`\n- `subIndustry`\n- `subIndustryCode`\n- `subsidiary`\n- `ticker`\n- `website`\n- `yearFounded`\n- `zip`\n\n</details>\n<details>\n  <summary>Output Fields for <strong>contactFetch</strong> (click to expand)</summary>\n\n- `active`\n- `age`\n- `companyId`\n- `companyName`\n- `contactId`\n- `corporatePhone`\n- `dbPersonArea`\n- `dbPersonCity`\n- `dbPersonCountry`\n- `dbPersonCountryCode`\n- `dbPersonId`\n- `dbPersonLatitude`\n- `dbPersonLongitude`\n- `dbPersonState`\n- `dbPersonStateCode`\n- `dbPersonStreet`\n- `dbPersonZip`\n- `description`\n- `directPhone`\n- `education`\n- `email`\n- `facebookHandle`\n- `firstName`\n- `imageUrl`\n- `jobFunctions`\n- `jobLevels`\n- `lastName`\n- `lastValidatedDate`\n- `linkedinHandle`\n- `contactQualityScore`\n- `middleName`\n- `mobileNumber`\n- `salary`\n- `salaryCurrency`\n- `startDate`\n- `titles`\n- `twitterHandle`\n\n</details>\n<details>\n  <summary>Output Fields for <strong>companySearch</strong> (click to expand)</summary>\n\n- `city`\n- `companyId`\n- `country`\n- `name`\n- `state`\n\n</details>\n\n<details>\n  <summary>Output Fields for <strong>contactSearch</strong> (click to expand)</summary>\n\n- `active`\n- `companyId`\n- `companyName`\n- `contactId`\n- `contactQualityScore`\n- `dbPersonId`\n- `firstName`\n- `jobFunctions`\n- `jobLevels`\n- `lastName`\n- `titles`\n\n</details>\n\nNote: Use \"all\" to include all available fields in the response.\n<br><br>**Example:**\n```\n{ \n  \"jobname\": \"TestJob\",\n  \"jobType\": \"contactSearch\",\n  \"filters\": [...]\n  \"fields\": [\"all\"], ← Will return ALL available fields\n}\n```\n\n### Request Body"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobRequestDTO'
+            examples:
+              Company Fetch Request Example:
+                description: Company Fetch Request Example
+                value:
+                  jobName: Company Fetch Bulk Job
+                  jobType: companyFetch
+                  fields:
+                  - companyId
+                  - name
+                  filters:
+                  - field: companyId
+                    values:
+                    - '1'
+                    - '2'
+                    - '3'
+              Contact Fetch Request Example:
+                description: Contact Fetch Request Example
+                value:
+                  jobName: Contact Fetch Bulk Job
+                  jobType: contactFetch
+                  fields:
+                  - contactId
+                  - firstName
+                  - lastName
+                  - titles
+                  filters:
+                  - field: contactId
+                    values:
+                    - '1'
+                    - '2'
+                    - '3'
+              Company Search Request Example:
+                description: Company Search Request Example
+                value:
+                  jobName: Sample Bulk Job
+                  jobType: companySearch
+                  fields:
+                  - all
+                  filters:
+                  - field: website
+                    values:
+                    - demandbase.com
+                  sortBy: companyRevenue
+                  sortOrder: asc
+              Contact Search Request Example:
+                description: Contact Search Request Example
+                value:
+                  jobName: Sample Contact Search Bulk Job
+                  jobType: contactSearch
+                  fields:
+                  - dbPersonId
+                  - firstName
+                  - lastName
+                  - contactId
+                  - companyId
+                  - companyName
+                  - titles
+                  - jobLevels
+                  - jobFunctions
+                  - active
+                  - contactQualityScore
+                  filters:
+                  - field: firstName
+                    values:
+                    - Sahil
+                  - field: titles
+                    values:
+                    - CMO
+                    - CTO
+                  - field: jobLevels
+                    values:
+                    - '1'
+                    - '2'
+                  sortBy: title
+                  sortOrder: asc
+      responses:
+        '202':
+          description: Bulk job created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkJobStatusDTO'
+              examples:
+                Company Fetch Success Response:
+                  description: Company Fetch Success Response
+                  value:
+                    jobName: Sample Bulk Job 2
+                    jobStatus: accepted
+                    jobType: companyFetch
+                    jobId: 3984c704-6c13-40de-bed4-84ba62b7fddd
+                    createdAt: '2025-06-09T20:39:51.431Z'
+                Contact Fetch Success Response:
+                  description: Contact Fetch Success Response
+                  value:
+                    jobName: Test Contact Fetch Job
+                    jobStatus: accepted
+                    jobType: contactFetch
+                    jobId: 3984c704-6c13-40de-bed4-84ba62b7fddd
+                    createdAt: '2025-06-09T20:39:51.431Z'
+                Company Search Success Response:
+                  description: Company Search Success Response
+                  value:
+                    jobName: Sample Bulk Job
+                    jobStatus: accepted
+                    jobType: companySearch
+                    jobId: 4bff3abb-3f69-4b01-bed5-96868e7e253e
+                    createdAt: '2025-07-24T16:46:52.699Z'
+                Contact Search Success Response:
+                  description: Contact Search Success Response
+                  value:
+                    jobName: Sample Bulk Job
+                    jobStatus: accepted
+                    jobType: contactSearch
+                    jobId: 5bff4abb-3f69-4b01-bed5-96868e7e253e
+                    createdAt: '2025-07-31T16:46:52.699Z'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BulkJobStatusDTO'
+              examples:
+                Company Fetch Success Response:
+                  description: Company Fetch Success Response
+                  value:
+                    jobName: Sample Bulk Job 2
+                    jobStatus: accepted
+                    jobType: companyFetch
+                    jobId: 3984c704-6c13-40de-bed4-84ba62b7fddd
+                    createdAt: '2025-06-09T20:39:51.431Z'
+                Contact Fetch Success Response:
+                  description: Contact Fetch Success Response
+                  value:
+                    jobName: Test Contact Fetch Job
+                    jobStatus: accepted
+                    jobType: contactFetch
+                    jobId: 3984c704-6c13-40de-bed4-84ba62b7fddd
+                    createdAt: '2025-06-09T20:39:51.431Z'
+                Company Search Success Response:
+                  description: Company Search Success Response
+                  value:
+                    jobName: Sample Bulk Job
+                    jobStatus: accepted
+                    jobType: companySearch
+                    jobId: 4bff3abb-3f69-4b01-bed5-96868e7e253e
+                    createdAt: '2025-07-24T16:46:52.699Z'
+                Contact Search Success Response:
+                  description: Contact Search Success Response
+                  value:
+                    jobName: Sample Bulk Job
+                    jobStatus: accepted
+                    jobType: contactSearch
+                    jobId: 5bff4abb-3f69-4b01-bed5-96868e7e253e
+                    createdAt: '2025-07-31T16:46:52.699Z'
+        '400':
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Missing Fields:
+                  description: When required fields are missing
+                  value:
+                    errorCode: 400-194
+                    errorMessage: fields list must not be empty in job request
+                    diagnosticCode: e85284b5-5330-40c0-aa39-392a8afd6681
+                Invalid Job Type:
+                  description: When job type is invalid or not supported
+                  value:
+                    errorCode: 400-195
+                    errorMessage: 'jobType must be one of: companyFetch, contactFetch, companySearch, contactSearch'
+                    diagnosticCode: abcd
+                Missing Job Name:
+                  description: When job name is missing or blank
+                  value:
+                    errorCode: 400-190
+                    errorMessage: jobName is required and cannot be empty.
+                    diagnosticCode: abcd
+                Job Name Too Long:
+                  description: When job name exceeds 50 characters
+                  value:
+                    errorCode: 400-196
+                    errorMessage: jobName must be at most 50 characters
+                    diagnosticCode: abcd
+                Invalid Field Name:
+                  description: When field names are not valid
+                  value:
+                    errorCode: 400-106
+                    errorMessage: 'Invalid field name: invalidField1, invalidField2'
+                    diagnosticCode: abcd
+                Multiple Filters:
+                  description: When more than one filter is provided
+                  value:
+                    errorCode: 400-201
+                    errorMessage: Maximum 1 filter can be applied at a time.
+                    diagnosticCode: abcd
+                Invalid Filter Field for Company Fetch:
+                  description: When filter field is not supported
+                  value:
+                    errorCode: 400-200
+                    errorMessage: Filter can only be applied on field 'companyId' for given jobType.
+                    diagnosticCode: abcd
+                Invalid Filter Field for Contact Fetch:
+                  description: When filter field is not supported
+                  value:
+                    errorCode: 400-212
+                    errorMessage: Filter can only be applied on field 'contactId' for given jobType.
+                    diagnosticCode: abcd
+                Values Limit Exceeded:
+                  description: When filter values exceed the limit
+                  value:
+                    errorCode: 400-203
+                    errorMessage: The number of values in the filter exceeds the limit of 10000.
+                    diagnosticCode: 2fe6b569-ff5b-4889-8dc1-653907134ffe
+                No Filters:
+                  description: When no filters are provided
+                  value:
+                    errorCode: 400-202
+                    errorMessage: At least one filter must be provided.
+                    diagnosticCode: abcd
+                No Filter values present:
+                  description: When no filter values are provided
+                  value:
+                    errorCode: 400-198
+                    errorMessage: Filter values must not be empty
+                    diagnosticCode: 0835ea59-38e1-4cfd-bb4d-37573d5b028f
+                Filter field missing:
+                  description: When filter field is provided
+                  value:
+                    errorCode: 400-197
+                    errorMessage: Filter field is required
+                    diagnosticCode: ea4c0465-672e-4fba-a5b7-020e30bf3b6a
+                jobType missing:
+                  description: When jobType is not provided
+                  value:
+                    errorCode: 400-199
+                    errorMessage: jobType is required and cannot be empty.
+                    diagnosticCode: 8e787f3c-c1a2-4875-8223-12ef79d6c239
+                Invalid SortBy Param for Company Search:
+                  description: When invalid SortBy Param is provided
+                  value:
+                    errorCode: 400-135
+                    errorMessage: Sorting is allowed only on employeeCount, businessType, companyRevenue and location
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid SortOrder Param:
+                  description: When invalid SortOrder Param is provided
+                  value:
+                    errorCode: 400-109
+                    errorMessage: Sorting order can be either asc or desc.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid Company Country Id:
+                  description: When invalid  Company Country Id is provided
+                  value:
+                    errorCode: 400-214
+                    errorMessage: Invalid country. Please enter valid country ID in country.
+                    diagnosticCode: 2ec12de8-1000-4620-8757-6091a1cffab7
+                Invalid News Categories:
+                  description: When invalid News Categories are provided
+                  value:
+                    errorCode: 400-112
+                    errorMessage: 'Invalid newsCategories. Valid values are: leadership Changes, new Offerings, acquisitions, partnerships, expanding operations, cost cutting, outperforming, underperforming, company presentation, litigation, compliance, research and development, data security, funding developments, bankruptcy and restructuring, real estate: deals, real estate: construction, corporate challenges'
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid News Duration:
+                  description: When an invalid News Duration is provided
+                  value:
+                    errorCode: 400-113
+                    errorMessage: Invalid newsDuration. Valid values are between 1 and 30
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid Industry:
+                  description: When an invalid Industry is provided
+                  value:
+                    errorCode: 400-114
+                    errorMessage: Industry Id must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid Max Employees:
+                  description: When an invalid Max Employees value is provided
+                  value:
+                    errorCode: 400-121
+                    errorMessage: maxEmployees must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                Invalid Min Employees:
+                  description: When an invalid Min Employees value is provided
+                  value:
+                    errorCode: 400-120
+                    errorMessage: minEmployees must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                Invalid Max Revenue:
+                  description: When an invalid Max Revenue value is provided
+                  value:
+                    errorCode: 400-119
+                    errorMessage: maxRevenue must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                Invalid Min Revenue:
+                  description: When an invalid Min Revenue value is provided
+                  value:
+                    errorCode: 400-118
+                    errorMessage: minRevenue must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                Invalid Business Structure:
+                  description: When an invalid Business Structure is provided
+                  value:
+                    errorCode: 400-128
+                    errorMessage: 'Invalid businessStructure. Valid values are: uncategorized, globalParent, subsidiary, group, branch, independent'
+                    diagnosticCode: cebdea29-25ac-40e5-af41-0626e34e6f46
+                Invalid Business Type:
+                  description: When an invalid Business Type is provided
+                  value:
+                    errorCode: 400-129
+                    errorMessage: 'Invalid businessType. Valid values are: public, private, school, government, organization'
+                    diagnosticCode: 2b7cd799-e532-46a4-bc4e-e967b0a40f4b
+                Invalid Company Status:
+                  description: When an invalid Company Status is provided
+                  value:
+                    errorCode: 400-130
+                    errorMessage: 'Invalid companyStatus. Valid values are: unassigned, operating, non-operating, acquired, liquidating, outOfBusiness'
+                    diagnosticCode: bb841d37-ed8f-4a82-a5c5-fd11ea6d8e3d
+                Invalid Fiscal Year End:
+                  description: When an invalid Fiscal Year End is provided
+                  value:
+                    errorCode: 400-131
+                    errorMessage: Invalid fiscalYearEnd. fiscalYearEnd should be a valid month name.
+                    diagnosticCode: 67521433-a92b-49ee-9d21-21d4007f8486
+                Invalid Fortune Ranking:
+                  description: When an invalid Fortune Ranking is provided
+                  value:
+                    errorCode: 400-132
+                    errorMessage: 'Invalid fortuneRanking. Valid values are: fortune500, fortune1000'
+                    diagnosticCode: 1921c127-a8e6-4685-aaa0-1f6bce967a18
+                Invalid Employee Range:
+                  description: When an invalid Employee Range is provided
+                  value:
+                    errorCode: 400-126
+                    errorMessage: minEmployees must be less than or equal to maxEmployees.
+                    diagnosticCode: ddda8332-696c-4e74-897b-f5cc5525ddbe
+                Invalid Revenue Range:
+                  description: When an invalid Revenue Range is provided
+                  value:
+                    errorCode: 400-127
+                    errorMessage: minRevenue must be less than or equal to minRevenue.
+                    diagnosticCode: cbc2bbd0-a801-41c1-a546-be6ea0e75797
+                Invalid Regions:
+                  description: When invalid Regions are provided
+                  value:
+                    errorCode: 400-133
+                    errorMessage: 'Invalid region. Valid values are: Africa, Asia, Europe, MiddleEast, NorthAmerica, Oceania, SouthAmerica'
+                    diagnosticCode: 88d76e2d-6f09-4018-97fe-b41c64f5ac67
+                Invalid Company Type:
+                  description: When an invalid Company Type is provided
+                  value:
+                    errorCode: 400-134
+                    errorMessage: 'Invalid companyType. Valid values are: unknown, public, private, government, organization'
+                    diagnosticCode: ed1cfeb5-a7bf-4621-a4f3-51b1e8f106ae
+                Invalid Gender:
+                  description: When an invalid Gender is provided
+                  value:
+                    errorCode: 400-117
+                    errorMessage: Invalid gender. Valid values are male and female
+                    diagnosticCode: fa7db512-d0ef-4c9d-aa8b-6e6bc21a61bc
+                Invalid Ethnicity:
+                  description: When an invalid Ethnicity is provided
+                  value:
+                    errorCode: 400-136
+                    errorMessage: Invalid Ethnicity Ids. Ethnicity Ids should be between 1 and 7
+                    diagnosticCode: 126df328-b3d1-4d62-9464-e435aa706805
+                Invalid SortBy Param for Contact Search:
+                  description: When invalid SortBy Param is provided
+                  value:
+                    errorCode: 400-108
+                    errorMessage: Sorting is allowed only on active, title and companyName.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid Contact CountryId:
+                  description: When invalid Contact Country Id is provided
+                  value:
+                    errorCode: 400-110
+                    errorMessage: Invalid contactCountry. Please enter valid country ID in contactCountry.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid Job Levels:
+                  description: When an invalid Job Level is provided
+                  value:
+                    errorCode: 400-124
+                    errorMessage: 'jobLevel must be an integer. '
+                    diagnosticCode: 8ee03d66-a07b-43bd-9bd0-eee448ed7a98
+                Invalid Min Contact Quality Score:
+                  description: When an invalid Min Contact Quality Score is provided
+                  value:
+                    errorCode: 400-123
+                    errorMessage: 'minContactQualityScore must one of: [A+, A, B, C]'
+                    diagnosticCode: 467e469f-2146-4af8-ac0f-5fb487fbba02
+                Invalid Job Function:
+                  description: When an invalid Job Function is provided
+                  value:
+                    errorCode: 400-125
+                    errorMessage: 'jobFunction must be an integer. '
+                    diagnosticCode: 3640f569-4d90-40cd-b0c6-2c72f671ab72
+                Invalid Phone Type:
+                  description: When an invalid Phone Type is provided
+                  value:
+                    errorCode: 400-137
+                    errorMessage: 'phoneType must be one of: [DIRECT, CORP, MOBILE, ANY, DIRECTORCORP]'
+                    diagnosticCode: 8ee03d66-a07b-43bd-9bd0-eee448ed7a98
+                Invalid Email Validation Status:
+                  description: When an invalid Email Validation Status is provided
+                  value:
+                    errorCode: 400-138
+                    errorMessage: 'emailValidationStatus must be one of: [ValidEmail, ValidDomain]'
+                    diagnosticCode: e32c6e5e-29cb-40c0-a37a-2c8e8213a477
+                Invalid CompanyId:
+                  description: When an invalid CompanyId is provided
+                  value:
+                    errorCode: 400-122
+                    errorMessage: Invalid companyId in companyIdsInclude. companyId must be an integer.
+                    diagnosticCode: ffa69cf0-b316-4a12-84d5-e4afb6bb23ee
+                Invalid Field In Filter:
+                  description: When an invalid field is provided in filter
+                  value:
+                    errorCode: 400-213
+                    errorMessage: 'Invalid field in filter: invalid'
+                    diagnosticCode: 581b5824-12e1-4ff6-bcfb-a733b034b7f9
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Bad Request Response:
+                  description: Bad Request Response
+                  value:
+                    errorCode: 400-194
+                    errorMessage: fields list must not be empty in job request
+                    diagnosticCode: e85284b5-5330-40c0-aa39-392a8afd6681
+                Invalid Job Type Response:
+                  description: Invalid Job Type Response
+                  value:
+                    errorCode: 400-195
+                    errorMessage: 'jobType must be one of: companyFetch, contactFetch, companySearch, contactSearch'
+                    diagnosticCode: abcd
+                Job Name Required Response:
+                  description: Job Name Required Response
+                  value:
+                    errorCode: 400-190
+                    errorMessage: jobName is required and cannot be empty.
+                    diagnosticCode: abcd
+                Job Name Too Long Response:
+                  description: Job Name Too Long Response
+                  value:
+                    errorCode: 400-196
+                    errorMessage: jobName must be at most 50 characters
+                    diagnosticCode: abcd
+                Invalid Field Name Response:
+                  description: Invalid Field Name Response
+                  value:
+                    errorCode: 400-106
+                    errorMessage: 'Invalid field name: invalidField1, invalidField2'
+                    diagnosticCode: abcd
+                Invalid Filters Count Response:
+                  description: Invalid Filters Count Response
+                  value:
+                    errorCode: 400-201
+                    errorMessage: Maximum 1 filter can be applied at a time.
+                    diagnosticCode: abcd
+                Invalid Filter Field Response for Company Fetch:
+                  description: Invalid Filter Field Response for Company Fetch
+                  value:
+                    errorCode: 400-200
+                    errorMessage: Filter can only be applied on field 'companyId' for given jobType.
+                    diagnosticCode: abcd
+                Invalid Filter Field Response for Contact Fetch:
+                  description: Invalid Filter Field Response for Contact Fetch
+                  value:
+                    errorCode: 400-212
+                    errorMessage: Filter can only be applied on field 'contactId' for given jobType.
+                    diagnosticCode: abcd
+                Values Limit Exceeded Response:
+                  description: Values Limit Exceeded Response
+                  value:
+                    errorCode: 400-203
+                    errorMessage: The number of values in the filter exceeds the limit of 10000.
+                    diagnosticCode: 2fe6b569-ff5b-4889-8dc1-653907134ffe
+                No Filters Response:
+                  description: No Filters Response
+                  value:
+                    errorCode: 400-202
+                    errorMessage: At least one filter must be provided.
+                    diagnosticCode: abcd
+                No Filter Values Response:
+                  description: No Filter Values Response
+                  value:
+                    errorCode: 400-198
+                    errorMessage: Filter values must not be empty
+                    diagnosticCode: 0835ea59-38e1-4cfd-bb4d-37573d5b028f
+                Filter Field Required Response:
+                  description: Filter Field Required Response
+                  value:
+                    errorCode: 400-197
+                    errorMessage: Filter field is required
+                    diagnosticCode: ea4c0465-672e-4fba-a5b7-020e30bf3b6a
+                jobType Required Response:
+                  description: jobType Required Response
+                  value:
+                    errorCode: 400-199
+                    errorMessage: jobType is required and cannot be empty.
+                    diagnosticCode: 8e787f3c-c1a2-4875-8223-12ef79d6c239
+                Invalid SortBy Param for Company Search:
+                  description: Invalid SortBy Param for Company Search
+                  value:
+                    errorCode: 400-135
+                    errorMessage: Sorting is allowed only on employeeCount, businessType, companyRevenue and location
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid SortOrder:
+                  description: Invalid SortOrder
+                  value:
+                    errorCode: 400-109
+                    errorMessage: Sorting order can be either asc or desc.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid Company Country Id:
+                  description: Invalid Company Country Id
+                  value:
+                    errorCode: 400-214
+                    errorMessage: Invalid country. Please enter valid country ID in country.
+                    diagnosticCode: 2ec12de8-1000-4620-8757-6091a1cffab7
+                Invalid NewsCategories:
+                  description: Invalid NewsCategories
+                  value:
+                    errorCode: 400-112
+                    errorMessage: 'Invalid newsCategories. Valid values are: leadership Changes, new Offerings, acquisitions, partnerships, expanding operations, cost cutting, outperforming, underperforming, company presentation, litigation, compliance, research and development, data security, funding developments, bankruptcy and restructuring, real estate: deals, real estate: construction, corporate challenges'
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid NewsDuration:
+                  description: Invalid NewsDuration
+                  value:
+                    errorCode: 400-113
+                    errorMessage: Invalid newsDuration. Valid values are between 1 and 30
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid Industry:
+                  description: Invalid Industry
+                  value:
+                    errorCode: 400-114
+                    errorMessage: Industry Id must be an integer.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid Max Employees:
+                  description: Invalid Max Employees
+                  value:
+                    errorCode: 400-121
+                    errorMessage: maxEmployees must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                Invalid Min Employees:
+                  description: Invalid Min Employees
+                  value:
+                    errorCode: 400-120
+                    errorMessage: minEmployees must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                Invalid Max Revenue:
+                  description: Invalid Max Revenue
+                  value:
+                    errorCode: 400-119
+                    errorMessage: maxRevenue must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                Invalid Min Revenue:
+                  description: Invalid Min Revenue
+                  value:
+                    errorCode: 400-118
+                    errorMessage: minRevenue must be greater than or equal to 0.
+                    diagnosticCode: 88ea1636-3c9d-40ec-bdc4-e28d8ec1d069
+                Invalid Business Structure:
+                  description: Invalid Business Structure
+                  value:
+                    errorCode: 400-128
+                    errorMessage: 'Invalid businessStructure. Valid values are: uncategorized, globalParent, subsidiary, group, branch, independent'
+                    diagnosticCode: cebdea29-25ac-40e5-af41-0626e34e6f46
+                Invalid Business Type:
+                  description: Invalid Business Type
+                  value:
+                    errorCode: 400-129
+                    errorMessage: 'Invalid businessType. Valid values are: public, private, school, government, organization'
+                    diagnosticCode: 2b7cd799-e532-46a4-bc4e-e967b0a40f4b
+                Invalid Company Status:
+                  description: Invalid Company Status
+                  value:
+                    errorCode: 400-130
+                    errorMessage: 'Invalid companyStatus. Valid values are: unassigned, operating, non-operating, acquired, liquidating, outOfBusiness'
+                    diagnosticCode: bb841d37-ed8f-4a82-a5c5-fd11ea6d8e3d
+                Invalid Fiscal Year End:
+                  description: Invalid Fiscal Year End
+                  value:
+                    errorCode: 400-131
+                    errorMessage: Invalid fiscalYearEnd. fiscalYearEnd should be a valid month name.
+                    diagnosticCode: 67521433-a92b-49ee-9d21-21d4007f8486
+                Invalid Fortune Ranking:
+                  description: Invalid Fortune Ranking
+                  value:
+                    errorCode: 400-132
+                    errorMessage: 'Invalid fortuneRanking. Valid values are: fortune500, fortune1000'
+                    diagnosticCode: 1921c127-a8e6-4685-aaa0-1f6bce967a18
+                Invalid Employee Range:
+                  description: Invalid Employee Range
+                  value:
+                    errorCode: 400-126
+                    errorMessage: minEmployees must be less than or equal to maxEmployees.
+                    diagnosticCode: ddda8332-696c-4e74-897b-f5cc5525ddbe
+                Invalid Revenue Range:
+                  description: Invalid Revenue Range
+                  value:
+                    errorCode: 400-127
+                    errorMessage: minRevenue must be less than or equal to minRevenue.
+                    diagnosticCode: cbc2bbd0-a801-41c1-a546-be6ea0e75797
+                Invalid Regions:
+                  description: Invalid Regions
+                  value:
+                    errorCode: 400-133
+                    errorMessage: 'Invalid region. Valid values are: Africa, Asia, Europe, MiddleEast, NorthAmerica, Oceania, SouthAmerica'
+                    diagnosticCode: 88d76e2d-6f09-4018-97fe-b41c64f5ac67
+                Invalid Company Type:
+                  description: Invalid Company Type
+                  value:
+                    errorCode: 400-134
+                    errorMessage: 'Invalid companyType. Valid values are: unknown, public, private, government, organization'
+                    diagnosticCode: ed1cfeb5-a7bf-4621-a4f3-51b1e8f106ae
+                Invalid Gender:
+                  description: Invalid Gender
+                  value:
+                    errorCode: 400-117
+                    errorMessage: Invalid gender. Valid values are male and female
+                    diagnosticCode: fa7db512-d0ef-4c9d-aa8b-6e6bc21a61bc
+                Invalid Ethnicity:
+                  description: Invalid Ethnicity
+                  value:
+                    errorCode: 400-136
+                    errorMessage: Invalid Ethnicity Ids. Ethnicity Ids should be between 1 and 7
+                    diagnosticCode: 126df328-b3d1-4d62-9464-e435aa706805
+                Invalid SortBy Param for Contact Search:
+                  description: Invalid SortBy Param for Contact Search
+                  value:
+                    errorCode: 400-108
+                    errorMessage: Sorting is allowed only on active, title and companyName.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid Sort Order:
+                  description: Invalid Sort Order
+                  value:
+                    errorCode: 400-109
+                    errorMessage: Sorting order can be either asc or desc.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid Contact CountryId:
+                  description: Invalid Contact CountryId
+                  value:
+                    errorCode: 400-110
+                    errorMessage: Invalid contactCountry. Please enter valid country ID in contactCountry.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+                Invalid Job Levels:
+                  description: Invalid Job Levels
+                  value:
+                    errorCode: 400-124
+                    errorMessage: 'jobLevel must be an integer. '
+                    diagnosticCode: 8ee03d66-a07b-43bd-9bd0-eee448ed7a98
+                Invalid Min Contact Quality Score:
+                  description: Invalid Min Contact Quality Score
+                  value:
+                    errorCode: 400-123
+                    errorMessage: 'minContactQualityScore must one of: [A+, A, B, C]'
+                    diagnosticCode: 467e469f-2146-4af8-ac0f-5fb487fbba02
+                Invalid Function:
+                  description: Invalid Function
+                  value:
+                    errorCode: 400-125
+                    errorMessage: 'jobFunction must be an integer. '
+                    diagnosticCode: 3640f569-4d90-40cd-b0c6-2c72f671ab72
+                Invalid Phone Type:
+                  description: Invalid Phone Type
+                  value:
+                    errorCode: 400-137
+                    errorMessage: 'phoneType must be one of: [DIRECT, CORP, MOBILE, ANY, DIRECTORCORP]'
+                    diagnosticCode: 8ee03d66-a07b-43bd-9bd0-eee448ed7a98
+                Invalid Email Validation Status:
+                  description: Invalid Email Validation Status
+                  value:
+                    errorCode: 400-138
+                    errorMessage: 'emailValidationStatus must be one of: [ValidEmail, ValidDomain]'
+                    diagnosticCode: e32c6e5e-29cb-40c0-a37a-2c8e8213a477
+                Invalid CompanyId:
+                  description: Invalid CompanyId
+                  value:
+                    errorCode: 400-122
+                    errorMessage: Invalid companyId in companyIdsInclude. companyId must be an integer.
+                    diagnosticCode: ffa69cf0-b316-4a12-84d5-e4afb6bb23ee
+                Invalid Field In Filter:
+                  description: When an invalid field is provided in filter
+                  value:
+                    errorCode: 400-213
+                    errorMessage: 'Invalid field in filter: invalid'
+                    diagnosticCode: 581b5824-12e1-4ff6-bcfb-a733b034b7f9
+        '401':
+          description: Unauthorized - Missing or invalid tenant ID
+          content:
+            application/json:
+              examples:
+                Unauthorized Response:
+                  description: Unauthorized Response
+                  value:
+                    status: Authentication Failed - Unauthorized.
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+components:
+  schemas:
+    JobRequestDTO:
+      type: object
+      properties:
+        jobType:
+          type: string
+          description: 'There are four supported job types:
+
+            | Job Type        | Description                                                  |
+
+            | --------------- | ------------------------------------------------------------ |
+
+            | `companyFetch`  | Retrieve companies by `companyId`.                           |
+
+            | `contactFetch`  | Retrieve contacts by `contactId`.                            |
+
+            | `companySearch` | Retrieve companies using filters (e.g., location, industry). |
+
+            | `contactSearch` | Retrieve contacts using filters (e.g., name, job function).  |'
+        jobName:
+          type: string
+          description: Descriptive name, max 50 characters.
+          maxLength: 50
+        fields:
+          type: array
+          description: ' List of fields to include in the output. Use "all" to fetch all available fields'
+          items:
+            type: string
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobFilter'
+        sortOrder:
+          type: string
+        sortBy:
+          type: string
+      required:
+      - jobType
+      - jobName
+      - fields
+      - filters
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        diagnosticCode:
+          type: string
+      xml:
+        name: error
+    BulkJobStatusDTO:
+      type: object
+      properties:
+        jobName:
+          type: string
+        jobStatus:
+          type: string
+        jobType:
+          type: string
+        jobId:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        resultsUrl:
+          type: string
+        message:
+          type: string
+      xml:
+        name: BulkJobStatus
+    JobFilter:
+      type: object
+      properties:
+        field:
+          type: string
+          description: 'Restrictions:
+
+            <ul>
+
+            <li>companyFetch: Only companyId is allowed.</li>
+
+            <li>contactFetch: Only contactId is allowed.</li>
+
+            <li>companySearch: Use any valid company search filter field.</li>
+
+            <li>contactSearch: Use valid contact search filter fields.</li>
+
+            </ul>'
+        values:
+          type: array
+          description: Array of string values to filter on
+          items:
+            type: string
+      required:
+      - field
+      - values
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: '[<span style="text-decoration:underline;color:blue; font-size:1.25em">How To Generate Bearer Tokens</span>](https://developer.demandbase.com/reference/generate_access_token)'
+      scheme: bearer

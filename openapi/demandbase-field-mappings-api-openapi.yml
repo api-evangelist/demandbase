@@ -1,0 +1,233 @@
+openapi: 3.2.0
+info:
+  title: Custom Sources Field Mappings API
+  description: 'Manage custom sources in the Demandbase platform. Custom sources let you define
+
+    named data origins and configure field mappings for the data they provide.
+
+    '
+  version: '1.0'
+servers:
+- url: https://uapi.demandbase.demandbase.com
+security:
+- bearerAuth: []
+tags:
+- name: Field Mappings
+  description: Configure field mappings for a source and object type.
+paths:
+  /integration/v1/custom-sources/{source_id}/field-mappings/{object_type}:
+    get:
+      summary: Get field mappings
+      description: Returns the field mappings configured for the given source and object type.
+      tags:
+      - Field Mappings
+      parameters:
+      - $ref: '#/components/parameters/SourceIdForMappings'
+      - $ref: '#/components/parameters/ObjectType'
+      responses:
+        '200':
+          description: Field mappings for the specified source and object type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldMappingsResponse'
+              examples:
+                Example:
+                  value:
+                    fieldMappings:
+                    - sourceFieldLabel: annual_revenue
+                      demandbaseFieldName: annualRevenue
+                      dataType: number
+                    - sourceFieldLabel: hq_country
+                      demandbaseFieldName: country
+                      dataType: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Upsert field mappings
+      description: 'Creates or replaces the field mappings for the given source and object type.
+
+        The full set of mappings provided in the request body replaces any existing mappings.
+
+        '
+      tags:
+      - Field Mappings
+      parameters:
+      - $ref: '#/components/parameters/SourceIdForMappings'
+      - $ref: '#/components/parameters/ObjectType'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldMappingRequest'
+            examples:
+              Example:
+                value:
+                  fieldMappings:
+                  - sourceFieldLabel: annual_revenue
+                    demandbaseFieldName: annualRevenue
+                    dataType: number
+                  - sourceFieldLabel: hq_country
+                    demandbaseFieldName: country
+                    dataType: string
+      responses:
+        '201':
+          description: Field mappings upserted successfully. No content returned.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    InternalServerError:
+      description: An unexpected server error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 500-001
+                  message: Internal server error.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 404-000
+                  message: Resource not found.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    BadRequest:
+      description: The request body or query parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 400-000
+                  message: Invalid input.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 403-000
+                  message: Unauthorized.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  schemas:
+    FieldMappingsResponse:
+      type: object
+      required:
+      - fieldMappings
+      properties:
+        fieldMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldMappingDTO'
+          description: List of field mappings configured for the requested source/object type.
+    StructuredError:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - code
+          - message
+          - diagnosticCode
+          properties:
+            code:
+              type: string
+              description: 'Machine-readable error code (e.g. `400-000`, `404-000`, `500-001`). Default values by HTTP status: 400 → `400-000`, 404 → `404-000`, 500 → `500-001`.
+
+                '
+            message:
+              type: string
+              description: Human-readable description of the error.
+            diagnosticCode:
+              type: string
+              description: UUID for tracing the request in server logs.
+    FieldMappingRequest:
+      type: object
+      required:
+      - fieldMappings
+      properties:
+        fieldMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldMappingDTO'
+          description: Field mappings to create/update for the given object type.
+    FieldMappingDTO:
+      type: object
+      required:
+      - sourceFieldLabel
+      - demandbaseFieldName
+      - dataType
+      properties:
+        sourceFieldLabel:
+          type: string
+          description: Label/name of the field as provided by the external source.
+        demandbaseFieldName:
+          type: string
+          description: Canonical Demandbase field name the source field is mapped to.
+        dataType:
+          type: string
+          description: 'Data type of the mapped field (for example: string, number, boolean, date).'
+  parameters:
+    SourceIdForMappings:
+      name: source_id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+      description: The unique ID of the source.
+    ObjectType:
+      name: object_type
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - account
+        - person
+      description: The object type for which field mappings are configured.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Pass a header like: `Authorization: Bearer <JWT Token>`
+
+
+        Visit [My Profile -> API Token](https://web.demandbase.com/o/ad/at) to generate an API token.
+
+        '

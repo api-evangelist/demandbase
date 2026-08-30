@@ -1,0 +1,2867 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: B2B Subscription API
+  description: 'The B2B API provides access to endpoints for searching, retrieving, and matching company and contact data.
+
+
+    It includes support for:
+
+    - **Company records:** Firmographic details, news, technologies, and more.
+
+    - **Contact records:** Current role, employment history, and professional details.
+
+    - **Demandbase Person profiles:** Persistent identities tied to individuals across multiple roles or companies.
+
+    - **Subscriptions:** Monitoring updates to companies and DB Person records.
+
+    ## Authentication
+
+    All requests to the B2B API must be authenticated using a valid API token. If authentication fails, the API will respond with a `401 Unauthorized` status code.
+
+    ### Obtaining an API Token
+
+    For instructions on generating API tokens, see the [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set) article at the Demandbase Help Center.
+
+    ### Authorization Header
+
+    Include your API token in the `Authorization` header of each request using the Bearer token scheme. Also set the `Content-Type` header to `application/json` when sending JSON payloads.
+
+    #### Example
+
+    ```
+
+    Authorization: Bearer YOUR_API_KEY_HERE
+
+    Content-Type: application/json
+
+    ```
+
+
+    > **Note:** Tokens should be treated as sensitive credentials. Do not expose them in public code repositories or client-side applications.'
+  contact:
+    name: Support
+    url: https://www.demandbase.com/
+    email: support@demandbase.com
+servers:
+- url: https://uapi.demandbase.com/data/b2b/v1
+  description: Server URL in Production environment
+security:
+- bearerAuth: []
+tags:
+- name: Subscription API
+  description: Subscription creation, updates, status, alerts, and lifecycle operations.
+paths:
+  /subscriptions/job:
+    put:
+      tags:
+      - Subscription API
+      summary: Update an Existing Subscription
+      description: 'Use this API to update an existing subscription. You must provide both the subscriptionId and subscriptionType to identify which subscription you want to modify. This endpoint supports partial and full updates, including:
+
+
+        - Replacing all associated entity IDs with the subscription (e.g., company IDs or dbPerson IDs).
+
+        - Incrementally adding or removing entity IDs in the subscription.
+
+        - Updating other subscription details such as frequency, webhook URL, signing secret, fields, or news categories.
+
+
+        The API responds with a jobId, which can be used to check the job''s status. Once the job completes successfully, the subscription is updated accordingly.
+
+        '
+      operationId: updateSubscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSubscriptionJobRequestDTO'
+            examples:
+              UpdateCompanySubscriptionRequest:
+                description: UpdateCompanySubscriptionRequest
+                value:
+                  subscriptionId: 2aac4dd2-d2c9-485e-b9ef-388c63e54915
+                  companyIds:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                  - 5
+                  name: Updated Company Subscription
+                  description: This is an updated subscription for company updates
+                  subscriptionType: company
+                  frequency: 14d
+                  fields:
+                  - all
+                  webhook: http://www.your-domain.com/webhook-updated
+                  signingSecret: updated-secret-key
+              UpdateCompanyNewsSubscriptionRequest:
+                description: UpdateCompanyNewsSubscriptionRequest
+                value:
+                  subscriptionId: 2aac4dd2-d2c9-485e-b9ef-388c63e54916
+                  addCompanyIds:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                  - 5
+                  removeCompanyIds:
+                  - 6
+                  - 7
+                  name: Updated Company News Subscription
+                  description: This is an updated subscription for company news updates
+                  subscriptionType: companyNews
+                  frequency: 60M
+                  newsCategories:
+                  - LEADERSHIP_CHANGES
+                  - RESEARCH_DEVELOPMENT
+                  - REALESTATE_DEALS
+                  webhook: http://www.your-domain.com/webhook-updated
+                  signingSecret: updated-secret-key
+              UpdateCompanyFamilyTreeSubscriptionRequest:
+                description: UpdateCompanyFamilyTreeSubscriptionRequest
+                value:
+                  subscriptionId: 2aac4dd2-d2c9-485e-b9ef-388c63e54917
+                  addCompanyIds:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                  - 5
+                  removeCompanyIds:
+                  - 6
+                  - 7
+                  name: Updated Company FamilyTree Subscription
+                  description: This is an updated subscription for company family tree updates
+                  subscriptionType: companyFamilyTree
+                  frequency: 1w
+                  webhook: http://www.your-domain.com/webhook-updated
+                  signingSecret: updated-secret-key
+              UpdateDbPersonSubscriptionRequest:
+                description: UpdateDbPersonSubscriptionRequest
+                value:
+                  subscriptionId: 2aac4dd2-d2c9-485e-b9ef-388c63e54918
+                  addDBPersonIds:
+                  - 101
+                  - 102
+                  - 103
+                  - 104
+                  - 105
+                  removeDBPersonIds:
+                  - 106
+                  - 107
+                  name: Updated DB Person Subscription
+                  description: This is an updated subscription for dbPerson updates
+                  subscriptionType: dbPerson
+                  frequency: 14d
+                  fields:
+                  - all
+                  webhook: http://www.your-domain.com/webhook-updated
+                  signingSecret: updated-secret-key
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionJobResponseDTO'
+              examples:
+                SuccessResponse:
+                  description: SuccessResponse
+                  value:
+                    jobId: 39ddf756-c04e-465c-b8c1-8d2c2be0abed
+                    jobStatus: accepted
+                    totalEntitiesProcessed: 0
+                    jobType: notificationSubscriptionCreate
+                    subscriptionType: company
+                    createdAt: '2025-06-25T09:00:42.620Z'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionJobResponseDTO'
+              examples:
+                SuccessResponseXml:
+                  description: SuccessResponseXml
+                  value:
+                    jobId: 39ddf756-c04e-465c-b8c1-8d2c2be0abed
+                    jobStatus: accepted
+                    totalEntitiesProcessed: 0
+                    jobType: notificationSubscriptionCreate
+                    subscriptionType: company
+                    createdAt: '2025-06-25T09:00:42.620Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidUrlResponse:
+                  description: InvalidUrlResponse
+                  value:
+                    errorCode: 400-144
+                    errorMessage: Invalid Webhook. Url syntax is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidSigningSecretResponse:
+                  description: InvalidSigningSecretResponse
+                  value:
+                    errorCode: 400-145
+                    errorMessage: Invalid Webhook. Signing secret is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidSubscriptionTypeResponse:
+                  description: InvalidSubscriptionTypeResponse
+                  value:
+                    errorCode: 400-146
+                    errorMessage: Invalid Subscription Type. Subscription type is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidStartTimeResponse:
+                  description: InvalidStartTimeResponse
+                  value:
+                    errorCode: 400-147
+                    errorMessage: Start time is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidFrequencyResponse:
+                  description: InvalidFrequencyResponse
+                  value:
+                    errorCode: 400-149
+                    errorMessage: Frequency has invalid pattern.
+                    diagnosticCode: cceddfa1-90be-4a37-9b85-896223844f04
+                InvalidFrequencyValueResponse:
+                  description: InvalidFrequencyValueResponse
+                  value:
+                    errorCode: 400-150
+                    errorMessage: Frequency value is invalid.
+                    diagnosticCode: cceddfa1-90be-4a37-9b85-896223844f04
+                InvalidFrequencyTypeResponse:
+                  description: InvalidFrequencyTypeResponse
+                  value:
+                    errorCode: 400-151
+                    errorMessage: Frequency type is invalid.
+                    diagnosticCode: e8bb70af-ab52-4bb3-a2cb-538801fc9ed4
+                InvalidFieldResponse:
+                  description: InvalidFieldResponse
+                  value:
+                    errorCode: 400-157
+                    errorMessage: One or more fields is invalid for provided subscription type.
+                    diagnosticCode: dd1546d9-f8c3-4b86-bcec-8acbae92998b
+                InvalidAgentResponse:
+                  description: InvalidAgentResponse
+                  value:
+                    errorCode: 400-163
+                    errorMessage: One or more news category is invalid for provided subscription type.
+                    diagnosticCode: cafba766-624e-40b7-8952-4acb657ada09
+                EmptyCompanyIdsResponse:
+                  description: EmptyCompanyIdsResponse
+                  value:
+                    errorCode: 400-158
+                    errorMessage: At least one company ID must be provided.
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+                EmptyContactIdsResponse:
+                  description: EmptyContactIdsResponse
+                  value:
+                    errorCode: 400-159
+                    errorMessage: At least one contact ID must be provided.
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+                CompanyIdsLimitExceededResponse:
+                  description: CompanyIdsLimitExceededResponse
+                  value:
+                    errorCode: 400-160
+                    errorMessage: Company ids exceeds the permissible limit for subscription job
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+                ContactIdsLimitExceededResponse:
+                  description: ContactIdsLimitExceededResponse
+                  value:
+                    errorCode: 400-161
+                    errorMessage: Contact ids exceeds the permissible limit for subscription job
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidUrlResponseXml:
+                  description: InvalidUrlResponseXml
+                  value:
+                    errorCode: 400-144
+                    errorMessage: Invalid Webhook. Url syntax is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidSigningSecretResponseXml:
+                  description: InvalidSigningSecretResponseXml
+                  value:
+                    errorCode: 400-145
+                    errorMessage: Invalid Webhook. Signing secret is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidSubscriptionTypeResponseXml:
+                  description: InvalidSubscriptionTypeResponseXml
+                  value:
+                    errorCode: 400-146
+                    errorMessage: Invalid Subscription Type. Subscription type is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidStartTimeResponseXml:
+                  description: InvalidStartTimeResponseXml
+                  value:
+                    errorCode: 400-147
+                    errorMessage: Start time is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidFrequencyResponseXml:
+                  description: InvalidFrequencyResponseXml
+                  value:
+                    errorCode: 400-149
+                    errorMessage: Frequency has invalid pattern.
+                    diagnosticCode: cceddfa1-90be-4a37-9b85-896223844f04
+                InvalidFrequencyValueResponseXml:
+                  description: InvalidFrequencyValueResponseXml
+                  value:
+                    errorCode: 400-150
+                    errorMessage: Frequency value is invalid.
+                    diagnosticCode: cceddfa1-90be-4a37-9b85-896223844f04
+                InvalidFrequencyTypeResponseXml:
+                  description: InvalidFrequencyTypeResponseXml
+                  value:
+                    errorCode: 400-151
+                    errorMessage: Frequency type is invalid.
+                    diagnosticCode: e8bb70af-ab52-4bb3-a2cb-538801fc9ed4
+                InvalidFieldResponseXml:
+                  description: InvalidFieldResponseXml
+                  value:
+                    errorCode: 400-157
+                    errorMessage: One or more fields is invalid for provided subscription type.
+                    diagnosticCode: dd1546d9-f8c3-4b86-bcec-8acbae92998b
+                EmptyCompanyIdsResponseXml:
+                  description: EmptyCompanyIdsResponseXml
+                  value:
+                    errorCode: 400-158
+                    errorMessage: At least one company ID must be provided.
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+                EmptyContactIdsResponseXml:
+                  description: EmptyContactIdsResponseXml
+                  value:
+                    errorCode: 400-159
+                    errorMessage: At least one contact ID must be provided.
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+                CompanyIdsLimitExceededResponseXml:
+                  description: CompanyIdsLimitExceededResponseXml
+                  value:
+                    errorCode: 400-160
+                    errorMessage: Company ids exceeds the permissible limit for subscription job
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+                ContactIdsLimitExceededResponseXml:
+                  description: ContactIdsLimitExceededResponseXml
+                  value:
+                    errorCode: 400-161
+                    errorMessage: Contact ids exceeds the permissible limit for subscription job
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+    post:
+      tags:
+      - Subscription API
+      summary: Create a New Subscription
+      description: 'Use this endpoint to create a subscription for monitoring updates to companies or DB Person records. Subscriptions allow you to receive change alerts via webhook and access historical alerts via API.
+
+
+        Each subscription is processed asynchronously. A jobId is returned on submission. Upon completion, the job will return a subscriptionId which can be used to fetch alerts or manage the subscription.'
+      operationId: updateSubscription_1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubscriptionJobRequestDTO'
+            examples:
+              Company Subscription Request Example:
+                description: Company Subscription Request Example
+                value:
+                  companyIds:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                  - 5
+                  name: Company Subscription
+                  description: This is a subscription for company updates
+                  subscriptionType: company
+                  startDate: '2025-06-25'
+                  frequency: 7d
+                  fields:
+                  - all
+                  webhook: http://www.your-domain.com/webhook
+                  signingSecret: secret-key
+              Company News Subscription Request Example:
+                description: Company News Subscription Request Example
+                value:
+                  companyIds:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                  - 5
+                  name: Company News Subscription
+                  description: This is a subscription for company news updates
+                  subscriptionType: companyNews
+                  startDate: '2025-06-25'
+                  frequency: 30M
+                  newsCategories:
+                  - LEADERSHIP_CHANGES
+                  - RESEARCH_DEVELOPMENT
+                  - REALESTATE_DEALS
+                  webhook: http://www.your-domain.com/webhook
+                  signingSecret: secret-key
+              Company Family Tree Subscription Request Example:
+                description: Company Family Tree Subscription Request Example
+                value:
+                  companyIds:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                  - 5
+                  name: Company FamilyTree Subscription
+                  description: This is a subscription for company family tree updates
+                  subscriptionType: companyFamilyTree
+                  startDate: '2025-06-25'
+                  frequency: 2w
+                  webhook: http://www.your-domain.com/webhook
+                  signingSecret: secret-key
+              DbPerson Subscription Request Example:
+                description: DbPerson Subscription Request Example
+                value:
+                  dbPersonIds:
+                  - 101
+                  - 102
+                  - 103
+                  - 104
+                  - 105
+                  name: DB Person Subscription
+                  description: This is a subscription for dbPerson updates
+                  subscriptionType: dbPerson
+                  startDate: '2025-06-25'
+                  frequency: 7d
+                  fields:
+                  - all
+                  webhook: http://www.your-domain.com/webhook
+                  signingSecret: secret-key
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionJobResponseDTO'
+              examples:
+                SuccessResponse:
+                  description: SuccessResponse
+                  value:
+                    jobId: 39ddf756-c04e-465c-b8c1-8d2c2be0abed
+                    jobStatus: accepted
+                    totalEntitiesProcessed: 0
+                    jobType: notificationSubscriptionCreate
+                    subscriptionType: company
+                    createdAt: '2025-06-25T09:00:42.620Z'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionJobResponseDTO'
+              examples:
+                SuccessResponseXml:
+                  description: SuccessResponseXml
+                  value:
+                    jobId: 39ddf756-c04e-465c-b8c1-8d2c2be0abed
+                    jobStatus: accepted
+                    totalEntitiesProcessed: 0
+                    jobType: notificationSubscriptionCreate
+                    subscriptionType: company
+                    createdAt: '2025-06-25T09:00:42.620Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidUrlResponse:
+                  description: InvalidUrlResponse
+                  value:
+                    errorCode: 400-144
+                    errorMessage: Invalid Webhook. Url syntax is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidSigningSecretResponse:
+                  description: InvalidSigningSecretResponse
+                  value:
+                    errorCode: 400-145
+                    errorMessage: Invalid Webhook. Signing secret is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidSubscriptionTypeResponse:
+                  description: InvalidSubscriptionTypeResponse
+                  value:
+                    errorCode: 400-146
+                    errorMessage: Invalid Subscription Type. Subscription type is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidStartTimeResponse:
+                  description: InvalidStartTimeResponse
+                  value:
+                    errorCode: 400-147
+                    errorMessage: Start time is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidFrequencyResponse:
+                  description: InvalidFrequencyResponse
+                  value:
+                    errorCode: 400-149
+                    errorMessage: Frequency has invalid pattern.
+                    diagnosticCode: cceddfa1-90be-4a37-9b85-896223844f04
+                InvalidFrequencyValueResponse:
+                  description: InvalidFrequencyValueResponse
+                  value:
+                    errorCode: 400-150
+                    errorMessage: Frequency value is invalid.
+                    diagnosticCode: cceddfa1-90be-4a37-9b85-896223844f04
+                InvalidFrequencyTypeResponse:
+                  description: InvalidFrequencyTypeResponse
+                  value:
+                    errorCode: 400-151
+                    errorMessage: Frequency type is invalid.
+                    diagnosticCode: e8bb70af-ab52-4bb3-a2cb-538801fc9ed4
+                InvalidFieldResponse:
+                  description: InvalidFieldResponse
+                  value:
+                    errorCode: 400-157
+                    errorMessage: One or more fields is invalid for provided subscription type.
+                    diagnosticCode: dd1546d9-f8c3-4b86-bcec-8acbae92998b
+                InvalidAgentResponse:
+                  description: InvalidAgentResponse
+                  value:
+                    errorCode: 400-163
+                    errorMessage: One or more news category is invalid for provided subscription type.
+                    diagnosticCode: cafba766-624e-40b7-8952-4acb657ada09
+                EmptyCompanyIdsResponse:
+                  description: EmptyCompanyIdsResponse
+                  value:
+                    errorCode: 400-158
+                    errorMessage: At least one company ID must be provided.
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+                EmptyContactIdsResponse:
+                  description: EmptyContactIdsResponse
+                  value:
+                    errorCode: 400-159
+                    errorMessage: At least one contact ID must be provided.
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+                CompanyIdsLimitExceededResponse:
+                  description: CompanyIdsLimitExceededResponse
+                  value:
+                    errorCode: 400-160
+                    errorMessage: Company ids exceeds the permissible limit for subscription job
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+                ContactIdsLimitExceededResponse:
+                  description: ContactIdsLimitExceededResponse
+                  value:
+                    errorCode: 400-161
+                    errorMessage: Contact ids exceeds the permissible limit for subscription job
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidUrlResponseXml:
+                  description: InvalidUrlResponseXml
+                  value:
+                    errorCode: 400-144
+                    errorMessage: Invalid Webhook. Url syntax is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidSigningSecretResponseXml:
+                  description: InvalidSigningSecretResponseXml
+                  value:
+                    errorCode: 400-145
+                    errorMessage: Invalid Webhook. Signing secret is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidSubscriptionTypeResponseXml:
+                  description: InvalidSubscriptionTypeResponseXml
+                  value:
+                    errorCode: 400-146
+                    errorMessage: Invalid Subscription Type. Subscription type is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidStartTimeResponseXml:
+                  description: InvalidStartTimeResponseXml
+                  value:
+                    errorCode: 400-147
+                    errorMessage: Start time is invalid.
+                    diagnosticCode: 261d677a-a60e-4a2c-81a7-b55a0ae148c0
+                InvalidFrequencyResponseXml:
+                  description: InvalidFrequencyResponseXml
+                  value:
+                    errorCode: 400-149
+                    errorMessage: Frequency has invalid pattern.
+                    diagnosticCode: cceddfa1-90be-4a37-9b85-896223844f04
+                InvalidFrequencyValueResponseXml:
+                  description: InvalidFrequencyValueResponseXml
+                  value:
+                    errorCode: 400-150
+                    errorMessage: Frequency value is invalid.
+                    diagnosticCode: cceddfa1-90be-4a37-9b85-896223844f04
+                InvalidFrequencyTypeResponseXml:
+                  description: InvalidFrequencyTypeResponseXml
+                  value:
+                    errorCode: 400-151
+                    errorMessage: Frequency type is invalid.
+                    diagnosticCode: e8bb70af-ab52-4bb3-a2cb-538801fc9ed4
+                InvalidFieldResponseXml:
+                  description: InvalidFieldResponseXml
+                  value:
+                    errorCode: 400-157
+                    errorMessage: One or more fields is invalid for provided subscription type.
+                    diagnosticCode: dd1546d9-f8c3-4b86-bcec-8acbae92998b
+                EmptyCompanyIdsResponseXml:
+                  description: EmptyCompanyIdsResponseXml
+                  value:
+                    errorCode: 400-158
+                    errorMessage: At least one company ID must be provided.
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+                EmptyContactIdsResponseXml:
+                  description: EmptyContactIdsResponseXml
+                  value:
+                    errorCode: 400-159
+                    errorMessage: At least one contact ID must be provided.
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+                CompanyIdsLimitExceededResponseXml:
+                  description: CompanyIdsLimitExceededResponseXml
+                  value:
+                    errorCode: 400-160
+                    errorMessage: Company ids exceeds the permissible limit for subscription job
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+                ContactIdsLimitExceededResponseXml:
+                  description: ContactIdsLimitExceededResponseXml
+                  value:
+                    errorCode: 400-161
+                    errorMessage: Contact ids exceeds the permissible limit for subscription job
+                    diagnosticCode: a5631e82-0dfc-41ea-9ce8-8089ceff022f
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /subscriptions/{subscriptionId}/entityIds:
+    get:
+      tags:
+      - Subscription API
+      summary: Get Subscription Entity IDs
+      description: 'Retrieve all entity IDs (company or dbPerson) associated with a given subscription. The response is paginated and depends on the type of subscription:
+
+
+        - For "company" or "companyFamilyTree" subscriptions, it returns Company IDs.
+
+        - For "dbPerson" subscriptions, it returns Demandbase Person IDs.
+
+        '
+      operationId: getSubscriptionEntityDetails
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination. Default is 1.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          example: 1
+      - name: perPage
+        in: query
+        description: Number of results per page. Default is 5000, maximum is 5000.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 5000
+          default: 5000
+          example: 10
+      - name: subscriptionId
+        in: path
+        description: Unique identifier for the subscription
+        required: true
+        schema:
+          type: string
+          example: 287ea0c8-99de-4f0c-addc-097f78b48ba6
+      responses:
+        '200':
+          description: Entity ID list retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntityDetailsDTO'
+              examples:
+                Company IDs - JSON:
+                  description: Company IDs - JSON
+                  value:
+                    companyIds:
+                    - '643462'
+                    - '1042601'
+                    - '643223'
+                    - '642023'
+                    - '26176'
+                    - '643886'
+                    - '848207'
+                    - '741359'
+                    - '643768'
+                    - '642647'
+                    pageNo: 1
+                    totalCount: 10
+                    pageSize: 50
+                    totalPages: 1
+                DB Person IDs - JSON:
+                  description: DB Person IDs - JSON
+                  value:
+                    dbPersonIds:
+                    - '643462'
+                    - '1042601'
+                    - '643223'
+                    - '642023'
+                    - '26176'
+                    - '643886'
+                    - '848207'
+                    - '741359'
+                    - '643768'
+                    - '642647'
+                    pageNo: 1
+                    totalCount: 10
+                    pageSize: 50
+                    totalPages: 1
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntityDetailsDTO'
+              examples:
+                Company IDs - XML:
+                  description: Company IDs - XML
+                  value:
+                    companyIds:
+                    - '643462'
+                    - '1042601'
+                    - '643223'
+                    - '642023'
+                    - '26176'
+                    - '643886'
+                    - '848207'
+                    - '741359'
+                    - '643768'
+                    - '642647'
+                    pageNo: 1
+                    totalCount: 10
+                    pageSize: 50
+                    totalPages: 1
+                DB Person IDs - XML:
+                  description: DB Person IDs - XML
+                  value:
+                    dbPersonIds:
+                    - '643462'
+                    - '1042601'
+                    - '643223'
+                    - '642023'
+                    - '26176'
+                    - '643886'
+                    - '848207'
+                    - '741359'
+                    - '643768'
+                    - '642647'
+                    pageNo: 1
+                    totalCount: 10
+                    pageSize: 50
+                    totalPages: 1
+        '401':
+          description: Unauthorized. Access token is missing or invalid.
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  description: Unauthorized
+                  value:
+                    status: Authentication Failed - Unauthorized.
+        '404':
+          description: The subscription ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Subscription Not Found:
+                  description: Subscription Not Found
+                  value:
+                    errorCode: 404-100
+                    errorMessage: Invalid ID, record not found.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Subscription Not Found - XML:
+                  description: Subscription Not Found - XML
+                  value:
+                    errorCode: 404-100
+                    errorMessage: Invalid ID, record not found.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /subscriptions/{subscriptionId}/alerts/{alertId}:
+    get:
+      tags:
+      - Subscription API
+      summary: Retrieve a Specific Subscription Alert
+      description: "Retrieve detailed alert updates for a specific subscription using its subscription ID and alert ID. Use `List Subscription Alerts` API to fetch latest alerts.\n\nThis endpoint returns the specific fields or news categories that triggered the alert, depending on the type of subscription:\n\n- **company**: Returns a list of company IDs and the fields that changed (e.g., name, address).\n- **companynews**: Returns company IDs and related news articles with timestamps.\n- **companyfamilytree**:\n    - Identifies companies added to or removed from the family tree.\n    - Includes migration messages if the root company itself was acquired.\n- **dbPerson**: Returns person IDs with changed fields, as well as detailed employment-level field updates per contact ID.\n\nThe response is paginated and supports high-volume results (e.g., up to 5,000 entities per page).\n"
+      operationId: getSubscriptionAlertDetails
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination. Default is 1.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          example: 1
+        examples:
+          default:
+            value: 1
+      - name: perPage
+        in: query
+        description: Number of results per page. Default is 5000, maximum is 5000.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 5000
+          default: 5000
+          example: 10
+        examples:
+          default:
+            value: 10
+      - name: subscriptionId
+        in: path
+        description: Unique identifier for the subscription
+        required: true
+        schema:
+          type: string
+        examples:
+          Subscription ID Example:
+            description: Subscription ID Example
+            value: 287ea0c8-99de-4f0c-addc-097f78b48ba6
+      - name: alertId
+        in: path
+        description: Unique identifier for the alert
+        required: true
+        schema:
+          type: string
+        examples:
+          Alert ID Example:
+            description: Alert ID Example
+            value: '1001'
+      responses:
+        '200':
+          description: Alert details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAlertDefinitionDTO'
+              examples:
+                Company Subscription:
+                  description: Company Subscription
+                  value:
+                    companyAlertDetails:
+                    - companyId: '6265'
+                      fields:
+                      - employees
+                    - companyId: '677586'
+                      fields:
+                      - employees
+                    - companyId: '724368'
+                      fields:
+                      - companyStatusV2
+                      - revenue
+                      - businessStructure
+                      - companyStatus
+                      - employees
+                    - companyId: '751147'
+                      fields:
+                      - employees
+                    - companyId: '25321'
+                      fields:
+                      - employees
+                    - companyId: '15191'
+                      fields:
+                      - employees
+                    - companyId: '712000'
+                      fields:
+                      - employees
+                    - companyId: '966735'
+                      fields:
+                      - employees
+                    - companyId: '2992705'
+                      fields:
+                      - companyStatusV2
+                      - revenue
+                      - businessStructure
+                      - companyStatus
+                    - companyId: '966833'
+                      fields:
+                      - employees
+                    - companyId: '51212245'
+                      fields:
+                      - address
+                      - businessStructure
+                      - employeeRange
+                      - companyStatus
+                      - employees
+                    - companyId: '1040416'
+                      fields:
+                      - employees
+                    subscriptionType: company
+                    pageNo: 1
+                    pageSize: 100
+                    totalCount: 12
+                    totalPages: 1
+                Company FamilyTree Subscription:
+                  description: Company FamilyTree Subscription
+                  value:
+                    companyFamilyTreeAlertDetails:
+                    - companyId: 3224482
+                      companyFamilyTreeChanges:
+                        addedCompanies:
+                        - 13632710
+                    - companyId: 738676
+                      message: Subscription updated to reflect change in ultimateParentCompanyId 738676 to 728897
+                      companyFamilyTreeChanges:
+                        addedCompanies:
+                        - 70890552
+                        - 70691787
+                        newUltimateParentCompanyId: 728897
+                    - companyId: 170251
+                      companyFamilyTreeChanges:
+                        addedCompanies:
+                        - 50218062
+                        - 17639086
+                        - 542141
+                        - 228887064
+                        - 37166
+                    - companyId: 206558
+                      message: Subscription updated to reflect change in ultimateParentCompanyId 206558 to 16266
+                      companyFamilyTreeChanges:
+                        addedCompanies:
+                        - 5715422
+                        - 3508924
+                        - 16266
+                        newUltimateParentCompanyId: 16266
+                    - companyId: 9958529
+                      companyFamilyTreeChanges:
+                        addedCompanies:
+                        - 69526170
+                    - companyId: 27879
+                      companyFamilyTreeChanges:
+                        addedCompanies:
+                        - 10368186
+                        deletedCompanies:
+                        - 10368186
+                    subscriptionType: companyfamilytree
+                    pageNo: 1
+                    pageSize: 10
+                    totalCount: 6
+                    totalPages: 1
+                Company News Subscription:
+                  description: Company News Subscription
+                  value:
+                    companyNewsAlertDetails:
+                    - companyId: '727291'
+                      articleUrl: https://uapi-article.db-data-api-prod.demandbase.com/data/b2b/v1/article/12356799690888
+                      timestamp: '2025-05-22T10:32:04.096+05:30'
+                      newsCategories:
+                      - RESEARCH_DEVELOPMENT
+                      - ACQUISITIONS
+                    - companyId: '811797'
+                      articleUrl: https://uapi-article.db-data-api-prod.demandbase.com/data/b2b/v1/article/56799755433
+                      timestamp: '2025-05-22T10:38:08.040+05:30'
+                      newsCategories:
+                      - RESEARCH_DEVELOPMENT
+                      - ACQUISITIONS
+                    subscriptionType: companynews
+                    pageNo: 1
+                    pageSize: 10
+                    totalCount: 2
+                    totalPages: 1
+                DB Person Subscription:
+                  description: DB Person Subscription
+                  value:
+                    dbPersonAlertDetails:
+                    - dbPersonId: '25243'
+                      fields:
+                      - age
+                    - dbPersonId: '87192237'
+                      employments:
+                      - contactId: '368220796'
+                        fields:
+                        - email
+                    subscriptionType: dbPerson
+                    pageNo: 3
+                    pageSize: 2
+                    totalCount: 55
+                    totalPages: 28
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GetAlertDefinitionDTO'
+              examples:
+                Company Subscription - XML:
+                  description: Company Subscription - XML
+                  value:
+                    companyAlertDetails:
+                    - companyId: '6265'
+                      fields:
+                      - employees
+                    - companyId: '677586'
+                      fields:
+                      - employees
+                    - companyId: '724368'
+                      fields:
+                      - companyStatusV2
+                      - revenue
+                      - businessStructure
+                      - companyStatus
+                      - employees
+                    - companyId: '751147'
+                      fields:
+                      - employees
+                    - companyId: '25321'
+                      fields:
+                      - employees
+                    - companyId: '15191'
+                      fields:
+                      - employees
+                    - companyId: '712000'
+                      fields:
+                      - employees
+                    - companyId: '966735'
+                      fields:
+                      - employees
+                    - companyId: '2992705'
+                      fields:
+                      - companyStatusV2
+                      - revenue
+                      - businessStructure
+                      - companyStatus
+                    - companyId: '966833'
+                      fields:
+                      - employees
+                    - companyId: '51212245'
+                      fields:
+                      - address
+                      - businessStructure
+                      - employeeRange
+                      - companyStatus
+                      - employees
+                    - companyId: '1040416'
+                      fields:
+                      - employees
+                    subscriptionType: company
+                    pageNo: 1
+                    pageSize: 100
+                    totalCount: 12
+                    totalPages: 1
+                Company FamilyTree Subscription - XML:
+                  description: Company FamilyTree Subscription - XML
+                  value:
+                    companyFamilyTreeAlertDetails:
+                    - companyId: 3224482
+                      companyFamilyTreeChanges:
+                        addedCompanies:
+                        - 13632710
+                    - companyId: 738676
+                      message: Subscription updated to reflect change in ultimateParentCompanyId 738676 to 728897
+                      companyFamilyTreeChanges:
+                        addedCompanies:
+                        - 70890552
+                        - 70691787
+                        newUltimateParentCompanyId: 728897
+                    - companyId: 170251
+                      companyFamilyTreeChanges:
+                        addedCompanies:
+                        - 50218062
+                        - 17639086
+                        - 542141
+                        - 228887064
+                        - 37166
+                    - companyId: 206558
+                      message: Subscription updated to reflect change in ultimateParentCompanyId 206558 to 16266
+                      companyFamilyTreeChanges:
+                        addedCompanies:
+                        - 5715422
+                        - 3508924
+                        - 16266
+                        newUltimateParentCompanyId: 16266
+                    - companyId: 9958529
+                      companyFamilyTreeChanges:
+                        addedCompanies:
+                        - 69526170
+                    - companyId: 27879
+                      companyFamilyTreeChanges:
+                        addedCompanies:
+                        - 10368186
+                        deletedCompanies:
+                        - 10368186
+                    subscriptionType: companyfamilytree
+                    pageNo: 1
+                    pageSize: 10
+                    totalCount: 6
+                    totalPages: 1
+                Company News Subscription - XML:
+                  description: Company News Subscription - XML
+                  value:
+                    companyNewsAlertDetails:
+                    - companyId: '727291'
+                      articleUrl: https://uapi-article.db-data-api-prod.demandbase.com/data/b2b/v1/article/12356799690888
+                      timestamp: '2025-05-22T10:32:04.096+05:30'
+                      newsCategories:
+                      - RESEARCH_DEVELOPMENT
+                      - ACQUISITIONS
+                    - companyId: '811797'
+                      articleUrl: https://uapi-article.db-data-api-prod.demandbase.com/data/b2b/v1/article/56799755433
+                      timestamp: '2025-05-22T10:38:08.040+05:30'
+                      newsCategories:
+                      - RESEARCH_DEVELOPMENT
+                      - ACQUISITIONS
+                    subscriptionType: companynews
+                    pageNo: 1
+                    pageSize: 10
+                    totalCount: 2
+                    totalPages: 1
+                DB Person Subscription - XML:
+                  description: DB Person Subscription - XML
+                  value:
+                    dbPersonAlertDetails:
+                    - dbPersonId: '25243'
+                      fields:
+                      - age
+                    - dbPersonId: '87192237'
+                      employments:
+                      - contactId: '368220796'
+                        fields:
+                        - email
+                    subscriptionType: dbPerson
+                    pageNo: 3
+                    pageSize: 2
+                    totalCount: 55
+                    totalPages: 28
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  description: Unauthorized
+                  value:
+                    status: Authentication Failed - Unauthorized.
+        '404':
+          description: The subscription or alert ID was not found.
+          content:
+            application/json:
+              examples:
+                Subscription Not Found:
+                  description: Subscription Not Found
+                  value:
+                    errorCode: 404-104
+                    errorMessage: Subscription ID does not exist.
+                    diagnosticCode: e227ac59-49f8-459e-ab7d-b5b3ce398d21
+                Alert Not Found:
+                  description: Alert Not Found
+                  value:
+                    errorCode: 404-105
+                    errorMessage: Alert ID does not exist.
+                    diagnosticCode: 845778f8-db95-45e3-80ec-5087191264cc
+            application/xml:
+              schema:
+                type: object
+                title: error
+                format: xml
+              examples:
+                Subscription Not Found - XML:
+                  description: Subscription Not Found - XML
+                  value:
+                    errorCode: 404-104
+                    errorMessage: Subscription ID does not exist.
+                    diagnosticCode: e227ac59-49f8-459e-ab7d-b5b3ce398d21
+                Alert Not Found - XML:
+                  description: Alert Not Found - XML
+                  value:
+                    errorCode: 404-105
+                    errorMessage: Alert ID does not exist.
+                    diagnosticCode: 845778f8-db95-45e3-80ec-5087191264cc
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /subscriptions/{subscriptionId}/alerts:
+    get:
+      tags:
+      - Subscription API
+      summary: List Subscription Alerts
+      description: 'Retrieve a paginated list of alerts generated for the specified subscription ID. Each alert includes:
+
+        - `alertId`: unique identifier for the alert
+
+        - `createdAt`: timestamp of when the alert was generated
+
+
+        Results are sorted in descending order of `createdAt` (most recent first).
+
+        '
+      operationId: getSubscriptionAlertsList
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination. Default is 1.
+        required: false
+        schema:
+          type: integer
+          default: 1
+          example: 1
+        examples:
+          default:
+            value: 1
+      - name: perPage
+        in: query
+        description: Number of results per page. Default is 10, maximum is 50.
+        required: false
+        schema:
+          type: integer
+          default: 10
+          example: 10
+        examples:
+          default:
+            value: 10
+      - name: subscriptionId
+        in: path
+        description: Unique identifier for the subscription
+        required: true
+        schema:
+          type: string
+          example: 287ea0c8-99de-4f0c-addc-097f78b48ba6
+        examples:
+          default:
+            value: 287ea0c8-99de-4f0c-addc-097f78b48ba6
+      responses:
+        '200':
+          description: Subscription alert details list fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAlertsResponseDTO'
+              examples:
+                Success Response:
+                  description: Success Response
+                  value:
+                    alerts:
+                    - alertId: 3
+                      createdAt: '2025-05-23T15:25:56.202+05:30'
+                    pageNo: 1
+                    pageSize: 2
+                    totalCount: 1
+                    totalPages: 1
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GetAlertsResponseDTO'
+              examples:
+                Success Response:
+                  description: Success Response
+                  value:
+                    alerts:
+                    - alertId: 3
+                      createdAt: '2025-05-23T15:25:56.202+05:30'
+                    pageNo: 1
+                    pageSize: 2
+                    totalCount: 1
+                    totalPages: 1
+        '401':
+          description: Unauthorized because the user is not authenticated.
+          content:
+            application/json:
+              examples:
+                UnauthorizedResponse:
+                  description: UnauthorizedResponse
+                  value:
+                    status: Authentication Failed - Unauthorized.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                SubscriptionNotFoundErrorResponse:
+                  description: SubscriptionNotFoundErrorResponse
+                  value:
+                    errorCode: 404-104
+                    errorMessage: Subscription ID does not exist.
+                    diagnosticCode: e227ac59-49f8-459e-ab7d-b5b3ce398d21
+            application/xml:
+              schema:
+                type: object
+                title: error
+                format: xml
+              examples:
+                SubscriptionNotFoundErrorResponseXml:
+                  description: SubscriptionNotFoundErrorResponseXml
+                  value:
+                    errorCode: 404-104
+                    errorMessage: Subscription ID does not exist.
+                    diagnosticCode: e227ac59-49f8-459e-ab7d-b5b3ce398d21
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /subscriptions/{subscriptionId}:
+    get:
+      tags:
+      - Subscription API
+      summary: Retrieve Subscription Details
+      description: 'Fetch detailed information for a specific subscription using its subscription ID.
+
+
+        The response includes:
+
+        - Subscription type (e.g., company, dbPerson, companyNews, companyFamilyTree)
+
+        - Frequency and start date
+
+        - Next scheduled notification time
+
+        - Webhook configuration details (if applicable)
+
+        - Tracked fields or subscribed news categories, depending on the subscription type
+
+        '
+      operationId: getSubscriptionDetails
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: Unique identifier for the subscription
+        required: true
+        schema:
+          type: string
+          example: 287ea0c8-99de-4f0c-addc-097f78b48ba6
+        examples:
+          default:
+            value: 287ea0c8-99de-4f0c-addc-097f78b48ba6
+      responses:
+        '200':
+          description: Subscription details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionDetailsResponse'
+              examples:
+                Company Subscription - JSON:
+                  description: Company Subscription - JSON
+                  value:
+                    startDate: '2025-06-25'
+                    createdAt: '2025-06-25T09:02:56.994Z'
+                    frequency: 2d
+                    fields:
+                    - revenue
+                    - phone
+                    - websites
+                    - name
+                    webhook:
+                      url: http://www.your-domain.com/webhook
+                      status: VERIFICATION_RUNNING
+                      signingSecret: secret-key
+                    subscriptionType: company
+                    name: testSubscription
+                    description: Testing Bulk Jobs
+                    nextFireTime: '2025-05-22T00:00:00.000Z'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionDetailsResponse'
+              examples:
+                Company Subscription - XML:
+                  description: Company Subscription - XML
+                  value:
+                    startDate: '2025-06-25'
+                    createdAt: '2025-06-25T09:02:56.994Z'
+                    frequency: 2d
+                    fields:
+                    - revenue
+                    - phone
+                    - websites
+                    - name
+                    webhook:
+                      url: http://www.your-domain.com/webhook
+                      status: VERIFICATION_RUNNING
+                      signingSecret: secret-key
+                    subscriptionType: company
+                    name: testSubscription
+                    description: Testing Bulk Jobs
+                    nextFireTime: '2025-05-22T00:00:00.000Z'
+        '400':
+          description: The subscription exists but is not accessible by the current user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Unauthorized Subscription Access:
+                  description: Unauthorized Subscription Access
+                  value:
+                    errorCode: 400-140
+                    errorMessage: Subscription belongs to a different user. You do not have access.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Unauthorized Subscription Access - XML:
+                  description: Unauthorized Subscription Access - XML
+                  value:
+                    errorCode: 400-140
+                    errorMessage: Subscription belongs to a different user. You do not have access.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+        '401':
+          description: Unauthorized. The request lacks valid authentication credentials.
+          content:
+            application/json:
+              examples:
+                Unauthorized Access:
+                  description: Unauthorized Access
+                  value:
+                    status: Authentication Failed - Unauthorized.
+        '404':
+          description: The subscription ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Subscription Not Found:
+                  description: Subscription Not Found
+                  value:
+                    errorCode: 404-100
+                    errorMessage: Invalid ID, record not found.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Subscription Not Found - XML:
+                  description: Subscription Not Found - XML
+                  value:
+                    errorCode: 404-100
+                    errorMessage: Invalid ID, record not found.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+    delete:
+      tags:
+      - Subscription API
+      summary: Delete a Subscription
+      description: 'Permanently delete a subscription using its subscription ID. This operation removes the subscription from the system and halts all future notifications or alerts related to it.
+
+        '
+      operationId: deleteSubscription
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: Unique identifier for the subscription
+        required: true
+        schema:
+          type: string
+          example: 287ea0c8-99de-4f0c-addc-097f78b48ba6
+        examples:
+          default:
+            value: 287ea0c8-99de-4f0c-addc-097f78b48ba6
+      responses:
+        '200':
+          description: Subscription was deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionDeleteResponse'
+              examples:
+                Success - JSON:
+                  description: Success - JSON
+                  value:
+                    subscriptionId: 63914a27-a5ca-4fdf-80b0-ffc985f53c14
+                    message: Subscription deleted successfully
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionDeleteResponse'
+              examples:
+                Success - XML:
+                  description: Success - XML
+                  value:
+                    subscriptionId: 63914a27-a5ca-4fdf-80b0-ffc985f53c14
+                    message: Subscription deleted successfully
+        '401':
+          description: Unauthorized. The request lacks valid authentication credentials.
+          content:
+            application/json:
+              examples:
+                Unauthorized Access:
+                  description: Unauthorized Access
+                  value:
+                    status: Authentication Failed - Unauthorized.
+        '404':
+          description: Subscription not found or already deleted.
+          content:
+            application/json:
+              examples:
+                Subscription Not Found:
+                  description: Subscription Not Found
+                  value:
+                    errorCode: 404-104
+                    errorMessage: Subscription ID does not exist.
+                    diagnosticCode: 7d31a7f2-6b68-45fe-bccc-0f147d8313dc
+            application/xml:
+              examples:
+                Subscription Not Found - XML:
+                  description: Subscription Not Found - XML
+                  value: "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n   <error>\n       <diagnosticCode>26002d98-ab9c-4803-a80c-0c5ad0685188</diagnosticCode>\n       <errorCode>404-104</errorCode>\n       <errorMessage>Subscription ID does not exist.</errorMessage>\n   </error>\n"
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /subscriptions/jobs:
+    get:
+      tags:
+      - Subscription API
+      summary: List Subscription Jobs
+      description: 'Retrieve a paginated list of all subscription jobs created by your tenant. Results are returned in descending order by creation time (`createdAt`). You can apply filters based on time period, date range, job status, and job type.
+
+
+        Period can be specified as `day`, `month`, or `year`. If `day` is selected, you can specify a range of days (e.g., 2024-09-01 to 2024-09-07). For `month`, you can specify a range of months (e.g., 2024-09 to 2024-10). For `year`, you can specify a range of years (e.g., 2024 to 2025 for the entire year).
+
+        '
+      operationId: subscriptionJobsListFetch
+      parameters:
+      - name: period
+        in: query
+        description: 'The time period type you want to filter jobs by.
+
+
+          Valid values:
+
+          - day
+
+          - month
+
+          - year
+
+          '
+        required: false
+        schema:
+          type: string
+          enum:
+          - day
+          - month
+          - year
+          description: 'The time period type you want to filter jobs by.
+
+
+            Valid values:
+
+            - day
+
+            - month
+
+            - year
+
+            '
+          example: month
+        examples:
+          default:
+            value: month
+      - name: start
+        in: query
+        description: 'Start day/month/year(inclusive) for the selected period.
+
+
+          Start format depends on the period type:
+
+          - day: YYYY-MM-DD  (e.g., 2024-09-01)
+
+          - month: YYYY-MM   (e.g., 2024-09)
+
+          - year: YYYY       (e.g., 2024)
+
+          '
+        required: false
+        schema:
+          type: string
+          description: 'Start day/month/year(inclusive) for the selected period.
+
+
+            Start format depends on the period type:
+
+            - day: YYYY-MM-DD  (e.g., 2024-09-01)
+
+            - month: YYYY-MM   (e.g., 2024-09)
+
+            - year: YYYY       (e.g., 2024)
+
+            '
+          example: 2024-09
+        examples:
+          default:
+            value: 2024-09
+      - name: end
+        in: query
+        description: 'End day/month/year(inclusive) for the selected period.
+
+
+          End format depends on the period type:
+
+          - day: YYYY-MM-DD  (e.g., 2024-09-30)
+
+          - month: YYYY-MM   (e.g., 2024-10)
+
+          - year: YYYY       (e.g., 2025)
+
+          '
+        required: false
+        schema:
+          type: string
+          description: 'End day/month/year(inclusive) for the selected period.
+
+
+            End format depends on the period type:
+
+            - day: YYYY-MM-DD  (e.g., 2024-09-30)
+
+            - month: YYYY-MM   (e.g., 2024-10)
+
+            - year: YYYY       (e.g., 2025)
+
+            '
+          example: 2024-10
+        examples:
+          default:
+            value: 2024-10
+      - name: jobStatus
+        in: query
+        description: 'Filter jobs by their status.
+
+
+          Valid values:
+
+          - failed
+
+          - accepted
+
+          - processing
+
+          - finished
+
+          '
+        required: false
+        schema:
+          type: string
+          enum:
+          - failed
+          - accepted
+          - processing
+          - finished
+          description: 'Filter jobs by their status.
+
+
+            Valid values:
+
+            - failed
+
+            - accepted
+
+            - processing
+
+            - finished
+
+            '
+          example: processing
+        examples:
+          default:
+            value: processing
+      - name: jobType
+        in: query
+        description: 'Type of subscription job to filter by.
+
+
+          Valid values:
+
+          - notificationSubscriptionCreate
+
+          - notificationSubscriptionUpdate
+
+          '
+        required: false
+        schema:
+          type: string
+          enum:
+          - notificationSubscriptionCreate
+          - notificationSubscriptionUpdate
+          description: 'Type of subscription job to filter by.
+
+
+            Valid values:
+
+            - notificationSubscriptionCreate
+
+            - notificationSubscriptionUpdate
+
+            '
+          example: notificationSubscriptionCreate
+        examples:
+          default:
+            value: notificationSubscriptionCreate
+      - name: page
+        in: query
+        description: Page number to retrieve. Must be 1 or higher.
+        required: false
+        schema:
+          type: string
+          description: Page number to retrieve. Must be 1 or higher.
+          example: '2'
+        examples:
+          default:
+            value: '2'
+      - name: perPage
+        in: query
+        description: Number of results per page (max 50).
+        required: false
+        schema:
+          type: string
+          description: Number of results per page (max 50).
+          example: '25'
+        examples:
+          default:
+            value: '25'
+      responses:
+        '200':
+          description: List of subscription jobs returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionJobsListResponseDTO'
+              examples:
+                Success - JSON:
+                  summary: Successful response with job data
+                  description: Success - JSON
+                  value:
+                    subscriptionJobs:
+                    - jobId: 39ddf756-c04e-465c-b8c1-8d2c2be0abed
+                      subscriptionId: 63914a27-a5ca-4fdf-80b0-ffc985f53c14
+                      jobType: notificationSubscriptionCreate
+                      jobStatus: accepted
+                      createdAt: '2025-02-02T16:44:47.295360Z'
+                    - jobId: blpabc9bgs2273jnufj5-4e2b-4c2a-9b1a-1a2b3c4d5e6f
+                      subscriptionId: u572ptlm8hugfbmeiqh6-7c8d-4e2b-9b1a-1a2b3c4d5e6f
+                      jobType: notificationSubscriptionCreate
+                      jobStatus: finished
+                      createdAt: '2025-03-19T06:11:41.899058Z'
+                    - jobId: fsg6131mstfi0fkvsfeq-8f7e-4d2b-9b1a-1a2b3c4d5e6f
+                      subscriptionId: n39mbqc1nplo6nevgjj8-9a8b-4c2a-9b1a-1a2b3c4d5e6f
+                      jobType: notificationSubscriptionUpdate
+                      jobStatus: finished
+                      createdAt: '2025-03-19T06:13:12.787300Z'
+                    pageNo: 1
+                    pageSize: 10
+                    totalCount: 879
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionJobsListResponseDTO'
+              examples:
+                Success - XML:
+                  description: Success - XML
+                  value:
+                    subscriptionJobs:
+                    - jobId: 39ddf756-c04e-465c-b8c1-8d2c2be0abed
+                      subscriptionId: 63914a27-a5ca-4fdf-80b0-ffc985f53c14
+                      jobType: notificationSubscriptionCreate
+                      jobStatus: accepted
+                      createdAt: '2025-02-02T16:44:47.295360Z'
+                    - jobId: blpabc9bgs2273jnufj5-4e2b-4c2a-9b1a-1a2b3c4d5e6f
+                      subscriptionId: u572ptlm8hugfbmeiqh6-7c8d-4e2b-9b1a-1a2b3c4d5e6f
+                      jobType: notificationSubscriptionCreate
+                      jobStatus: finished
+                      createdAt: '2025-03-19T06:11:41.899058Z'
+                    - jobId: fsg6131mstfi0fkvsfeq-8f7e-4d2b-9b1a-1a2b3c4d5e6f
+                      subscriptionId: n39mbqc1nplo6nevgjj8-9a8b-4c2a-9b1a-1a2b3c4d5e6f
+                      jobType: notificationSubscriptionUpdate
+                      jobStatus: finished
+                      createdAt: '2025-03-19T06:13:12.787300Z'
+                    pageNo: 1
+                    pageSize: 10
+                    totalCount: 879
+        '400':
+          description: Invalid input or unsupported query parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Missing Period:
+                  description: Missing Period
+                  value:
+                    errorCode: 400-172
+                    errorMessage: Invalid set of period params, either send period, start and end or none of them.
+                    diagnosticCode: 29cc1814-a86a-440d-af76-5ce881fad9db
+                Invalid Date Format:
+                  description: Invalid Date Format
+                  value:
+                    errorCode: 400-174
+                    errorMessage: Invalid date format.
+                    diagnosticCode: 60430752-6639-46a8-acb6-1741629b654f
+                Invalid Start Date:
+                  description: Invalid Start Date
+                  value:
+                    errorCode: 400-179
+                    errorMessage: Invalid start date.
+                    diagnosticCode: 7f67713b-1d70-482c-acc9-823d12877891
+                Invalid Period:
+                  description: Invalid Period
+                  value:
+                    errorCode: 400-173
+                    errorMessage: 'Invalid period type. Valid values are: day, month and year.'
+                    diagnosticCode: 6345d682-b017-46ee-88ca-edd051b4e790
+                Invalid Day Range:
+                  description: Invalid Day Range
+                  value:
+                    errorCode: 400-175
+                    errorMessage: Difference between start date and end date should be less than 90 days.
+                    diagnosticCode: 5a5b0774-80f8-4649-ac69-8235992f676a
+                Invalid Month Range:
+                  description: Invalid Month Range
+                  value:
+                    errorCode: 400-176
+                    errorMessage: Difference between start date and end date should be less than 18 months.
+                    diagnosticCode: b99f789d-885c-4e62-adac-f92dbcb1d74c
+                Invalid Job Status:
+                  description: Invalid Job Status
+                  value:
+                    errorCode: 400-177
+                    errorMessage: 'Invalid job status. Valid values are: accepted, processing, finished and failed'
+                    diagnosticCode: 5bf08aab-850e-44bd-9cc5-93138afa99cd
+                Invalid Job Types:
+                  description: Invalid Job Types
+                  value:
+                    errorCode: 400-178
+                    errorMessage: 'Invalid job type. Valid values are: notificationSubscriptionCreate and notificationSubscriptionUpdate'
+                    diagnosticCode: f84010f1-2e89-4d2f-9ebe-921b4a74e0d7
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Missing Period XML:
+                  description: Missing Period XML
+                  value:
+                    errorCode: 400-172
+                    errorMessage: Invalid set of period params, either send period, start and end or none of them.
+                    diagnosticCode: 29cc1814-a86a-440d-af76-5ce881fad9db
+                Invalid Date Format XML:
+                  description: Invalid Date Format XML
+                  value:
+                    errorCode: 400-174
+                    errorMessage: Invalid date format.
+                    diagnosticCode: 60430752-6639-46a8-acb6-1741629b654f
+                Invalid Start Date XML:
+                  description: Invalid Start Date XML
+                  value:
+                    errorCode: 400-179
+                    errorMessage: Invalid start date.
+                    diagnosticCode: 7f67713b-1d70-482c-acc9-823d12877891
+                Invalid Period XML:
+                  description: Invalid Period XML
+                  value:
+                    errorCode: 400-173
+                    errorMessage: 'Invalid period type. Valid values are: day, month and year.'
+                    diagnosticCode: 6345d682-b017-46ee-88ca-edd051b4e790
+                Invalid Day Range XML:
+                  description: Invalid Day Range XML
+                  value:
+                    errorCode: 400-175
+                    errorMessage: Difference between start date and end date should be less than 90 days.
+                    diagnosticCode: 5a5b0774-80f8-4649-ac69-8235992f676a
+                Invalid Month Range XML:
+                  description: Invalid Month Range XML
+                  value:
+                    errorCode: 400-176
+                    errorMessage: Difference between start date and end date should be less than 18 months.
+                    diagnosticCode: b99f789d-885c-4e62-adac-f92dbcb1d74c
+                Invalid Job Status XML:
+                  description: Invalid Job Status XML
+                  value:
+                    errorCode: 400-177
+                    errorMessage: 'Invalid job status. Valid values are: accepted, processing, finished and failed'
+                    diagnosticCode: 5bf08aab-850e-44bd-9cc5-93138afa99cd
+                Invalid Job Types XML:
+                  description: Invalid Job Types XML
+                  value:
+                    errorCode: 400-178
+                    errorMessage: 'Invalid job type. Valid values are: notificationSubscriptionCreate and notificationSubscriptionUpdate'
+                    diagnosticCode: f84010f1-2e89-4d2f-9ebe-921b4a74e0d7
+        '401':
+          description: Authentication is required or token is invalid.
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  description: Unauthorized
+                  value:
+                    status: Authentication Failed - Unauthorized.
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /subscriptions/job/{jobId}:
+    get:
+      tags:
+      - Subscription API
+      summary: Check Subscription Job Status
+      description: 'Retrieve the current status of a bulk subscription job using its unique job ID.
+
+        After you submit a create or update subscription job request, you’ll receive a job ID.
+
+        This endpoint allows you to monitor that job’s progress and determine whether it has completed successfully.
+
+
+        If the job completes, the response will include the generated subscriptionId—which you can use to manage the subscription.
+
+        If the job fails, the response will contain error details explaining what went wrong.
+
+        '
+      operationId: getSubscriptionJobStatus
+      parameters:
+      - name: jobId
+        in: path
+        description: Job ID
+        required: true
+        schema:
+          type: string
+          example: ln63a2kv6k2cm09cubar
+        examples:
+          default:
+            value: ln63a2kv6k2cm09cubar
+      responses:
+        '200':
+          description: Job status retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkSubscriptionJobStatusResponseDTO'
+              examples:
+                Success - JSON:
+                  summary: A successful response showing job status
+                  description: Success - JSON
+                  value:
+                    jobId: 39ddf756-c04e-465c-b8c1-8d2c2be0abed
+                    subscriptionId: 63914a27-a5ca-4fdf-80b0-ffc985f53c14
+                    jobStatus: finished
+                    totalEntitiesProcessed: 5000
+                    jobType: notificationSubscriptionCreate
+                    subscriptionType: company
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BulkSubscriptionJobStatusResponseDTO'
+              examples:
+                Success - XML:
+                  summary: A successful XML response
+                  description: Success - XML
+                  value:
+                    jobId: 39ddf756-c04e-465c-b8c1-8d2c2be0abed
+                    subscriptionId: 63914a27-a5ca-4fdf-80b0-ffc985f53c14
+                    jobStatus: finished
+                    totalEntitiesProcessed: 5000
+                    jobType: notificationSubscriptionCreate
+                    subscriptionType: company
+        '400':
+          description: Invalid job ID or request format.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Bad Request - Invalid Job ID:
+                  description: Bad Request - Invalid Job ID
+                  value:
+                    errorCode: 400-139
+                    errorMessage: Job Id should not be empty.
+                    diagnosticCode: 15d8774c-f2a1-4352-ba65-386bf8d04ecf
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Bad Request XML:
+                  description: Bad Request XML
+                  value:
+                    errorCode: 400-139
+                    errorMessage: Job Id should not be empty.
+                    diagnosticCode: 15d8774c-f2a1-4352-ba65-386bf8d04ecf
+        '401':
+          description: Unauthorized. Access token missing or invalid.
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  description: Unauthorized
+                  value:
+                    status: Authentication Failed - Unauthorized.
+        '404':
+          description: The specified job ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Job Not Found - JSON:
+                  description: Job Not Found - JSON
+                  value:
+                    errorCode: 404-101
+                    errorMessage: Invalid job ID, job not found.
+                    diagnosticCode: 92ce43d0-a861-4394-b44d-420d114dcfcb
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Job Not Found - XML:
+                  description: Job Not Found - XML
+                  value:
+                    errorCode: 404-101
+                    errorMessage: Invalid job ID, job not found.
+                    diagnosticCode: 92ce43d0-a861-4394-b44d-420d114dcfcb
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+  /subscriptions:
+    get:
+      tags:
+      - Subscription API
+      summary: List Subscriptions
+      description: 'Retrieve a list of all subscriptions associated with your tenant.
+
+        You can filter results by one or more subscription types and paginate through the results.
+
+        Results are returned in pages, with support for customizing the number of items per page.
+
+        '
+      operationId: getAllSubscriptionsByClientID
+      parameters:
+      - name: subscriptionType
+        in: query
+        description: 'Comma-separated list of subscription types to filter the results. Valid values include: company, companyNews, dbPerson, companyFamilyTree.'
+        required: false
+        schema:
+          type: string
+          example: company,companyNews
+        examples:
+          default:
+            value: company,companyNews
+      - name: page
+        in: query
+        description: Page number for pagination. Default is 1.
+        required: false
+        schema:
+          type: integer
+          default: 1
+          example: 1
+        examples:
+          default:
+            value: 1
+      - name: perPage
+        in: query
+        description: Number of results per page. Default is 10, maximum is 50.
+        required: false
+        schema:
+          type: integer
+          default: 10
+          example: 10
+        examples:
+          default:
+            value: 10
+      responses:
+        '200':
+          description: List of subscriptions retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionListResponse'
+              examples:
+                Success - JSON:
+                  description: Success - JSON
+                  value:
+                    subscriptions:
+                    - name: Subscription Name
+                      description: Subscription Description
+                      subscriptionType: company
+                      subscriptionId: '12345'
+                    pageNo: 1
+                    pageSize: 10
+                    totalCount: 1
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionListResponse'
+              examples:
+                Success - XML:
+                  description: Success - XML
+                  value:
+                    subscriptions:
+                    - name: Subscription Name
+                      description: Subscription Description
+                      subscriptionType: company
+                      subscriptionId: '12345'
+                    pageNo: 1
+                    pageSize: 10
+                    totalCount: 1
+        '400':
+          description: Results per page value is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Invalid Results Per Page:
+                  description: Invalid Results Per Page
+                  value:
+                    errorCode: 404-101
+                    errorMessage: perPage must be between 1 and 50.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Invalid Results Per Page - XML:
+                  description: Invalid Results Per Page - XML
+                  value:
+                    errorCode: 404-101
+                    errorMessage: perPage must be between 1 and 50.
+                    diagnosticCode: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/data/b2b/v1
+        description: Server URL in Production environment
+components:
+  schemas:
+    CompanyAlertData:
+      type: object
+      properties:
+        companyId:
+          type: string
+        fields:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        fieldChanges:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/FieldDTO'
+      xml:
+        name: company
+    SubscriptionDeleteResponse:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+        message:
+          type: string
+      xml:
+        name: subscription
+    FieldDTO:
+      type: object
+      properties:
+        fieldName:
+          type: string
+        value:
+          type: string
+        newValue:
+          type: string
+      xml:
+        name: fieldChange
+    SubscriptionJobsListResponseDTO:
+      type: object
+      properties:
+        subscriptionJobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionJobsListDTO'
+          xml:
+            name: subscriptionJobsList
+            wrapped: true
+        pageNo:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        totalCount:
+          type: integer
+          format: int64
+      xml:
+        name: subscriptionJobsListResponse
+    CreateSubscriptionJobRequestDTO:
+      type: object
+      properties:
+        companyIds:
+          type: array
+          description: 'Required when subscriptionType is "company", "companyNews", or "companyFamilyTree".
+
+
+            For "companyFamilyTree", only Ultimate Parent Company IDs are allowed.
+
+
+            Provide a list of Company IDs you want to track. You can include up to 1 million IDs.
+
+            '
+          items:
+            type: integer
+            description: 'Required when subscriptionType is "company", "companyNews", or "companyFamilyTree".
+
+
+              For "companyFamilyTree", only Ultimate Parent Company IDs are allowed.
+
+
+              Provide a list of Company IDs you want to track. You can include up to 1 million IDs.
+
+              '
+            format: int32
+        dbPersonIds:
+          type: array
+          description: 'Required when subscriptionType is "dbPerson".
+
+
+            Provide a list of Demandbase Person IDs you want to subscribe to.
+
+            You can include up to 1 million IDs in a single request.
+
+            '
+          items:
+            type: integer
+            description: 'Required when subscriptionType is "dbPerson".
+
+
+              Provide a list of Demandbase Person IDs you want to subscribe to.
+
+              You can include up to 1 million IDs in a single request.
+
+              '
+            format: int32
+        name:
+          type: string
+          description: A name for your subscription. Helps identify it later.
+        description:
+          type: string
+          description: Optional description to explain what this subscription is for.
+        subscriptionType:
+          type: string
+          enum:
+          - company
+          - companyNews
+          - dbPerson
+          - companyFamilyTree
+          description: 'Type of subscription you''re creating.
+
+
+            Choose from: "company", "companyNews", "dbPerson", or "companyFamilyTree".
+
+            '
+        startDate:
+          type: string
+          description: 'The start date for your subscription in YYYY-MM-DD format.
+
+
+            Notifications will begin from: startDate + frequency.
+
+            They’ll continue at regular intervals based on the frequency.
+
+            '
+          example: '2025-02-18'
+        frequency:
+          type: string
+          description: 'How often you want to receive updates. Use one of the following formats:
+
+
+            - Minutes (M), Hours (h), Days (d), Weeks (w), or Months (m)
+
+            - Example: "7d" means every 7 days, "3w" means every 3 weeks
+
+
+            Minimum frequency:
+
+            - "company" and "dbPerson": 1 day
+
+            - "companyNews": 15 minutes
+
+            - "companyFamilyTree": 1 week
+
+            '
+        fields:
+          type: array
+          description: 'Fields you want to track for changes. When any of these fields change, you''ll get a notification.
+
+
+            If subscriptionType = "company":
+
+            Available fields: all (default), name, activeStatus, revenue, address, employeeRange, fax, naics, sic, primaryIndsutry, phone, revenueRange, Ticker, websites, companyStatus, companyType, financialYearEnd, employees, companyId, companyStatusV2, companyTypeV2, businessStructure, siteTypes, siteCount, siteLocationCount
+
+
+            If subscriptionType = "dbPerson":
+
+            Available fields: all (default), active, name, facebookHandle, linkedInHandle, twitterHandle, education, titles, phone, email, salary, description, imageUrl, age, newEmployment, executiveMobileNo
+
+            '
+          items:
+            type: string
+            description: 'Fields you want to track for changes. When any of these fields change, you''ll get a notification.
+
+
+              If subscriptionType = "company":
+
+              Available fields: all (default), name, activeStatus, revenue, address, employeeRange, fax, naics, sic, primaryIndsutry, phone, revenueRange, Ticker, websites, companyStatus, companyType, financialYearEnd, employees, companyId, companyStatusV2, companyTypeV2, businessStructure, siteTypes, siteCount, siteLocationCount
+
+
+              If subscriptionType = "dbPerson":
+
+              Available fields: all (default), active, name, facebookHandle, linkedInHandle, twitterHandle, education, titles, phone, email, salary, description, imageUrl, age, newEmployment, executiveMobileNo
+
+              '
+        newsCategories:
+          type: array
+          description: 'Categories of news you want to be notified about (only relevant for "companyNews").
+
+
+            Options include: LEADERSHIP_CHANGES, NEW_OFFERINGS, PARTNERSHIPS, COMPANY_PRESENTATION, LITIGATION, COMPLIANCE, RESEARCH_DEVELOPMENT, DATA_SECURITY, FUNDING_DEVELOPMENTS, BANKRUPTCY_RESTRUCTURING, REALESTATE_DEALS, REALESTATE_CONSTRUCTION, CORPORATE_CHALLENGES, ACQUISITIONS, EXPANDING_OPERATIONS, COST_CUTTING, OUTPERFORMING, UNDERPERFORMING.
+
+            '
+          items:
+            type: string
+            description: 'Categories of news you want to be notified about (only relevant for "companyNews").
+
+
+              Options include: LEADERSHIP_CHANGES, NEW_OFFERINGS, PARTNERSHIPS, COMPANY_PRESENTATION, LITIGATION, COMPLIANCE, RESEARCH_DEVELOPMENT, DATA_SECURITY, FUNDING_DEVELOPMENTS, BANKRUPTCY_RESTRUCTURING, REALESTATE_DEALS, REALESTATE_CONSTRUCTION, CORPORATE_CHALLENGES, ACQUISITIONS, EXPANDING_OPERATIONS, COST_CUTTING, OUTPERFORMING, UNDERPERFORMING.
+
+              '
+        webhook:
+          type: string
+          description: 'The endpoint URL where notifications should be delivered.
+
+
+            Example: https://yourdomain.com/webhook
+
+            '
+        signingSecret:
+          type: string
+          description: 'A shared secret used to sign webhook payloads using HmacSHA1.
+
+
+            This signature will appear in the X-DemandbaseAPI-AlertDataSignature header.
+
+            Max length: 500 characters.
+
+            '
+          maxLength: 500
+    SubscriptionListResponse:
+      type: object
+      properties:
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionDetailsDTO'
+          xml:
+            wrapped: true
+        pageNo:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+      xml:
+        name: subscriptionListResponse
+    GetAlertsResponseDTO:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertResponseDTO'
+          xml:
+            wrapped: true
+        pageNo:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+      xml:
+        name: Alert
+    UpdateSubscriptionJobRequestDTO:
+      type: object
+      properties:
+        companyIds:
+          type: array
+          description: Updated list of Company IDs you want to subscribe to. This replaces the existing list if provided.
+          items:
+            type: integer
+            format: int32
+        addCompanyIds:
+          type: array
+          description: Company IDs to add to the current subscription (incremental update).
+          items:
+            type: integer
+            format: int32
+        removeCompanyIds:
+          type: array
+          description: Company IDs to remove from the current subscription.
+          items:
+            type: integer
+            format: int32
+        dbPersonIds:
+          type: array
+          description: Updated list of Demandbase Person IDs to subscribe to. This replaces the existing list if provided.
+          items:
+            type: integer
+            format: int32
+        addDBPersonIds:
+          type: array
+          description: Demandbase Person IDs to add to the current subscription (incremental update).
+          items:
+            type: integer
+            format: int32
+        removeDBPersonIds:
+          type: array
+          description: Demandbase Person IDs to remove from the current subscription.
+          items:
+            type: integer
+            format: int32
+        subscriptionId:
+          type: string
+          description: Unique ID of the subscription you want to update.
+        name:
+          type: string
+          description: Updated name for the subscription.
+        description:
+          type: string
+          description: Updated description explaining the purpose of this subscription.
+        subscriptionType:
+          type: string
+          enum:
+          - company
+          - companyNews
+          - dbPerson
+          - companyFamilyTree
+          description: Type of subscription you are updating.
+        frequency:
+          type: string
+          description: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    New frequency for receiving updates.\n    Format options: Minutes (M), Hours (h), Days (d), Weeks (w), or Months (m)\n    Example: \"7d\" for every 7 days\n"
+        fields:
+          type: array
+          description: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    Updated list of fields to track for changes.\n    Notifications will be triggered when any of these fields value changes.\n"
+          items:
+            type: string
+        newsCategories:
+          type: array
+          description: News categories to subscribe to (applicable only for 'companyNews').
+          items:
+            type: string
+            enum:
+            - LEADERSHIP_CHANGES
+            - NEW_OFFERINGS
+            - PARTNERSHIPS
+            - COMPANY_PRESENTATION
+            - LITIGATION
+            - COMPLIANCE
+            - RESEARCH_DEVELOPMENT
+            - DATA_SECURITY
+            - FUNDING_DEVELOPMENTS
+            - BANKRUPTCY_RESTRUCTURING
+            - REALESTATE_DEALS
+            - REALESTATE_CONSTRUCTION
+            - CORPORATE_CHALLENGES
+            - ACQUISITIONS
+            - EXPANDING_OPERATIONS
+            - COST_CUTTING
+            - OUTPERFORMING
+            - UNDERPERFORMING
+        webhook:
+          type: string
+          description: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    Updated Webhook URL where notifications should be sent.\n    Example: http://www.your-domain.com/webhook\n"
+        signingSecret:
+          type: string
+          description: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    Updated optional shared secret used to sign webhook payloads (HmacSHA1).\n    The signature will appear in the 'X-DemandbaseAPI-AlertDataSignature' header.\n    Max length: 500 characters.\n"
+          maxLength: 500
+    SubscriptionEntityDetailsDTO:
+      type: object
+      properties:
+        companyIds:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        dbPersonIds:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        pageNo:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+    EmploymentAlertData:
+      type: object
+      properties:
+        contactId:
+          type: string
+        fields:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        fieldChanges:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/FieldDTO'
+      xml:
+        name: employment
+    ContactAlertData:
+      type: object
+      properties:
+        dbPersonId:
+          type: string
+        fields:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        employments:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/EmploymentAlertData'
+        fieldChanges:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/FieldDTO'
+      xml:
+        name: dbPerson
+    GetAlertDefinitionDTO:
+      type: object
+      properties:
+        companyAlertDetails:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/CompanyAlertData'
+        companyNewsAlertDetails:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/CompanyNewsAlertData'
+        dbPersonAlertDetails:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ContactAlertData'
+        companyFamilyTreeAlertDetails:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/FamilyTreeAlertData'
+        subscriptionType:
+          type: string
+          enum:
+          - company
+          - companynews
+          - dbPerson
+          - companyfamilytree
+        pageNo:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int64
+        totalCount:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+      xml:
+        name: alert
+    FamilyTreeChangeEventDTO:
+      type: object
+      properties:
+        companyId:
+          type: integer
+          format: int32
+        addedCompanies:
+          type: array
+          uniqueItems: true
+          items:
+            type: integer
+            format: int32
+        deletedCompanies:
+          type: array
+          uniqueItems: true
+          items:
+            type: integer
+            format: int32
+        newUltimateParentCompanyId:
+          type: integer
+          format: int32
+        currentCompanyId:
+          type: integer
+          format: int32
+        timestamp:
+          type: integer
+          format: int64
+      xml:
+        name: familyTreeChanges
+    SubscriptionJobsListDTO:
+      type: object
+      properties:
+        jobId:
+          type: string
+        subscriptionId:
+          type: string
+        jobType:
+          type: string
+        jobStatus:
+          type: string
+        createdAt:
+          type: string
+    SubscriptionDetailsDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        subscriptionType:
+          type: string
+        subscriptionId:
+          type: string
+        createdAt:
+          type: string
+    AlertResponseDTO:
+      type: object
+      properties:
+        alertId:
+          type: integer
+          format: int32
+        createdAt:
+          type: string
+    FamilyTreeAlertData:
+      type: object
+      properties:
+        companyId:
+          type: integer
+          format: int32
+        currentCompanyId:
+          type: integer
+          format: int32
+        message:
+          type: string
+        companyFamilyTreeChanges:
+          $ref: '#/components/schemas/FamilyTreeChangeEventDTO'
+      xml:
+        name: familyTree
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        diagnosticCode:
+          type: string
+      xml:
+        name: error
+    WebhookDTO:
+      type: object
+      description: Webhook configuration object containing target URL, signing secret, and validation error(if any).
+      properties:
+        url:
+          type: string
+          description: Target URL where alerts will be delivered.
+        status:
+          type: string
+          description: 'Current status of the webhook: VERIFICATION_PENDING (queued for verification), VERIFICATION_RUNNING (verification in progress), ACTIVE (verification succeeded), or DISABLED (verification failed or the webhook was disabled).'
+          enum:
+          - VERIFICATION_PENDING
+          - VERIFICATION_RUNNING
+          - ACTIVE
+          - DISABLED
+        disableReasonMessage:
+          type: string
+          description: Explanation provided when the webhook is disabled, such as delivery failures or configuration issues.
+        signingSecret:
+          type: string
+          description: Shared secret used to generate HMAC signatures for verifying the authenticity of webhook requests.
+      xml:
+        name: webhook
+    BulkSubscriptionJobStatusResponseDTO:
+      type: object
+      properties:
+        jobId:
+          type: string
+        subscriptionId:
+          type: string
+        jobStatus:
+          type: string
+        totalEntitiesProcessed:
+          type: integer
+          format: int64
+        jobType:
+          type: string
+        invalidIds:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        message:
+          type: string
+        subscriptionType:
+          type: string
+      xml:
+        name: bulkSubscriptionJobStatus
+    SubscriptionDetailsResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Display name for the subscription.
+        description:
+          type: string
+          description: Optional description provided by the user to describe the purpose of the subscription.
+        nextFireTime:
+          type: string
+          description: Next scheduled time when the subscription will trigger an alert or data push.
+        subscriptionType:
+          type: string
+          description: Type of subscription, e.g., company, companynews, dbPerson, companyfamilytree.
+        frequency:
+          type: string
+          description: Subscription frequency configuration, such as daily, weekly, etc
+        webhook:
+          $ref: '#/components/schemas/WebhookDTO'
+        startDate:
+          type: string
+          description: Start date when the subscription becomes active.
+        createdAt:
+          type: string
+          description: Timestamp when the subscription was originally created.
+        newsCategories:
+          type: array
+          description: Set of news categories tracked in case of a news-based subscription.
+          uniqueItems: true
+          items:
+            type: string
+            description: Set of news categories tracked in case of a news-based subscription.
+            xml:
+              name: newsCategory
+          xml:
+            name: newsCategory
+        fields:
+          type: array
+          description: Set of entity fields (e.g., revenue, employee count) to track for changes in a company or person record.
+          uniqueItems: true
+          items:
+            type: string
+            description: Set of entity fields (e.g., revenue, employee count) to track for changes in a company or person record.
+            xml:
+              name: field
+          xml:
+            name: field
+      xml:
+        name: subscription
+    CompanyNewsAlertData:
+      type: object
+      properties:
+        companyId:
+          type: string
+        articleUrl:
+          type: string
+          format: uri
+        timestamp:
+          type: string
+        newsCategories:
+          type: array
+          items:
+            type: string
+      xml:
+        name: article
+    SubscriptionJobResponseDTO:
+      type: object
+      properties:
+        jobId:
+          type: string
+        jobStatus:
+          type: string
+        subscriptionId:
+          type: string
+        totalEntitiesProcessed:
+          type: integer
+          format: int32
+        jobType:
+          type: string
+        subscriptionType:
+          type: string
+        createdAt:
+          type: string
+      xml:
+        name: subscription
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: '[<span style="text-decoration:underline;color:blue; font-size:1.25em">How To Generate Bearer Tokens</span>](https://developer.demandbase.com/reference/generate_access_token)'
+      scheme: bearer

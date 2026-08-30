@@ -1,0 +1,333 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: Data Import Activities Management API
+  description: This API is designed to facilitate the bulk import of structured data (such as Accounts, People, and Activities) directly into the Demandbase platform. It allows users to programmatically upload files for processing, ensuring that Demandbase targets and segments are consistently updated with the freshest data from your external systems.
+servers:
+- url: https://uapi.demandbase.com/import/v1
+security:
+- bearerAuth: []
+tags:
+- name: Activities Management
+paths:
+  /activity_type:
+    post:
+      tags:
+      - Activities Management
+      summary: Create New Activity Type
+      description: Create a new activity type on your Demandbase tenant.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activityType:
+                  type: object
+                  properties:
+                    label:
+                      type: string
+                      description: The label of the activity type.
+                    name:
+                      type: string
+                      description: 'The name of the activity type. '
+                    description:
+                      type: string
+                      description: A description of the activity type.
+                  required:
+                  - label
+                fields:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      fieldName:
+                        type: string
+                        description: Name of the custom field.
+                      fieldDataType:
+                        type: string
+                        description: Data type of the custom field (e.g., string, date).
+                      defaultField:
+                        type: boolean
+                        description: Indicates whether this is a default field.
+                      isRequiredForCsvImport:
+                        type: boolean
+                        description: Indicates whether this field is required for CSV import.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityType'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+    get:
+      tags:
+      - Activities Management
+      summary: List Activity Types
+      description: Get all activity types currently configured on your Demandbase tenant
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomActivityType'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+  /activity_type/{identifier}:
+    get:
+      tags:
+      - Activities Management
+      summary: Activity Type Lookup
+      description: Retrieve details of an activity type for data import.
+      parameters:
+      - name: identifier
+        in: path
+        description: 'The unique identifier for the activity type. This should be the activity type ID.
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomActivityData'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+  /activity_type/{activityTypeId}:
+    put:
+      tags:
+      - Activities Management
+      summary: Update Activity Type
+      description: 'Update an existing activity type on your Demandbase tenant. Use the activity type ID in the URI (via `PUT /activity_type/{activityTypeId}`).
+
+        '
+      parameters:
+      - name: activityTypeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activityType:
+                  type: object
+                  properties:
+                    label:
+                      type: string
+                      description: 'The label of the activity type. '
+                    name:
+                      type: string
+                      description: 'The name of the activity type. '
+                    description:
+                      type: string
+                      description: A description of the activity type.
+                  required:
+                  - label
+                fields:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CustomActivityField'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityType'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://uapi.demandbase.com/import/v1
+components:
+  schemas:
+    CustomActivity:
+      type: object
+      title: CustomActivity
+      properties:
+        name:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+      required:
+      - name
+    ActivityType:
+      type: object
+      title: ActivityType
+      properties:
+        id:
+          type: integer
+          format: int64
+        label:
+          type: string
+      required:
+      - id
+      - label
+    CustomActivityType:
+      type: object
+      title: CustomActivityType
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        activitySource:
+          type: string
+      required:
+      - id
+      - name
+      - description
+      - activitySource
+    BadRequest:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    CustomActivityData:
+      type: object
+      title: CustomActivityData
+      properties:
+        activityType:
+          $ref: '#/components/schemas/CustomActivity'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomActivityField'
+      required:
+      - activityType
+    NotFound:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    CustomActivityField:
+      type: object
+      title: CustomActivityField
+      properties:
+        fieldName:
+          type: string
+        fieldDataType:
+          type: string
+        defaultField:
+          type: boolean
+        isRequiredForCsvImport:
+          type: boolean
+      required:
+      - fieldName
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: 'For instructions on generating API tokens, see the [Auth API](https://developer.demandbase.com/docs/auth-api/t26do264wb0f6-auth-api) article.
+
+        '
+      scheme: bearer
+      bearerFormat: JWT

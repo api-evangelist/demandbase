@@ -1,0 +1,281 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: Data Export Create Export Job API
+  description: "Export data in bulk from the Demandbase platform.<br><br>Authenticate using a bearer token. Pass a header like: `Authorization: Bearer v334asfsdfo3241ERqwefe`<br><br>The part after 'Bearer' is your API token. \nFor instructions on generating API tokens, see the [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set) article at the Demandbase Help Center"
+servers:
+- url: https://uapi.demandbase.com/data/export
+security:
+- token: []
+tags:
+- name: Create Export Job
+paths:
+  /v1/job:
+    post:
+      tags:
+      - Create Export Job
+      summary: Create export job (Account, Opportunity, Person, Activity, Campaign, and Creative)
+      description: Creates a data export job for any supported entity type.
+      operationId: createExportJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobRequestBody'
+            examples:
+              account:
+                value:
+                  entityType: account
+                  jobName: AccountExportJob
+                  fields:
+                  - '{Account}.name'
+                  - '{Account}.industry'
+                  format: CSV
+      responses:
+        '202':
+          description: Returns job metadata including jobId.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobDetails'
+        '400':
+          $ref: '#/components/responses/400errorDescriptionsForAllApi'
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+  /v1/accountList/job:
+    post:
+      tags:
+      - Create Export Job
+      summary: Create account list export job
+      operationId: fetchAccountListJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountListExportJob'
+      responses:
+        '202':
+          description: Returns the Job ID of the newly-created job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobDetails'
+        '400':
+          $ref: '#/components/responses/400errorDescriptionsForAllApi'
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+  /v1/personList/job:
+    post:
+      tags:
+      - Create Export Job
+      summary: Create person list export job
+      operationId: fetchPersonListJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonListExportJob'
+      responses:
+        '202':
+          description: Returns the jobId of the newly-created job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobDetails'
+        '400':
+          $ref: '#/components/responses/400errorDescriptionsForAllApi'
+        '401':
+          $ref: '#/components/responses/401errorDescriptionsForAllApi'
+        '403':
+          $ref: '#/components/responses/403errorDescriptionsForAllApi'
+        '429':
+          $ref: '#/components/responses/429errorDescriptionsForAllApi'
+        '500':
+          $ref: '#/components/responses/500errorDescriptionsForAllApi'
+      security:
+      - token: []
+components:
+  responses:
+    429errorDescriptionsForAllApi:
+      description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 429-100
+            errorMessage: Rate limit exceeded.
+            diagnosticCode: ce0fc1770e0d425b88892df4f663bf07
+    500errorDescriptionsForAllApi:
+      description: An unexpected internal service error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 500-100
+            errorMessage: Error while communicating with internal service.
+            diagnosticCode: de0fc1770e0d425b88892df4f663bf07
+    400errorDescriptionsForAllApi:
+      description: The request body, path parameter, or query parameter is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+    401errorDescriptionsForAllApi:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 401-100
+            errorMessage: Authentication credentials are missing or invalid.
+            diagnosticCode: 1e0fc1770e0d425b88892df4f663bf07
+    403errorDescriptionsForAllApi:
+      description: The authenticated user does not have permission to access this resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 403-100
+            errorMessage: The authenticated user does not have permission to access this resource.
+            diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
+  schemas:
+    JobRequestBody:
+      type: object
+      required:
+      - entityType
+      - jobName
+      properties:
+        entityType:
+          type: string
+          enum:
+          - account
+          - accountBuyingGroup
+          - personBuyingGroupMember
+          - opportunity
+          - person
+          - activity
+          - campaign
+          - creative
+        jobName:
+          type: string
+        fromDate:
+          type: string
+          format: date
+          example: '2023-01-01'
+        toDate:
+          type: string
+          format: date
+          example: '2023-01-31'
+        fields:
+          type: array
+          items:
+            type: string
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        source:
+          type: array
+          items:
+            type: string
+          description: 'Optional (Required for campaign and creative). Source of ad data: demandbase, google, linkedin, or all.'
+        adReportType:
+          type: string
+        accountListIds:
+          type: array
+          items:
+            type: integer
+        personListIds:
+          type: array
+          items:
+            type: integer
+        format:
+          type: string
+    Filter:
+      type: object
+      properties:
+        field:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+        operator:
+          type: string
+          description: One of Equals, Does Not Equal, Contains, Does Not Contain, Begins With, Does Not Begin With, Ends With, Does Not End With, Greater Than, Greater Than or Equal To, Less Than, Less Than or Equal To, Between, Exists, Does Not Exist, In, Not In
+    ErrorDto:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        diagnosticCode:
+          type: string
+        errorMessage:
+          type: string
+    PersonListExportJob:
+      type: object
+      properties:
+        jobName:
+          type: string
+        personListIds:
+          type: array
+          items:
+            type: integer
+    JobDetails:
+      type: object
+      required:
+      - jobStatus
+      - createdAt
+      - jobId
+      - entityType
+      - jobName
+      properties:
+        jobStatus:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        jobId:
+          type: string
+        entityType:
+          type: string
+        jobName:
+          type: string
+    AccountListExportJob:
+      type: object
+      properties:
+        jobName:
+          type: string
+        accountListId:
+          type: integer
+        accountListIds:
+          type: array
+          items:
+            type: integer
+  securitySchemes:
+    token:
+      type: http
+      scheme: bearer
