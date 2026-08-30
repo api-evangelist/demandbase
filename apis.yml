@@ -41,7 +41,7 @@ created: '2024-01-20'
 modified: '2026-08-13'
 specificationVersion: '0.23'
 tags:
-- Account Based Marketing
+- Account-Based Marketing
 - Advertising
 - AI Agents
 - B2B Marketing
@@ -266,6 +266,8 @@ apis:
   humanURL: https://developer.demandbase.com/docs/b2b-overview
   baseURL: https://uapi.demandbase.com/data/b2b/v1
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
