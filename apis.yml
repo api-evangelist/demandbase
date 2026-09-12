@@ -1355,6 +1355,8 @@ apis:
   - type: Authentication
     url: authentication/demandbase-authentication.yml
 common:
+- type: Website
+  url: https://www.demandbase.com/
 - type: Overlay
   url: overlays/demandbase-b2b-overlay.yaml
 - type: Overlay
