@@ -2,7 +2,15 @@ openapi: 3.2.0
 info:
   version: '1.0'
   title: Data Export Get Fields API
-  description: "Export data in bulk from the Demandbase platform.<br><br>Authenticate using a bearer token. Pass a header like: `Authorization: Bearer v334asfsdfo3241ERqwefe`<br><br>The part after 'Bearer' is your API token. \nFor instructions on generating API tokens, see the [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set) article at the Demandbase Help Center"
+  description: 'Export data in bulk from the Demandbase platform.
+
+
+    Authenticate using a bearer token. Pass a header like: `Authorization: Bearer v334asfsdfo3241ERqwefe`
+
+
+    The part after ''Bearer'' is your API token.
+
+    For instructions on generating API tokens, see the Generate and Manage API Key Set article at the Demandbase Help Center'
 servers:
 - url: https://uapi.demandbase.com/data/export
 security:
@@ -17,9 +25,7 @@ paths:
       summary: Export fields
       description: 'The Fields endpoint returns a list of all fields available for specific data export jobs.
 
-        For `campaign` and `creative` export jobs, the query parameter `adReportType` is required.
-
-        '
+        For `campaign` and `creative` export jobs, the query parameter `adReportType` is required.'
       operationId: fetchFields
       parameters:
       - name: entityType
@@ -64,7 +70,34 @@ paths:
       security:
       - token: []
 components:
+  schemas:
+    ErrorDto:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        diagnosticCode:
+          type: string
+        errorMessage:
+          type: string
+    Field:
+      type: object
+      properties:
+        name:
+          type: string
+        dataType:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
   responses:
+    400errorDescriptionsForFetchFields:
+      description: Invalid entityType.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
     429errorDescriptionsForAllApi:
       description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
       content:
@@ -95,12 +128,6 @@ components:
             errorCode: 401-100
             errorMessage: Authentication credentials are missing or invalid.
             diagnosticCode: 1e0fc1770e0d425b88892df4f663bf07
-    400errorDescriptionsForFetchFields:
-      description: Invalid entityType.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
     403errorDescriptionsForAllApi:
       description: The authenticated user does not have permission to access this resource.
       content:
@@ -111,27 +138,6 @@ components:
             errorCode: 403-100
             errorMessage: The authenticated user does not have permission to access this resource.
             diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
-  schemas:
-    ErrorDto:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        diagnosticCode:
-          type: string
-        errorMessage:
-          type: string
-    Field:
-      type: object
-      properties:
-        name:
-          type: string
-        dataType:
-          type: string
-        label:
-          type: string
-        description:
-          type: string
   securitySchemes:
     token:
       type: http

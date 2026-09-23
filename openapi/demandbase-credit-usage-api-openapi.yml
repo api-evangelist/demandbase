@@ -29,7 +29,7 @@ paths:
       tags:
       - Credit Usage
       summary: Fetch Credit Usage details
-      description: ' Returns a summary of credit usage and entitlements for the specified API category.'
+      description: Returns a summary of credit usage and entitlements for the specified API category.
       operationId: getCreditUsageDetails
       parameters:
       - name: apiProduct
@@ -103,6 +103,13 @@ paths:
             default: reporting/v1
 components:
   schemas:
+    CreditUsage:
+      type: object
+      properties:
+        summary:
+          $ref: '#/components/schemas/CreditUsageSummary'
+      xml:
+        name: usage
     CreditUsageSummary:
       type: object
       properties:
@@ -134,13 +141,6 @@ components:
 
             - `RUM`: credits deducted only for unique records returned within the period'
           example: perRecord
-    CreditUsage:
-      type: object
-      properties:
-        summary:
-          $ref: '#/components/schemas/CreditUsageSummary'
-      xml:
-        name: usage
   securitySchemes:
     bearerAuth:
       type: http

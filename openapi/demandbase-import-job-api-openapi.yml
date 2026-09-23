@@ -77,6 +77,8 @@ paths:
       - bearerAuth: []
       servers:
       - url: https://uapi.demandbase.com/import/v1
+      operationId: postJob
+      x-operation-id-source: derived
   /{entityType}/sources:
     get:
       tags:
@@ -140,6 +142,8 @@ paths:
       servers:
       - url: https://uapi.demandbase.com/import/v1
       x-internal: false
+      operationId: getByEntityTypeSources
+      x-operation-id-source: derived
   /job/{id}/data:
     put:
       tags:
@@ -237,6 +241,8 @@ paths:
       - bearerAuth: []
       servers:
       - url: https://uapi.demandbase.com/import/v1
+      operationId: putJobByIdData
+      x-operation-id-source: derived
   /job/{id}:
     get:
       tags:
@@ -313,6 +319,8 @@ paths:
       - bearerAuth: []
       servers:
       - url: https://uapi.demandbase.com/import/v1
+      operationId: getJobById
+      x-operation-id-source: derived
   /jobs:
     get:
       tags:
@@ -407,41 +415,18 @@ paths:
       - bearerAuth: []
       servers:
       - url: https://uapi.demandbase.com/import/v1
+      operationId: getJobs
+      x-operation-id-source: derived
 components:
   schemas:
-    DataImportJobs:
+    UnauthorizedError:
       type: object
-      properties:
-        totalCount:
-          type: integer
-          description: Total count of Data Import Jobs
-          format: int64
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataImportJob'
-    BadRequest:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    ForbiddenError:
-      type: object
-      description: The authenticated user is missing the import permission
+      description: Access token is missing or invalid
       properties:
         status:
           type: string
       required:
       - status
-    NotFound:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     CreateDataImportJob:
       type: object
       properties:
@@ -461,6 +446,39 @@ components:
       required:
       - dataImportName
       - entityType
+    ForbiddenError:
+      type: object
+      description: The authenticated user is missing the import permission
+      properties:
+        status:
+          type: string
+      required:
+      - status
+    BadRequest:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    NotFound:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    DataImportJobs:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: Total count of Data Import Jobs
+          format: int64
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataImportJob'
     DataImportJob:
       type: object
       properties:
@@ -499,14 +517,6 @@ components:
           type: string
       required:
       - message
-    UnauthorizedError:
-      type: object
-      description: Access token is missing or invalid
-      properties:
-        status:
-          type: string
-      required:
-      - status
   securitySchemes:
     bearerAuth:
       type: http

@@ -2,7 +2,15 @@ openapi: 3.2.0
 info:
   version: '1.0'
   title: Data Export Create Export Job API
-  description: "Export data in bulk from the Demandbase platform.<br><br>Authenticate using a bearer token. Pass a header like: `Authorization: Bearer v334asfsdfo3241ERqwefe`<br><br>The part after 'Bearer' is your API token. \nFor instructions on generating API tokens, see the [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set) article at the Demandbase Help Center"
+  description: 'Export data in bulk from the Demandbase platform.
+
+
+    Authenticate using a bearer token. Pass a header like: `Authorization: Bearer v334asfsdfo3241ERqwefe`
+
+
+    The part after ''Bearer'' is your API token.
+
+    For instructions on generating API tokens, see the Generate and Manage API Key Set article at the Demandbase Help Center'
 servers:
 - url: https://uapi.demandbase.com/data/export
 security:
@@ -14,7 +22,7 @@ paths:
     post:
       tags:
       - Create Export Job
-      summary: Create export job (Account, Opportunity, Person, Activity, Campaign, and Creative)
+      summary: Create export job (Account, Opportunity, Person, Activity, Campaign, and…
       description: Creates a data export job for any supported entity type.
       operationId: createExportJob
       requestBody:
@@ -114,54 +122,27 @@ paths:
       security:
       - token: []
 components:
-  responses:
-    429errorDescriptionsForAllApi:
-      description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 429-100
-            errorMessage: Rate limit exceeded.
-            diagnosticCode: ce0fc1770e0d425b88892df4f663bf07
-    500errorDescriptionsForAllApi:
-      description: An unexpected internal service error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 500-100
-            errorMessage: Error while communicating with internal service.
-            diagnosticCode: de0fc1770e0d425b88892df4f663bf07
-    400errorDescriptionsForAllApi:
-      description: The request body, path parameter, or query parameter is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-    401errorDescriptionsForAllApi:
-      description: Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 401-100
-            errorMessage: Authentication credentials are missing or invalid.
-            diagnosticCode: 1e0fc1770e0d425b88892df4f663bf07
-    403errorDescriptionsForAllApi:
-      description: The authenticated user does not have permission to access this resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 403-100
-            errorMessage: The authenticated user does not have permission to access this resource.
-            diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
   schemas:
+    ErrorDto:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        diagnosticCode:
+          type: string
+        errorMessage:
+          type: string
+    AccountListExportJob:
+      type: object
+      properties:
+        jobName:
+          type: string
+        accountListId:
+          type: integer
+        accountListIds:
+          type: array
+          items:
+            type: integer
     JobRequestBody:
       type: object
       required:
@@ -226,24 +207,6 @@ components:
         operator:
           type: string
           description: One of Equals, Does Not Equal, Contains, Does Not Contain, Begins With, Does Not Begin With, Ends With, Does Not End With, Greater Than, Greater Than or Equal To, Less Than, Less Than or Equal To, Between, Exists, Does Not Exist, In, Not In
-    ErrorDto:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        diagnosticCode:
-          type: string
-        errorMessage:
-          type: string
-    PersonListExportJob:
-      type: object
-      properties:
-        jobName:
-          type: string
-        personListIds:
-          type: array
-          items:
-            type: integer
     JobDetails:
       type: object
       required:
@@ -264,17 +227,62 @@ components:
           type: string
         jobName:
           type: string
-    AccountListExportJob:
+    PersonListExportJob:
       type: object
       properties:
         jobName:
           type: string
-        accountListId:
-          type: integer
-        accountListIds:
+        personListIds:
           type: array
           items:
             type: integer
+  responses:
+    429errorDescriptionsForAllApi:
+      description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 429-100
+            errorMessage: Rate limit exceeded.
+            diagnosticCode: ce0fc1770e0d425b88892df4f663bf07
+    500errorDescriptionsForAllApi:
+      description: An unexpected internal service error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 500-100
+            errorMessage: Error while communicating with internal service.
+            diagnosticCode: de0fc1770e0d425b88892df4f663bf07
+    401errorDescriptionsForAllApi:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 401-100
+            errorMessage: Authentication credentials are missing or invalid.
+            diagnosticCode: 1e0fc1770e0d425b88892df4f663bf07
+    403errorDescriptionsForAllApi:
+      description: The authenticated user does not have permission to access this resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 403-100
+            errorMessage: The authenticated user does not have permission to access this resource.
+            diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
+    400errorDescriptionsForAllApi:
+      description: The request body, path parameter, or query parameter is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
   securitySchemes:
     token:
       type: http

@@ -83,6 +83,8 @@ paths:
       - bearerAuth: []
       servers:
       - url: https://uapi.demandbase.com/import/v1
+      operationId: postActivityType
+      x-operation-id-source: derived
     get:
       tags:
       - Activities Management
@@ -119,6 +121,8 @@ paths:
       - bearerAuth: []
       servers:
       - url: https://uapi.demandbase.com/import/v1
+      operationId: getActivityType
+      x-operation-id-source: derived
   /activity_type/{identifier}:
     get:
       tags:
@@ -163,14 +167,14 @@ paths:
       - bearerAuth: []
       servers:
       - url: https://uapi.demandbase.com/import/v1
+      operationId: getActivityTypeByIdentifier
+      x-operation-id-source: derived
   /activity_type/{activityTypeId}:
     put:
       tags:
       - Activities Management
       summary: Update Activity Type
-      description: 'Update an existing activity type on your Demandbase tenant. Use the activity type ID in the URI (via `PUT /activity_type/{activityTypeId}`).
-
-        '
+      description: Update an existing activity type on your Demandbase tenant. Use the activity type ID in the URI (via `PUT /activity_type/{activityTypeId}`).
       parameters:
       - name: activityTypeId
         in: path
@@ -232,6 +236,8 @@ paths:
       - bearerAuth: []
       servers:
       - url: https://uapi.demandbase.com/import/v1
+      operationId: putActivityTypeByActivityTypeId
+      x-operation-id-source: derived
 components:
   schemas:
     CustomActivity:
@@ -246,6 +252,20 @@ components:
           type: string
       required:
       - name
+    CustomActivityField:
+      type: object
+      title: CustomActivityField
+      properties:
+        fieldName:
+          type: string
+        fieldDataType:
+          type: string
+        defaultField:
+          type: boolean
+        isRequiredForCsvImport:
+          type: boolean
+      required:
+      - fieldName
     ActivityType:
       type: object
       title: ActivityType
@@ -258,6 +278,32 @@ components:
       required:
       - id
       - label
+    CustomActivityData:
+      type: object
+      title: CustomActivityData
+      properties:
+        activityType:
+          $ref: '#/components/schemas/CustomActivity'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomActivityField'
+      required:
+      - activityType
+    BadRequest:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    NotFound:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     CustomActivityType:
       type: object
       title: CustomActivityType
@@ -276,32 +322,6 @@ components:
       - name
       - description
       - activitySource
-    BadRequest:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    CustomActivityData:
-      type: object
-      title: CustomActivityData
-      properties:
-        activityType:
-          $ref: '#/components/schemas/CustomActivity'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomActivityField'
-      required:
-      - activityType
-    NotFound:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     Error:
       type: object
       properties:
@@ -309,20 +329,6 @@ components:
           type: string
       required:
       - message
-    CustomActivityField:
-      type: object
-      title: CustomActivityField
-      properties:
-        fieldName:
-          type: string
-        fieldDataType:
-          type: string
-        defaultField:
-          type: boolean
-        isRequiredForCsvImport:
-          type: boolean
-      required:
-      - fieldName
   securitySchemes:
     bearerAuth:
       type: http

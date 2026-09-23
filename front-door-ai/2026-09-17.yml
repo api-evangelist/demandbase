@@ -1,0 +1,27 @@
+# Front Door AI Index — demandbase — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: demandbase
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.demandbase.com
+  final_host: www.demandbase.com
+  ownership: own
+  owner: demandbase
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 6
+  host_score: 6
+  density: 5.35
+  words: 1121
+  tiers:
+    agentic: 0
+    core: 6
+    model: 0
+  ambiguous: 4
+  top_terms:
+    AI: 6
+    agent: 2
+    automation: 2

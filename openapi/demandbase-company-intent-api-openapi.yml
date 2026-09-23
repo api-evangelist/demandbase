@@ -5,27 +5,7 @@ info:
   license:
     name: Proprietary
     url: https://www.demandbase.com/terms-of-use/
-  description: 'The Intent API provides company-level intent signals, including keyword research activity, intent strength, and trending behavior.
-
-
-    > **Beta:** This API is currently in beta and may change before general availability.
-
-
-    ## Authentication
-
-    All requests must be authenticated using a valid API token. Include the token in the `Authorization` header using the Bearer scheme.
-
-
-    For instructions on generating API tokens, see [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set).
-
-
-    ```text
-
-    Authorization: Bearer YOUR_API_KEY_HERE
-
-    Content-Type: application/json
-
-    ```'
+  description: The Intent API provides company-level intent signals, including keyword research activity, intent strength, and trending behavior.
   contact:
     name: Support
     url: https://www.demandbase.com/
@@ -207,6 +187,26 @@ paths:
       - bearerAuth: []
 components:
   schemas:
+    Pagination:
+      type: object
+      properties:
+        after:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page. Null when no additional page is available.
+          example: Tzo1MDoyNQ==
+        before:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the previous page. Null when the current page is the first page.
+          example: TzowOjI1
+        totalCount:
+          type: integer
+          format: int64
+          description: Total number of matching records.
+          example: 142
     IntentResult:
       type: object
       properties:
@@ -376,6 +376,13 @@ components:
           default: DESC
           description: Sort direction.
           example: DESC
+    UnauthorizedResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Authentication failure status.
+          example: Authentication Failed - Unauthorized.
     IntentResponse:
       type: object
       properties:
@@ -386,33 +393,6 @@ components:
             $ref: '#/components/schemas/IntentResult'
         pagination:
           $ref: '#/components/schemas/Pagination'
-    UnauthorizedResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Authentication failure status.
-          example: Authentication Failed - Unauthorized.
-    Pagination:
-      type: object
-      properties:
-        after:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page. Null when no additional page is available.
-          example: Tzo1MDoyNQ==
-        before:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the previous page. Null when the current page is the first page.
-          example: TzowOjI1
-        totalCount:
-          type: integer
-          format: int64
-          description: Total number of matching records.
-          example: 142
   securitySchemes:
     bearerAuth:
       type: http

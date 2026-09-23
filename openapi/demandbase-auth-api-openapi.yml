@@ -12,9 +12,7 @@ paths:
   /auth/v1/token:
     post:
       summary: Generate an access token
-      description: 'This endpoint issues an OAuth2 bearer token for authenticating with Demandbase APIs.
-
-        '
+      description: This endpoint issues an OAuth2 bearer token for authenticating with Demandbase APIs.
       requestBody:
         required: true
         content:
@@ -58,4 +56,6 @@ paths:
           description: Invalid request (missing or incorrect parameters)
       tags:
       - Auth
+      operationId: postAuthV1Token
+      x-operation-id-source: derived
 x-readme: {}

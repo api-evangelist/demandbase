@@ -2,43 +2,7 @@ openapi: 3.2.0
 info:
   version: '1.0'
   title: B2B Reference Tables API
-  description: 'The B2B API provides access to endpoints for searching, retrieving, and matching company and contact data.
-
-
-    It includes support for:
-
-    - **Company records:** Firmographic details, news, technologies, and more.
-
-    - **Contact records:** Current role, employment history, and professional details.
-
-    - **Demandbase Person profiles:** Persistent identities tied to individuals across multiple roles or companies.
-
-    - **Subscriptions:** Monitoring updates to companies and DB Person records.
-
-    ## Authentication
-
-    All requests to the B2B API must be authenticated using a valid API token. If authentication fails, the API will respond with a `401 Unauthorized` status code.
-
-    ### Obtaining an API Token
-
-    For instructions on generating API tokens, see the [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set) article at the Demandbase Help Center.
-
-    ### Authorization Header
-
-    Include your API token in the `Authorization` header of each request using the Bearer token scheme. Also set the `Content-Type` header to `application/json` when sending JSON payloads.
-
-    #### Example
-
-    ```
-
-    Authorization: Bearer YOUR_API_KEY_HERE
-
-    Content-Type: application/json
-
-    ```
-
-
-    > **Note:** Tokens should be treated as sensitive credentials. Do not expose them in public code repositories or client-side applications.'
+  description: The B2B API provides access to endpoints for searching, retrieving, and matching company and contact data.
   contact:
     name: Support
     url: https://www.demandbase.com/
@@ -140,23 +104,6 @@ paths:
         description: Server URL in Production environment
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
-        diagnosticCode:
-          type: string
-      xml:
-        name: error
-    UnauthorizedResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: Authentication Failed - Unauthorized.
     ReferenceDataResponseDTO:
       type: object
       required:
@@ -172,6 +119,23 @@ components:
           items:
             type: object
             additionalProperties: true
+    UnauthorizedResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: Authentication Failed - Unauthorized.
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        diagnosticCode:
+          type: string
+      xml:
+        name: error
   securitySchemes:
     bearerAuth:
       type: http

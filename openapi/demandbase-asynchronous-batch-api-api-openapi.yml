@@ -2,43 +2,7 @@ openapi: 3.2.0
 info:
   version: '1.0'
   title: B2B Asynchronous (Batch) API
-  description: 'The B2B API provides access to endpoints for searching, retrieving, and matching company and contact data.
-
-
-    It includes support for:
-
-    - **Company records:** Firmographic details, news, technologies, and more.
-
-    - **Contact records:** Current role, employment history, and professional details.
-
-    - **Demandbase Person profiles:** Persistent identities tied to individuals across multiple roles or companies.
-
-    - **Subscriptions:** Monitoring updates to companies and DB Person records.
-
-    ## Authentication
-
-    All requests to the B2B API must be authenticated using a valid API token. If authentication fails, the API will respond with a `401 Unauthorized` status code.
-
-    ### Obtaining an API Token
-
-    For instructions on generating API tokens, see the [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set) article at the Demandbase Help Center.
-
-    ### Authorization Header
-
-    Include your API token in the `Authorization` header of each request using the Bearer token scheme. Also set the `Content-Type` header to `application/json` when sending JSON payloads.
-
-    #### Example
-
-    ```
-
-    Authorization: Bearer YOUR_API_KEY_HERE
-
-    Content-Type: application/json
-
-    ```
-
-
-    > **Note:** Tokens should be treated as sensitive credentials. Do not expose them in public code repositories or client-side applications.'
+  description: The B2B API provides access to endpoints for searching, retrieving, and matching company and contact data.
   contact:
     name: Support
     url: https://www.demandbase.com/
@@ -75,11 +39,9 @@ paths:
 
         - CSV column headers correspond exactly to the field names specified in your job request
 
-        - For detailed information about available fields and their descriptions, refer to the field documentation in the <a href="https://demandbase.stoplight.io/docs/3p-api/zsbobfus3ok0w-create-a-bulk-data-retrieval-job" target="_blank">Create a Bulk Data Retrieval Job</a> endpoint
+        - For detailed information about available fields and their descriptions, refer to the field documentation in the Create a Bulk Data Retrieval Job endpoint
 
-        - Array fields (like `titles`, `jobFunctions`) are represented as pipe-separated values (e.g., "VP|Director|Manager")
-
-        '
+        - Array fields (like `titles`, `jobFunctions`) are represented as pipe-separated values (e.g., "VP|Director|Manager")'
       operationId: getBulkJobStatus
       parameters:
       - name: jobId
@@ -605,9 +567,7 @@ paths:
         Create and run asynchronous bulk jobs to retrieve company or contact data using entity IDs or search filters. This API is ideal for large data exports with a file-based CSV output.
 
 
-        You can submit up to **10,000 entity IDs** in a single request. The API initiates an asynchronous job and returns a `jobId` to track its status and retrieve results using the <a href="https://developer.demandbase.com/docs/3p-api/3nstx7v40nc9k-get-bulk-job-status" target="_blank">Job Status</a> API.
-
-        '
+        You can submit up to **10,000 entity IDs** in a single request. The API initiates an asynchronous job and returns a `jobId` to track its status and retrieve results using the Job Status API.'
       operationId: createBulkJob
       requestBody:
         description: "**NOTE:** You may submit up to 10,000 IDs or filter values per request\n\n### Filter Fields\n<details>\n <summary><strong>Company Search</strong> (click to expand)</summary>\n\n- `areaCodes`\n- `businessStructure`\n- `businessTypes`\n- `categoryIds`\n- `cities`\n- `companyStatus`\n- `companyType`\n- `country`\n- `dbe`\n- `disabled`\n- `ethnicity`\n- `fiscalYearEnd`\n- `fortuneRanking`\n- `gender`\n- `hasPhone`\n- `hasWebsite`\n- `industries`\n- `keywords`\n- `lgbt`\n- `maxEmployees`\n- `maxRevenue`\n- `mbe`\n- `minEmployees`\n- `minRevenue`\n- `naics`\n- `newsCategories`\n- `newsDuration`\n- `primaryIndustryOnly`\n- `primaryNAICSOnly`\n- `primarySICOnly`\n- `productIds`\n- `regions`\n- `sicCodes`\n- `state`\n- `street`\n- `subCategoryIds`\n- `subIndustries`\n- `ticker`\n- `vbe`\n- `website`\n- `wbe`\n- `zipCodes`\n</details>\n\n<details>\n  <summary><strong>Contact Search</strong> (click to expand)</summary>\n\n- `active`\n- `companyCity`\n- `companyCountry`\n- `companyIdsToInclude`\n- `companyName`\n- `companyState`\n- `companyWebsite`\n- `contactCity`\n- `contactCountry`\n- `contactState`\n- `email`\n- `emailRequired`\n- `emailValidationStatus`\n- `firstName`\n- `industries`\n- `jobFunctions`\n- `jobLevels`\n- `lastName`\n- `maxEmployees`\n- `minContactQualityScore`\n- `minEmployees`\n- `phoneRequired`\n- `phoneType`\n- `primaryIndustryOnly`\n- `subIndustries`\n- `titles`\n\n</details>\n\n### Available Output Fields by Job Type\n<details>\n  <summary>Output Fields for <strong>companyFetch</strong> (click to expand)</summary>\n\n- `britishSics`\n- `businessStructure`\n- `city`\n- `companyBlogProfile`\n- `companyId`\n- `companyLinkedInProfile`\n- `companyStatus`\n- `companyTwitterProfile`\n- `companyType`\n- `currentCompanyId`\n- `description`\n- `employees`\n- `fiscalYearEnd`\n- `fortuneRanking`\n- `industry`\n- `industryCode`\n- `latitude`\n- `longitude`\n- `naics`\n- `naicsDescription`\n- `name`\n- `phone`\n- `revenue`\n- `revenueCurrency`\n- `sic`\n- `sicDescription`\n- `siteCount`\n- `siteLocationCount`\n- `siteType`\n- `state`\n- `street`\n- `subIndustry`\n- `subIndustryCode`\n- `subsidiary`\n- `ticker`\n- `website`\n- `yearFounded`\n- `zip`\n\n</details>\n<details>\n  <summary>Output Fields for <strong>contactFetch</strong> (click to expand)</summary>\n\n- `active`\n- `age`\n- `companyId`\n- `companyName`\n- `contactId`\n- `corporatePhone`\n- `dbPersonArea`\n- `dbPersonCity`\n- `dbPersonCountry`\n- `dbPersonCountryCode`\n- `dbPersonId`\n- `dbPersonLatitude`\n- `dbPersonLongitude`\n- `dbPersonState`\n- `dbPersonStateCode`\n- `dbPersonStreet`\n- `dbPersonZip`\n- `description`\n- `directPhone`\n- `education`\n- `email`\n- `facebookHandle`\n- `firstName`\n- `imageUrl`\n- `jobFunctions`\n- `jobLevels`\n- `lastName`\n- `lastValidatedDate`\n- `linkedinHandle`\n- `contactQualityScore`\n- `middleName`\n- `mobileNumber`\n- `salary`\n- `salaryCurrency`\n- `startDate`\n- `titles`\n- `twitterHandle`\n\n</details>\n<details>\n  <summary>Output Fields for <strong>companySearch</strong> (click to expand)</summary>\n\n- `city`\n- `companyId`\n- `country`\n- `name`\n- `state`\n\n</details>\n\n<details>\n  <summary>Output Fields for <strong>contactSearch</strong> (click to expand)</summary>\n\n- `active`\n- `companyId`\n- `companyName`\n- `contactId`\n- `contactQualityScore`\n- `dbPersonId`\n- `firstName`\n- `jobFunctions`\n- `jobLevels`\n- `lastName`\n- `titles`\n\n</details>\n\nNote: Use \"all\" to include all available fields in the response.\n<br><br>**Example:**\n```\n{ \n  \"jobname\": \"TestJob\",\n  \"jobType\": \"contactSearch\",\n  \"filters\": [...]\n  \"fields\": [\"all\"], ← Will return ALL available fields\n}\n```\n\n### Request Body"
@@ -1316,57 +1276,6 @@ paths:
         description: Server URL in Production environment
 components:
   schemas:
-    JobRequestDTO:
-      type: object
-      properties:
-        jobType:
-          type: string
-          description: 'There are four supported job types:
-
-            | Job Type        | Description                                                  |
-
-            | --------------- | ------------------------------------------------------------ |
-
-            | `companyFetch`  | Retrieve companies by `companyId`.                           |
-
-            | `contactFetch`  | Retrieve contacts by `contactId`.                            |
-
-            | `companySearch` | Retrieve companies using filters (e.g., location, industry). |
-
-            | `contactSearch` | Retrieve contacts using filters (e.g., name, job function).  |'
-        jobName:
-          type: string
-          description: Descriptive name, max 50 characters.
-          maxLength: 50
-        fields:
-          type: array
-          description: ' List of fields to include in the output. Use "all" to fetch all available fields'
-          items:
-            type: string
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobFilter'
-        sortOrder:
-          type: string
-        sortBy:
-          type: string
-      required:
-      - jobType
-      - jobName
-      - fields
-      - filters
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
-        diagnosticCode:
-          type: string
-      xml:
-        name: error
     BulkJobStatusDTO:
       type: object
       properties:
@@ -1414,6 +1323,57 @@ components:
       required:
       - field
       - values
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        diagnosticCode:
+          type: string
+      xml:
+        name: error
+    JobRequestDTO:
+      type: object
+      properties:
+        jobType:
+          type: string
+          description: 'There are four supported job types:
+
+            | Job Type        | Description                                                  |
+
+            | --------------- | ------------------------------------------------------------ |
+
+            | `companyFetch`  | Retrieve companies by `companyId`.                           |
+
+            | `contactFetch`  | Retrieve contacts by `contactId`.                            |
+
+            | `companySearch` | Retrieve companies using filters (e.g., location, industry). |
+
+            | `contactSearch` | Retrieve contacts using filters (e.g., name, job function).  |'
+        jobName:
+          type: string
+          description: Descriptive name, max 50 characters.
+          maxLength: 50
+        fields:
+          type: array
+          description: ' List of fields to include in the output. Use "all" to fetch all available fields'
+          items:
+            type: string
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobFilter'
+        sortOrder:
+          type: string
+        sortBy:
+          type: string
+      required:
+      - jobType
+      - jobName
+      - fields
+      - filters
   securitySchemes:
     bearerAuth:
       type: http

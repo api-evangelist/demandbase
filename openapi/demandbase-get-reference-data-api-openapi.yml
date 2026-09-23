@@ -2,7 +2,15 @@ openapi: 3.2.0
 info:
   version: '1.0'
   title: Data Export Get Reference Data API
-  description: "Export data in bulk from the Demandbase platform.<br><br>Authenticate using a bearer token. Pass a header like: `Authorization: Bearer v334asfsdfo3241ERqwefe`<br><br>The part after 'Bearer' is your API token. \nFor instructions on generating API tokens, see the [Generate and Manage API Key Set](https://support.demandbase.com/hc/en-us/articles/38999526296603-Generate-and-Manage-API-Key-Set) article at the Demandbase Help Center"
+  description: 'Export data in bulk from the Demandbase platform.
+
+
+    Authenticate using a bearer token. Pass a header like: `Authorization: Bearer v334asfsdfo3241ERqwefe`
+
+
+    The part after ''Bearer'' is your API token.
+
+    For instructions on generating API tokens, see the Generate and Manage API Key Set article at the Demandbase Help Center'
 servers:
 - url: https://uapi.demandbase.com/data/export
 security:
@@ -93,7 +101,27 @@ paths:
       security:
       - token: []
 components:
+  schemas:
+    ErrorDto:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        diagnosticCode:
+          type: string
+        errorMessage:
+          type: string
   responses:
+    400errorDescriptionsForReferenceData:
+      description: The requested reference object is not supported.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 400-154
+            errorMessage: Invalid reference entity type.
+            diagnosticCode: 2e0fc1770e0d425b88892df4f663bf07
     429errorDescriptionsForAllApi:
       description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
       content:
@@ -114,16 +142,6 @@ components:
             errorCode: 500-100
             errorMessage: Error while communicating with internal service.
             diagnosticCode: de0fc1770e0d425b88892df4f663bf07
-    400errorDescriptionsForReferenceData:
-      description: The requested reference object is not supported.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 400-154
-            errorMessage: Invalid reference entity type.
-            diagnosticCode: 2e0fc1770e0d425b88892df4f663bf07
     401errorDescriptionsForAllApi:
       description: Authentication credentials are missing or invalid.
       content:
@@ -144,16 +162,6 @@ components:
             errorCode: 403-100
             errorMessage: The authenticated user does not have permission to access this resource.
             diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
-  schemas:
-    ErrorDto:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        diagnosticCode:
-          type: string
-        errorMessage:
-          type: string
   securitySchemes:
     token:
       type: http

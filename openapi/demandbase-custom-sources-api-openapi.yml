@@ -3,9 +3,7 @@ info:
   title: Custom Sources API
   description: 'Manage custom sources in the Demandbase platform. Custom sources let you define
 
-    named data origins and configure field mappings for the data they provide.
-
-    '
+    named data origins and configure field mappings for the data they provide.'
   version: '1.0'
 servers:
 - url: https://uapi.demandbase.demandbase.com
@@ -74,6 +72,8 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      operationId: getIntegrationV1CustomSources
+      x-operation-id-source: derived
     post:
       summary: Create a custom source
       description: Creates a new custom source and returns the created resource.
@@ -112,6 +112,8 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      operationId: postIntegrationV1CustomSources
+      x-operation-id-source: derived
   /integration/v1/custom-sources/{id}:
     get:
       summary: Get a custom source
@@ -143,6 +145,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      operationId: getIntegrationV1CustomSourcesById
+      x-operation-id-source: derived
     put:
       summary: Update a custom source
       description: Updates an existing source by its ID and returns the updated resource.
@@ -185,6 +189,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      operationId: putIntegrationV1CustomSourcesById
+      x-operation-id-source: derived
     delete:
       summary: Delete a custom source
       description: Deletes an existing source by its ID.
@@ -203,75 +209,46 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      operationId: deleteIntegrationV1CustomSourcesById
+      x-operation-id-source: derived
 components:
-  responses:
-    InternalServerError:
-      description: An unexpected server error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 500-001
-                  message: Internal server error.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 404-000
-                  message: Resource not found.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-    BadRequest:
-      description: The request body or query parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 400-000
-                  message: Invalid input.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-    Unauthorized:
-      description: Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 403-000
-                  message: Unauthorized.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
   schemas:
-    GetSourcesResponse:
+    CreateSourceRequest:
       type: object
       required:
-      - totalCount
-      - data
+      - name
+      - description
+      - priority
       properties:
-        totalCount:
+        name:
+          type: string
+          description: Human-readable name of the source.
+        description:
+          type: string
+          description: Description of the source.
+        priority:
           type: integer
-          format: int64
-          description: Total number of sources matching the query.
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceItem'
+          description: 'Priority for source ordering. Valid values: 0 (no preference) or 50-99 (custom) inclusive.
+
+            '
+    UpdateSourceRequest:
+      type: object
+      required:
+      - name
+      - description
+      - priority
+      properties:
+        name:
+          type: string
+          description: Human-readable name of the source.
+        description:
+          type: string
+          description: Description of the source.
+        priority:
+          type: integer
+          description: 'Priority for source ordering. Valid values: 0 (no preference) or 50-99 (custom) inclusive.
+
+            '
     SourceItem:
       type: object
       required:
@@ -298,6 +275,20 @@ components:
           description: 'Priority for source ordering. 0 = no preference; 50-99 = custom sources (lower number = higher priority).
 
             '
+    GetSourcesResponse:
+      type: object
+      required:
+      - totalCount
+      - data
+      properties:
+        totalCount:
+          type: integer
+          format: int64
+          description: Total number of sources matching the query.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceItem'
     StructuredError:
       type: object
       required:
@@ -321,42 +312,59 @@ components:
             diagnosticCode:
               type: string
               description: UUID for tracing the request in server logs.
-    UpdateSourceRequest:
-      type: object
-      required:
-      - name
-      - description
-      - priority
-      properties:
-        name:
-          type: string
-          description: Human-readable name of the source.
-        description:
-          type: string
-          description: Description of the source.
-        priority:
-          type: integer
-          description: 'Priority for source ordering. Valid values: 0 (no preference) or 50-99 (custom) inclusive.
-
-            '
-    CreateSourceRequest:
-      type: object
-      required:
-      - name
-      - description
-      - priority
-      properties:
-        name:
-          type: string
-          description: Human-readable name of the source.
-        description:
-          type: string
-          description: Description of the source.
-        priority:
-          type: integer
-          description: 'Priority for source ordering. Valid values: 0 (no preference) or 50-99 (custom) inclusive.
-
-            '
+  responses:
+    BadRequest:
+      description: The request body or query parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 400-000
+                  message: Invalid input.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 403-000
+                  message: Unauthorized.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 404-000
+                  message: Resource not found.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    InternalServerError:
+      description: An unexpected server error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 500-001
+                  message: Internal server error.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
   parameters:
     SourceId:
       name: id
