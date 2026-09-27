@@ -1297,43 +1297,6 @@ components:
           type: string
       xml:
         name: BulkJobStatus
-    JobFilter:
-      type: object
-      properties:
-        field:
-          type: string
-          description: 'Restrictions:
-
-            <ul>
-
-            <li>companyFetch: Only companyId is allowed.</li>
-
-            <li>contactFetch: Only contactId is allowed.</li>
-
-            <li>companySearch: Use any valid company search filter field.</li>
-
-            <li>contactSearch: Use valid contact search filter fields.</li>
-
-            </ul>'
-        values:
-          type: array
-          description: Array of string values to filter on
-          items:
-            type: string
-      required:
-      - field
-      - values
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
-        diagnosticCode:
-          type: string
-      xml:
-        name: error
     JobRequestDTO:
       type: object
       properties:
@@ -1374,6 +1337,43 @@ components:
       - jobName
       - fields
       - filters
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        diagnosticCode:
+          type: string
+      xml:
+        name: error
+    JobFilter:
+      type: object
+      properties:
+        field:
+          type: string
+          description: 'Restrictions:
+
+            <ul>
+
+            <li>companyFetch: Only companyId is allowed.</li>
+
+            <li>contactFetch: Only contactId is allowed.</li>
+
+            <li>companySearch: Use any valid company search filter field.</li>
+
+            <li>contactSearch: Use valid contact search filter fields.</li>
+
+            </ul>'
+        values:
+          type: array
+          description: Array of string values to filter on
+          items:
+            type: string
+      required:
+      - field
+      - values
   securitySchemes:
     bearerAuth:
       type: http

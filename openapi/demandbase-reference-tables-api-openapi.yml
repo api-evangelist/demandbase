@@ -104,21 +104,6 @@ paths:
         description: Server URL in Production environment
 components:
   schemas:
-    ReferenceDataResponseDTO:
-      type: object
-      required:
-      - objectType
-      - data
-      properties:
-        objectType:
-          type: string
-          description: Canonical name of the requested reference object.
-        data:
-          type: array
-          description: Tenant-specific reference records. Record fields depend on the requested object.
-          items:
-            type: object
-            additionalProperties: true
     UnauthorizedResponse:
       type: object
       properties:
@@ -136,6 +121,21 @@ components:
           type: string
       xml:
         name: error
+    ReferenceDataResponseDTO:
+      type: object
+      required:
+      - objectType
+      - data
+      properties:
+        objectType:
+          type: string
+          description: Canonical name of the requested reference object.
+        data:
+          type: array
+          description: Tenant-specific reference records. Record fields depend on the requested object.
+          items:
+            type: object
+            additionalProperties: true
   securitySchemes:
     bearerAuth:
       type: http

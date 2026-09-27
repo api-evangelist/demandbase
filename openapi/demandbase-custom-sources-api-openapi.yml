@@ -213,6 +213,43 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    GetSourcesResponse:
+      type: object
+      required:
+      - totalCount
+      - data
+      properties:
+        totalCount:
+          type: integer
+          format: int64
+          description: Total number of sources matching the query.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceItem'
+    StructuredError:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - code
+          - message
+          - diagnosticCode
+          properties:
+            code:
+              type: string
+              description: 'Machine-readable error code (e.g. `400-000`, `404-000`, `500-001`). Default values by HTTP status: 400 → `400-000`, 404 → `404-000`, 500 → `500-001`.
+
+                '
+            message:
+              type: string
+              description: Human-readable description of the error.
+            diagnosticCode:
+              type: string
+              description: UUID for tracing the request in server logs.
     CreateSourceRequest:
       type: object
       required:
@@ -275,46 +312,18 @@ components:
           description: 'Priority for source ordering. 0 = no preference; 50-99 = custom sources (lower number = higher priority).
 
             '
-    GetSourcesResponse:
-      type: object
-      required:
-      - totalCount
-      - data
-      properties:
-        totalCount:
-          type: integer
-          format: int64
-          description: Total number of sources matching the query.
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceItem'
-    StructuredError:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - code
-          - message
-          - diagnosticCode
-          properties:
-            code:
-              type: string
-              description: 'Machine-readable error code (e.g. `400-000`, `404-000`, `500-001`). Default values by HTTP status: 400 → `400-000`, 404 → `404-000`, 500 → `500-001`.
-
-                '
-            message:
-              type: string
-              description: Human-readable description of the error.
-            diagnosticCode:
-              type: string
-              description: UUID for tracing the request in server logs.
+  parameters:
+    SourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+      description: The unique ID of the source.
   responses:
-    BadRequest:
-      description: The request body or query parameters are invalid.
+    InternalServerError:
+      description: An unexpected server error occurred.
       content:
         application/json:
           schema:
@@ -323,8 +332,8 @@ components:
             Example:
               value:
                 error:
-                  code: 400-000
-                  message: Invalid input.
+                  code: 500-001
+                  message: Internal server error.
                   diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
     Unauthorized:
       description: Authentication credentials are missing or invalid.
@@ -339,6 +348,19 @@ components:
                   code: 403-000
                   message: Unauthorized.
                   diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    BadRequest:
+      description: The request body or query parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 400-000
+                  message: Invalid input.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
     NotFound:
       description: The requested resource was not found.
       content:
@@ -352,28 +374,6 @@ components:
                   code: 404-000
                   message: Resource not found.
                   diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-    InternalServerError:
-      description: An unexpected server error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 500-001
-                  message: Internal server error.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-  parameters:
-    SourceId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-        format: int64
-      description: The unique ID of the source.
   securitySchemes:
     bearerAuth:
       type: http

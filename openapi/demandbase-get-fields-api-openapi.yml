@@ -70,6 +70,53 @@ paths:
       security:
       - token: []
 components:
+  responses:
+    429errorDescriptionsForAllApi:
+      description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 429-100
+            errorMessage: Rate limit exceeded.
+            diagnosticCode: ce0fc1770e0d425b88892df4f663bf07
+    500errorDescriptionsForAllApi:
+      description: An unexpected internal service error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 500-100
+            errorMessage: Error while communicating with internal service.
+            diagnosticCode: de0fc1770e0d425b88892df4f663bf07
+    400errorDescriptionsForFetchFields:
+      description: Invalid entityType.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+    403errorDescriptionsForAllApi:
+      description: The authenticated user does not have permission to access this resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 403-100
+            errorMessage: The authenticated user does not have permission to access this resource.
+            diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
+    401errorDescriptionsForAllApi:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 401-100
+            errorMessage: Authentication credentials are missing or invalid.
+            diagnosticCode: 1e0fc1770e0d425b88892df4f663bf07
   schemas:
     ErrorDto:
       type: object
@@ -91,53 +138,6 @@ components:
           type: string
         description:
           type: string
-  responses:
-    400errorDescriptionsForFetchFields:
-      description: Invalid entityType.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-    429errorDescriptionsForAllApi:
-      description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 429-100
-            errorMessage: Rate limit exceeded.
-            diagnosticCode: ce0fc1770e0d425b88892df4f663bf07
-    500errorDescriptionsForAllApi:
-      description: An unexpected internal service error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 500-100
-            errorMessage: Error while communicating with internal service.
-            diagnosticCode: de0fc1770e0d425b88892df4f663bf07
-    401errorDescriptionsForAllApi:
-      description: Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 401-100
-            errorMessage: Authentication credentials are missing or invalid.
-            diagnosticCode: 1e0fc1770e0d425b88892df4f663bf07
-    403errorDescriptionsForAllApi:
-      description: The authenticated user does not have permission to access this resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 403-100
-            errorMessage: The authenticated user does not have permission to access this resource.
-            diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
   securitySchemes:
     token:
       type: http

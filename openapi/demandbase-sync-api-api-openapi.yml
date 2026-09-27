@@ -1834,672 +1834,7 @@ paths:
       - url: https://uapi.demandbase.com/data/b2b/v1
         description: Server URL in Production environment
 components:
-  examples:
-    CompanyDetailsResponse:
-      description: Company Details Response
-      value:
-        companyId: 726263
-        companyName: Microsoft Corporation
-        companyType: Public
-        companyStatus: Operating
-        tickers:
-        - tickerName: MSFT
-          exchange: NASD
-        classification:
-          primaryBusiness:
-            industry: Computer Software
-            industryCode: '8'
-          secondaryBusinesses:
-          - industry: Computer Software
-            industryCode: '8'
-            subIndustry: Enterprise Resource Planning Software
-            subIndustryCode: '8_32'
-        address:
-          street: One Microsoft Way
-          city: Redmond
-          state: WA
-          zip: 98052-6399
-          country: US
-          latitude: '47.6400493830442'
-          longitude: '-122.129796892405'
-        phone: +1 425 882 8080
-        revenue: 245122
-        revenueCurrency: USD
-        employeeCount: 228000
-        sic: '7371'
-        sicDescription: Services-Computer Programming Services
-        naics: '5132'
-        naicsDescription: Software Publishers
-        financialYearEnd: '6'
-        equifaxId: 049615062
-        companyTaxId: '911144442'
-        britishSics:
-        - britishSic: '58290'
-          description: Other software publishing
-        - britishSic: '46510'
-          description: Wholesale of computers, computer peripheral equipment and software
-        foundedIn: '1975'
-        socialHandles:
-          twitter: https://twitter.com/microsoftindia
-          facebook: https://www.facebook.com/microsoft
-          blog: https://news.microsoft.com/feed/
-          linkedIn: https://www.linkedin.com/company/microsoft
-        siteTypes:
-        - Uncategorized
-        siteCount: 276
-        siteLocationCount: 82
-        businessStructure: Global Parent
-        websites:
-        - https://www.microsoft.com/en-us/
-    CompanyCompetitorsResponse:
-      description: Company Competitors Response
-      value:
-        companyId: 726263
-        companyName: Microsoft Corporation
-        companyType: Public
-        companyStatus: Operating
-        tickers:
-        - tickerName: MSFT
-          exchange: NASD
-        classification:
-          primaryBusiness:
-            industry: Computer Software
-            industryCode: '8'
-          secondaryBusinesses:
-          - industry: Computer Software
-            industryCode: '8'
-            subIndustry: Enterprise Resource Planning Software
-            subIndustryCode: '8_32'
-        address:
-          street: One Microsoft Way
-          city: Redmond
-          state: WA
-          zip: 98052-6399
-          country: US
-          latitude: '47.6400493830442'
-          longitude: '-122.129796892405'
-        phone: +1 425 882 8080
-        revenue: 245122
-        revenueCurrency: USD
-        employeeCount: 228000
-        sic: '7371'
-        sicDescription: Services-Computer Programming Services
-        naics: '5132'
-        naicsDescription: Software Publishers
-        financialYearEnd: '6'
-        equifaxId: 049615062
-        companyTaxId: '911144442'
-        britishSics:
-        - britishSic: '58290'
-          description: Other software publishing
-        - britishSic: '46510'
-          description: Wholesale of computers, computer peripheral equipment and software
-        foundedIn: '1975'
-        socialHandles:
-          twitter: https://twitter.com/microsoftindia
-          facebook: https://www.facebook.com/microsoft
-          blog: https://news.microsoft.com/feed/
-          linkedIn: https://www.linkedin.com/company/microsoft
-        siteTypes:
-        - Uncategorized
-        siteCount: 276
-        siteLocationCount: 82
-        businessStructure: Global Parent
-        websites:
-        - https://www.microsoft.com/en-us/
-        competitors:
-        - name: Red Hat Inc
-          city: Raleigh
-          state: NC
-          country: US
-          companyId: 732237
-        - name: Adobe Systems Incorporated
-          city: San Jose
-          state: CA
-          country: US
-          companyId: 724292
-    CompanyInstalledTechResponse:
-      description: Company Installed Tech Response
-      value:
-        companyId: 726263
-        companyName: Microsoft Corporation
-        companyType: Public
-        companyStatus: Operating
-        tickers:
-        - tickerName: MSFT
-          exchange: NASD
-        classification:
-          primaryBusiness:
-            industry: Computer Software
-            industryCode: '8'
-          secondaryBusinesses:
-          - industry: Computer Software
-            industryCode: '8'
-            subIndustry: Enterprise Resource Planning Software
-            subIndustryCode: '8_32'
-        address:
-          street: One Microsoft Way
-          city: Redmond
-          state: WA
-          zip: 98052-6399
-          country: US
-          latitude: '47.6400493830442'
-          longitude: '-122.129796892405'
-        phone: +1 425 882 8080
-        revenue: 245122
-        revenueCurrency: USD
-        employeeCount: 228000
-        sic: '7371'
-        sicDescription: Services-Computer Programming Services
-        naics: '5132'
-        naicsDescription: Software Publishers
-        financialYearEnd: '6'
-        equifaxId: 049615062
-        companyTaxId: '911144442'
-        britishSics:
-        - britishSic: '58290'
-          description: Other software publishing
-        - britishSic: '46510'
-          description: Wholesale of computers, computer peripheral equipment and software
-        - britishSic: '62011'
-          description: Ready-made interactive leisure and entertainment software development
-        - britishSic: '58210'
-          description: Publishing of computer games
-        foundedIn: '1975'
-        socialHandles:
-          twitter: https://twitter.com/microsoftindia
-          facebook: https://www.facebook.com/microsoft
-          blog: https://news.microsoft.com/feed/
-          linkedIn: https://www.linkedin.com/company/microsoft
-        siteTypes:
-        - Uncategorized
-        siteCount: 276
-        siteLocationCount: 82
-        businessStructure: Global Parent
-        websites:
-        - https://www.microsoft.com/en-us/
-        techUsed:
-          categories:
-          - categoryId: '52'
-            categoryName: AR/VR
-            subCategories:
-            - subCategoryId: '5000773'
-              subCategoryName: AR/VR Wearable
-              products:
-              - productId: DM17112
-                productName: Hololens2
-              - productId: DM10556
-                productName: Oculus Rift
-            - subCategoryId: '5000160'
-              subCategoryName: Augmented Reality Software
-              products:
-              - productId: DM10598
-                productName: Microsoft Dynamics 365 Product Visualize
-            - subCategoryId: '5000388'
-              subCategoryName: Virtual Reality Software
-              products:
-              - productId: DM02373
-                productName: Cryengine
-          - categoryId: '61'
-            categoryName: Analytics
-            subCategories:
-            - subCategoryId: '5000076'
-              subCategoryName: Business Intelligence Software
-              products:
-              - productId: DM01069
-                productName: Axio
-              - productId: DM02743
-                productName: Domo
-              - productId: DM12976
-                productName: Halo
-              - productId: DM05198
-                productName: Kxen
-              - productId: DM05911
-                productName: Microsoft Power Bi
-              - productId: DM12721
-                productName: Nicepeopleatwork
-              - productId: DM07982
-                productName: SAP Visual Intelligence
-              - productId: DM09374
-                productName: Twitter Website Universal Tag
-            - subCategoryId: '5000854'
-              subCategoryName: Data Science and Machine Learning
-              products:
-              - productId: DM20720
-                productName: Google Cloud AI Platform
-            - subCategoryId: '5000506'
-              subCategoryName: Data Virtualization Software
-              products:
-              - productId: DM12093
-                productName: Grafana
-            - subCategoryId: '5000020'
-              subCategoryName: Enterprise Search Software
-              products:
-              - productId: DM02319
-                productName: Coveo
-              - productId: DM02928
-                productName: Elasticsearch
-              - productId: DM07989
-                productName: SAS
-            - subCategoryId: '5000857'
-              subCategoryName: Image and Video Analysis
-              products:
-              - productId: DM20735
-                productName: Google Cloud Translation API
-            - subCategoryId: '5000482'
-              subCategoryName: Information Technology Management
-              products:
-              - productId: DM03655
-                productName: Gist
-            - subCategoryId: '5000033'
-              subCategoryName: Other Analytics Software
-              products:
-              - productId: DM16925
-                productName: ELK Stack
-              - productId: DM17008
-                productName: Google Crashlytics
-              - productId: DM20375
-                productName: Microsoft Azure Data Explorer
-            - subCategoryId: '5000078'
-              subCategoryName: Predictive Analytics Software
-              products:
-              - productId: DM04367
-                productName: IBM Spss
-              - productId: DM04631
-                productName: Innovyze
-              - productId: DM05089
-                productName: Kaggle
-            - subCategoryId: '5000232'
-              subCategoryName: Professional Services
-              products:
-              - productId: DM01294
-                productName: Bloomberg
-              - productId: DM09095
-                productName: Thomson Reuters
-            - subCategoryId: '5000365'
-              subCategoryName: Reporting
-              products:
-              - productId: DM17811
-                productName: Servicenow Reporting
-            - subCategoryId: '5000552'
-              subCategoryName: Social Media Marketing
-              products:
-              - productId: DM13407
-                productName: Socialbakers
-              - productId: DM15002
-                productName: Talkwalker
-    CompanyFamilyTreeResponse:
-      description: Company Family Tree Response
-      value:
-        companyId: 726263
-        companyName: Microsoft Corporation
-        companyType: Public
-        companyStatus: Operating
-        tickers:
-        - tickerName: MSFT
-          exchange: NASD
-        classification:
-          primaryBusiness:
-            industry: Computer Software
-            industryCode: '8'
-          secondaryBusinesses:
-          - industry: Computer Software
-            industryCode: '8'
-            subIndustry: Enterprise Resource Planning Software
-            subIndustryCode: '8_32'
-        address:
-          street: One Microsoft Way
-          city: Redmond
-          state: WA
-          zip: 98052-6399
-          country: US
-          latitude: '47.6400493830442'
-          longitude: '-122.129796892405'
-        phone: +1 425 882 8080
-        revenue: 245122
-        revenueCurrency: USD
-        employeeCount: 228000
-        sic: '7371'
-        sicDescription: Services-Computer Programming Services
-        naics: '5132'
-        naicsDescription: Software Publishers
-        financialYearEnd: '6'
-        equifaxId: 049615062
-        companyTaxId: '911144442'
-        britishSics:
-        - britishSic: '58290'
-          description: Other software publishing
-        - britishSic: '46510'
-          description: Wholesale of computers, computer peripheral equipment and software
-        foundedIn: '1975'
-        socialHandles:
-          twitter: https://twitter.com/microsoftindia
-          facebook: https://www.facebook.com/microsoft
-          blog: https://news.microsoft.com/feed/
-          linkedIn: https://www.linkedin.com/company/microsoft
-        siteTypes:
-        - Uncategorized
-        siteCount: 276
-        siteLocationCount: 82
-        businessStructure: Global Parent
-        websites:
-        - https://www.microsoft.com/en-us/
-        familyTree:
-          company:
-            companyId: 1
-            name: Microsoft
-            city: Redmond
-            state: WA
-            country: US
-          children:
-          - company:
-              companyId: 2
-              name: Microsoft India
-              city: Bangalore
-              state: KA
-              country: IN
-            children:
-            - company:
-                companyId: 3
-                name: Microsoft India Pvt Ltd
-                city: Bangalore
-                state: KA
-                country: IN
-        acquisitions:
-          companies:
-          - companyId: 2
-            name: Microsoft India
-            city: Bangalore
-            state: KA
-            country: IN
-    CompanyLogosResponse:
-      description: Company Logos Response
-      value:
-        companyId: 578458
-        companyName: Analysis Group, Inc.
-        companyType: Private
-        companyStatus: Operating
-        tickers: []
-        classification:
-          primaryBusiness:
-            industry: Corporate Services
-            industryCode: '229'
-            subIndustry: Management Consulting
-            subIndustryCode: '257'
-          secondaryBusinesses: []
-        address:
-          street: 111 Huntington Avenue Tenth Floor
-          city: Boston
-          state: MA
-          zip: 02199
-          country: US
-        phone: +1 617 425 8000
-        revenue: 43.75
-        revenueCurrency: USD
-        employeeCount: 500
-        sic: '8742'
-        sicDescription: Services-Management Consulting Services
-        naics: '541611'
-        naicsDescription: Administrative Management and General Management Consulting Services
-        equifaxId: 049615062
-        britishSics:
-        - britishSic: '71122'
-          description: Engineering related scientific and technical consulting activities
-        - britishSic: '70229'
-          description: Management consultancy activities other than financial management
-        foundedIn: '1981'
-        socialHandles:
-          twitter: https://twitter.com/analysisgroup
-          facebook: https://www.facebook.com/analysisgroup
-          linkedIn: https://www.linkedin.com/company/analysis-group
-        diversity:
-          gender: Female
-          ethnicity: African American
-          certifications:
-            wbe: true
-            mbe: true
-            vbe: true
-            disabled: false
-            dbe: true
-            lgbt: false
-        siteTypes:
-        - Uncategorized
-        businessStructure: Independent
-        websites:
-        - https://www.analysisgroup.com/
-        companyLogos:
-        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/100
-        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/200
-        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/400
   schemas:
-    EmploymentDetails:
-      type: object
-      properties:
-        contactId:
-          type: integer
-          format: int32
-        companyId:
-          type: integer
-          format: int32
-        companyName:
-          type: string
-        contactQualityScore:
-          type: string
-        description:
-          type: string
-        startDate:
-          type: string
-        salary:
-          type: string
-        salaryCurrency:
-          type: string
-        active:
-          type: string
-        emails:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailDetails'
-          xml:
-            wrapped: true
-        lastValidatedDate:
-          type: string
-        phoneNumbers:
-          $ref: '#/components/schemas/PhoneNumbers'
-        jobLevels:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobLevels'
-          xml:
-            wrapped: true
-        jobFunctions:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobFunctions'
-          xml:
-            wrapped: true
-        titles:
-          type: array
-          items:
-            type: string
-            xml:
-              name: title
-          xml:
-            wrapped: true
-    EmploymentDTO:
-      type: object
-      properties:
-        contactId:
-          type: integer
-          format: int64
-        companyId:
-          type: integer
-          format: int64
-        companyName:
-          type: string
-        titles:
-          type: array
-          items:
-            type: string
-            xml:
-              name: title
-          xml:
-            wrapped: true
-        jobLevels:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobLevelsV2'
-          xml:
-            wrapped: true
-        jobFunctions:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobFunctionsV2'
-          xml:
-            wrapped: true
-        active:
-          type: boolean
-        hasPhone:
-          type: boolean
-        hasEmail:
-          type: boolean
-        contactQualityScore:
-          type: string
-    FamilyTreeResultDTO:
-      type: object
-      properties:
-        company:
-          $ref: '#/components/schemas/CompanyDTO'
-        children:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/FamilyTreeResultDTO'
-          xml:
-            wrapped: true
-    TickerDTO:
-      type: object
-      properties:
-        tickerName:
-          type: string
-        exchange:
-          type: string
-    MatchResponseDTO:
-      type: object
-      properties:
-        matches:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatchResponse'
-          xml:
-            wrapped: true
-      xml:
-        name: MatchResults
-    MatchResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        companyMatches:
-          type: array
-          items:
-            $ref: '#/components/schemas/CompanyMatchDTO'
-          xml:
-            wrapped: true
-        contactMatches:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactMatchDTO'
-          xml:
-            wrapped: true
-    ContactResultsDTO:
-      type: object
-      properties:
-        dbPersonDetails:
-          $ref: '#/components/schemas/PersonDTO'
-        employmentDetails:
-          $ref: '#/components/schemas/EmploymentDTO'
-    EmailDetails:
-      type: object
-      properties:
-        email:
-          type: string
-        validationStatus:
-          type: string
-    Employments:
-      type: object
-      properties:
-        contactId:
-          type: integer
-          format: int32
-        companyId:
-          type: integer
-          format: int32
-        companyName:
-          type: string
-        emails:
-          type: array
-          items:
-            type: string
-            xml:
-              name: email
-          xml:
-            wrapped: true
-        phoneNumbers:
-          $ref: '#/components/schemas/PhoneNumbers'
-        active:
-          type: string
-        jobLevels:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobLevels'
-          xml:
-            wrapped: true
-        jobFunctions:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobFunctions'
-          xml:
-            wrapped: true
-        titles:
-          type: array
-          items:
-            type: string
-            xml:
-              name: title
-          xml:
-            wrapped: true
-    TechUsedProductDTO:
-      type: object
-      description: A product detected for the company.
-      properties:
-        productId:
-          type: string
-          description: Demandbase identifier for the product.
-          example: DM01069
-        productName:
-          type: string
-          description: Display name of the product.
-          example: Axio
-    ContactSearchResponseDTO:
-      type: object
-      properties:
-        contactResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactResultsDTO'
-          xml:
-            name: contactResult
-        totalCount:
-          type: integer
-          format: int64
-        pageNo:
-          type: integer
-          format: int64
-        pageSize:
-          type: integer
-          format: int64
-      xml:
-        name: contactResults
     DiversityDTO:
       type: object
       properties:
@@ -2509,12 +1844,14 @@ components:
           type: string
         certifications:
           $ref: '#/components/schemas/DiversityCertificationsDTO'
-    BritishSicDTO:
+    SocialHandles:
       type: object
       properties:
-        britishSic:
+        twitter:
           type: string
-        description:
+        facebook:
+          type: string
+        linkedIn:
           type: string
     ContactSearchRequestDTO:
       type: object
@@ -2652,31 +1989,107 @@ components:
         perPage:
           type: string
           default: '10'
-    ErrorResponse:
+    CompanyNewsArticle:
       type: object
       properties:
-        errorCode:
+        title:
           type: string
-        errorMessage:
+        url:
           type: string
-        diagnosticCode:
+        publicationDate:
+          type: string
+        source:
+          type: string
+        imageUrl:
+          type: string
+        newsCategory:
+          type: string
+    JobFunctionsV2:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    CompanyNewsResponseDTO:
+      type: object
+      properties:
+        companyNews:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyNewsArticle'
+          xml:
+            wrapped: true
+        pageNo:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int64
+        companyId:
           type: string
       xml:
-        name: error
-    CompanyDTO:
+        name: news
+    CompanyAddressDTO:
       type: object
+      description: Company address. State and country are returned as codes when available.
       properties:
-        name:
+        street:
           type: string
         city:
           type: string
         state:
           type: string
+          description: State or province code.
+          example: WA
+        zip:
+          type: string
         country:
           type: string
-        companyId:
-          type: integer
-          format: int32
+          description: ISO 3166-1 alpha-2 country code.
+          example: US
+        latitude:
+          type: string
+        longitude:
+          type: string
+        area:
+          type: string
+    JobFunctions:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    TechUsedSubCategoryDTO:
+      type: object
+      description: A technology subcategory and its detected products.
+      properties:
+        subCategoryId:
+          type: string
+          description: Demandbase identifier for the technology subcategory.
+          example: '5000076'
+        subCategoryName:
+          type: string
+          description: Display name of the technology subcategory.
+          example: Business Intelligence Software
+        products:
+          type: array
+          description: Products detected for the company within the subcategory.
+          items:
+            $ref: '#/components/schemas/TechUsedProductDTO'
+          xml:
+            wrapped: true
+    JobLevelsV2:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
     PersonDTO:
       type: object
       properties:
@@ -2691,15 +2104,352 @@ components:
           type: string
         city:
           type: string
-    SocialHandles:
+    ContactSearchResponseDTO:
       type: object
       properties:
-        twitter:
+        contactResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactResultsDTO'
+          xml:
+            name: contactResult
+        totalCount:
+          type: integer
+          format: int64
+        pageNo:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int64
+      xml:
+        name: contactResults
+    ClassificationDTO:
+      type: object
+      properties:
+        primaryBusiness:
+          $ref: '#/components/schemas/BusinessDTO'
+        secondaryBusinesses:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessDTO'
+          xml:
+            wrapped: true
+    EmploymentDTO:
+      type: object
+      properties:
+        contactId:
+          type: integer
+          format: int64
+        companyId:
+          type: integer
+          format: int64
+        companyName:
           type: string
-        facebook:
+        titles:
+          type: array
+          items:
+            type: string
+            xml:
+              name: title
+          xml:
+            wrapped: true
+        jobLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobLevelsV2'
+          xml:
+            wrapped: true
+        jobFunctions:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobFunctionsV2'
+          xml:
+            wrapped: true
+        active:
+          type: boolean
+        hasPhone:
+          type: boolean
+        hasEmail:
+          type: boolean
+        contactQualityScore:
           type: string
-        linkedIn:
+    CompanyFetchResponseDTO:
+      type: object
+      properties:
+        companyId:
+          type: integer
+          format: int32
+        companyName:
           type: string
+        description:
+          type: string
+        companyType:
+          type: string
+        companyStatus:
+          type: string
+        tickers:
+          type: array
+          items:
+            $ref: '#/components/schemas/TickerDTO'
+          xml:
+            wrapped: true
+        classification:
+          $ref: '#/components/schemas/ClassificationDTO'
+        address:
+          $ref: '#/components/schemas/CompanyAddressDTO'
+        phone:
+          type: string
+        revenue:
+          type: number
+          format: double
+          description: Annual revenue in millions.
+        revenueCurrency:
+          type: string
+        employeeCount:
+          type: integer
+          format: int32
+        sic:
+          type: string
+        sicDescription:
+          type: string
+        naics:
+          type: string
+        naicsDescription:
+          type: string
+        financialYearEnd:
+          type: string
+        equifaxId:
+          type: string
+        companyTaxId:
+          type: string
+        fortuneRanking:
+          type: string
+        britishSics:
+          type: array
+          items:
+            $ref: '#/components/schemas/BritishSicDTO'
+          xml:
+            wrapped: true
+        foundedIn:
+          type: string
+        socialHandles:
+          $ref: '#/components/schemas/SocialHandlesDTO'
+        diversity:
+          $ref: '#/components/schemas/DiversityDTO'
+        siteTypes:
+          type: array
+          items:
+            type: string
+            xml:
+              name: siteType
+          xml:
+            wrapped: true
+        siteCount:
+          type: integer
+          format: int32
+        siteLocationCount:
+          type: integer
+          format: int32
+        businessStructure:
+          type: string
+        currentCompanyId:
+          type: integer
+          format: int32
+        websites:
+          type: array
+          items:
+            type: string
+            xml:
+              name: website
+          xml:
+            wrapped: true
+        companyCompetitorIds:
+          type: array
+          items:
+            type: string
+        familyTree:
+          $ref: '#/components/schemas/FamilyTreeResultDTO'
+        acquisitions:
+          $ref: '#/components/schemas/AcquiredCompanyResultDTO'
+        techUsed:
+          $ref: '#/components/schemas/CompanyTechUsedDTO'
+        companyLogos:
+          type: array
+          items:
+            type: string
+            xml:
+              name: companyLogo
+          xml:
+            wrapped: true
+        competitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyDTO'
+          xml:
+            wrapped: true
+      xml:
+        name: company
+    MatchResponseDTO:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchResponse'
+          xml:
+            wrapped: true
+      xml:
+        name: MatchResults
+    TickerDTO:
+      type: object
+      properties:
+        tickerName:
+          type: string
+        exchange:
+          type: string
+    MatchResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        companyMatches:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyMatchDTO'
+          xml:
+            wrapped: true
+        contactMatches:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactMatchDTO'
+          xml:
+            wrapped: true
+    TechUsedCategoryDTO:
+      type: object
+      description: A technology category and its subcategories.
+      properties:
+        categoryId:
+          type: string
+          description: Demandbase identifier for the technology category.
+          example: '61'
+        categoryName:
+          type: string
+          description: Display name of the technology category.
+          example: Analytics
+        subCategories:
+          type: array
+          description: Technology subcategories within the category.
+          items:
+            $ref: '#/components/schemas/TechUsedSubCategoryDTO'
+          xml:
+            wrapped: true
+    DiversityCertificationsDTO:
+      type: object
+      properties:
+        wbe:
+          type: boolean
+        mbe:
+          type: boolean
+        vbe:
+          type: boolean
+        disabled:
+          type: boolean
+        dbe:
+          type: boolean
+        lgbt:
+          type: boolean
+    FamilyTreeResultDTO:
+      type: object
+      properties:
+        company:
+          $ref: '#/components/schemas/CompanyDTO'
+        children:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/FamilyTreeResultDTO'
+          xml:
+            wrapped: true
+    ContactFetchResponseDTO:
+      type: object
+      properties:
+        dbPersonDetails:
+          $ref: '#/components/schemas/DBPersonDetails'
+        employmentDetails:
+          $ref: '#/components/schemas/EmploymentDetails'
+        employmentHistoryList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employments'
+          xml:
+            wrapped: true
+      xml:
+        name: contact
+    DBPersonDetails:
+      type: object
+      properties:
+        dbPersonId:
+          type: integer
+          format: int32
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: integer
+          format: int32
+        mobileNumber:
+          type: string
+        educationList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Education'
+          xml:
+            wrapped: true
+        imageUrl:
+          type: string
+        socialHandles:
+          $ref: '#/components/schemas/SocialHandles'
+        address:
+          $ref: '#/components/schemas/AddressDTO'
+    TechUsedProductDTO:
+      type: object
+      description: A product detected for the company.
+      properties:
+        productId:
+          type: string
+          description: Demandbase identifier for the product.
+          example: DM01069
+        productName:
+          type: string
+          description: Display name of the product.
+          example: Axio
+    ContactResultsDTO:
+      type: object
+      properties:
+        dbPersonDetails:
+          $ref: '#/components/schemas/PersonDTO'
+        employmentDetails:
+          $ref: '#/components/schemas/EmploymentDTO'
+    ContactMatchDTO:
+      type: object
+      properties:
+        contact:
+          $ref: '#/components/schemas/ContactFetchResponseDTO'
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        diagnosticCode:
+          type: string
+      xml:
+        name: error
     CompanySearchRequestDTO:
       type: object
       properties:
@@ -2932,95 +2682,6 @@ components:
         perPage:
           type: string
           example: '10'
-    ClassificationDTO:
-      type: object
-      properties:
-        primaryBusiness:
-          $ref: '#/components/schemas/BusinessDTO'
-        secondaryBusinesses:
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessDTO'
-          xml:
-            wrapped: true
-    PhoneNumbers:
-      type: object
-      properties:
-        directNumber:
-          type: string
-        corporateNumber:
-          type: string
-    ContactFetchResponseDTO:
-      type: object
-      properties:
-        dbPersonDetails:
-          $ref: '#/components/schemas/DBPersonDetails'
-        employmentDetails:
-          $ref: '#/components/schemas/EmploymentDetails'
-        employmentHistoryList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Employments'
-          xml:
-            wrapped: true
-      xml:
-        name: contact
-    ContactMatchDTO:
-      type: object
-      properties:
-        contact:
-          $ref: '#/components/schemas/ContactFetchResponseDTO'
-    CompanyNewsArticle:
-      type: object
-      properties:
-        title:
-          type: string
-        url:
-          type: string
-        publicationDate:
-          type: string
-        source:
-          type: string
-        imageUrl:
-          type: string
-        newsCategory:
-          type: string
-    AcquiredCompanyResultDTO:
-      type: object
-      properties:
-        companies:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/CompanyDTO'
-          xml:
-            wrapped: true
-    JobFunctions:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    TechUsedCategoryDTO:
-      type: object
-      description: A technology category and its subcategories.
-      properties:
-        categoryId:
-          type: string
-          description: Demandbase identifier for the technology category.
-          example: '61'
-        categoryName:
-          type: string
-          description: Display name of the technology category.
-          example: Analytics
-        subCategories:
-          type: array
-          description: Technology subcategories within the category.
-          items:
-            $ref: '#/components/schemas/TechUsedSubCategoryDTO'
-          xml:
-            wrapped: true
     AddressDTO:
       type: object
       properties:
@@ -3044,57 +2705,190 @@ components:
           type: string
         area:
           type: string
-    DiversityCertificationsDTO:
-      type: object
-      properties:
-        wbe:
-          type: boolean
-        mbe:
-          type: boolean
-        vbe:
-          type: boolean
-        disabled:
-          type: boolean
-        dbe:
-          type: boolean
-        lgbt:
-          type: boolean
-    Education:
-      type: object
-      properties:
-        degree:
-          type: string
-        major:
-          type: string
-        university:
-          type: string
-    CompanyTechUsedDTO:
-      type: object
-      description: Installed technology information grouped by category and subcategory.
-      properties:
-        categories:
-          type: array
-          description: Technology categories associated with the company.
-          items:
-            $ref: '#/components/schemas/TechUsedCategoryDTO'
-          xml:
-            wrapped: true
-    SocialHandlesDTO:
-      type: object
-      properties:
-        twitter:
-          type: string
-        facebook:
-          type: string
-        blog:
-          type: string
-        linkedIn:
-          type: string
     CompanyMatchDTO:
       type: object
       properties:
         company:
           $ref: '#/components/schemas/CompanyFetchResponseDTO'
+    AcquiredCompanyResultDTO:
+      type: object
+      properties:
+        companies:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/CompanyDTO'
+          xml:
+            wrapped: true
+    EmailDetails:
+      type: object
+      properties:
+        email:
+          type: string
+        validationStatus:
+          type: string
+    CompanyDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        companyId:
+          type: integer
+          format: int32
+    BritishSicDTO:
+      type: object
+      properties:
+        britishSic:
+          type: string
+        description:
+          type: string
+    JobLevels:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    BusinessDTO:
+      type: object
+      properties:
+        industry:
+          type: string
+        industryCode:
+          type: string
+        subIndustry:
+          type: string
+        subIndustryCode:
+          type: string
+    Employments:
+      type: object
+      properties:
+        contactId:
+          type: integer
+          format: int32
+        companyId:
+          type: integer
+          format: int32
+        companyName:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+            xml:
+              name: email
+          xml:
+            wrapped: true
+        phoneNumbers:
+          $ref: '#/components/schemas/PhoneNumbers'
+        active:
+          type: string
+        jobLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobLevels'
+          xml:
+            wrapped: true
+        jobFunctions:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobFunctions'
+          xml:
+            wrapped: true
+        titles:
+          type: array
+          items:
+            type: string
+            xml:
+              name: title
+          xml:
+            wrapped: true
+    EmploymentDetails:
+      type: object
+      properties:
+        contactId:
+          type: integer
+          format: int32
+        companyId:
+          type: integer
+          format: int32
+        companyName:
+          type: string
+        contactQualityScore:
+          type: string
+        description:
+          type: string
+        startDate:
+          type: string
+        salary:
+          type: string
+        salaryCurrency:
+          type: string
+        active:
+          type: string
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailDetails'
+          xml:
+            wrapped: true
+        lastValidatedDate:
+          type: string
+        phoneNumbers:
+          $ref: '#/components/schemas/PhoneNumbers'
+        jobLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobLevels'
+          xml:
+            wrapped: true
+        jobFunctions:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobFunctions'
+          xml:
+            wrapped: true
+        titles:
+          type: array
+          items:
+            type: string
+            xml:
+              name: title
+          xml:
+            wrapped: true
+    MatchRequestDTO:
+      type: object
+      properties:
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchRequest'
+        fields:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            example: '["name","city"]'
+          example:
+          - name
+          - city
+        limitResults:
+          type: string
+          example: '10'
+        matchBranch:
+          type: string
+          example: 'true'
+        minContactQualityScore:
+          type: string
+          example: A+
+      required:
+      - requests
     CompanySearchResponseDTO:
       type: object
       properties:
@@ -3115,17 +2909,24 @@ components:
           format: int64
       xml:
         name: companies
-    BusinessDTO:
+    PhoneNumbers:
       type: object
       properties:
-        industry:
+        directNumber:
           type: string
-        industryCode:
+        corporateNumber:
           type: string
-        subIndustry:
-          type: string
-        subIndustryCode:
-          type: string
+    CompanyTechUsedDTO:
+      type: object
+      description: Installed technology information grouped by category and subcategory.
+      properties:
+        categories:
+          type: array
+          description: Technology categories associated with the company.
+          items:
+            $ref: '#/components/schemas/TechUsedCategoryDTO'
+          xml:
+            wrapped: true
     MatchRequest:
       type: object
       properties:
@@ -3195,264 +2996,463 @@ components:
           example: current
       required:
       - id
-    CompanyNewsResponseDTO:
+    SocialHandlesDTO:
       type: object
       properties:
-        companyNews:
-          type: array
-          items:
-            $ref: '#/components/schemas/CompanyNewsArticle'
-          xml:
-            wrapped: true
-        pageNo:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalCount:
-          type: integer
-          format: int64
-        companyId:
+        twitter:
           type: string
-      xml:
-        name: news
-    CompanyFetchResponseDTO:
+        facebook:
+          type: string
+        blog:
+          type: string
+        linkedIn:
+          type: string
+    Education:
       type: object
       properties:
-        companyId:
-          type: integer
-          format: int32
-        companyName:
+        degree:
           type: string
-        description:
+        major:
           type: string
-        companyType:
+        university:
           type: string
-        companyStatus:
-          type: string
+  examples:
+    CompanyFamilyTreeResponse:
+      description: Company Family Tree Response
+      value:
+        companyId: 726263
+        companyName: Microsoft Corporation
+        companyType: Public
+        companyStatus: Operating
         tickers:
-          type: array
-          items:
-            $ref: '#/components/schemas/TickerDTO'
-          xml:
-            wrapped: true
+        - tickerName: MSFT
+          exchange: NASD
         classification:
-          $ref: '#/components/schemas/ClassificationDTO'
+          primaryBusiness:
+            industry: Computer Software
+            industryCode: '8'
+          secondaryBusinesses:
+          - industry: Computer Software
+            industryCode: '8'
+            subIndustry: Enterprise Resource Planning Software
+            subIndustryCode: '8_32'
         address:
-          $ref: '#/components/schemas/CompanyAddressDTO'
-        phone:
-          type: string
-        revenue:
-          type: number
-          format: double
-          description: Annual revenue in millions.
-        revenueCurrency:
-          type: string
-        employeeCount:
-          type: integer
-          format: int32
-        sic:
-          type: string
-        sicDescription:
-          type: string
-        naics:
-          type: string
-        naicsDescription:
-          type: string
-        financialYearEnd:
-          type: string
-        equifaxId:
-          type: string
-        companyTaxId:
-          type: string
-        fortuneRanking:
-          type: string
+          street: One Microsoft Way
+          city: Redmond
+          state: WA
+          zip: 98052-6399
+          country: US
+          latitude: '47.6400493830442'
+          longitude: '-122.129796892405'
+        phone: +1 425 882 8080
+        revenue: 245122
+        revenueCurrency: USD
+        employeeCount: 228000
+        sic: '7371'
+        sicDescription: Services-Computer Programming Services
+        naics: '5132'
+        naicsDescription: Software Publishers
+        financialYearEnd: '6'
+        equifaxId: 049615062
+        companyTaxId: '911144442'
         britishSics:
-          type: array
-          items:
-            $ref: '#/components/schemas/BritishSicDTO'
-          xml:
-            wrapped: true
-        foundedIn:
-          type: string
+        - britishSic: '58290'
+          description: Other software publishing
+        - britishSic: '46510'
+          description: Wholesale of computers, computer peripheral equipment and software
+        foundedIn: '1975'
         socialHandles:
-          $ref: '#/components/schemas/SocialHandlesDTO'
-        diversity:
-          $ref: '#/components/schemas/DiversityDTO'
+          twitter: https://twitter.com/microsoftindia
+          facebook: https://www.facebook.com/microsoft
+          blog: https://news.microsoft.com/feed/
+          linkedIn: https://www.linkedin.com/company/microsoft
         siteTypes:
-          type: array
-          items:
-            type: string
-            xml:
-              name: siteType
-          xml:
-            wrapped: true
-        siteCount:
-          type: integer
-          format: int32
-        siteLocationCount:
-          type: integer
-          format: int32
-        businessStructure:
-          type: string
-        currentCompanyId:
-          type: integer
-          format: int32
+        - Uncategorized
+        siteCount: 276
+        siteLocationCount: 82
+        businessStructure: Global Parent
         websites:
-          type: array
-          items:
-            type: string
-            xml:
-              name: website
-          xml:
-            wrapped: true
-        companyCompetitorIds:
-          type: array
-          items:
-            type: string
+        - https://www.microsoft.com/en-us/
         familyTree:
-          $ref: '#/components/schemas/FamilyTreeResultDTO'
+          company:
+            companyId: 1
+            name: Microsoft
+            city: Redmond
+            state: WA
+            country: US
+          children:
+          - company:
+              companyId: 2
+              name: Microsoft India
+              city: Bangalore
+              state: KA
+              country: IN
+            children:
+            - company:
+                companyId: 3
+                name: Microsoft India Pvt Ltd
+                city: Bangalore
+                state: KA
+                country: IN
         acquisitions:
-          $ref: '#/components/schemas/AcquiredCompanyResultDTO'
-        techUsed:
-          $ref: '#/components/schemas/CompanyTechUsedDTO'
-        companyLogos:
-          type: array
-          items:
-            type: string
-            xml:
-              name: companyLogo
-          xml:
-            wrapped: true
-        competitors:
-          type: array
-          items:
-            $ref: '#/components/schemas/CompanyDTO'
-          xml:
-            wrapped: true
-      xml:
-        name: company
-    JobFunctionsV2:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    JobLevels:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    JobLevelsV2:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    DBPersonDetails:
-      type: object
-      properties:
-        dbPersonId:
-          type: integer
-          format: int32
-        firstName:
-          type: string
-        middleName:
-          type: string
-        lastName:
-          type: string
-        age:
-          type: integer
-          format: int32
-        mobileNumber:
-          type: string
-        educationList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Education'
-          xml:
-            wrapped: true
-        imageUrl:
-          type: string
-        socialHandles:
-          $ref: '#/components/schemas/SocialHandles'
+          companies:
+          - companyId: 2
+            name: Microsoft India
+            city: Bangalore
+            state: KA
+            country: IN
+    CompanyInstalledTechResponse:
+      description: Company Installed Tech Response
+      value:
+        companyId: 726263
+        companyName: Microsoft Corporation
+        companyType: Public
+        companyStatus: Operating
+        tickers:
+        - tickerName: MSFT
+          exchange: NASD
+        classification:
+          primaryBusiness:
+            industry: Computer Software
+            industryCode: '8'
+          secondaryBusinesses:
+          - industry: Computer Software
+            industryCode: '8'
+            subIndustry: Enterprise Resource Planning Software
+            subIndustryCode: '8_32'
         address:
-          $ref: '#/components/schemas/AddressDTO'
-    CompanyAddressDTO:
-      type: object
-      description: Company address. State and country are returned as codes when available.
-      properties:
-        street:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-          description: State or province code.
-          example: WA
-        zip:
-          type: string
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code.
-          example: US
-        latitude:
-          type: string
-        longitude:
-          type: string
-        area:
-          type: string
-    TechUsedSubCategoryDTO:
-      type: object
-      description: A technology subcategory and its detected products.
-      properties:
-        subCategoryId:
-          type: string
-          description: Demandbase identifier for the technology subcategory.
-          example: '5000076'
-        subCategoryName:
-          type: string
-          description: Display name of the technology subcategory.
-          example: Business Intelligence Software
-        products:
-          type: array
-          description: Products detected for the company within the subcategory.
-          items:
-            $ref: '#/components/schemas/TechUsedProductDTO'
-          xml:
-            wrapped: true
-    MatchRequestDTO:
-      type: object
-      properties:
-        requests:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatchRequest'
-        fields:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-            example: '["name","city"]'
-          example:
-          - name
-          - city
-        limitResults:
-          type: string
-          example: '10'
-        matchBranch:
-          type: string
-          example: 'true'
-        minContactQualityScore:
-          type: string
-          example: A+
-      required:
-      - requests
+          street: One Microsoft Way
+          city: Redmond
+          state: WA
+          zip: 98052-6399
+          country: US
+          latitude: '47.6400493830442'
+          longitude: '-122.129796892405'
+        phone: +1 425 882 8080
+        revenue: 245122
+        revenueCurrency: USD
+        employeeCount: 228000
+        sic: '7371'
+        sicDescription: Services-Computer Programming Services
+        naics: '5132'
+        naicsDescription: Software Publishers
+        financialYearEnd: '6'
+        equifaxId: 049615062
+        companyTaxId: '911144442'
+        britishSics:
+        - britishSic: '58290'
+          description: Other software publishing
+        - britishSic: '46510'
+          description: Wholesale of computers, computer peripheral equipment and software
+        - britishSic: '62011'
+          description: Ready-made interactive leisure and entertainment software development
+        - britishSic: '58210'
+          description: Publishing of computer games
+        foundedIn: '1975'
+        socialHandles:
+          twitter: https://twitter.com/microsoftindia
+          facebook: https://www.facebook.com/microsoft
+          blog: https://news.microsoft.com/feed/
+          linkedIn: https://www.linkedin.com/company/microsoft
+        siteTypes:
+        - Uncategorized
+        siteCount: 276
+        siteLocationCount: 82
+        businessStructure: Global Parent
+        websites:
+        - https://www.microsoft.com/en-us/
+        techUsed:
+          categories:
+          - categoryId: '52'
+            categoryName: AR/VR
+            subCategories:
+            - subCategoryId: '5000773'
+              subCategoryName: AR/VR Wearable
+              products:
+              - productId: DM17112
+                productName: Hololens2
+              - productId: DM10556
+                productName: Oculus Rift
+            - subCategoryId: '5000160'
+              subCategoryName: Augmented Reality Software
+              products:
+              - productId: DM10598
+                productName: Microsoft Dynamics 365 Product Visualize
+            - subCategoryId: '5000388'
+              subCategoryName: Virtual Reality Software
+              products:
+              - productId: DM02373
+                productName: Cryengine
+          - categoryId: '61'
+            categoryName: Analytics
+            subCategories:
+            - subCategoryId: '5000076'
+              subCategoryName: Business Intelligence Software
+              products:
+              - productId: DM01069
+                productName: Axio
+              - productId: DM02743
+                productName: Domo
+              - productId: DM12976
+                productName: Halo
+              - productId: DM05198
+                productName: Kxen
+              - productId: DM05911
+                productName: Microsoft Power Bi
+              - productId: DM12721
+                productName: Nicepeopleatwork
+              - productId: DM07982
+                productName: SAP Visual Intelligence
+              - productId: DM09374
+                productName: Twitter Website Universal Tag
+            - subCategoryId: '5000854'
+              subCategoryName: Data Science and Machine Learning
+              products:
+              - productId: DM20720
+                productName: Google Cloud AI Platform
+            - subCategoryId: '5000506'
+              subCategoryName: Data Virtualization Software
+              products:
+              - productId: DM12093
+                productName: Grafana
+            - subCategoryId: '5000020'
+              subCategoryName: Enterprise Search Software
+              products:
+              - productId: DM02319
+                productName: Coveo
+              - productId: DM02928
+                productName: Elasticsearch
+              - productId: DM07989
+                productName: SAS
+            - subCategoryId: '5000857'
+              subCategoryName: Image and Video Analysis
+              products:
+              - productId: DM20735
+                productName: Google Cloud Translation API
+            - subCategoryId: '5000482'
+              subCategoryName: Information Technology Management
+              products:
+              - productId: DM03655
+                productName: Gist
+            - subCategoryId: '5000033'
+              subCategoryName: Other Analytics Software
+              products:
+              - productId: DM16925
+                productName: ELK Stack
+              - productId: DM17008
+                productName: Google Crashlytics
+              - productId: DM20375
+                productName: Microsoft Azure Data Explorer
+            - subCategoryId: '5000078'
+              subCategoryName: Predictive Analytics Software
+              products:
+              - productId: DM04367
+                productName: IBM Spss
+              - productId: DM04631
+                productName: Innovyze
+              - productId: DM05089
+                productName: Kaggle
+            - subCategoryId: '5000232'
+              subCategoryName: Professional Services
+              products:
+              - productId: DM01294
+                productName: Bloomberg
+              - productId: DM09095
+                productName: Thomson Reuters
+            - subCategoryId: '5000365'
+              subCategoryName: Reporting
+              products:
+              - productId: DM17811
+                productName: Servicenow Reporting
+            - subCategoryId: '5000552'
+              subCategoryName: Social Media Marketing
+              products:
+              - productId: DM13407
+                productName: Socialbakers
+              - productId: DM15002
+                productName: Talkwalker
+    CompanyLogosResponse:
+      description: Company Logos Response
+      value:
+        companyId: 578458
+        companyName: Analysis Group, Inc.
+        companyType: Private
+        companyStatus: Operating
+        tickers: []
+        classification:
+          primaryBusiness:
+            industry: Corporate Services
+            industryCode: '229'
+            subIndustry: Management Consulting
+            subIndustryCode: '257'
+          secondaryBusinesses: []
+        address:
+          street: 111 Huntington Avenue Tenth Floor
+          city: Boston
+          state: MA
+          zip: 02199
+          country: US
+        phone: +1 617 425 8000
+        revenue: 43.75
+        revenueCurrency: USD
+        employeeCount: 500
+        sic: '8742'
+        sicDescription: Services-Management Consulting Services
+        naics: '541611'
+        naicsDescription: Administrative Management and General Management Consulting Services
+        equifaxId: 049615062
+        britishSics:
+        - britishSic: '71122'
+          description: Engineering related scientific and technical consulting activities
+        - britishSic: '70229'
+          description: Management consultancy activities other than financial management
+        foundedIn: '1981'
+        socialHandles:
+          twitter: https://twitter.com/analysisgroup
+          facebook: https://www.facebook.com/analysisgroup
+          linkedIn: https://www.linkedin.com/company/analysis-group
+        diversity:
+          gender: Female
+          ethnicity: African American
+          certifications:
+            wbe: true
+            mbe: true
+            vbe: true
+            disabled: false
+            dbe: true
+            lgbt: false
+        siteTypes:
+        - Uncategorized
+        businessStructure: Independent
+        websites:
+        - https://www.analysisgroup.com/
+        companyLogos:
+        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/100
+        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/200
+        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/400
+    CompanyCompetitorsResponse:
+      description: Company Competitors Response
+      value:
+        companyId: 726263
+        companyName: Microsoft Corporation
+        companyType: Public
+        companyStatus: Operating
+        tickers:
+        - tickerName: MSFT
+          exchange: NASD
+        classification:
+          primaryBusiness:
+            industry: Computer Software
+            industryCode: '8'
+          secondaryBusinesses:
+          - industry: Computer Software
+            industryCode: '8'
+            subIndustry: Enterprise Resource Planning Software
+            subIndustryCode: '8_32'
+        address:
+          street: One Microsoft Way
+          city: Redmond
+          state: WA
+          zip: 98052-6399
+          country: US
+          latitude: '47.6400493830442'
+          longitude: '-122.129796892405'
+        phone: +1 425 882 8080
+        revenue: 245122
+        revenueCurrency: USD
+        employeeCount: 228000
+        sic: '7371'
+        sicDescription: Services-Computer Programming Services
+        naics: '5132'
+        naicsDescription: Software Publishers
+        financialYearEnd: '6'
+        equifaxId: 049615062
+        companyTaxId: '911144442'
+        britishSics:
+        - britishSic: '58290'
+          description: Other software publishing
+        - britishSic: '46510'
+          description: Wholesale of computers, computer peripheral equipment and software
+        foundedIn: '1975'
+        socialHandles:
+          twitter: https://twitter.com/microsoftindia
+          facebook: https://www.facebook.com/microsoft
+          blog: https://news.microsoft.com/feed/
+          linkedIn: https://www.linkedin.com/company/microsoft
+        siteTypes:
+        - Uncategorized
+        siteCount: 276
+        siteLocationCount: 82
+        businessStructure: Global Parent
+        websites:
+        - https://www.microsoft.com/en-us/
+        competitors:
+        - name: Red Hat Inc
+          city: Raleigh
+          state: NC
+          country: US
+          companyId: 732237
+        - name: Adobe Systems Incorporated
+          city: San Jose
+          state: CA
+          country: US
+          companyId: 724292
+    CompanyDetailsResponse:
+      description: Company Details Response
+      value:
+        companyId: 726263
+        companyName: Microsoft Corporation
+        companyType: Public
+        companyStatus: Operating
+        tickers:
+        - tickerName: MSFT
+          exchange: NASD
+        classification:
+          primaryBusiness:
+            industry: Computer Software
+            industryCode: '8'
+          secondaryBusinesses:
+          - industry: Computer Software
+            industryCode: '8'
+            subIndustry: Enterprise Resource Planning Software
+            subIndustryCode: '8_32'
+        address:
+          street: One Microsoft Way
+          city: Redmond
+          state: WA
+          zip: 98052-6399
+          country: US
+          latitude: '47.6400493830442'
+          longitude: '-122.129796892405'
+        phone: +1 425 882 8080
+        revenue: 245122
+        revenueCurrency: USD
+        employeeCount: 228000
+        sic: '7371'
+        sicDescription: Services-Computer Programming Services
+        naics: '5132'
+        naicsDescription: Software Publishers
+        financialYearEnd: '6'
+        equifaxId: 049615062
+        companyTaxId: '911144442'
+        britishSics:
+        - britishSic: '58290'
+          description: Other software publishing
+        - britishSic: '46510'
+          description: Wholesale of computers, computer peripheral equipment and software
+        foundedIn: '1975'
+        socialHandles:
+          twitter: https://twitter.com/microsoftindia
+          facebook: https://www.facebook.com/microsoft
+          blog: https://news.microsoft.com/feed/
+          linkedIn: https://www.linkedin.com/company/microsoft
+        siteTypes:
+        - Uncategorized
+        siteCount: 276
+        siteLocationCount: 82
+        businessStructure: Global Parent
+        websites:
+        - https://www.microsoft.com/en-us/
   securitySchemes:
     bearerAuth:
       type: http

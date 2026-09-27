@@ -496,139 +496,21 @@ paths:
       servers:
       - url: https://uapi.demandbase.com
 components:
+  responses:
+    404errorNoUserFound:
+      description: '<div style="background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+        Returned if the provided external user id does not exist in DemandBase
+
+        </div>'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          examples:
+            Example 1:
+              $ref: '#/components/examples/errorNoUserFoundExample'
   schemas:
-    NewUserResponse:
-      type: object
-      properties:
-        fullName:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            Name of the user
-
-            </div>'
-        email:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            Email address of the user
-
-            </div>'
-        externalId:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            User ID in client''s system
-
-            </div>'
-        permissionSets:
-          type: array
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            Permissions of the user
-
-            </div>'
-          items:
-            type: string
-        department:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            Department of the user
-
-            </div>'
-        view:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            View of the user
-
-            </div>'
-        workspaces:
-          type: array
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            Workspaces of the user if applicable
-
-            </div>'
-          items:
-            type: string
-        jobFunction:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            Job function of the user
-
-            </div>'
-        dateCreated:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            Date when the user was created
-
-            </div>'
-          format: date
-    ErrorDto:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            This is a error code
-
-            </div>
-
-            '
-        errorMessage:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            A clear text description of the error
-
-            </div>
-
-            '
-    UserListItem:
-      type: object
-      properties:
-        name:
-          type: string
-        email:
-          type: string
-        externalIds:
-          type: array
-          items:
-            type: string
-        permissionSets:
-          type: array
-          items:
-            type: string
-        department:
-          type: string
-        view:
-          type: string
-        workspaces:
-          type: array
-          items:
-            type: string
-        date_created:
-          type: string
-          format: date-time
-        jobFunction:
-          type: string
-    UserListResponse:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserListItem'
-      required:
-      - totalCount
-      - data
     User:
       type: object
       properties:
@@ -689,6 +571,39 @@ components:
       - permissionSets
       - department
       - view
+    UserListResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserListItem'
+      required:
+      - totalCount
+      - data
+    ErrorDto:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            This is a error code
+
+            </div>
+
+            '
+        errorMessage:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            A clear text description of the error
+
+            </div>
+
+            '
     GetUserResponse:
       type: object
       properties:
@@ -762,20 +677,105 @@ components:
             Job function of the user
 
             </div>'
-  responses:
-    404errorNoUserFound:
-      description: '<div style="background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+    NewUserResponse:
+      type: object
+      properties:
+        fullName:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
 
-        Returned if the provided external user id does not exist in DemandBase
+            Name of the user
 
-        </div>'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          examples:
-            Example 1:
-              $ref: '#/components/examples/errorNoUserFoundExample'
+            </div>'
+        email:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            Email address of the user
+
+            </div>'
+        externalId:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            User ID in client''s system
+
+            </div>'
+        permissionSets:
+          type: array
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            Permissions of the user
+
+            </div>'
+          items:
+            type: string
+        department:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            Department of the user
+
+            </div>'
+        view:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            View of the user
+
+            </div>'
+        workspaces:
+          type: array
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            Workspaces of the user if applicable
+
+            </div>'
+          items:
+            type: string
+        jobFunction:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            Job function of the user
+
+            </div>'
+        dateCreated:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            Date when the user was created
+
+            </div>'
+          format: date
+    UserListItem:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        externalIds:
+          type: array
+          items:
+            type: string
+        permissionSets:
+          type: array
+          items:
+            type: string
+        department:
+          type: string
+        view:
+          type: string
+        workspaces:
+          type: array
+          items:
+            type: string
+        date_created:
+          type: string
+          format: date-time
+        jobFunction:
+          type: string
   examples:
     errorNoUserFoundExample:
       value:

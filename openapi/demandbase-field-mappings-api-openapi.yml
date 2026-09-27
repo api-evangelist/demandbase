@@ -89,28 +89,9 @@ paths:
       operationId: putIntegrationV1CustomSourcesBySourceIdFieldMappingsByObjectType
       x-operation-id-source: derived
 components:
-  parameters:
-    SourceIdForMappings:
-      name: source_id
-      in: path
-      required: true
-      schema:
-        type: integer
-        format: int64
-      description: The unique ID of the source.
-    ObjectType:
-      name: object_type
-      in: path
-      required: true
-      schema:
-        type: string
-        enum:
-        - account
-        - person
-      description: The object type for which field mappings are configured.
   responses:
-    BadRequest:
-      description: The request body or query parameters are invalid.
+    InternalServerError:
+      description: An unexpected server error occurred.
       content:
         application/json:
           schema:
@@ -119,8 +100,8 @@ components:
             Example:
               value:
                 error:
-                  code: 400-000
-                  message: Invalid input.
+                  code: 500-001
+                  message: Internal server error.
                   diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
     Unauthorized:
       description: Authentication credentials are missing or invalid.
@@ -135,6 +116,19 @@ components:
                   code: 403-000
                   message: Unauthorized.
                   diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    BadRequest:
+      description: The request body or query parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 400-000
+                  message: Invalid input.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
     NotFound:
       description: The requested resource was not found.
       content:
@@ -148,46 +142,7 @@ components:
                   code: 404-000
                   message: Resource not found.
                   diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-    InternalServerError:
-      description: An unexpected server error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 500-001
-                  message: Internal server error.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
   schemas:
-    FieldMappingsResponse:
-      type: object
-      required:
-      - fieldMappings
-      properties:
-        fieldMappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldMappingDTO'
-          description: List of field mappings configured for the requested source/object type.
-    FieldMappingDTO:
-      type: object
-      required:
-      - sourceFieldLabel
-      - demandbaseFieldName
-      - dataType
-      properties:
-        sourceFieldLabel:
-          type: string
-          description: Label/name of the field as provided by the external source.
-        demandbaseFieldName:
-          type: string
-          description: Canonical Demandbase field name the source field is mapped to.
-        dataType:
-          type: string
-          description: 'Data type of the mapped field (for example: string, number, boolean, date).'
     StructuredError:
       type: object
       required:
@@ -211,6 +166,22 @@ components:
             diagnosticCode:
               type: string
               description: UUID for tracing the request in server logs.
+    FieldMappingDTO:
+      type: object
+      required:
+      - sourceFieldLabel
+      - demandbaseFieldName
+      - dataType
+      properties:
+        sourceFieldLabel:
+          type: string
+          description: Label/name of the field as provided by the external source.
+        demandbaseFieldName:
+          type: string
+          description: Canonical Demandbase field name the source field is mapped to.
+        dataType:
+          type: string
+          description: 'Data type of the mapped field (for example: string, number, boolean, date).'
     FieldMappingRequest:
       type: object
       required:
@@ -221,6 +192,35 @@ components:
           items:
             $ref: '#/components/schemas/FieldMappingDTO'
           description: Field mappings to create/update for the given object type.
+    FieldMappingsResponse:
+      type: object
+      required:
+      - fieldMappings
+      properties:
+        fieldMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldMappingDTO'
+          description: List of field mappings configured for the requested source/object type.
+  parameters:
+    SourceIdForMappings:
+      name: source_id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+      description: The unique ID of the source.
+    ObjectType:
+      name: object_type
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - account
+        - person
+      description: The object type for which field mappings are configured.
   securitySchemes:
     bearerAuth:
       type: http

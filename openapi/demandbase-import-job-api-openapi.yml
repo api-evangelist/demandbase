@@ -419,6 +419,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    DataImportJobs:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: Total count of Data Import Jobs
+          format: int64
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataImportJob'
     UnauthorizedError:
       type: object
       description: Access token is missing or invalid
@@ -427,6 +438,13 @@ components:
           type: string
       required:
       - status
+    NotFound:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     CreateDataImportJob:
       type: object
       properties:
@@ -446,39 +464,13 @@ components:
       required:
       - dataImportName
       - entityType
-    ForbiddenError:
-      type: object
-      description: The authenticated user is missing the import permission
-      properties:
-        status:
-          type: string
-      required:
-      - status
-    BadRequest:
+    Error:
       type: object
       properties:
         message:
           type: string
       required:
       - message
-    NotFound:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    DataImportJobs:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-          description: Total count of Data Import Jobs
-          format: int64
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataImportJob'
     DataImportJob:
       type: object
       properties:
@@ -510,13 +502,21 @@ components:
           type: integer
           description: Activity type id
           format: int32
-    Error:
+    BadRequest:
       type: object
       properties:
         message:
           type: string
       required:
       - message
+    ForbiddenError:
+      type: object
+      description: The authenticated user is missing the import permission
+      properties:
+        status:
+          type: string
+      required:
+      - status
   securitySchemes:
     bearerAuth:
       type: http

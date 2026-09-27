@@ -240,6 +240,51 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    NotFound:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    CustomActivityData:
+      type: object
+      title: CustomActivityData
+      properties:
+        activityType:
+          $ref: '#/components/schemas/CustomActivity'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomActivityField'
+      required:
+      - activityType
+    ActivityType:
+      type: object
+      title: ActivityType
+      properties:
+        id:
+          type: integer
+          format: int64
+        label:
+          type: string
+      required:
+      - id
+      - label
+    BadRequest:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     CustomActivity:
       type: object
       title: CustomActivity
@@ -266,44 +311,6 @@ components:
           type: boolean
       required:
       - fieldName
-    ActivityType:
-      type: object
-      title: ActivityType
-      properties:
-        id:
-          type: integer
-          format: int64
-        label:
-          type: string
-      required:
-      - id
-      - label
-    CustomActivityData:
-      type: object
-      title: CustomActivityData
-      properties:
-        activityType:
-          $ref: '#/components/schemas/CustomActivity'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomActivityField'
-      required:
-      - activityType
-    BadRequest:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    NotFound:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     CustomActivityType:
       type: object
       title: CustomActivityType
@@ -322,13 +329,6 @@ components:
       - name
       - description
       - activitySource
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
   securitySchemes:
     bearerAuth:
       type: http
