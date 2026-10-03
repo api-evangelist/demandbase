@@ -1276,27 +1276,17 @@ paths:
         description: Server URL in Production environment
 components:
   schemas:
-    BulkJobStatusDTO:
+    ErrorResponse:
       type: object
       properties:
-        jobName:
+        errorCode:
           type: string
-        jobStatus:
+        errorMessage:
           type: string
-        jobType:
-          type: string
-        jobId:
-          type: string
-        createdAt:
-          type: string
-        updatedAt:
-          type: string
-        resultsUrl:
-          type: string
-        message:
+        diagnosticCode:
           type: string
       xml:
-        name: BulkJobStatus
+        name: error
     JobRequestDTO:
       type: object
       properties:
@@ -1337,17 +1327,27 @@ components:
       - jobName
       - fields
       - filters
-    ErrorResponse:
+    BulkJobStatusDTO:
       type: object
       properties:
-        errorCode:
+        jobName:
           type: string
-        errorMessage:
+        jobStatus:
           type: string
-        diagnosticCode:
+        jobType:
+          type: string
+        jobId:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        resultsUrl:
+          type: string
+        message:
           type: string
       xml:
-        name: error
+        name: BulkJobStatus
     JobFilter:
       type: object
       properties:

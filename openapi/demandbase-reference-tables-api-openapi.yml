@@ -104,23 +104,6 @@ paths:
         description: Server URL in Production environment
 components:
   schemas:
-    UnauthorizedResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: Authentication Failed - Unauthorized.
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
-        diagnosticCode:
-          type: string
-      xml:
-        name: error
     ReferenceDataResponseDTO:
       type: object
       required:
@@ -136,6 +119,23 @@ components:
           items:
             type: object
             additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        diagnosticCode:
+          type: string
+      xml:
+        name: error
+    UnauthorizedResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: Authentication Failed - Unauthorized.
   securitySchemes:
     bearerAuth:
       type: http

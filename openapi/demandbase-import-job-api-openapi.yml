@@ -430,15 +430,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataImportJob'
-    UnauthorizedError:
-      type: object
-      description: Access token is missing or invalid
-      properties:
-        status:
-          type: string
-      required:
-      - status
-    NotFound:
+    BadRequest:
       type: object
       properties:
         message:
@@ -464,7 +456,15 @@ components:
       required:
       - dataImportName
       - entityType
-    Error:
+    ForbiddenError:
+      type: object
+      description: The authenticated user is missing the import permission
+      properties:
+        status:
+          type: string
+      required:
+      - status
+    NotFound:
       type: object
       properties:
         message:
@@ -502,16 +502,16 @@ components:
           type: integer
           description: Activity type id
           format: int32
-    BadRequest:
+    Error:
       type: object
       properties:
         message:
           type: string
       required:
       - message
-    ForbiddenError:
+    UnauthorizedError:
       type: object
-      description: The authenticated user is missing the import permission
+      description: Access token is missing or invalid
       properties:
         status:
           type: string

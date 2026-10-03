@@ -496,114 +496,7 @@ paths:
       servers:
       - url: https://uapi.demandbase.com
 components:
-  responses:
-    404errorNoUserFound:
-      description: '<div style="background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-        Returned if the provided external user id does not exist in DemandBase
-
-        </div>'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          examples:
-            Example 1:
-              $ref: '#/components/examples/errorNoUserFoundExample'
   schemas:
-    User:
-      type: object
-      properties:
-        fullName:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            The full name of the user.
-
-            </div>'
-        email:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            The email address of the user
-
-            </div>'
-        externalId:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            An external identifier for the user, such as user id in your user management system.
-
-            </div>'
-        permissionSets:
-          type: array
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            An array of permission sets assigned to the user. These must match the permission sets configured in the DB1 platform.
-
-            <br><strong>More info:</strong> <a href="https://support.demandbase.com/hc/en-us/articles/4408096348827-Create-and-Manage-Permission-Sets" target="_blank"><span style="color:blue">Create and Manage Permission Sets</span></a>
-
-            </div>'
-          items:
-            type: string
-        department:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            The department the user belongs to, used for organizational grouping.
-
-            <br><strong>More info:</strong> <a href="https://support.demandbase.com/hc/en-us/articles/19135030630171-Create-and-Manage-Departments" target="_blank"><span style="color:blue">Create and Manage Departments</span></a>
-
-            </div>'
-        view:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            The default view that defines which interface and columns the user sees upon login.
-
-            <br><strong>More info:</strong> <a href="https://support.demandbase.com/hc/en-us/articles/360051564312-Create-and-Manage-User-Views-View-Management" target="_blank"><span style="color:blue;">Create and Manage User Views</span></a>
-
-            </div>'
-      required:
-      - fullName
-      - email
-      - externalId
-      - permissionSets
-      - department
-      - view
-    UserListResponse:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserListItem'
-      required:
-      - totalCount
-      - data
-    ErrorDto:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            This is a error code
-
-            </div>
-
-            '
-        errorMessage:
-          type: string
-          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
-
-            A clear text description of the error
-
-            </div>
-
-            '
     GetUserResponse:
       type: object
       properties:
@@ -677,6 +570,99 @@ components:
             Job function of the user
 
             </div>'
+    UserListResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserListItem'
+      required:
+      - totalCount
+      - data
+    ErrorDto:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            This is a error code
+
+            </div>
+
+            '
+        errorMessage:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            A clear text description of the error
+
+            </div>
+
+            '
+    User:
+      type: object
+      properties:
+        fullName:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            The full name of the user.
+
+            </div>'
+        email:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            The email address of the user
+
+            </div>'
+        externalId:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            An external identifier for the user, such as user id in your user management system.
+
+            </div>'
+        permissionSets:
+          type: array
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            An array of permission sets assigned to the user. These must match the permission sets configured in the DB1 platform.
+
+            <br><strong>More info:</strong> <a href="https://support.demandbase.com/hc/en-us/articles/4408096348827-Create-and-Manage-Permission-Sets" target="_blank"><span style="color:blue">Create and Manage Permission Sets</span></a>
+
+            </div>'
+          items:
+            type: string
+        department:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            The department the user belongs to, used for organizational grouping.
+
+            <br><strong>More info:</strong> <a href="https://support.demandbase.com/hc/en-us/articles/19135030630171-Create-and-Manage-Departments" target="_blank"><span style="color:blue">Create and Manage Departments</span></a>
+
+            </div>'
+        view:
+          type: string
+          description: '<div style="background:#FFFFFF; border-left:4px solid #3bb273; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+            The default view that defines which interface and columns the user sees upon login.
+
+            <br><strong>More info:</strong> <a href="https://support.demandbase.com/hc/en-us/articles/360051564312-Create-and-Manage-User-Views-View-Management" target="_blank"><span style="color:blue;">Create and Manage User Views</span></a>
+
+            </div>'
+      required:
+      - fullName
+      - email
+      - externalId
+      - permissionSets
+      - department
+      - view
     NewUserResponse:
       type: object
       properties:
@@ -776,6 +762,20 @@ components:
           format: date-time
         jobFunction:
           type: string
+  responses:
+    404errorNoUserFound:
+      description: '<div style="background:#FFFFFF; border-left:4px solid red; border-top:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000; padding:10px 14px; border-radius:4px; margin-bottom:10px;">
+
+        Returned if the provided external user id does not exist in DemandBase
+
+        </div>'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          examples:
+            Example 1:
+              $ref: '#/components/examples/errorNoUserFoundExample'
   examples:
     errorNoUserFoundExample:
       value:

@@ -103,22 +103,6 @@ paths:
       description: Poll this endpoint until jobStatus is terminal. accepted and processing are non-terminal; continue polling. finished and failed are terminal. A finished job includes its download URL; a failed job does not produce a result file.
 components:
   responses:
-    429errorDescriptionsForAllApi:
-      description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 429-100
-            errorMessage: Rate limit exceeded.
-            diagnosticCode: ce0fc1770e0d425b88892df4f663bf07
-    400errorDescriptionsForAllApi:
-      description: The request body, path parameter, or query parameter is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
     404errorDescriptionsForStatusApi:
       description: No export job exists for the requested job ID.
       content:
@@ -129,26 +113,6 @@ components:
             errorCode: 404-302
             errorMessage: Job id invalid
             diagnosticCode: 4e0fc1770e0d425b88892df4f663bf07
-    500errorDescriptionsForAllApi:
-      description: An unexpected internal service error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 500-100
-            errorMessage: Error while communicating with internal service.
-            diagnosticCode: de0fc1770e0d425b88892df4f663bf07
-    403errorDescriptionsForAllApi:
-      description: The authenticated user does not have permission to access this resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 403-100
-            errorMessage: The authenticated user does not have permission to access this resource.
-            diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
     401errorDescriptionsForAllApi:
       description: Authentication credentials are missing or invalid.
       content:
@@ -159,40 +123,43 @@ components:
             errorCode: 401-100
             errorMessage: Authentication credentials are missing or invalid.
             diagnosticCode: 1e0fc1770e0d425b88892df4f663bf07
+    500errorDescriptionsForAllApi:
+      description: An unexpected internal service error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 500-100
+            errorMessage: Error while communicating with internal service.
+            diagnosticCode: de0fc1770e0d425b88892df4f663bf07
+    400errorDescriptionsForAllApi:
+      description: The request body, path parameter, or query parameter is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+    403errorDescriptionsForAllApi:
+      description: The authenticated user does not have permission to access this resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 403-100
+            errorMessage: The authenticated user does not have permission to access this resource.
+            diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
+    429errorDescriptionsForAllApi:
+      description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 429-100
+            errorMessage: Rate limit exceeded.
+            diagnosticCode: ce0fc1770e0d425b88892df4f663bf07
   schemas:
-    JobDetailsList:
-      type: object
-      required:
-      - pageNo
-      - pageSize
-      - data
-      - totalCount
-      properties:
-        pageNo:
-          type: integer
-        pageSize:
-          type: integer
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              updatedAt:
-                type: string
-                format: date-time
-              createdAt:
-                type: string
-                format: date-time
-              jobName:
-                type: string
-              jobId:
-                type: string
-              jobStatus:
-                type: string
-              entityType:
-                type: string
-        totalCount:
-          type: integer
     ErrorDto:
       type: object
       properties:
@@ -240,6 +207,39 @@ components:
           type:
           - string
           - 'null'
+    JobDetailsList:
+      type: object
+      required:
+      - pageNo
+      - pageSize
+      - data
+      - totalCount
+      properties:
+        pageNo:
+          type: integer
+        pageSize:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              updatedAt:
+                type: string
+                format: date-time
+              createdAt:
+                type: string
+                format: date-time
+              jobName:
+                type: string
+              jobId:
+                type: string
+              jobStatus:
+                type: string
+              entityType:
+                type: string
+        totalCount:
+          type: integer
   securitySchemes:
     token:
       type: http

@@ -187,16 +187,86 @@ paths:
       - bearerAuth: []
 components:
   schemas:
-    IntentResponse:
+    IntentResult:
       type: object
       properties:
-        data:
-          type: array
-          description: Intent result records.
-          items:
-            $ref: '#/components/schemas/IntentResult'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
+        companyId:
+          type: string
+          description: Demandbase Company ID.
+          example: '726263'
+        domain:
+          type: string
+          description: Company domain.
+          example: microsoft.com
+        keyword:
+          type: string
+          description: Keyword associated with the intent signal.
+          example: Zero Trust
+        numPeopleResearching:
+          type: integer
+          description: Number of people researching the keyword.
+          example: 8
+        intentStrength:
+          type: string
+          enum:
+          - LOW
+          - MED
+          - HIGH
+          description: Intent strength classification.
+          example: HIGH
+        isTrending:
+          type: boolean
+          description: Whether research activity for the keyword is currently trending.
+          example: true
+        trendingScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Computed trend strength score from 0 through 100.
+          example: 72
+        numTrendingDays:
+          type: integer
+          description: Number of consecutive days the keyword has been trending.
+          example: 3
+        startDate:
+          type: string
+          format: date
+          description: Start of the measurement period.
+          example: '2026-07-12'
+        endDate:
+          type: string
+          format: date
+          description: End of the measurement period.
+          example: '2026-07-18'
+        keywordSetId:
+          type: integer
+          format: int64
+          description: Keyword Set identifier.
+          example: 7303
+        keywordSetName:
+          type: string
+          description: Keyword Set name.
+          example: Security Keywords
+    Pagination:
+      type: object
+      properties:
+        after:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page. Null when no additional page is available.
+          example: Tzo1MDoyNQ==
+        before:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the previous page. Null when the current page is the first page.
+          example: TzowOjI1
+        totalCount:
+          type: integer
+          format: int64
+          description: Total number of matching records.
+          example: 142
     UnauthorizedResponse:
       type: object
       properties:
@@ -295,26 +365,6 @@ components:
           default: DESC
           description: Sort direction.
           example: DESC
-    Pagination:
-      type: object
-      properties:
-        after:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page. Null when no additional page is available.
-          example: Tzo1MDoyNQ==
-        before:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the previous page. Null when the current page is the first page.
-          example: TzowOjI1
-        totalCount:
-          type: integer
-          format: int64
-          description: Total number of matching records.
-          example: 142
     ErrorResponse:
       type: object
       properties:
@@ -333,66 +383,16 @@ components:
           example: ccb84f25-236e-4bcf-be01-88b7dd673fb4
       xml:
         name: error
-    IntentResult:
+    IntentResponse:
       type: object
       properties:
-        companyId:
-          type: string
-          description: Demandbase Company ID.
-          example: '726263'
-        domain:
-          type: string
-          description: Company domain.
-          example: microsoft.com
-        keyword:
-          type: string
-          description: Keyword associated with the intent signal.
-          example: Zero Trust
-        numPeopleResearching:
-          type: integer
-          description: Number of people researching the keyword.
-          example: 8
-        intentStrength:
-          type: string
-          enum:
-          - LOW
-          - MED
-          - HIGH
-          description: Intent strength classification.
-          example: HIGH
-        isTrending:
-          type: boolean
-          description: Whether research activity for the keyword is currently trending.
-          example: true
-        trendingScore:
-          type: integer
-          minimum: 0
-          maximum: 100
-          description: Computed trend strength score from 0 through 100.
-          example: 72
-        numTrendingDays:
-          type: integer
-          description: Number of consecutive days the keyword has been trending.
-          example: 3
-        startDate:
-          type: string
-          format: date
-          description: Start of the measurement period.
-          example: '2026-07-12'
-        endDate:
-          type: string
-          format: date
-          description: End of the measurement period.
-          example: '2026-07-18'
-        keywordSetId:
-          type: integer
-          format: int64
-          description: Keyword Set identifier.
-          example: 7303
-        keywordSetName:
-          type: string
-          description: Keyword Set name.
-          example: Security Keywords
+        data:
+          type: array
+          description: Intent result records.
+          items:
+            $ref: '#/components/schemas/IntentResult'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
   securitySchemes:
     bearerAuth:
       type: http

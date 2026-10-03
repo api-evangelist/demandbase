@@ -212,21 +212,69 @@ paths:
       operationId: deleteIntegrationV1CustomSourcesById
       x-operation-id-source: derived
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 404-000
+                  message: Resource not found.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 403-000
+                  message: Unauthorized.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    InternalServerError:
+      description: An unexpected server error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 500-001
+                  message: Internal server error.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    BadRequest:
+      description: The request body or query parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 400-000
+                  message: Invalid input.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  parameters:
+    SourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+      description: The unique ID of the source.
   schemas:
-    GetSourcesResponse:
-      type: object
-      required:
-      - totalCount
-      - data
-      properties:
-        totalCount:
-          type: integer
-          format: int64
-          description: Total number of sources matching the query.
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceItem'
     StructuredError:
       type: object
       required:
@@ -251,24 +299,6 @@ components:
               type: string
               description: UUID for tracing the request in server logs.
     CreateSourceRequest:
-      type: object
-      required:
-      - name
-      - description
-      - priority
-      properties:
-        name:
-          type: string
-          description: Human-readable name of the source.
-        description:
-          type: string
-          description: Description of the source.
-        priority:
-          type: integer
-          description: 'Priority for source ordering. Valid values: 0 (no preference) or 50-99 (custom) inclusive.
-
-            '
-    UpdateSourceRequest:
       type: object
       required:
       - name
@@ -312,68 +342,38 @@ components:
           description: 'Priority for source ordering. 0 = no preference; 50-99 = custom sources (lower number = higher priority).
 
             '
-  parameters:
-    SourceId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-        format: int64
-      description: The unique ID of the source.
-  responses:
-    InternalServerError:
-      description: An unexpected server error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 500-001
-                  message: Internal server error.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-    Unauthorized:
-      description: Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 403-000
-                  message: Unauthorized.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-    BadRequest:
-      description: The request body or query parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 400-000
-                  message: Invalid input.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 404-000
-                  message: Resource not found.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    GetSourcesResponse:
+      type: object
+      required:
+      - totalCount
+      - data
+      properties:
+        totalCount:
+          type: integer
+          format: int64
+          description: Total number of sources matching the query.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceItem'
+    UpdateSourceRequest:
+      type: object
+      required:
+      - name
+      - description
+      - priority
+      properties:
+        name:
+          type: string
+          description: Human-readable name of the source.
+        description:
+          type: string
+          description: Description of the source.
+        priority:
+          type: integer
+          description: 'Priority for source ordering. Valid values: 0 (no preference) or 50-99 (custom) inclusive.
+
+            '
   securitySchemes:
     bearerAuth:
       type: http
