@@ -1358,6 +1358,9 @@ apis:
   - type: Authentication
     url: authentication/demandbase-authentication.yml
 common:
+- type: CapabilityMap
+  url: capabilities/demandbase-capability-edges.yml
+  name: Demandbase Business Capability Map
 - type: Website
   url: https://www.demandbase.com/
 - type: Overlay
