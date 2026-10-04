@@ -240,39 +240,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    BadRequest:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    CustomActivity:
-      type: object
-      title: CustomActivity
-      properties:
-        name:
-          type: string
-        label:
-          type: string
-        description:
-          type: string
-      required:
-      - name
-    CustomActivityField:
-      type: object
-      title: CustomActivityField
-      properties:
-        fieldName:
-          type: string
-        fieldDataType:
-          type: string
-        defaultField:
-          type: boolean
-        isRequiredForCsvImport:
-          type: boolean
-      required:
-      - fieldName
     NotFound:
       type: object
       properties:
@@ -292,18 +259,6 @@ components:
       required:
       - id
       - label
-    CustomActivityData:
-      type: object
-      title: CustomActivityData
-      properties:
-        activityType:
-          $ref: '#/components/schemas/CustomActivity'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomActivityField'
-      required:
-      - activityType
     Error:
       type: object
       properties:
@@ -329,6 +284,51 @@ components:
       - name
       - description
       - activitySource
+    CustomActivityData:
+      type: object
+      title: CustomActivityData
+      properties:
+        activityType:
+          $ref: '#/components/schemas/CustomActivity'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomActivityField'
+      required:
+      - activityType
+    CustomActivity:
+      type: object
+      title: CustomActivity
+      properties:
+        name:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+      required:
+      - name
+    BadRequest:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    CustomActivityField:
+      type: object
+      title: CustomActivityField
+      properties:
+        fieldName:
+          type: string
+        fieldDataType:
+          type: string
+        defaultField:
+          type: boolean
+        isRequiredForCsvImport:
+          type: boolean
+      required:
+      - fieldName
   securitySchemes:
     bearerAuth:
       type: http

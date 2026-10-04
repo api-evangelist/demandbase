@@ -70,6 +70,27 @@ paths:
       security:
       - token: []
 components:
+  schemas:
+    Field:
+      type: object
+      properties:
+        name:
+          type: string
+        dataType:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+    ErrorDto:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        diagnosticCode:
+          type: string
+        errorMessage:
+          type: string
   responses:
     500errorDescriptionsForAllApi:
       description: An unexpected internal service error occurred.
@@ -101,6 +122,12 @@ components:
             errorCode: 403-100
             errorMessage: The authenticated user does not have permission to access this resource.
             diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
+    400errorDescriptionsForFetchFields:
+      description: Invalid entityType.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
     429errorDescriptionsForAllApi:
       description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
       content:
@@ -111,33 +138,6 @@ components:
             errorCode: 429-100
             errorMessage: Rate limit exceeded.
             diagnosticCode: ce0fc1770e0d425b88892df4f663bf07
-    400errorDescriptionsForFetchFields:
-      description: Invalid entityType.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-  schemas:
-    ErrorDto:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        diagnosticCode:
-          type: string
-        errorMessage:
-          type: string
-    Field:
-      type: object
-      properties:
-        name:
-          type: string
-        dataType:
-          type: string
-        label:
-          type: string
-        description:
-          type: string
   securitySchemes:
     token:
       type: http

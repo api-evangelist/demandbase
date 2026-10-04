@@ -90,16 +90,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    FieldMappingRequest:
-      type: object
-      required:
-      - fieldMappings
-      properties:
-        fieldMappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldMappingDTO'
-          description: Field mappings to create/update for the given object type.
     StructuredError:
       type: object
       required:
@@ -139,6 +129,16 @@ components:
         dataType:
           type: string
           description: 'Data type of the mapped field (for example: string, number, boolean, date).'
+    FieldMappingRequest:
+      type: object
+      required:
+      - fieldMappings
+      properties:
+        fieldMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldMappingDTO'
+          description: Field mappings to create/update for the given object type.
     FieldMappingsResponse:
       type: object
       required:
@@ -149,59 +149,6 @@ components:
           items:
             $ref: '#/components/schemas/FieldMappingDTO'
           description: List of field mappings configured for the requested source/object type.
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 404-000
-                  message: Resource not found.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-    Unauthorized:
-      description: Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 403-000
-                  message: Unauthorized.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-    InternalServerError:
-      description: An unexpected server error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 500-001
-                  message: Internal server error.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-    BadRequest:
-      description: The request body or query parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StructuredError'
-          examples:
-            Example:
-              value:
-                error:
-                  code: 400-000
-                  message: Invalid input.
-                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
   parameters:
     ObjectType:
       name: object_type
@@ -221,6 +168,59 @@ components:
         type: integer
         format: int64
       description: The unique ID of the source.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 404-000
+                  message: Resource not found.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    InternalServerError:
+      description: An unexpected server error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 500-001
+                  message: Internal server error.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 403-000
+                  message: Unauthorized.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    BadRequest:
+      description: The request body or query parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StructuredError'
+          examples:
+            Example:
+              value:
+                error:
+                  code: 400-000
+                  message: Invalid input.
+                  diagnosticCode: a1b2c3d4-e5f6-7890-abcd-ef1234567890
   securitySchemes:
     bearerAuth:
       type: http

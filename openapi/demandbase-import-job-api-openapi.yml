@@ -419,6 +419,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    NotFound:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     DataImportJobs:
       type: object
       properties:
@@ -430,7 +437,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataImportJob'
-    BadRequest:
+    UnauthorizedError:
+      type: object
+      description: Access token is missing or invalid
+      properties:
+        status:
+          type: string
+      required:
+      - status
+    Error:
       type: object
       properties:
         message:
@@ -456,6 +471,13 @@ components:
       required:
       - dataImportName
       - entityType
+    BadRequest:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     ForbiddenError:
       type: object
       description: The authenticated user is missing the import permission
@@ -464,13 +486,6 @@ components:
           type: string
       required:
       - status
-    NotFound:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     DataImportJob:
       type: object
       properties:
@@ -502,21 +517,6 @@ components:
           type: integer
           description: Activity type id
           format: int32
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    UnauthorizedError:
-      type: object
-      description: Access token is missing or invalid
-      properties:
-        status:
-          type: string
-      required:
-      - status
   securitySchemes:
     bearerAuth:
       type: http

@@ -1835,283 +1835,41 @@ paths:
         description: Server URL in Production environment
 components:
   schemas:
-    CompanyNewsResponseDTO:
-      type: object
-      properties:
-        companyNews:
-          type: array
-          items:
-            $ref: '#/components/schemas/CompanyNewsArticle'
-          xml:
-            wrapped: true
-        pageNo:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalCount:
-          type: integer
-          format: int64
-        companyId:
-          type: string
-      xml:
-        name: news
-    ClassificationDTO:
-      type: object
-      properties:
-        primaryBusiness:
-          $ref: '#/components/schemas/BusinessDTO'
-        secondaryBusinesses:
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessDTO'
-          xml:
-            wrapped: true
-    EmploymentDetails:
-      type: object
-      properties:
-        contactId:
-          type: integer
-          format: int32
-        companyId:
-          type: integer
-          format: int32
-        companyName:
-          type: string
-        contactQualityScore:
-          type: string
-        description:
-          type: string
-        startDate:
-          type: string
-        salary:
-          type: string
-        salaryCurrency:
-          type: string
-        active:
-          type: string
-        emails:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailDetails'
-          xml:
-            wrapped: true
-        lastValidatedDate:
-          type: string
-        phoneNumbers:
-          $ref: '#/components/schemas/PhoneNumbers'
-        jobLevels:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobLevels'
-          xml:
-            wrapped: true
-        jobFunctions:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobFunctions'
-          xml:
-            wrapped: true
-        titles:
-          type: array
-          items:
-            type: string
-            xml:
-              name: title
-          xml:
-            wrapped: true
-    CompanySearchResponseDTO:
-      type: object
-      properties:
-        companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/CompanyDTO'
-          xml:
-            name: company
-        totalCount:
-          type: integer
-          format: int64
-        pageNo:
-          type: integer
-          format: int64
-        pageSize:
-          type: integer
-          format: int64
-      xml:
-        name: companies
-    ContactResultsDTO:
-      type: object
-      properties:
-        dbPersonDetails:
-          $ref: '#/components/schemas/PersonDTO'
-        employmentDetails:
-          $ref: '#/components/schemas/EmploymentDTO'
-    Employments:
-      type: object
-      properties:
-        contactId:
-          type: integer
-          format: int32
-        companyId:
-          type: integer
-          format: int32
-        companyName:
-          type: string
-        emails:
-          type: array
-          items:
-            type: string
-            xml:
-              name: email
-          xml:
-            wrapped: true
-        phoneNumbers:
-          $ref: '#/components/schemas/PhoneNumbers'
-        active:
-          type: string
-        jobLevels:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobLevels'
-          xml:
-            wrapped: true
-        jobFunctions:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobFunctions'
-          xml:
-            wrapped: true
-        titles:
-          type: array
-          items:
-            type: string
-            xml:
-              name: title
-          xml:
-            wrapped: true
-    JobLevelsV2:
+    MatchResponse:
       type: object
       properties:
         id:
           type: string
-        name:
-          type: string
-    AddressDTO:
-      type: object
-      properties:
-        street:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        stateCode:
-          type: string
-        zip:
-          type: string
-        country:
-          type: string
-        countryCode:
-          type: string
-        latitude:
-          type: string
-        longitude:
-          type: string
-        area:
-          type: string
-    FamilyTreeResultDTO:
-      type: object
-      properties:
-        company:
-          $ref: '#/components/schemas/CompanyDTO'
-        children:
+        companyMatches:
           type: array
-          uniqueItems: true
           items:
-            $ref: '#/components/schemas/FamilyTreeResultDTO'
+            $ref: '#/components/schemas/CompanyMatchDTO'
           xml:
             wrapped: true
-    TechUsedProductDTO:
-      type: object
-      description: A product detected for the company.
-      properties:
-        productId:
-          type: string
-          description: Demandbase identifier for the product.
-          example: DM01069
-        productName:
-          type: string
-          description: Display name of the product.
-          example: Axio
-    BusinessDTO:
-      type: object
-      properties:
-        industry:
-          type: string
-        industryCode:
-          type: string
-        subIndustry:
-          type: string
-        subIndustryCode:
-          type: string
-    CompanyDTO:
-      type: object
-      properties:
-        name:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        companyId:
-          type: integer
-          format: int32
-    ContactSearchResponseDTO:
-      type: object
-      properties:
-        contactResults:
+        contactMatches:
           type: array
           items:
-            $ref: '#/components/schemas/ContactResultsDTO'
+            $ref: '#/components/schemas/ContactMatchDTO'
           xml:
-            name: contactResult
-        totalCount:
-          type: integer
-          format: int64
-        pageNo:
-          type: integer
-          format: int64
-        pageSize:
-          type: integer
-          format: int64
+            wrapped: true
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        diagnosticCode:
+          type: string
       xml:
-        name: contactResults
-    EmailDetails:
+        name: error
+    TickerDTO:
       type: object
       properties:
-        email:
+        tickerName:
           type: string
-        validationStatus:
+        exchange:
           type: string
-    DiversityCertificationsDTO:
-      type: object
-      properties:
-        wbe:
-          type: boolean
-        mbe:
-          type: boolean
-        vbe:
-          type: boolean
-        disabled:
-          type: boolean
-        dbe:
-          type: boolean
-        lgbt:
-          type: boolean
     MatchRequest:
       type: object
       properties:
@@ -2181,289 +1939,6 @@ components:
           example: current
       required:
       - id
-    AcquiredCompanyResultDTO:
-      type: object
-      properties:
-        companies:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/CompanyDTO'
-          xml:
-            wrapped: true
-    SocialHandles:
-      type: object
-      properties:
-        twitter:
-          type: string
-        facebook:
-          type: string
-        linkedIn:
-          type: string
-    PhoneNumbers:
-      type: object
-      properties:
-        directNumber:
-          type: string
-        corporateNumber:
-          type: string
-    TickerDTO:
-      type: object
-      properties:
-        tickerName:
-          type: string
-        exchange:
-          type: string
-    ContactSearchRequestDTO:
-      type: object
-      properties:
-        firstName:
-          type: string
-          example: John
-        lastName:
-          type: string
-          example: Doe
-        email:
-          type: string
-          example: john.doe@example.com
-        contactCity:
-          type: string
-          example: New York
-        contactState:
-          type: string
-          example: NY
-        contactCountry:
-          type: string
-          description: Country Id
-          example: '1'
-        titles:
-          type: array
-          items:
-            type: string
-          example:
-          - Manager
-          - Director
-        companyName:
-          type: string
-          example: Demandbase
-        companyCity:
-          type: string
-          example: San Francisco
-        companyState:
-          type: string
-          example: CA
-        companyCountry:
-          type: string
-          description: Country Id
-          example: '1'
-        companyWebsite:
-          type: string
-          example: demandbase.com
-        jobLevels:
-          type: array
-          items:
-            type: string
-          example:
-          - '1'
-          - '2'
-        jobFunctions:
-          type: array
-          items:
-            type: string
-          example:
-          - '1'
-          - '2'
-        active:
-          type: string
-          default: 'true'
-        emailRequired:
-          type: string
-          default: 'false'
-        phoneRequired:
-          type: string
-          default: 'false'
-        phoneType:
-          type: string
-          enum:
-          - direct
-          - corp
-          - mobile
-          - any
-          example: mobile
-        emailValidationStatus:
-          type: string
-          example: ValidEmail
-        minContactQualityScore:
-          type: string
-          example: A
-        companyIdsToInclude:
-          type: array
-          items:
-            type: string
-          default:
-          - '726263'
-          example:
-          - '726263'
-          - '726256'
-        contactIdsToExclude:
-          type: array
-          items:
-            type: string
-          example:
-          - '726263'
-          - '726256'
-        primaryIndustryOnly:
-          type: string
-          default: 'false'
-        sortBy:
-          type: string
-          example: companyName
-        sortOrder:
-          type: string
-          enum:
-          - asc
-          - desc
-          example: asc
-        maxEmployees:
-          type: string
-          example: '100'
-        minEmployees:
-          type: string
-          example: '10'
-        industries:
-          type: array
-          items:
-            type: string
-          example:
-          - '1'
-          - '2'
-        subIndustries:
-          type: array
-          items:
-            type: string
-          example:
-          - '1_1'
-          - '2_1'
-        page:
-          type: string
-          default: '1'
-        perPage:
-          type: string
-          default: '10'
-    JobFunctions:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    ContactFetchResponseDTO:
-      type: object
-      properties:
-        dbPersonDetails:
-          $ref: '#/components/schemas/DBPersonDetails'
-        employmentDetails:
-          $ref: '#/components/schemas/EmploymentDetails'
-        employmentHistoryList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Employments'
-          xml:
-            wrapped: true
-      xml:
-        name: contact
-    EmploymentDTO:
-      type: object
-      properties:
-        contactId:
-          type: integer
-          format: int64
-        companyId:
-          type: integer
-          format: int64
-        companyName:
-          type: string
-        titles:
-          type: array
-          items:
-            type: string
-            xml:
-              name: title
-          xml:
-            wrapped: true
-        jobLevels:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobLevelsV2'
-          xml:
-            wrapped: true
-        jobFunctions:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobFunctionsV2'
-          xml:
-            wrapped: true
-        active:
-          type: boolean
-        hasPhone:
-          type: boolean
-        hasEmail:
-          type: boolean
-        contactQualityScore:
-          type: string
-    JobLevels:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    MatchRequestDTO:
-      type: object
-      properties:
-        requests:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatchRequest'
-        fields:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-            example: '["name","city"]'
-          example:
-          - name
-          - city
-        limitResults:
-          type: string
-          example: '10'
-        matchBranch:
-          type: string
-          example: 'true'
-        minContactQualityScore:
-          type: string
-          example: A+
-      required:
-      - requests
-    PersonDTO:
-      type: object
-      properties:
-        dbPersonId:
-          type: integer
-          format: int64
-        firstName:
-          type: string
-        lastName:
-          type: string
-        country:
-          type: string
-        city:
-          type: string
-    ContactMatchDTO:
-      type: object
-      properties:
-        contact:
-          $ref: '#/components/schemas/ContactFetchResponseDTO'
     CompanySearchRequestDTO:
       type: object
       properties:
@@ -2696,21 +2171,165 @@ components:
         perPage:
           type: string
           example: '10'
-    CompanyNewsArticle:
+    CompanyDTO:
       type: object
       properties:
-        title:
+        name:
           type: string
-        url:
+        city:
           type: string
-        publicationDate:
+        state:
           type: string
-        source:
+        country:
           type: string
-        imageUrl:
+        companyId:
+          type: integer
+          format: int32
+    Education:
+      type: object
+      properties:
+        degree:
           type: string
-        newsCategory:
+        major:
           type: string
+        university:
+          type: string
+    ContactSearchRequestDTO:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        email:
+          type: string
+          example: john.doe@example.com
+        contactCity:
+          type: string
+          example: New York
+        contactState:
+          type: string
+          example: NY
+        contactCountry:
+          type: string
+          description: Country Id
+          example: '1'
+        titles:
+          type: array
+          items:
+            type: string
+          example:
+          - Manager
+          - Director
+        companyName:
+          type: string
+          example: Demandbase
+        companyCity:
+          type: string
+          example: San Francisco
+        companyState:
+          type: string
+          example: CA
+        companyCountry:
+          type: string
+          description: Country Id
+          example: '1'
+        companyWebsite:
+          type: string
+          example: demandbase.com
+        jobLevels:
+          type: array
+          items:
+            type: string
+          example:
+          - '1'
+          - '2'
+        jobFunctions:
+          type: array
+          items:
+            type: string
+          example:
+          - '1'
+          - '2'
+        active:
+          type: string
+          default: 'true'
+        emailRequired:
+          type: string
+          default: 'false'
+        phoneRequired:
+          type: string
+          default: 'false'
+        phoneType:
+          type: string
+          enum:
+          - direct
+          - corp
+          - mobile
+          - any
+          example: mobile
+        emailValidationStatus:
+          type: string
+          example: ValidEmail
+        minContactQualityScore:
+          type: string
+          example: A
+        companyIdsToInclude:
+          type: array
+          items:
+            type: string
+          default:
+          - '726263'
+          example:
+          - '726263'
+          - '726256'
+        contactIdsToExclude:
+          type: array
+          items:
+            type: string
+          example:
+          - '726263'
+          - '726256'
+        primaryIndustryOnly:
+          type: string
+          default: 'false'
+        sortBy:
+          type: string
+          example: companyName
+        sortOrder:
+          type: string
+          enum:
+          - asc
+          - desc
+          example: asc
+        maxEmployees:
+          type: string
+          example: '100'
+        minEmployees:
+          type: string
+          example: '10'
+        industries:
+          type: array
+          items:
+            type: string
+          example:
+          - '1'
+          - '2'
+        subIndustries:
+          type: array
+          items:
+            type: string
+          example:
+          - '1_1'
+          - '2_1'
+        page:
+          type: string
+          default: '1'
+        perPage:
+          type: string
+          default: '10'
     DBPersonDetails:
       type: object
       properties:
@@ -2740,17 +2359,86 @@ components:
           $ref: '#/components/schemas/SocialHandles'
         address:
           $ref: '#/components/schemas/AddressDTO'
-    MatchResponseDTO:
+    MatchRequestDTO:
       type: object
       properties:
-        matches:
+        requests:
           type: array
           items:
-            $ref: '#/components/schemas/MatchResponse'
+            $ref: '#/components/schemas/MatchRequest'
+        fields:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            example: '["name","city"]'
+          example:
+          - name
+          - city
+        limitResults:
+          type: string
+          example: '10'
+        matchBranch:
+          type: string
+          example: 'true'
+        minContactQualityScore:
+          type: string
+          example: A+
+      required:
+      - requests
+    CompanyNewsResponseDTO:
+      type: object
+      properties:
+        companyNews:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyNewsArticle'
           xml:
             wrapped: true
+        pageNo:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int64
+        companyId:
+          type: string
       xml:
-        name: MatchResults
+        name: news
+    ContactResultsDTO:
+      type: object
+      properties:
+        dbPersonDetails:
+          $ref: '#/components/schemas/PersonDTO'
+        employmentDetails:
+          $ref: '#/components/schemas/EmploymentDTO'
+    CompanyAddressDTO:
+      type: object
+      description: Company address. State and country are returned as codes when available.
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          description: State or province code.
+          example: WA
+        zip:
+          type: string
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code.
+          example: US
+        latitude:
+          type: string
+        longitude:
+          type: string
+        area:
+          type: string
     BritishSicDTO:
       type: object
       properties:
@@ -2758,13 +2446,106 @@ components:
           type: string
         description:
           type: string
-    JobFunctionsV2:
+    BusinessDTO:
       type: object
       properties:
-        id:
+        industry:
           type: string
-        name:
+        industryCode:
           type: string
+        subIndustry:
+          type: string
+        subIndustryCode:
+          type: string
+    TechUsedProductDTO:
+      type: object
+      description: A product detected for the company.
+      properties:
+        productId:
+          type: string
+          description: Demandbase identifier for the product.
+          example: DM01069
+        productName:
+          type: string
+          description: Display name of the product.
+          example: Axio
+    FamilyTreeResultDTO:
+      type: object
+      properties:
+        company:
+          $ref: '#/components/schemas/CompanyDTO'
+        children:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/FamilyTreeResultDTO'
+          xml:
+            wrapped: true
+    EmailDetails:
+      type: object
+      properties:
+        email:
+          type: string
+        validationStatus:
+          type: string
+    EmploymentDetails:
+      type: object
+      properties:
+        contactId:
+          type: integer
+          format: int32
+        companyId:
+          type: integer
+          format: int32
+        companyName:
+          type: string
+        contactQualityScore:
+          type: string
+        description:
+          type: string
+        startDate:
+          type: string
+        salary:
+          type: string
+        salaryCurrency:
+          type: string
+        active:
+          type: string
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailDetails'
+          xml:
+            wrapped: true
+        lastValidatedDate:
+          type: string
+        phoneNumbers:
+          $ref: '#/components/schemas/PhoneNumbers'
+        jobLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobLevels'
+          xml:
+            wrapped: true
+        jobFunctions:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobFunctions'
+          xml:
+            wrapped: true
+        titles:
+          type: array
+          items:
+            type: string
+            xml:
+              name: title
+          xml:
+            wrapped: true
+    CompanyMatchDTO:
+      type: object
+      properties:
+        company:
+          $ref: '#/components/schemas/CompanyFetchResponseDTO'
     TechUsedCategoryDTO:
       type: object
       description: A technology category and its subcategories.
@@ -2784,6 +2565,280 @@ components:
             $ref: '#/components/schemas/TechUsedSubCategoryDTO'
           xml:
             wrapped: true
+    AddressDTO:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        stateCode:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        countryCode:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        area:
+          type: string
+    DiversityDTO:
+      type: object
+      properties:
+        gender:
+          type: string
+        ethnicity:
+          type: string
+        certifications:
+          $ref: '#/components/schemas/DiversityCertificationsDTO'
+    Employments:
+      type: object
+      properties:
+        contactId:
+          type: integer
+          format: int32
+        companyId:
+          type: integer
+          format: int32
+        companyName:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+            xml:
+              name: email
+          xml:
+            wrapped: true
+        phoneNumbers:
+          $ref: '#/components/schemas/PhoneNumbers'
+        active:
+          type: string
+        jobLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobLevels'
+          xml:
+            wrapped: true
+        jobFunctions:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobFunctions'
+          xml:
+            wrapped: true
+        titles:
+          type: array
+          items:
+            type: string
+            xml:
+              name: title
+          xml:
+            wrapped: true
+    DiversityCertificationsDTO:
+      type: object
+      properties:
+        wbe:
+          type: boolean
+        mbe:
+          type: boolean
+        vbe:
+          type: boolean
+        disabled:
+          type: boolean
+        dbe:
+          type: boolean
+        lgbt:
+          type: boolean
+    ClassificationDTO:
+      type: object
+      properties:
+        primaryBusiness:
+          $ref: '#/components/schemas/BusinessDTO'
+        secondaryBusinesses:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessDTO'
+          xml:
+            wrapped: true
+    PersonDTO:
+      type: object
+      properties:
+        dbPersonId:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+    CompanySearchResponseDTO:
+      type: object
+      properties:
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyDTO'
+          xml:
+            name: company
+        totalCount:
+          type: integer
+          format: int64
+        pageNo:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int64
+      xml:
+        name: companies
+    ContactFetchResponseDTO:
+      type: object
+      properties:
+        dbPersonDetails:
+          $ref: '#/components/schemas/DBPersonDetails'
+        employmentDetails:
+          $ref: '#/components/schemas/EmploymentDetails'
+        employmentHistoryList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employments'
+          xml:
+            wrapped: true
+      xml:
+        name: contact
+    SocialHandlesDTO:
+      type: object
+      properties:
+        twitter:
+          type: string
+        facebook:
+          type: string
+        blog:
+          type: string
+        linkedIn:
+          type: string
+    JobFunctions:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    TechUsedSubCategoryDTO:
+      type: object
+      description: A technology subcategory and its detected products.
+      properties:
+        subCategoryId:
+          type: string
+          description: Demandbase identifier for the technology subcategory.
+          example: '5000076'
+        subCategoryName:
+          type: string
+          description: Display name of the technology subcategory.
+          example: Business Intelligence Software
+        products:
+          type: array
+          description: Products detected for the company within the subcategory.
+          items:
+            $ref: '#/components/schemas/TechUsedProductDTO'
+          xml:
+            wrapped: true
+    MatchResponseDTO:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchResponse'
+          xml:
+            wrapped: true
+      xml:
+        name: MatchResults
+    EmploymentDTO:
+      type: object
+      properties:
+        contactId:
+          type: integer
+          format: int64
+        companyId:
+          type: integer
+          format: int64
+        companyName:
+          type: string
+        titles:
+          type: array
+          items:
+            type: string
+            xml:
+              name: title
+          xml:
+            wrapped: true
+        jobLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobLevelsV2'
+          xml:
+            wrapped: true
+        jobFunctions:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobFunctionsV2'
+          xml:
+            wrapped: true
+        active:
+          type: boolean
+        hasPhone:
+          type: boolean
+        hasEmail:
+          type: boolean
+        contactQualityScore:
+          type: string
+    JobLevels:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    AcquiredCompanyResultDTO:
+      type: object
+      properties:
+        companies:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/CompanyDTO'
+          xml:
+            wrapped: true
+    ContactSearchResponseDTO:
+      type: object
+      properties:
+        contactResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactResultsDTO'
+          xml:
+            name: contactResult
+        totalCount:
+          type: integer
+          format: int64
+        pageNo:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int64
+      xml:
+        name: contactResults
     CompanyFetchResponseDTO:
       type: object
       properties:
@@ -2900,44 +2955,44 @@ components:
             wrapped: true
       xml:
         name: company
-    CompanyMatchDTO:
+    JobFunctionsV2:
       type: object
       properties:
-        company:
-          $ref: '#/components/schemas/CompanyFetchResponseDTO'
-    CompanyAddressDTO:
-      type: object
-      description: Company address. State and country are returned as codes when available.
-      properties:
-        street:
+        id:
           type: string
-        city:
+        name:
           type: string
-        state:
-          type: string
-          description: State or province code.
-          example: WA
-        zip:
-          type: string
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code.
-          example: US
-        latitude:
-          type: string
-        longitude:
-          type: string
-        area:
-          type: string
-    DiversityDTO:
+    CompanyNewsArticle:
       type: object
       properties:
-        gender:
+        title:
           type: string
-        ethnicity:
+        url:
           type: string
-        certifications:
-          $ref: '#/components/schemas/DiversityCertificationsDTO'
+        publicationDate:
+          type: string
+        source:
+          type: string
+        imageUrl:
+          type: string
+        newsCategory:
+          type: string
+    SocialHandles:
+      type: object
+      properties:
+        twitter:
+          type: string
+        facebook:
+          type: string
+        linkedIn:
+          type: string
+    PhoneNumbers:
+      type: object
+      properties:
+        directNumber:
+          type: string
+        corporateNumber:
+          type: string
     CompanyTechUsedDTO:
       type: object
       description: Installed technology information grouped by category and subcategory.
@@ -2949,74 +3004,145 @@ components:
             $ref: '#/components/schemas/TechUsedCategoryDTO'
           xml:
             wrapped: true
-    TechUsedSubCategoryDTO:
-      type: object
-      description: A technology subcategory and its detected products.
-      properties:
-        subCategoryId:
-          type: string
-          description: Demandbase identifier for the technology subcategory.
-          example: '5000076'
-        subCategoryName:
-          type: string
-          description: Display name of the technology subcategory.
-          example: Business Intelligence Software
-        products:
-          type: array
-          description: Products detected for the company within the subcategory.
-          items:
-            $ref: '#/components/schemas/TechUsedProductDTO'
-          xml:
-            wrapped: true
-    Education:
+    ContactMatchDTO:
       type: object
       properties:
-        degree:
-          type: string
-        major:
-          type: string
-        university:
-          type: string
-    SocialHandlesDTO:
-      type: object
-      properties:
-        twitter:
-          type: string
-        facebook:
-          type: string
-        blog:
-          type: string
-        linkedIn:
-          type: string
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
-        diagnosticCode:
-          type: string
-      xml:
-        name: error
-    MatchResponse:
+        contact:
+          $ref: '#/components/schemas/ContactFetchResponseDTO'
+    JobLevelsV2:
       type: object
       properties:
         id:
           type: string
-        companyMatches:
-          type: array
-          items:
-            $ref: '#/components/schemas/CompanyMatchDTO'
-          xml:
-            wrapped: true
-        contactMatches:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactMatchDTO'
-          xml:
-            wrapped: true
+        name:
+          type: string
   examples:
+    CompanyLogosResponse:
+      description: Company Logos Response
+      value:
+        companyId: 578458
+        companyName: Analysis Group, Inc.
+        companyType: Private
+        companyStatus: Operating
+        tickers: []
+        classification:
+          primaryBusiness:
+            industry: Corporate Services
+            industryCode: '229'
+            subIndustry: Management Consulting
+            subIndustryCode: '257'
+          secondaryBusinesses: []
+        address:
+          street: 111 Huntington Avenue Tenth Floor
+          city: Boston
+          state: MA
+          zip: 02199
+          country: US
+        phone: +1 617 425 8000
+        revenue: 43.75
+        revenueCurrency: USD
+        employeeCount: 500
+        sic: '8742'
+        sicDescription: Services-Management Consulting Services
+        naics: '541611'
+        naicsDescription: Administrative Management and General Management Consulting Services
+        equifaxId: 049615062
+        britishSics:
+        - britishSic: '71122'
+          description: Engineering related scientific and technical consulting activities
+        - britishSic: '70229'
+          description: Management consultancy activities other than financial management
+        foundedIn: '1981'
+        socialHandles:
+          twitter: https://twitter.com/analysisgroup
+          facebook: https://www.facebook.com/analysisgroup
+          linkedIn: https://www.linkedin.com/company/analysis-group
+        diversity:
+          gender: Female
+          ethnicity: African American
+          certifications:
+            wbe: true
+            mbe: true
+            vbe: true
+            disabled: false
+            dbe: true
+            lgbt: false
+        siteTypes:
+        - Uncategorized
+        businessStructure: Independent
+        websites:
+        - https://www.analysisgroup.com/
+        companyLogos:
+        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/100
+        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/200
+        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/400
+    CompanyCompetitorsResponse:
+      description: Company Competitors Response
+      value:
+        companyId: 726263
+        companyName: Microsoft Corporation
+        companyType: Public
+        companyStatus: Operating
+        tickers:
+        - tickerName: MSFT
+          exchange: NASD
+        classification:
+          primaryBusiness:
+            industry: Computer Software
+            industryCode: '8'
+          secondaryBusinesses:
+          - industry: Computer Software
+            industryCode: '8'
+            subIndustry: Enterprise Resource Planning Software
+            subIndustryCode: '8_32'
+        address:
+          street: One Microsoft Way
+          city: Redmond
+          state: WA
+          zip: 98052-6399
+          country: US
+          latitude: '47.6400493830442'
+          longitude: '-122.129796892405'
+        phone: +1 425 882 8080
+        revenue: 245122
+        revenueCurrency: USD
+        employeeCount: 228000
+        sic: '7371'
+        sicDescription: Services-Computer Programming Services
+        naics: '5132'
+        naicsDescription: Software Publishers
+        financialYearEnd: '6'
+        equifaxId: 049615062
+        companyTaxId: '911144442'
+        britishSics:
+        - britishSic: '58290'
+          description: Other software publishing
+        - britishSic: '46510'
+          description: Wholesale of computers, computer peripheral equipment and software
+        foundedIn: '1975'
+        socialHandles:
+          twitter: https://twitter.com/microsoftindia
+          facebook: https://www.facebook.com/microsoft
+          blog: https://news.microsoft.com/feed/
+          linkedIn: https://www.linkedin.com/company/microsoft
+        siteTypes:
+        - Uncategorized
+        siteCount: 276
+        siteLocationCount: 82
+        businessStructure: Global Parent
+        websites:
+        - https://www.microsoft.com/en-us/
+        competitors:
+        - name: Red Hat Inc
+          city: Raleigh
+          state: NC
+          country: US
+          companyId: 732237
+        - name: Adobe Systems Incorporated
+          city: San Jose
+          state: CA
+          country: US
+          companyId: 724292
     CompanyInstalledTechResponse:
       description: Company Installed Tech Response
       value:
@@ -3271,132 +3397,6 @@ components:
             city: Bangalore
             state: KA
             country: IN
-    CompanyCompetitorsResponse:
-      description: Company Competitors Response
-      value:
-        companyId: 726263
-        companyName: Microsoft Corporation
-        companyType: Public
-        companyStatus: Operating
-        tickers:
-        - tickerName: MSFT
-          exchange: NASD
-        classification:
-          primaryBusiness:
-            industry: Computer Software
-            industryCode: '8'
-          secondaryBusinesses:
-          - industry: Computer Software
-            industryCode: '8'
-            subIndustry: Enterprise Resource Planning Software
-            subIndustryCode: '8_32'
-        address:
-          street: One Microsoft Way
-          city: Redmond
-          state: WA
-          zip: 98052-6399
-          country: US
-          latitude: '47.6400493830442'
-          longitude: '-122.129796892405'
-        phone: +1 425 882 8080
-        revenue: 245122
-        revenueCurrency: USD
-        employeeCount: 228000
-        sic: '7371'
-        sicDescription: Services-Computer Programming Services
-        naics: '5132'
-        naicsDescription: Software Publishers
-        financialYearEnd: '6'
-        equifaxId: 049615062
-        companyTaxId: '911144442'
-        britishSics:
-        - britishSic: '58290'
-          description: Other software publishing
-        - britishSic: '46510'
-          description: Wholesale of computers, computer peripheral equipment and software
-        foundedIn: '1975'
-        socialHandles:
-          twitter: https://twitter.com/microsoftindia
-          facebook: https://www.facebook.com/microsoft
-          blog: https://news.microsoft.com/feed/
-          linkedIn: https://www.linkedin.com/company/microsoft
-        siteTypes:
-        - Uncategorized
-        siteCount: 276
-        siteLocationCount: 82
-        businessStructure: Global Parent
-        websites:
-        - https://www.microsoft.com/en-us/
-        competitors:
-        - name: Red Hat Inc
-          city: Raleigh
-          state: NC
-          country: US
-          companyId: 732237
-        - name: Adobe Systems Incorporated
-          city: San Jose
-          state: CA
-          country: US
-          companyId: 724292
-    CompanyLogosResponse:
-      description: Company Logos Response
-      value:
-        companyId: 578458
-        companyName: Analysis Group, Inc.
-        companyType: Private
-        companyStatus: Operating
-        tickers: []
-        classification:
-          primaryBusiness:
-            industry: Corporate Services
-            industryCode: '229'
-            subIndustry: Management Consulting
-            subIndustryCode: '257'
-          secondaryBusinesses: []
-        address:
-          street: 111 Huntington Avenue Tenth Floor
-          city: Boston
-          state: MA
-          zip: 02199
-          country: US
-        phone: +1 617 425 8000
-        revenue: 43.75
-        revenueCurrency: USD
-        employeeCount: 500
-        sic: '8742'
-        sicDescription: Services-Management Consulting Services
-        naics: '541611'
-        naicsDescription: Administrative Management and General Management Consulting Services
-        equifaxId: 049615062
-        britishSics:
-        - britishSic: '71122'
-          description: Engineering related scientific and technical consulting activities
-        - britishSic: '70229'
-          description: Management consultancy activities other than financial management
-        foundedIn: '1981'
-        socialHandles:
-          twitter: https://twitter.com/analysisgroup
-          facebook: https://www.facebook.com/analysisgroup
-          linkedIn: https://www.linkedin.com/company/analysis-group
-        diversity:
-          gender: Female
-          ethnicity: African American
-          certifications:
-            wbe: true
-            mbe: true
-            vbe: true
-            disabled: false
-            dbe: true
-            lgbt: false
-        siteTypes:
-        - Uncategorized
-        businessStructure: Independent
-        websites:
-        - https://www.analysisgroup.com/
-        companyLogos:
-        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/100
-        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/200
-        - https://uapi.demandbase.com/data/b2b/v1/company/578458/logos/400
     CompanyDetailsResponse:
       description: Company Details Response
       value:

@@ -143,12 +143,6 @@ components:
             errorCode: 401-100
             errorMessage: Authentication credentials are missing or invalid.
             diagnosticCode: 1e0fc1770e0d425b88892df4f663bf07
-    400errorDescriptionsForAllApi:
-      description: The request body, path parameter, or query parameter is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
     403errorDescriptionsForAllApi:
       description: The authenticated user does not have permission to access this resource.
       content:
@@ -159,6 +153,12 @@ components:
             errorCode: 403-100
             errorMessage: The authenticated user does not have permission to access this resource.
             diagnosticCode: 3e0fc1770e0d425b88892df4f663bf07
+    400errorDescriptionsForAllApi:
+      description: The request body, path parameter, or query parameter is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
     429errorDescriptionsForAllApi:
       description: An endpoint request limit, concurrent-job limit, or export quota was exceeded.
       content:
@@ -170,25 +170,35 @@ components:
             errorMessage: Rate limit exceeded.
             diagnosticCode: ce0fc1770e0d425b88892df4f663bf07
   schemas:
-    JobDetails:
+    Filter:
       type: object
-      required:
-      - jobStatus
-      - createdAt
-      - jobId
-      - entityType
-      - jobName
       properties:
-        jobStatus:
+        field:
           type: string
-        createdAt:
+        values:
+          type: array
+          items:
+            type: string
+        operator:
           type: string
-          format: date-time
-        jobId:
-          type: string
-        entityType:
-          type: string
+          description: One of Equals, Does Not Equal, Contains, Does Not Contain, Begins With, Does Not Begin With, Ends With, Does Not End With, Greater Than, Greater Than or Equal To, Less Than, Less Than or Equal To, Between, Exists, Does Not Exist, In, Not In
+    PersonListExportJob:
+      type: object
+      properties:
         jobName:
+          type: string
+        personListIds:
+          type: array
+          items:
+            type: integer
+    ErrorDto:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        diagnosticCode:
+          type: string
+        errorMessage:
           type: string
     JobRequestBody:
       type: object
@@ -242,36 +252,26 @@ components:
             type: integer
         format:
           type: string
-    ErrorDto:
+    JobDetails:
       type: object
+      required:
+      - jobStatus
+      - createdAt
+      - jobId
+      - entityType
+      - jobName
       properties:
-        errorCode:
+        jobStatus:
           type: string
-        diagnosticCode:
+        createdAt:
           type: string
-        errorMessage:
+          format: date-time
+        jobId:
           type: string
-    Filter:
-      type: object
-      properties:
-        field:
+        entityType:
           type: string
-        values:
-          type: array
-          items:
-            type: string
-        operator:
-          type: string
-          description: One of Equals, Does Not Equal, Contains, Does Not Contain, Begins With, Does Not Begin With, Ends With, Does Not End With, Greater Than, Greater Than or Equal To, Less Than, Less Than or Equal To, Between, Exists, Does Not Exist, In, Not In
-    PersonListExportJob:
-      type: object
-      properties:
         jobName:
           type: string
-        personListIds:
-          type: array
-          items:
-            type: integer
     AccountListExportJob:
       type: object
       properties:

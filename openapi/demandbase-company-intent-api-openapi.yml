@@ -187,6 +187,51 @@ paths:
       - bearerAuth: []
 components:
   schemas:
+    Pagination:
+      type: object
+      properties:
+        after:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page. Null when no additional page is available.
+          example: Tzo1MDoyNQ==
+        before:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the previous page. Null when the current page is the first page.
+          example: TzowOjI1
+        totalCount:
+          type: integer
+          format: int64
+          description: Total number of matching records.
+          example: 142
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Structured error code.
+          example: 400-218
+        errorMessage:
+          type: string
+          description: Human-readable error message.
+          example: At least one of companyIds, keywordSetIds, or keywords must be provided for intent search.
+        diagnosticCode:
+          type: string
+          format: uuid
+          description: Unique diagnostic identifier for troubleshooting.
+          example: ccb84f25-236e-4bcf-be01-88b7dd673fb4
+      xml:
+        name: error
+    UnauthorizedResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Authentication failure status.
+          example: Authentication Failed - Unauthorized.
     IntentResult:
       type: object
       properties:
@@ -247,33 +292,16 @@ components:
           type: string
           description: Keyword Set name.
           example: Security Keywords
-    Pagination:
+    IntentResponse:
       type: object
       properties:
-        after:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page. Null when no additional page is available.
-          example: Tzo1MDoyNQ==
-        before:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the previous page. Null when the current page is the first page.
-          example: TzowOjI1
-        totalCount:
-          type: integer
-          format: int64
-          description: Total number of matching records.
-          example: 142
-    UnauthorizedResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Authentication failure status.
-          example: Authentication Failed - Unauthorized.
+        data:
+          type: array
+          description: Intent result records.
+          items:
+            $ref: '#/components/schemas/IntentResult'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     IntentRequest:
       type: object
       required:
@@ -365,34 +393,6 @@ components:
           default: DESC
           description: Sort direction.
           example: DESC
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: Structured error code.
-          example: 400-218
-        errorMessage:
-          type: string
-          description: Human-readable error message.
-          example: At least one of companyIds, keywordSetIds, or keywords must be provided for intent search.
-        diagnosticCode:
-          type: string
-          format: uuid
-          description: Unique diagnostic identifier for troubleshooting.
-          example: ccb84f25-236e-4bcf-be01-88b7dd673fb4
-      xml:
-        name: error
-    IntentResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Intent result records.
-          items:
-            $ref: '#/components/schemas/IntentResult'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
   securitySchemes:
     bearerAuth:
       type: http

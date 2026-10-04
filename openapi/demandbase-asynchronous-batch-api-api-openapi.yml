@@ -1276,17 +1276,32 @@ paths:
         description: Server URL in Production environment
 components:
   schemas:
-    ErrorResponse:
+    JobFilter:
       type: object
       properties:
-        errorCode:
+        field:
           type: string
-        errorMessage:
-          type: string
-        diagnosticCode:
-          type: string
-      xml:
-        name: error
+          description: 'Restrictions:
+
+            <ul>
+
+            <li>companyFetch: Only companyId is allowed.</li>
+
+            <li>contactFetch: Only contactId is allowed.</li>
+
+            <li>companySearch: Use any valid company search filter field.</li>
+
+            <li>contactSearch: Use valid contact search filter fields.</li>
+
+            </ul>'
+        values:
+          type: array
+          description: Array of string values to filter on
+          items:
+            type: string
+      required:
+      - field
+      - values
     JobRequestDTO:
       type: object
       properties:
@@ -1327,6 +1342,17 @@ components:
       - jobName
       - fields
       - filters
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        diagnosticCode:
+          type: string
+      xml:
+        name: error
     BulkJobStatusDTO:
       type: object
       properties:
@@ -1348,32 +1374,6 @@ components:
           type: string
       xml:
         name: BulkJobStatus
-    JobFilter:
-      type: object
-      properties:
-        field:
-          type: string
-          description: 'Restrictions:
-
-            <ul>
-
-            <li>companyFetch: Only companyId is allowed.</li>
-
-            <li>contactFetch: Only contactId is allowed.</li>
-
-            <li>companySearch: Use any valid company search filter field.</li>
-
-            <li>contactSearch: Use valid contact search filter fields.</li>
-
-            </ul>'
-        values:
-          type: array
-          description: Array of string values to filter on
-          items:
-            type: string
-      required:
-      - field
-      - values
   securitySchemes:
     bearerAuth:
       type: http
