@@ -99,3 +99,19 @@ x-evidence:
   metadata_probe:
     url: https://gateway.demandbase.com/.well-known/oauth-protected-resource
     http_status: 200
+rfc9728:
+  endpoint: https://gateway.demandbase.com/mcp/servers/db-mcp
+  metadata_url: https://gateway.demandbase.com/.well-known/oauth-protected-resource
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://gateway.demandbase.com/mcp/
+    authorization_servers:
+    - https://gateway.demandbase.com
+    scopes_supported:
+    - openid
+    - profile
+    - email
+    - offline_access

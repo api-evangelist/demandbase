@@ -205,10 +205,8 @@ apis:
 unitEconomics:
   - name: Cost per Platform Seat
     metric: platform_fee_total / user_seats
-    target: TBD
   - name: Cost per Targeted Account
     metric: platform_fee_total / target_accounts
-    target: TBD
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
