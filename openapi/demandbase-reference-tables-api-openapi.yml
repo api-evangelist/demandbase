@@ -104,17 +104,12 @@ paths:
         description: Server URL in Production environment
 components:
   schemas:
-    ErrorResponse:
+    UnauthorizedResponse:
       type: object
       properties:
-        errorCode:
+        status:
           type: string
-        errorMessage:
-          type: string
-        diagnosticCode:
-          type: string
-      xml:
-        name: error
+          example: Authentication Failed - Unauthorized.
     ReferenceDataResponseDTO:
       type: object
       required:
@@ -130,12 +125,17 @@ components:
           items:
             type: object
             additionalProperties: true
-    UnauthorizedResponse:
+    ErrorResponse:
       type: object
       properties:
-        status:
+        errorCode:
           type: string
-          example: Authentication Failed - Unauthorized.
+        errorMessage:
+          type: string
+        diagnosticCode:
+          type: string
+      xml:
+        name: error
   securitySchemes:
     bearerAuth:
       type: http

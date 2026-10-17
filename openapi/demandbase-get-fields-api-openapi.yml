@@ -70,27 +70,6 @@ paths:
       security:
       - token: []
 components:
-  schemas:
-    Field:
-      type: object
-      properties:
-        name:
-          type: string
-        dataType:
-          type: string
-        label:
-          type: string
-        description:
-          type: string
-    ErrorDto:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        diagnosticCode:
-          type: string
-        errorMessage:
-          type: string
   responses:
     500errorDescriptionsForAllApi:
       description: An unexpected internal service error occurred.
@@ -102,16 +81,6 @@ components:
             errorCode: 500-100
             errorMessage: Error while communicating with internal service.
             diagnosticCode: de0fc1770e0d425b88892df4f663bf07
-    401errorDescriptionsForAllApi:
-      description: Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorDto'
-          example:
-            errorCode: 401-100
-            errorMessage: Authentication credentials are missing or invalid.
-            diagnosticCode: 1e0fc1770e0d425b88892df4f663bf07
     403errorDescriptionsForAllApi:
       description: The authenticated user does not have permission to access this resource.
       content:
@@ -138,6 +107,37 @@ components:
             errorCode: 429-100
             errorMessage: Rate limit exceeded.
             diagnosticCode: ce0fc1770e0d425b88892df4f663bf07
+    401errorDescriptionsForAllApi:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDto'
+          example:
+            errorCode: 401-100
+            errorMessage: Authentication credentials are missing or invalid.
+            diagnosticCode: 1e0fc1770e0d425b88892df4f663bf07
+  schemas:
+    ErrorDto:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        diagnosticCode:
+          type: string
+        errorMessage:
+          type: string
+    Field:
+      type: object
+      properties:
+        name:
+          type: string
+        dataType:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
   securitySchemes:
     token:
       type: http

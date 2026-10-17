@@ -2183,42 +2183,110 @@ components:
             name: field
       xml:
         name: subscription
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
-        diagnosticCode:
-          type: string
-      xml:
-        name: error
-    BulkSubscriptionJobStatusResponseDTO:
+    SubscriptionJobsListDTO:
       type: object
       properties:
         jobId:
           type: string
         subscriptionId:
           type: string
-        jobStatus:
-          type: string
-        totalEntitiesProcessed:
-          type: integer
-          format: int64
         jobType:
           type: string
-        invalidIds:
+        jobStatus:
+          type: string
+        createdAt:
+          type: string
+    GetAlertDefinitionDTO:
+      type: object
+      properties:
+        companyAlertDetails:
           type: array
           uniqueItems: true
           items:
-            type: string
+            $ref: '#/components/schemas/CompanyAlertData'
+        companyNewsAlertDetails:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/CompanyNewsAlertData'
+        dbPersonAlertDetails:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ContactAlertData'
+        companyFamilyTreeAlertDetails:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/FamilyTreeAlertData'
+        subscriptionType:
+          type: string
+          enum:
+          - company
+          - companynews
+          - dbPerson
+          - companyfamilytree
+        pageNo:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int64
+        totalCount:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+      xml:
+        name: alert
+    FieldDTO:
+      type: object
+      properties:
+        fieldName:
+          type: string
+        value:
+          type: string
+        newValue:
+          type: string
+      xml:
+        name: fieldChange
+    FamilyTreeAlertData:
+      type: object
+      properties:
+        companyId:
+          type: integer
+          format: int32
+        currentCompanyId:
+          type: integer
+          format: int32
         message:
+          type: string
+        companyFamilyTreeChanges:
+          $ref: '#/components/schemas/FamilyTreeChangeEventDTO'
+      xml:
+        name: familyTree
+    SubscriptionDetailsDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
           type: string
         subscriptionType:
           type: string
-      xml:
-        name: bulkSubscriptionJobStatus
+        subscriptionId:
+          type: string
+        createdAt:
+          type: string
+    AlertResponseDTO:
+      type: object
+      properties:
+        alertId:
+          type: integer
+          format: int32
+        createdAt:
+          type: string
     UpdateSubscriptionJobRequestDTO:
       type: object
       properties:
@@ -2314,19 +2382,39 @@ components:
           type: string
           description: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    Updated optional shared secret used to sign webhook payloads (HmacSHA1).\n    The signature will appear in the 'X-DemandbaseAPI-AlertDataSignature' header.\n    Max length: 500 characters.\n"
           maxLength: 500
-    SubscriptionDetailsDTO:
+    CompanyNewsAlertData:
       type: object
       properties:
-        name:
+        companyId:
           type: string
-        description:
+        articleUrl:
           type: string
-        subscriptionType:
+          format: uri
+        timestamp:
           type: string
-        subscriptionId:
+        newsCategories:
+          type: array
+          items:
+            type: string
+      xml:
+        name: article
+    EmploymentAlertData:
+      type: object
+      properties:
+        contactId:
           type: string
-        createdAt:
-          type: string
+        fields:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        fieldChanges:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/FieldDTO'
+      xml:
+        name: employment
     ContactAlertData:
       type: object
       properties:
@@ -2349,6 +2437,109 @@ components:
             $ref: '#/components/schemas/FieldDTO'
       xml:
         name: dbPerson
+    SubscriptionDeleteResponse:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+        message:
+          type: string
+      xml:
+        name: subscription
+    CompanyAlertData:
+      type: object
+      properties:
+        companyId:
+          type: string
+        fields:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        fieldChanges:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/FieldDTO'
+      xml:
+        name: company
+    SubscriptionListResponse:
+      type: object
+      properties:
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionDetailsDTO'
+          xml:
+            wrapped: true
+        pageNo:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+      xml:
+        name: subscriptionListResponse
+    FamilyTreeChangeEventDTO:
+      type: object
+      properties:
+        companyId:
+          type: integer
+          format: int32
+        addedCompanies:
+          type: array
+          uniqueItems: true
+          items:
+            type: integer
+            format: int32
+        deletedCompanies:
+          type: array
+          uniqueItems: true
+          items:
+            type: integer
+            format: int32
+        newUltimateParentCompanyId:
+          type: integer
+          format: int32
+        currentCompanyId:
+          type: integer
+          format: int32
+        timestamp:
+          type: integer
+          format: int64
+      xml:
+        name: familyTreeChanges
+    BulkSubscriptionJobStatusResponseDTO:
+      type: object
+      properties:
+        jobId:
+          type: string
+        subscriptionId:
+          type: string
+        jobStatus:
+          type: string
+        totalEntitiesProcessed:
+          type: integer
+          format: int64
+        jobType:
+          type: string
+        invalidIds:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        message:
+          type: string
+        subscriptionType:
+          type: string
+      xml:
+        name: bulkSubscriptionJobStatus
     WebhookDTO:
       type: object
       description: Webhook configuration object containing target URL, signing secret, and validation error(if any).
@@ -2372,123 +2563,26 @@ components:
           description: Shared secret used to generate HMAC signatures for verifying the authenticity of webhook requests.
       xml:
         name: webhook
-    GetAlertsResponseDTO:
+    SubscriptionJobResponseDTO:
       type: object
       properties:
-        alerts:
-          type: array
-          items:
-            $ref: '#/components/schemas/AlertResponseDTO'
-          xml:
-            wrapped: true
-        pageNo:
+        jobId:
+          type: string
+        jobStatus:
+          type: string
+        subscriptionId:
+          type: string
+        totalEntitiesProcessed:
           type: integer
           format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalCount:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-      xml:
-        name: Alert
-    SubscriptionJobsListResponseDTO:
-      type: object
-      properties:
-        subscriptionJobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubscriptionJobsListDTO'
-          xml:
-            name: subscriptionJobsList
-            wrapped: true
-        pageNo:
-          type: integer
-          format: int64
-        pageSize:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int64
-        totalCount:
-          type: integer
-          format: int64
-      xml:
-        name: subscriptionJobsListResponse
-    GetAlertDefinitionDTO:
-      type: object
-      properties:
-        companyAlertDetails:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/CompanyAlertData'
-        companyNewsAlertDetails:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/CompanyNewsAlertData'
-        dbPersonAlertDetails:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/ContactAlertData'
-        companyFamilyTreeAlertDetails:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/FamilyTreeAlertData'
+        jobType:
+          type: string
         subscriptionType:
           type: string
-          enum:
-          - company
-          - companynews
-          - dbPerson
-          - companyfamilytree
-        pageNo:
-          type: integer
-          format: int64
-        pageSize:
-          type: integer
-          format: int64
-        totalCount:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int64
-      xml:
-        name: alert
-    FamilyTreeAlertData:
-      type: object
-      properties:
-        companyId:
-          type: integer
-          format: int32
-        currentCompanyId:
-          type: integer
-          format: int32
-        message:
-          type: string
-        companyFamilyTreeChanges:
-          $ref: '#/components/schemas/FamilyTreeChangeEventDTO'
-      xml:
-        name: familyTree
-    FieldDTO:
-      type: object
-      properties:
-        fieldName:
-          type: string
-        value:
-          type: string
-        newValue:
+        createdAt:
           type: string
       xml:
-        name: fieldChange
+        name: subscription
     SubscriptionEntityDetailsDTO:
       type: object
       properties:
@@ -2514,6 +2608,29 @@ components:
         totalPages:
           type: integer
           format: int32
+    GetAlertsResponseDTO:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertResponseDTO'
+          xml:
+            wrapped: true
+        pageNo:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+      xml:
+        name: Alert
     CreateSubscriptionJobRequestDTO:
       type: object
       properties:
@@ -2675,158 +2792,41 @@ components:
 
             '
           maxLength: 500
-    SubscriptionJobResponseDTO:
+    SubscriptionJobsListResponseDTO:
       type: object
       properties:
-        jobId:
-          type: string
-        jobStatus:
-          type: string
-        subscriptionId:
-          type: string
-        totalEntitiesProcessed:
-          type: integer
-          format: int32
-        jobType:
-          type: string
-        subscriptionType:
-          type: string
-        createdAt:
-          type: string
-      xml:
-        name: subscription
-    AlertResponseDTO:
-      type: object
-      properties:
-        alertId:
-          type: integer
-          format: int32
-        createdAt:
-          type: string
-    EmploymentAlertData:
-      type: object
-      properties:
-        contactId:
-          type: string
-        fields:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        fieldChanges:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/FieldDTO'
-      xml:
-        name: employment
-    FamilyTreeChangeEventDTO:
-      type: object
-      properties:
-        companyId:
-          type: integer
-          format: int32
-        addedCompanies:
-          type: array
-          uniqueItems: true
-          items:
-            type: integer
-            format: int32
-        deletedCompanies:
-          type: array
-          uniqueItems: true
-          items:
-            type: integer
-            format: int32
-        newUltimateParentCompanyId:
-          type: integer
-          format: int32
-        currentCompanyId:
-          type: integer
-          format: int32
-        timestamp:
-          type: integer
-          format: int64
-      xml:
-        name: familyTreeChanges
-    SubscriptionListResponse:
-      type: object
-      properties:
-        subscriptions:
+        subscriptionJobs:
           type: array
           items:
-            $ref: '#/components/schemas/SubscriptionDetailsDTO'
+            $ref: '#/components/schemas/SubscriptionJobsListDTO'
           xml:
+            name: subscriptionJobsList
             wrapped: true
         pageNo:
           type: integer
-          format: int32
+          format: int64
         pageSize:
-          type: integer
-          format: int32
-        totalCount:
           type: integer
           format: int64
         totalPages:
           type: integer
           format: int64
+        totalCount:
+          type: integer
+          format: int64
       xml:
-        name: subscriptionListResponse
-    SubscriptionJobsListDTO:
+        name: subscriptionJobsListResponse
+    ErrorResponse:
       type: object
       properties:
-        jobId:
+        errorCode:
           type: string
-        subscriptionId:
+        errorMessage:
           type: string
-        jobType:
-          type: string
-        jobStatus:
-          type: string
-        createdAt:
-          type: string
-    SubscriptionDeleteResponse:
-      type: object
-      properties:
-        subscriptionId:
-          type: string
-        message:
+        diagnosticCode:
           type: string
       xml:
-        name: subscription
-    CompanyNewsAlertData:
-      type: object
-      properties:
-        companyId:
-          type: string
-        articleUrl:
-          type: string
-          format: uri
-        timestamp:
-          type: string
-        newsCategories:
-          type: array
-          items:
-            type: string
-      xml:
-        name: article
-    CompanyAlertData:
-      type: object
-      properties:
-        companyId:
-          type: string
-        fields:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        fieldChanges:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/FieldDTO'
-      xml:
-        name: company
+        name: error
   securitySchemes:
     bearerAuth:
       type: http

@@ -240,6 +240,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     NotFound:
       type: object
       properties:
@@ -259,43 +266,6 @@ components:
       required:
       - id
       - label
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    CustomActivityType:
-      type: object
-      title: CustomActivityType
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        description:
-          type: string
-        activitySource:
-          type: string
-      required:
-      - id
-      - name
-      - description
-      - activitySource
-    CustomActivityData:
-      type: object
-      title: CustomActivityData
-      properties:
-        activityType:
-          $ref: '#/components/schemas/CustomActivity'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomActivityField'
-      required:
-      - activityType
     CustomActivity:
       type: object
       title: CustomActivity
@@ -308,6 +278,18 @@ components:
           type: string
       required:
       - name
+    CustomActivityData:
+      type: object
+      title: CustomActivityData
+      properties:
+        activityType:
+          $ref: '#/components/schemas/CustomActivity'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomActivityField'
+      required:
+      - activityType
     BadRequest:
       type: object
       properties:
@@ -329,6 +311,24 @@ components:
           type: boolean
       required:
       - fieldName
+    CustomActivityType:
+      type: object
+      title: CustomActivityType
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        activitySource:
+          type: string
+      required:
+      - id
+      - name
+      - description
+      - activitySource
   securitySchemes:
     bearerAuth:
       type: http

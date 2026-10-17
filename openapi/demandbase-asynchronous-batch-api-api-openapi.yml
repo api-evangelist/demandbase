@@ -1276,6 +1276,27 @@ paths:
         description: Server URL in Production environment
 components:
   schemas:
+    BulkJobStatusDTO:
+      type: object
+      properties:
+        jobName:
+          type: string
+        jobStatus:
+          type: string
+        jobType:
+          type: string
+        jobId:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        resultsUrl:
+          type: string
+        message:
+          type: string
+      xml:
+        name: BulkJobStatus
     JobFilter:
       type: object
       properties:
@@ -1353,27 +1374,6 @@ components:
           type: string
       xml:
         name: error
-    BulkJobStatusDTO:
-      type: object
-      properties:
-        jobName:
-          type: string
-        jobStatus:
-          type: string
-        jobType:
-          type: string
-        jobId:
-          type: string
-        createdAt:
-          type: string
-        updatedAt:
-          type: string
-        resultsUrl:
-          type: string
-        message:
-          type: string
-      xml:
-        name: BulkJobStatus
   securitySchemes:
     bearerAuth:
       type: http
