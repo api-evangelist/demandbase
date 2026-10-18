@@ -55,3 +55,16 @@
     detected: '2026-10-14'
   status: not-a-workflow
   arazzo: null
+- slug: demandbase-slack-own
+  label: Slack (own)
+  partner: slack
+  partner_name: Slack (own)
+  category: Slack app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://slack.com/marketplace/A7FHF0KQA-demandbase
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
