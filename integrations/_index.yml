@@ -128,3 +128,16 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: demandbase-hubspot-own
+  label: HubSpot (own)
+  partner: hubspot
+  partner_name: HubSpot (own)
+  category: ACCOUNT_BASED_MARKETING
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://ecosystem.hubspot.com/marketplace/listing/demandbase
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
