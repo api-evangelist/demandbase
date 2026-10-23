@@ -1358,6 +1358,8 @@ apis:
   - type: Authentication
     url: authentication/demandbase-authentication.yml
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/demandbase/overview
 - type: CapabilityMap
   url: capabilities/demandbase-capability-edges.yml
   name: Demandbase Business Capability Map
