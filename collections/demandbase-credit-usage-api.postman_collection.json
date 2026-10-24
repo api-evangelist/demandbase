@@ -1,0 +1,273 @@
+{
+  "info": {
+    "_postman_id": "40fe3bec-7984-40d6-80bb-74c9d2f91915",
+    "name": "Credit Usage API",
+    "description": "This API allows authenticated users to retrieve summary-level credit usage and entitlement data for a specified API product. It supports two billing models:\n\n- **Per Record:** Credits are deducted each time a record is returned.\n\n- **RUM (Record Under Management):** Credits are deducted once per unique record per entitlement period.\n\nContact Support:\n Name: Support\n Email: support@demandbase.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:10:35.000Z",
+    "updatedAt": "2026-10-22T01:10:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-40fe3bec-7984-40d6-80bb-74c9d2f91915"
+  },
+  "item": [
+    {
+      "name": "reporting",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "usage",
+              "item": [
+                {
+                  "name": "Fetch Credit Usage details",
+                  "id": "b6f81445-ac8d-491a-9e44-d4f13ee0e7a8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/reporting/v1/usage?apiProduct=b2bapi",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "reporting",
+                        "v1",
+                        "usage"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) API product name (e.g., b2bApi)",
+                          "key": "apiProduct",
+                          "value": "b2bapi"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "4b27a8cc-b56e-4f38-9368-409e92952024",
+                          "key": "basePath",
+                          "value": "reporting/v1"
+                        }
+                      ]
+                    },
+                    "description": "Returns a summary of credit usage and entitlements for the specified API category."
+                  },
+                  "response": [
+                    {
+                      "id": "7b21e610-1995-4d66-b433-af46d190b844",
+                      "name": "Credit usage details fetched successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/reporting/v1/usage?apiProduct=b2bapi",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "reporting",
+                            "v1",
+                            "usage"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) API product name (e.g., b2bApi)",
+                              "key": "apiProduct",
+                              "value": "b2bapi"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"summary\": {\n    \"scope\": \"<string>\",\n    \"totalCreditsAllocated\": \"<integer>\",\n    \"totalCreditsConsumed\": \"<integer>\",\n    \"totalCreditsAvailable\": \"<integer>\",\n    \"chargingModel\": \"RUM\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:10:35.000Z",
+                      "updatedAt": "2026-10-22T01:10:35.000Z",
+                      "uid": "35240-7b21e610-1995-4d66-b433-af46d190b844"
+                    },
+                    {
+                      "id": "7a9cac46-21ce-4a3d-8518-3fd3f519d6c2",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/reporting/v1/usage?apiProduct=b2bapi",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "reporting",
+                            "v1",
+                            "usage"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) API product name (e.g., b2bApi)",
+                              "key": "apiProduct",
+                              "value": "b2bapi"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"examples\": {\n    \"InvalidAPICategoryErrorResponse\": {\n      \"description\": \"InvalidAPICategoryErrorResponse\",\n      \"value\": {\n        \"errorCode\": \"400-100\",\n        \"errorMessage\": \"Invalid value for apiCategory. Should be among {b2bApi}\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:10:35.000Z",
+                      "updatedAt": "2026-10-22T01:10:35.000Z",
+                      "uid": "35240-7a9cac46-21ce-4a3d-8518-3fd3f519d6c2"
+                    },
+                    {
+                      "id": "3ee36587-9c3f-4a7c-9a44-69be325e47b3",
+                      "name": "Unauthorized because the user is not authenticated.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/reporting/v1/usage?apiProduct=b2bapi",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "reporting",
+                            "v1",
+                            "usage"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) API product name (e.g., b2bApi)",
+                              "key": "apiProduct",
+                              "value": "b2bapi"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:10:35.000Z",
+                      "updatedAt": "2026-10-22T01:10:35.000Z",
+                      "uid": "35240-3ee36587-9c3f-4a7c-9a44-69be325e47b3"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:10:35.000Z",
+                  "updatedAt": "2026-10-22T01:10:35.000Z",
+                  "uid": "35240-b6f81445-ac8d-491a-9e44-d4f13ee0e7a8"
+                }
+              ],
+              "id": "b90c5216-5e75-4dc0-8825-f7cd834ae0fc",
+              "createdAt": "2026-10-22T01:10:35.000Z",
+              "updatedAt": "2026-10-22T01:10:35.000Z",
+              "uid": "35240-b90c5216-5e75-4dc0-8825-f7cd834ae0fc"
+            }
+          ],
+          "id": "8dca1368-f994-4861-a8cb-768863d02409",
+          "createdAt": "2026-10-22T01:10:35.000Z",
+          "updatedAt": "2026-10-22T01:10:35.000Z",
+          "uid": "35240-8dca1368-f994-4861-a8cb-768863d02409"
+        }
+      ],
+      "id": "1087e92a-d651-457b-b432-55bf93b1f37a",
+      "createdAt": "2026-10-22T01:10:35.000Z",
+      "updatedAt": "2026-10-22T01:10:35.000Z",
+      "uid": "35240-1087e92a-d651-457b-b432-55bf93b1f37a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "basePath",
+      "value": "reporting/v1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://uapi.demandbase.com"
+    }
+  ]
+}

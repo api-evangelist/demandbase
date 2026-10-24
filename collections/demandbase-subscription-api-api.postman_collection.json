@@ -1,0 +1,2737 @@
+{
+  "info": {
+    "_postman_id": "07836cfa-133e-4478-9151-639de8cad30a",
+    "name": "B2B Subscription API",
+    "description": "The B2B API provides access to endpoints for searching, retrieving, and matching company and contact data.\n\nContact Support:\n Name: Support\n Email: support@demandbase.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:11:27.000Z",
+    "updatedAt": "2026-10-22T01:11:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-07836cfa-133e-4478-9151-639de8cad30a"
+  },
+  "item": [
+    {
+      "name": "subscriptions",
+      "item": [
+        {
+          "name": "job",
+          "item": [
+            {
+              "name": "{jobId}",
+              "item": [
+                {
+                  "name": "Check Subscription Job Status",
+                  "id": "0b222b07-585f-4dd5-ad7e-98c4a6e7e265",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job/:jobId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        "job",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "78835662-bc3a-44f6-b1d2-a5a573af879b",
+                          "key": "jobId",
+                          "value": "<string>",
+                          "description": "(Required) Job ID"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve the current status of a bulk subscription job using its unique job ID.\nAfter you submit a create or update subscription job request, you\u2019ll receive a job ID.\nThis endpoint allows you to monitor that job\u2019s progress and determine whether it has completed successfully.\n\nIf the job completes, the response will include the generated subscriptionId\u2014which you can use to manage the subscription.\nIf the job fails, the response will contain error details explaining what went wrong."
+                  },
+                  "response": [
+                    {
+                      "id": "6dba5246-b8db-44d5-b8a6-9bf5e56e40f4",
+                      "name": "Job status retrieved successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job/:jobId",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "subscriptions",
+                            "job",
+                            ":jobId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"jobId\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"jobStatus\": \"<string>\",\n  \"totalEntitiesProcessed\": \"<long>\",\n  \"jobType\": \"<string>\",\n  \"invalidIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"message\": \"<string>\",\n  \"subscriptionType\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:28.000Z",
+                      "updatedAt": "2026-10-22T01:11:28.000Z",
+                      "uid": "35240-6dba5246-b8db-44d5-b8a6-9bf5e56e40f4"
+                    },
+                    {
+                      "id": "4e59903f-8a84-41f5-a055-a84b734c169b",
+                      "name": "Invalid job ID or request format.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job/:jobId",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "subscriptions",
+                            "job",
+                            ":jobId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:28.000Z",
+                      "updatedAt": "2026-10-22T01:11:28.000Z",
+                      "uid": "35240-4e59903f-8a84-41f5-a055-a84b734c169b"
+                    },
+                    {
+                      "id": "f5b379f4-7390-49eb-b6a5-c181dd593f90",
+                      "name": "Unauthorized. Access token missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job/:jobId",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "subscriptions",
+                            "job",
+                            ":jobId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"examples\": {\n    \"Unauthorized\": {\n      \"description\": \"Unauthorized\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:11:28.000Z",
+                      "updatedAt": "2026-10-22T01:11:28.000Z",
+                      "uid": "35240-f5b379f4-7390-49eb-b6a5-c181dd593f90"
+                    },
+                    {
+                      "id": "f603318f-fd5f-4e6a-93cc-b127d75aff65",
+                      "name": "The specified job ID was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job/:jobId",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "subscriptions",
+                            "job",
+                            ":jobId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:28.000Z",
+                      "updatedAt": "2026-10-22T01:11:28.000Z",
+                      "uid": "35240-f603318f-fd5f-4e6a-93cc-b127d75aff65"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-0b222b07-585f-4dd5-ad7e-98c4a6e7e265"
+                }
+              ],
+              "id": "6ebe5fc9-cd2d-4573-b660-c19aebeaf78a",
+              "createdAt": "2026-10-22T01:11:28.000Z",
+              "updatedAt": "2026-10-22T01:11:28.000Z",
+              "uid": "35240-6ebe5fc9-cd2d-4573-b660-c19aebeaf78a"
+            },
+            {
+              "name": "Update an Existing Subscription",
+              "id": "391f7b81-1146-4caa-bcba-1c5f1821d9a0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"addCompanyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"removeCompanyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dbPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"addDBPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"removeDBPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"subscriptionId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subscriptionType\": \"companyFamilyTree\",\n  \"frequency\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"newsCategories\": [\n    \"LEADERSHIP_CHANGES\",\n    \"BANKRUPTCY_RESTRUCTURING\"\n  ],\n  \"webhook\": \"<string>\",\n  \"signingSecret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "subscriptions",
+                    "job"
+                  ]
+                },
+                "description": "Use this API to update an existing subscription. You must provide both the subscriptionId and subscriptionType to identify which subscription you want to modify. This endpoint supports partial and full updates, including:\n\n- Replacing all associated entity IDs with the subscription (e.g., company IDs or dbPerson IDs).\n- Incrementally adding or removing entity IDs in the subscription.\n- Updating other subscription details such as frequency, webhook URL, signing secret, fields, or news categories.\n\nThe API responds with a jobId, which can be used to check the job's status. Once the job completes successfully, the subscription is updated accordingly."
+              },
+              "response": [
+                {
+                  "id": "c0286df4-1540-498e-a6ce-ac81b0d5c1a7",
+                  "name": "Successful operation",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"companyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"addCompanyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"removeCompanyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dbPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"addDBPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"removeDBPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"subscriptionId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subscriptionType\": \"companyFamilyTree\",\n  \"frequency\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"newsCategories\": [\n    \"LEADERSHIP_CHANGES\",\n    \"BANKRUPTCY_RESTRUCTURING\"\n  ],\n  \"webhook\": \"<string>\",\n  \"signingSecret\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        "job"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobId\": \"<string>\",\n  \"jobStatus\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"totalEntitiesProcessed\": \"<integer>\",\n  \"jobType\": \"<string>\",\n  \"subscriptionType\": \"<string>\",\n  \"createdAt\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-c0286df4-1540-498e-a6ce-ac81b0d5c1a7"
+                },
+                {
+                  "id": "812cf45d-3de4-417a-98a5-d0161a117900",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"companyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"addCompanyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"removeCompanyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dbPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"addDBPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"removeDBPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"subscriptionId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subscriptionType\": \"companyFamilyTree\",\n  \"frequency\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"newsCategories\": [\n    \"LEADERSHIP_CHANGES\",\n    \"BANKRUPTCY_RESTRUCTURING\"\n  ],\n  \"webhook\": \"<string>\",\n  \"signingSecret\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        "job"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-812cf45d-3de4-417a-98a5-d0161a117900"
+                },
+                {
+                  "id": "1563ec07-8f0d-49cc-aab7-8c44778daaa2",
+                  "name": "Unauthorized because the user is not authenticated.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"companyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"addCompanyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"removeCompanyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dbPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"addDBPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"removeDBPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"subscriptionId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subscriptionType\": \"companyFamilyTree\",\n  \"frequency\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"newsCategories\": [\n    \"LEADERSHIP_CHANGES\",\n    \"BANKRUPTCY_RESTRUCTURING\"\n  ],\n  \"webhook\": \"<string>\",\n  \"signingSecret\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        "job"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-1563ec07-8f0d-49cc-aab7-8c44778daaa2"
+                }
+              ],
+              "createdAt": "2026-10-22T01:11:28.000Z",
+              "updatedAt": "2026-10-22T01:11:28.000Z",
+              "uid": "35240-391f7b81-1146-4caa-bcba-1c5f1821d9a0"
+            },
+            {
+              "name": "Create a New Subscription",
+              "id": "04740447-b644-43cd-9b28-967e03c4ed0a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dbPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subscriptionType\": \"companyNews\",\n  \"startDate\": \"<string>\",\n  \"frequency\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"newsCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhook\": \"<string>\",\n  \"signingSecret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "subscriptions",
+                    "job"
+                  ]
+                },
+                "description": "Use this endpoint to create a subscription for monitoring updates to companies or DB Person records. Subscriptions allow you to receive change alerts via webhook and access historical alerts via API.\n\nEach subscription is processed asynchronously. A jobId is returned on submission. Upon completion, the job will return a subscriptionId which can be used to fetch alerts or manage the subscription."
+              },
+              "response": [
+                {
+                  "id": "d090b18f-ab72-427f-b4cc-eb498b60c641",
+                  "name": "Successful operation",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"companyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dbPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subscriptionType\": \"companyNews\",\n  \"startDate\": \"<string>\",\n  \"frequency\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"newsCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhook\": \"<string>\",\n  \"signingSecret\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        "job"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobId\": \"<string>\",\n  \"jobStatus\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"totalEntitiesProcessed\": \"<integer>\",\n  \"jobType\": \"<string>\",\n  \"subscriptionType\": \"<string>\",\n  \"createdAt\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-d090b18f-ab72-427f-b4cc-eb498b60c641"
+                },
+                {
+                  "id": "768d7238-c6f4-4583-b3bc-60d17c1159cd",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"companyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dbPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subscriptionType\": \"companyNews\",\n  \"startDate\": \"<string>\",\n  \"frequency\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"newsCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhook\": \"<string>\",\n  \"signingSecret\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        "job"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-768d7238-c6f4-4583-b3bc-60d17c1159cd"
+                },
+                {
+                  "id": "46991880-687d-4737-8430-af137866f31b",
+                  "name": "Unauthorized because the user is not authenticated.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"companyIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dbPersonIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subscriptionType\": \"companyNews\",\n  \"startDate\": \"<string>\",\n  \"frequency\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"newsCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhook\": \"<string>\",\n  \"signingSecret\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/job",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        "job"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-46991880-687d-4737-8430-af137866f31b"
+                }
+              ],
+              "createdAt": "2026-10-22T01:11:28.000Z",
+              "updatedAt": "2026-10-22T01:11:28.000Z",
+              "uid": "35240-04740447-b644-43cd-9b28-967e03c4ed0a"
+            }
+          ],
+          "id": "5fae8050-090d-4e00-bbcf-0d64f1ede184",
+          "createdAt": "2026-10-22T01:11:28.000Z",
+          "updatedAt": "2026-10-22T01:11:28.000Z",
+          "uid": "35240-5fae8050-090d-4e00-bbcf-0d64f1ede184"
+        },
+        {
+          "name": "{subscriptionId}",
+          "item": [
+            {
+              "name": "entityIds",
+              "item": [
+                {
+                  "name": "Get Subscription Entity IDs",
+                  "id": "20c85613-12a0-4b3e-9fca-35d0ae757745",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/entityIds?page=1&perPage=5000",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        ":subscriptionId",
+                        "entityIds"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number for pagination. Default is 1.",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of results per page. Default is 5000, maximum is 5000.",
+                          "key": "perPage",
+                          "value": "5000"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "f5f68b30-6ccf-4272-8995-b1c5b791dca5",
+                          "key": "subscriptionId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the subscription"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all entity IDs (company or dbPerson) associated with a given subscription. The response is paginated and depends on the type of subscription:\n\n- For \"company\" or \"companyFamilyTree\" subscriptions, it returns Company IDs.\n- For \"dbPerson\" subscriptions, it returns Demandbase Person IDs."
+                  },
+                  "response": [
+                    {
+                      "id": "15d081ac-fe3b-498b-9520-2fa7990ecd48",
+                      "name": "Entity ID list retrieved successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/entityIds?page=1&perPage=5000",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "subscriptions",
+                            ":subscriptionId",
+                            "entityIds"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination. Default is 1.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page. Default is 5000, maximum is 5000.",
+                              "key": "perPage",
+                              "value": "5000"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "subscriptionId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"companyIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dbPersonIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"pageNo\": \"<integer>\",\n  \"pageSize\": \"<integer>\",\n  \"totalCount\": \"<integer>\",\n  \"totalPages\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T01:11:28.000Z",
+                      "updatedAt": "2026-10-22T01:11:28.000Z",
+                      "uid": "35240-15d081ac-fe3b-498b-9520-2fa7990ecd48"
+                    },
+                    {
+                      "id": "839a4abc-6b97-4178-86b4-a6449a54c3b9",
+                      "name": "Unauthorized. Access token is missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/entityIds?page=1&perPage=5000",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "subscriptions",
+                            ":subscriptionId",
+                            "entityIds"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination. Default is 1.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page. Default is 5000, maximum is 5000.",
+                              "key": "perPage",
+                              "value": "5000"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "subscriptionId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"examples\": {\n    \"Unauthorized\": {\n      \"description\": \"Unauthorized\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:11:28.000Z",
+                      "updatedAt": "2026-10-22T01:11:28.000Z",
+                      "uid": "35240-839a4abc-6b97-4178-86b4-a6449a54c3b9"
+                    },
+                    {
+                      "id": "d4959317-36be-4c36-b666-6daeff6d144c",
+                      "name": "The subscription ID was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/entityIds?page=1&perPage=5000",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "subscriptions",
+                            ":subscriptionId",
+                            "entityIds"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination. Default is 1.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page. Default is 5000, maximum is 5000.",
+                              "key": "perPage",
+                              "value": "5000"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "subscriptionId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:28.000Z",
+                      "updatedAt": "2026-10-22T01:11:28.000Z",
+                      "uid": "35240-d4959317-36be-4c36-b666-6daeff6d144c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-20c85613-12a0-4b3e-9fca-35d0ae757745"
+                }
+              ],
+              "id": "90c277d3-06af-4482-b731-6c5065480451",
+              "createdAt": "2026-10-22T01:11:28.000Z",
+              "updatedAt": "2026-10-22T01:11:28.000Z",
+              "uid": "35240-90c277d3-06af-4482-b731-6c5065480451"
+            },
+            {
+              "name": "alerts",
+              "item": [
+                {
+                  "name": "{alertId}",
+                  "item": [
+                    {
+                      "name": "Retrieve a Specific Subscription Alert",
+                      "id": "3825369c-beec-40de-a0bc-30b53e13a221",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/alerts/:alertId?page=1&perPage=5000",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "subscriptions",
+                            ":subscriptionId",
+                            "alerts",
+                            ":alertId"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination. Default is 1.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page. Default is 5000, maximum is 5000.",
+                              "key": "perPage",
+                              "value": "5000"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "2b0e3270-04b6-4125-9aee-a103a6c3defe",
+                              "key": "subscriptionId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the subscription"
+                            },
+                            {
+                              "id": "5ca5e450-cb75-45eb-b753-1529e6f54fad",
+                              "key": "alertId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the alert"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve detailed alert updates for a specific subscription using its subscription ID and alert ID. Use `List Subscription Alerts` API to fetch latest alerts.\n\nThis endpoint returns the specific fields or news categories that triggered the alert, depending on the type of subscription:\n\n- **company**: Returns a list of company IDs and the fields that changed (e.g., name, address).\n- **companynews**: Returns company IDs and related news articles with timestamps.\n- **companyfamilytree**:\n- Identifies companies added to or removed from the family tree.\n- Includes migration messages if the root company itself was acquired.\n- **dbPerson**: Returns person IDs with changed fields, as well as detailed employment-level field updates per contact ID.\n\nThe response is paginated and supports high-volume results (e.g., up to 5,000 entities per page)."
+                      },
+                      "response": [
+                        {
+                          "id": "afc8572c-c5ad-4441-aec1-0d6ca016a5ea",
+                          "name": "Alert details retrieved successfully.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/alerts/:alertId?page=1&perPage=5000",
+                              "protocol": "https",
+                              "host": [
+                                "uapi",
+                                "demandbase",
+                                "com"
+                              ],
+                              "path": [
+                                "data",
+                                "b2b",
+                                "v1",
+                                "subscriptions",
+                                ":subscriptionId",
+                                "alerts",
+                                ":alertId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number for pagination. Default is 1.",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page. Default is 5000, maximum is 5000.",
+                                  "key": "perPage",
+                                  "value": "5000"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subscriptionId"
+                                },
+                                {
+                                  "key": "alertId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"companyAlertDetails\": [\n    {\n      \"companyId\": \"<string>\",\n      \"fields\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"fieldChanges\": [\n        {\n          \"fieldName\": \"<string>\",\n          \"value\": \"<string>\",\n          \"newValue\": \"<string>\"\n        },\n        {\n          \"fieldName\": \"<string>\",\n          \"value\": \"<string>\",\n          \"newValue\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"companyId\": \"<string>\",\n      \"fields\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"fieldChanges\": [\n        {\n          \"fieldName\": \"<string>\",\n          \"value\": \"<string>\",\n          \"newValue\": \"<string>\"\n        },\n        {\n          \"fieldName\": \"<string>\",\n          \"value\": \"<string>\",\n          \"newValue\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"companyNewsAlertDetails\": [\n    {\n      \"companyId\": \"<string>\",\n      \"articleUrl\": \"<uri>\",\n      \"timestamp\": \"<string>\",\n      \"newsCategories\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"companyId\": \"<string>\",\n      \"articleUrl\": \"<uri>\",\n      \"timestamp\": \"<string>\",\n      \"newsCategories\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"dbPersonAlertDetails\": [\n    {\n      \"dbPersonId\": \"<string>\",\n      \"fields\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"employments\": [\n        {\n          \"contactId\": \"<string>\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"fieldChanges\": [\n            {\n              \"fieldName\": \"<string>\",\n              \"value\": \"<string>\",\n              \"newValue\": \"<string>\"\n            },\n            {\n              \"fieldName\": \"<string>\",\n              \"value\": \"<string>\",\n              \"newValue\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"contactId\": \"<string>\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"fieldChanges\": [\n            {\n              \"fieldName\": \"<string>\",\n              \"value\": \"<string>\",\n              \"newValue\": \"<string>\"\n            },\n            {\n              \"fieldName\": \"<string>\",\n              \"value\": \"<string>\",\n              \"newValue\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"fieldChanges\": [\n        {\n          \"fieldName\": \"<string>\",\n          \"value\": \"<string>\",\n          \"newValue\": \"<string>\"\n        },\n        {\n          \"fieldName\": \"<string>\",\n          \"value\": \"<string>\",\n          \"newValue\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"dbPersonId\": \"<string>\",\n      \"fields\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"employments\": [\n        {\n          \"contactId\": \"<string>\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"fieldChanges\": [\n            {\n              \"fieldName\": \"<string>\",\n              \"value\": \"<string>\",\n              \"newValue\": \"<string>\"\n            },\n            {\n              \"fieldName\": \"<string>\",\n              \"value\": \"<string>\",\n              \"newValue\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"contactId\": \"<string>\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"fieldChanges\": [\n            {\n              \"fieldName\": \"<string>\",\n              \"value\": \"<string>\",\n              \"newValue\": \"<string>\"\n            },\n            {\n              \"fieldName\": \"<string>\",\n              \"value\": \"<string>\",\n              \"newValue\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"fieldChanges\": [\n        {\n          \"fieldName\": \"<string>\",\n          \"value\": \"<string>\",\n          \"newValue\": \"<string>\"\n        },\n        {\n          \"fieldName\": \"<string>\",\n          \"value\": \"<string>\",\n          \"newValue\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"companyFamilyTreeAlertDetails\": [\n    {\n      \"companyId\": \"<integer>\",\n      \"currentCompanyId\": \"<integer>\",\n      \"message\": \"<string>\",\n      \"companyFamilyTreeChanges\": {\n        \"companyId\": \"<integer>\",\n        \"addedCompanies\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"deletedCompanies\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"newUltimateParentCompanyId\": \"<integer>\",\n        \"currentCompanyId\": \"<integer>\",\n        \"timestamp\": \"<long>\"\n      }\n    },\n    {\n      \"companyId\": \"<integer>\",\n      \"currentCompanyId\": \"<integer>\",\n      \"message\": \"<string>\",\n      \"companyFamilyTreeChanges\": {\n        \"companyId\": \"<integer>\",\n        \"addedCompanies\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"deletedCompanies\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"newUltimateParentCompanyId\": \"<integer>\",\n        \"currentCompanyId\": \"<integer>\",\n        \"timestamp\": \"<long>\"\n      }\n    }\n  ],\n  \"subscriptionType\": \"dbPerson\",\n  \"pageNo\": \"<long>\",\n  \"pageSize\": \"<long>\",\n  \"totalCount\": \"<long>\",\n  \"totalPages\": \"<long>\"\n}",
+                          "createdAt": "2026-10-22T01:11:28.000Z",
+                          "updatedAt": "2026-10-22T01:11:28.000Z",
+                          "uid": "35240-afc8572c-c5ad-4441-aec1-0d6ca016a5ea"
+                        },
+                        {
+                          "id": "4600f3e8-c25f-460b-bbc3-8edc64304021",
+                          "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/alerts/:alertId?page=1&perPage=5000",
+                              "protocol": "https",
+                              "host": [
+                                "uapi",
+                                "demandbase",
+                                "com"
+                              ],
+                              "path": [
+                                "data",
+                                "b2b",
+                                "v1",
+                                "subscriptions",
+                                ":subscriptionId",
+                                "alerts",
+                                ":alertId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number for pagination. Default is 1.",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page. Default is 5000, maximum is 5000.",
+                                  "key": "perPage",
+                                  "value": "5000"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subscriptionId"
+                                },
+                                {
+                                  "key": "alertId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"examples\": {\n    \"Unauthorized\": {\n      \"description\": \"Unauthorized\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                          "createdAt": "2026-10-22T01:11:28.000Z",
+                          "updatedAt": "2026-10-22T01:11:28.000Z",
+                          "uid": "35240-4600f3e8-c25f-460b-bbc3-8edc64304021"
+                        },
+                        {
+                          "id": "294887ca-7963-4768-9284-e93b5c9c5327",
+                          "name": "The subscription or alert ID was not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/alerts/:alertId?page=1&perPage=5000",
+                              "protocol": "https",
+                              "host": [
+                                "uapi",
+                                "demandbase",
+                                "com"
+                              ],
+                              "path": [
+                                "data",
+                                "b2b",
+                                "v1",
+                                "subscriptions",
+                                ":subscriptionId",
+                                "alerts",
+                                ":alertId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number for pagination. Default is 1.",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page. Default is 5000, maximum is 5000.",
+                                  "key": "perPage",
+                                  "value": "5000"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subscriptionId"
+                                },
+                                {
+                                  "key": "alertId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"examples\": {\n    \"Subscription Not Found\": {\n      \"description\": \"Subscription Not Found\",\n      \"value\": {\n        \"errorCode\": \"404-104\",\n        \"errorMessage\": \"Subscription ID does not exist.\",\n        \"diagnosticCode\": \"e227ac59-49f8-459e-ab7d-b5b3ce398d21\"\n      }\n    },\n    \"Alert Not Found\": {\n      \"description\": \"Alert Not Found\",\n      \"value\": {\n        \"errorCode\": \"404-105\",\n        \"errorMessage\": \"Alert ID does not exist.\",\n        \"diagnosticCode\": \"845778f8-db95-45e3-80ec-5087191264cc\"\n      }\n    }\n  }\n}",
+                          "createdAt": "2026-10-22T01:11:28.000Z",
+                          "updatedAt": "2026-10-22T01:11:28.000Z",
+                          "uid": "35240-294887ca-7963-4768-9284-e93b5c9c5327"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:11:28.000Z",
+                      "updatedAt": "2026-10-22T01:11:28.000Z",
+                      "uid": "35240-3825369c-beec-40de-a0bc-30b53e13a221"
+                    }
+                  ],
+                  "id": "7ffbf3d7-7022-4338-ae55-1ab53eff2707",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-7ffbf3d7-7022-4338-ae55-1ab53eff2707"
+                },
+                {
+                  "name": "List Subscription Alerts",
+                  "id": "60d1cb67-c730-4566-8244-a6399f68370d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/alerts?page=1&perPage=10",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        ":subscriptionId",
+                        "alerts"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number for pagination. Default is 1.",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of results per page. Default is 10, maximum is 50.",
+                          "key": "perPage",
+                          "value": "10"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "48c36ddf-3816-4388-9a1c-9da87f1c36eb",
+                          "key": "subscriptionId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the subscription"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a paginated list of alerts generated for the specified subscription ID. Each alert includes:\n- `alertId`: unique identifier for the alert\n- `createdAt`: timestamp of when the alert was generated\n\nResults are sorted in descending order of `createdAt` (most recent first)."
+                  },
+                  "response": [
+                    {
+                      "id": "b5e24ad2-2b97-4cdc-9dc0-4490a53fe0cf",
+                      "name": "Subscription alert details list fetched successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/alerts?page=1&perPage=10",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "subscriptions",
+                            ":subscriptionId",
+                            "alerts"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination. Default is 1.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page. Default is 10, maximum is 50.",
+                              "key": "perPage",
+                              "value": "10"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "subscriptionId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"alerts\": [\n    {\n      \"alertId\": \"<integer>\",\n      \"createdAt\": \"<string>\"\n    },\n    {\n      \"alertId\": \"<integer>\",\n      \"createdAt\": \"<string>\"\n    }\n  ],\n  \"pageNo\": \"<integer>\",\n  \"pageSize\": \"<integer>\",\n  \"totalCount\": \"<integer>\",\n  \"totalPages\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T01:11:28.000Z",
+                      "updatedAt": "2026-10-22T01:11:28.000Z",
+                      "uid": "35240-b5e24ad2-2b97-4cdc-9dc0-4490a53fe0cf"
+                    },
+                    {
+                      "id": "a72b0f29-bb55-485d-a09b-10ce3be802bc",
+                      "name": "Unauthorized because the user is not authenticated.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/alerts?page=1&perPage=10",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "subscriptions",
+                            ":subscriptionId",
+                            "alerts"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination. Default is 1.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page. Default is 10, maximum is 50.",
+                              "key": "perPage",
+                              "value": "10"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "subscriptionId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:11:28.000Z",
+                      "updatedAt": "2026-10-22T01:11:28.000Z",
+                      "uid": "35240-a72b0f29-bb55-485d-a09b-10ce3be802bc"
+                    },
+                    {
+                      "id": "a3e8771d-f367-4ec6-8dd2-2939dae083f6",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId/alerts?page=1&perPage=10",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "subscriptions",
+                            ":subscriptionId",
+                            "alerts"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination. Default is 1.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page. Default is 10, maximum is 50.",
+                              "key": "perPage",
+                              "value": "10"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "subscriptionId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"examples\": {\n    \"SubscriptionNotFoundErrorResponse\": {\n      \"description\": \"SubscriptionNotFoundErrorResponse\",\n      \"value\": {\n        \"errorCode\": \"404-104\",\n        \"errorMessage\": \"Subscription ID does not exist.\",\n        \"diagnosticCode\": \"e227ac59-49f8-459e-ab7d-b5b3ce398d21\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:11:28.000Z",
+                      "updatedAt": "2026-10-22T01:11:28.000Z",
+                      "uid": "35240-a3e8771d-f367-4ec6-8dd2-2939dae083f6"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-60d1cb67-c730-4566-8244-a6399f68370d"
+                }
+              ],
+              "id": "d4ae8bae-a9ad-48e0-8512-c510fb0c1c31",
+              "createdAt": "2026-10-22T01:11:28.000Z",
+              "updatedAt": "2026-10-22T01:11:28.000Z",
+              "uid": "35240-d4ae8bae-a9ad-48e0-8512-c510fb0c1c31"
+            },
+            {
+              "name": "Retrieve Subscription Details",
+              "id": "61fffd8d-02f8-4eb4-976e-f5f8b818d439",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "492e8693-4287-46ff-bd46-d2d1ac9a0825",
+                      "key": "subscriptionId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the subscription"
+                    }
+                  ]
+                },
+                "description": "Fetch detailed information for a specific subscription using its subscription ID.\n\nThe response includes:\n- Subscription type (e.g., company, dbPerson, companyNews, companyFamilyTree)\n- Frequency and start date\n- Next scheduled notification time\n- Webhook configuration details (if applicable)\n- Tracked fields or subscribed news categories, depending on the subscription type"
+              },
+              "response": [
+                {
+                  "id": "3dd51af3-e34f-4542-924c-e2a754d88b17",
+                  "name": "Subscription details retrieved successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        ":subscriptionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"nextFireTime\": \"<string>\",\n  \"subscriptionType\": \"<string>\",\n  \"frequency\": \"<string>\",\n  \"webhook\": {\n    \"url\": \"<string>\",\n    \"status\": \"VERIFICATION_PENDING\",\n    \"disableReasonMessage\": \"<string>\",\n    \"signingSecret\": \"<string>\"\n  },\n  \"startDate\": \"<string>\",\n  \"createdAt\": \"<string>\",\n  \"newsCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-3dd51af3-e34f-4542-924c-e2a754d88b17"
+                },
+                {
+                  "id": "d56d74c8-00a6-4615-bf7b-738f3368c39c",
+                  "name": "The subscription exists but is not accessible by the current user.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        ":subscriptionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-d56d74c8-00a6-4615-bf7b-738f3368c39c"
+                },
+                {
+                  "id": "5e507a64-5f39-4b6b-a7f3-e7a33f49eea2",
+                  "name": "Unauthorized. The request lacks valid authentication credentials.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        ":subscriptionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"Unauthorized Access\": {\n      \"description\": \"Unauthorized Access\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-5e507a64-5f39-4b6b-a7f3-e7a33f49eea2"
+                },
+                {
+                  "id": "da64c2ac-828e-44aa-930f-f1fc10a85571",
+                  "name": "The subscription ID was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        ":subscriptionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-da64c2ac-828e-44aa-930f-f1fc10a85571"
+                }
+              ],
+              "createdAt": "2026-10-22T01:11:28.000Z",
+              "updatedAt": "2026-10-22T01:11:28.000Z",
+              "uid": "35240-61fffd8d-02f8-4eb4-976e-f5f8b818d439"
+            },
+            {
+              "name": "Delete a Subscription",
+              "id": "2865e66b-f373-4996-a3c4-e9226ab63b08",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "342455ed-b06c-4532-9246-ed51822a3637",
+                      "key": "subscriptionId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the subscription"
+                    }
+                  ]
+                },
+                "description": "Permanently delete a subscription using its subscription ID. This operation removes the subscription from the system and halts all future notifications or alerts related to it."
+              },
+              "response": [
+                {
+                  "id": "ccbea7ae-83d5-4afe-90e0-6aca3b2e2bcd",
+                  "name": "Subscription was deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        ":subscriptionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"subscriptionId\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-ccbea7ae-83d5-4afe-90e0-6aca3b2e2bcd"
+                },
+                {
+                  "id": "719a31f7-c179-464c-93f5-a7fc5b1970fb",
+                  "name": "Unauthorized. The request lacks valid authentication credentials.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        ":subscriptionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"Unauthorized Access\": {\n      \"description\": \"Unauthorized Access\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-719a31f7-c179-464c-93f5-a7fc5b1970fb"
+                },
+                {
+                  "id": "9e8b6015-39d5-439f-8288-0502e8796ff2",
+                  "name": "Subscription not found or already deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/:subscriptionId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        ":subscriptionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"Subscription Not Found\": {\n      \"description\": \"Subscription Not Found\",\n      \"value\": {\n        \"errorCode\": \"404-104\",\n        \"errorMessage\": \"Subscription ID does not exist.\",\n        \"diagnosticCode\": \"7d31a7f2-6b68-45fe-bccc-0f147d8313dc\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-9e8b6015-39d5-439f-8288-0502e8796ff2"
+                }
+              ],
+              "createdAt": "2026-10-22T01:11:28.000Z",
+              "updatedAt": "2026-10-22T01:11:28.000Z",
+              "uid": "35240-2865e66b-f373-4996-a3c4-e9226ab63b08"
+            }
+          ],
+          "id": "6ee23440-e9df-4ec4-8189-123b5308597b",
+          "createdAt": "2026-10-22T01:11:28.000Z",
+          "updatedAt": "2026-10-22T01:11:28.000Z",
+          "uid": "35240-6ee23440-e9df-4ec4-8189-123b5308597b"
+        },
+        {
+          "name": "jobs",
+          "item": [
+            {
+              "name": "List Subscription Jobs",
+              "id": "1e4e3ebe-eca1-4048-aa26-f83c8905e634",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/jobs?period=month&start=<string>&end=<string>&jobStatus=finished&jobType=notificationSubscriptionUpdate&page=<string>&perPage=<string>",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "subscriptions",
+                    "jobs"
+                  ],
+                  "query": [
+                    {
+                      "description": "The time period type you want to filter jobs by.\n\nValid values:\n- day\n- month\n- year\n",
+                      "key": "period",
+                      "value": "month"
+                    },
+                    {
+                      "description": "Start day/month/year(inclusive) for the selected period.\n\nStart format depends on the period type:\n- day: YYYY-MM-DD  (e.g., 2024-09-01)\n- month: YYYY-MM   (e.g., 2024-09)\n- year: YYYY       (e.g., 2024)\n",
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "End day/month/year(inclusive) for the selected period.\n\nEnd format depends on the period type:\n- day: YYYY-MM-DD  (e.g., 2024-09-30)\n- month: YYYY-MM   (e.g., 2024-10)\n- year: YYYY       (e.g., 2025)\n",
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter jobs by their status.\n\nValid values:\n- failed\n- accepted\n- processing\n- finished\n",
+                      "key": "jobStatus",
+                      "value": "finished"
+                    },
+                    {
+                      "description": "Type of subscription job to filter by.\n\nValid values:\n- notificationSubscriptionCreate\n- notificationSubscriptionUpdate\n",
+                      "key": "jobType",
+                      "value": "notificationSubscriptionUpdate"
+                    },
+                    {
+                      "description": "Page number to retrieve. Must be 1 or higher.",
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of results per page (max 50).",
+                      "key": "perPage",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieve a paginated list of all subscription jobs created by your tenant. Results are returned in descending order by creation time (`createdAt`). You can apply filters based on time period, date range, job status, and job type.\n\nPeriod can be specified as `day`, `month`, or `year`. If `day` is selected, you can specify a range of days (e.g., 2024-09-01 to 2024-09-07). For `month`, you can specify a range of months (e.g., 2024-09 to 2024-10). For `year`, you can specify a range of years (e.g., 2024 to 2025 for the entire year)."
+              },
+              "response": [
+                {
+                  "id": "f94f5992-bdc1-47f0-afe6-41a0d170c68a",
+                  "name": "List of subscription jobs returned successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/jobs?period=month&start=<string>&end=<string>&jobStatus=finished&jobType=notificationSubscriptionUpdate&page=<string>&perPage=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        "jobs"
+                      ],
+                      "query": [
+                        {
+                          "description": "The time period type you want to filter jobs by.\n\nValid values:\n- day\n- month\n- year\n",
+                          "key": "period",
+                          "value": "month"
+                        },
+                        {
+                          "description": "Start day/month/year(inclusive) for the selected period.\n\nStart format depends on the period type:\n- day: YYYY-MM-DD  (e.g., 2024-09-01)\n- month: YYYY-MM   (e.g., 2024-09)\n- year: YYYY       (e.g., 2024)\n",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "End day/month/year(inclusive) for the selected period.\n\nEnd format depends on the period type:\n- day: YYYY-MM-DD  (e.g., 2024-09-30)\n- month: YYYY-MM   (e.g., 2024-10)\n- year: YYYY       (e.g., 2025)\n",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter jobs by their status.\n\nValid values:\n- failed\n- accepted\n- processing\n- finished\n",
+                          "key": "jobStatus",
+                          "value": "finished"
+                        },
+                        {
+                          "description": "Type of subscription job to filter by.\n\nValid values:\n- notificationSubscriptionCreate\n- notificationSubscriptionUpdate\n",
+                          "key": "jobType",
+                          "value": "notificationSubscriptionUpdate"
+                        },
+                        {
+                          "description": "Page number to retrieve. Must be 1 or higher.",
+                          "key": "page",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of results per page (max 50).",
+                          "key": "perPage",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"subscriptionJobs\": [\n    {\n      \"jobId\": \"<string>\",\n      \"subscriptionId\": \"<string>\",\n      \"jobType\": \"<string>\",\n      \"jobStatus\": \"<string>\",\n      \"createdAt\": \"<string>\"\n    },\n    {\n      \"jobId\": \"<string>\",\n      \"subscriptionId\": \"<string>\",\n      \"jobType\": \"<string>\",\n      \"jobStatus\": \"<string>\",\n      \"createdAt\": \"<string>\"\n    }\n  ],\n  \"pageNo\": \"<long>\",\n  \"pageSize\": \"<long>\",\n  \"totalPages\": \"<long>\",\n  \"totalCount\": \"<long>\"\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-f94f5992-bdc1-47f0-afe6-41a0d170c68a"
+                },
+                {
+                  "id": "0c2b530e-207c-4814-81f7-7f1d6485d3c3",
+                  "name": "Invalid input or unsupported query parameters.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/jobs?period=month&start=<string>&end=<string>&jobStatus=finished&jobType=notificationSubscriptionUpdate&page=<string>&perPage=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        "jobs"
+                      ],
+                      "query": [
+                        {
+                          "description": "The time period type you want to filter jobs by.\n\nValid values:\n- day\n- month\n- year\n",
+                          "key": "period",
+                          "value": "month"
+                        },
+                        {
+                          "description": "Start day/month/year(inclusive) for the selected period.\n\nStart format depends on the period type:\n- day: YYYY-MM-DD  (e.g., 2024-09-01)\n- month: YYYY-MM   (e.g., 2024-09)\n- year: YYYY       (e.g., 2024)\n",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "End day/month/year(inclusive) for the selected period.\n\nEnd format depends on the period type:\n- day: YYYY-MM-DD  (e.g., 2024-09-30)\n- month: YYYY-MM   (e.g., 2024-10)\n- year: YYYY       (e.g., 2025)\n",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter jobs by their status.\n\nValid values:\n- failed\n- accepted\n- processing\n- finished\n",
+                          "key": "jobStatus",
+                          "value": "finished"
+                        },
+                        {
+                          "description": "Type of subscription job to filter by.\n\nValid values:\n- notificationSubscriptionCreate\n- notificationSubscriptionUpdate\n",
+                          "key": "jobType",
+                          "value": "notificationSubscriptionUpdate"
+                        },
+                        {
+                          "description": "Page number to retrieve. Must be 1 or higher.",
+                          "key": "page",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of results per page (max 50).",
+                          "key": "perPage",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-0c2b530e-207c-4814-81f7-7f1d6485d3c3"
+                },
+                {
+                  "id": "b2484415-a8ca-461e-9a7a-0dd8b262f298",
+                  "name": "Authentication is required or token is invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions/jobs?period=month&start=<string>&end=<string>&jobStatus=finished&jobType=notificationSubscriptionUpdate&page=<string>&perPage=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "subscriptions",
+                        "jobs"
+                      ],
+                      "query": [
+                        {
+                          "description": "The time period type you want to filter jobs by.\n\nValid values:\n- day\n- month\n- year\n",
+                          "key": "period",
+                          "value": "month"
+                        },
+                        {
+                          "description": "Start day/month/year(inclusive) for the selected period.\n\nStart format depends on the period type:\n- day: YYYY-MM-DD  (e.g., 2024-09-01)\n- month: YYYY-MM   (e.g., 2024-09)\n- year: YYYY       (e.g., 2024)\n",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "End day/month/year(inclusive) for the selected period.\n\nEnd format depends on the period type:\n- day: YYYY-MM-DD  (e.g., 2024-09-30)\n- month: YYYY-MM   (e.g., 2024-10)\n- year: YYYY       (e.g., 2025)\n",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter jobs by their status.\n\nValid values:\n- failed\n- accepted\n- processing\n- finished\n",
+                          "key": "jobStatus",
+                          "value": "finished"
+                        },
+                        {
+                          "description": "Type of subscription job to filter by.\n\nValid values:\n- notificationSubscriptionCreate\n- notificationSubscriptionUpdate\n",
+                          "key": "jobType",
+                          "value": "notificationSubscriptionUpdate"
+                        },
+                        {
+                          "description": "Page number to retrieve. Must be 1 or higher.",
+                          "key": "page",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of results per page (max 50).",
+                          "key": "perPage",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"Unauthorized\": {\n      \"description\": \"Unauthorized\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:11:28.000Z",
+                  "updatedAt": "2026-10-22T01:11:28.000Z",
+                  "uid": "35240-b2484415-a8ca-461e-9a7a-0dd8b262f298"
+                }
+              ],
+              "createdAt": "2026-10-22T01:11:28.000Z",
+              "updatedAt": "2026-10-22T01:11:28.000Z",
+              "uid": "35240-1e4e3ebe-eca1-4048-aa26-f83c8905e634"
+            }
+          ],
+          "id": "7e22caff-9b9c-413f-b503-e7e7bd4ae7fc",
+          "createdAt": "2026-10-22T01:11:28.000Z",
+          "updatedAt": "2026-10-22T01:11:28.000Z",
+          "uid": "35240-7e22caff-9b9c-413f-b503-e7e7bd4ae7fc"
+        },
+        {
+          "name": "List Subscriptions",
+          "id": "32ee892f-927a-45da-bd11-39f3c550b09a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions?subscriptionType=<string>&page=1&perPage=10",
+              "protocol": "https",
+              "host": [
+                "uapi",
+                "demandbase",
+                "com"
+              ],
+              "path": [
+                "data",
+                "b2b",
+                "v1",
+                "subscriptions"
+              ],
+              "query": [
+                {
+                  "description": "Comma-separated list of subscription types to filter the results. Valid values include: company, companyNews, dbPerson, companyFamilyTree.",
+                  "key": "subscriptionType",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Page number for pagination. Default is 1.",
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "Number of results per page. Default is 10, maximum is 50.",
+                  "key": "perPage",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Retrieve a list of all subscriptions associated with your tenant.\nYou can filter results by one or more subscription types and paginate through the results.\nResults are returned in pages, with support for customizing the number of items per page."
+          },
+          "response": [
+            {
+              "id": "b58770a8-1eb9-4760-a574-7060aba32f53",
+              "name": "List of subscriptions retrieved successfully.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions?subscriptionType=<string>&page=1&perPage=10",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated list of subscription types to filter the results. Valid values include: company, companyNews, dbPerson, companyFamilyTree.",
+                      "key": "subscriptionType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Page number for pagination. Default is 1.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of results per page. Default is 10, maximum is 50.",
+                      "key": "perPage",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"subscriptions\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"subscriptionType\": \"<string>\",\n      \"subscriptionId\": \"<string>\",\n      \"createdAt\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"subscriptionType\": \"<string>\",\n      \"subscriptionId\": \"<string>\",\n      \"createdAt\": \"<string>\"\n    }\n  ],\n  \"pageNo\": \"<integer>\",\n  \"pageSize\": \"<integer>\",\n  \"totalCount\": \"<long>\",\n  \"totalPages\": \"<long>\"\n}",
+              "createdAt": "2026-10-22T01:11:28.000Z",
+              "updatedAt": "2026-10-22T01:11:28.000Z",
+              "uid": "35240-b58770a8-1eb9-4760-a574-7060aba32f53"
+            },
+            {
+              "id": "4601268c-684d-495c-b6ba-1940f9f8386e",
+              "name": "Results per page value is invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/subscriptions?subscriptionType=<string>&page=1&perPage=10",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated list of subscription types to filter the results. Valid values include: company, companyNews, dbPerson, companyFamilyTree.",
+                      "key": "subscriptionType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Page number for pagination. Default is 1.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of results per page. Default is 10, maximum is 50.",
+                      "key": "perPage",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:11:28.000Z",
+              "updatedAt": "2026-10-22T01:11:28.000Z",
+              "uid": "35240-4601268c-684d-495c-b6ba-1940f9f8386e"
+            }
+          ],
+          "createdAt": "2026-10-22T01:11:28.000Z",
+          "updatedAt": "2026-10-22T01:11:28.000Z",
+          "uid": "35240-32ee892f-927a-45da-bd11-39f3c550b09a"
+        }
+      ],
+      "id": "baf7611e-5aeb-469c-898f-dd14665ad6f0",
+      "createdAt": "2026-10-22T01:11:28.000Z",
+      "updatedAt": "2026-10-22T01:11:28.000Z",
+      "uid": "35240-baf7611e-5aeb-469c-898f-dd14665ad6f0"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://uapi.demandbase.com/data/b2b/v1"
+    }
+  ]
+}

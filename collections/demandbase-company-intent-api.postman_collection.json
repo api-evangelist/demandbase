@@ -1,0 +1,346 @@
+{
+  "info": {
+    "_postman_id": "c5bc4148-2be0-4eb9-877d-f8edf5a2d606",
+    "name": "Company Intent API",
+    "description": "The Intent API provides company-level intent signals, including keyword research activity, intent strength, and trending behavior.\n\nContact Support:\n Name: Support\n Email: support@demandbase.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:10:22.000Z",
+    "updatedAt": "2026-10-22T01:10:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c5bc4148-2be0-4eb9-877d-f8edf5a2d606"
+  },
+  "item": [
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "intent",
+          "item": [
+            {
+              "name": "query",
+              "item": [
+                {
+                  "name": "Retrieve company intent data",
+                  "id": "6bc81c55-fea1-4068-a0bb-344001b888df",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"companyIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywordSetIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"intentStrength\": \"HIGH\",\n  \"minNumPeopleResearching\": \"<integer>\",\n  \"maxNumPeopleResearching\": \"<integer>\",\n  \"pageSize\": 25,\n  \"pageToken\": \"<string>\",\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/intent/query",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        "intent",
+                        "query"
+                      ]
+                    },
+                    "description": "Retrieves company intent signals filtered by company IDs, keyword set IDs, or keywords within a specified time range.\n\nYou can optionally filter by intent strength or the number of people researching and control pagination and sorting. At least one of `companyIds`, `keywordSetIds`, or `keywords` is required."
+                  },
+                  "response": [
+                    {
+                      "id": "10cf013a-4d8d-4ff8-b388-d8fc3d60aa0a",
+                      "name": "Intent records fetched successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"companyIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywordSetIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"intentStrength\": \"HIGH\",\n  \"minNumPeopleResearching\": \"<integer>\",\n  \"maxNumPeopleResearching\": \"<integer>\",\n  \"pageSize\": 25,\n  \"pageToken\": \"<string>\",\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/intent/query",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            "intent",
+                            "query"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"companyId\": \"<string>\",\n      \"domain\": \"<string>\",\n      \"keyword\": \"<string>\",\n      \"numPeopleResearching\": \"<integer>\",\n      \"intentStrength\": \"HIGH\",\n      \"isTrending\": \"<boolean>\",\n      \"trendingScore\": \"<integer>\",\n      \"numTrendingDays\": \"<integer>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\",\n      \"keywordSetId\": \"<long>\",\n      \"keywordSetName\": \"<string>\"\n    },\n    {\n      \"companyId\": \"<string>\",\n      \"domain\": \"<string>\",\n      \"keyword\": \"<string>\",\n      \"numPeopleResearching\": \"<integer>\",\n      \"intentStrength\": \"LOW\",\n      \"isTrending\": \"<boolean>\",\n      \"trendingScore\": \"<integer>\",\n      \"numTrendingDays\": \"<integer>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\",\n      \"keywordSetId\": \"<long>\",\n      \"keywordSetName\": \"<string>\"\n    }\n  ],\n  \"pagination\": {\n    \"after\": \"<string,null>\",\n    \"before\": \"<string,null>\",\n    \"totalCount\": \"<long>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:10:23.000Z",
+                      "updatedAt": "2026-10-22T01:10:23.000Z",
+                      "uid": "35240-10cf013a-4d8d-4ff8-b388-d8fc3d60aa0a"
+                    },
+                    {
+                      "id": "759b1170-2ac5-4449-9bca-9f2f7ae551ae",
+                      "name": "The request is invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"companyIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywordSetIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"intentStrength\": \"HIGH\",\n  \"minNumPeopleResearching\": \"<integer>\",\n  \"maxNumPeopleResearching\": \"<integer>\",\n  \"pageSize\": 25,\n  \"pageToken\": \"<string>\",\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/intent/query",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            "intent",
+                            "query"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<uuid>\"\n}",
+                      "createdAt": "2026-10-22T01:10:23.000Z",
+                      "updatedAt": "2026-10-22T01:10:23.000Z",
+                      "uid": "35240-759b1170-2ac5-4449-9bca-9f2f7ae551ae"
+                    },
+                    {
+                      "id": "c0dd3939-c74c-4d2e-8fdd-a0744baa5c91",
+                      "name": "Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"companyIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywordSetIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"intentStrength\": \"HIGH\",\n  \"minNumPeopleResearching\": \"<integer>\",\n  \"maxNumPeopleResearching\": \"<integer>\",\n  \"pageSize\": 25,\n  \"pageToken\": \"<string>\",\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/intent/query",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            "intent",
+                            "query"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:10:23.000Z",
+                      "updatedAt": "2026-10-22T01:10:23.000Z",
+                      "uid": "35240-c0dd3939-c74c-4d2e-8fdd-a0744baa5c91"
+                    },
+                    {
+                      "id": "156cf18c-219d-4761-a334-4d65c38a8b40",
+                      "name": "The API key does not include Intent API access.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"companyIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywordSetIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"intentStrength\": \"HIGH\",\n  \"minNumPeopleResearching\": \"<integer>\",\n  \"maxNumPeopleResearching\": \"<integer>\",\n  \"pageSize\": 25,\n  \"pageToken\": \"<string>\",\n  \"sortBy\": \"endDate\",\n  \"sortOrder\": \"DESC\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/intent/query",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            "intent",
+                            "query"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<uuid>\"\n}",
+                      "createdAt": "2026-10-22T01:10:23.000Z",
+                      "updatedAt": "2026-10-22T01:10:23.000Z",
+                      "uid": "35240-156cf18c-219d-4761-a334-4d65c38a8b40"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:10:23.000Z",
+                  "updatedAt": "2026-10-22T01:10:23.000Z",
+                  "uid": "35240-6bc81c55-fea1-4068-a0bb-344001b888df"
+                }
+              ],
+              "id": "277785b1-257a-4656-8f5f-f2e3fd078a4b",
+              "createdAt": "2026-10-22T01:10:23.000Z",
+              "updatedAt": "2026-10-22T01:10:23.000Z",
+              "uid": "35240-277785b1-257a-4656-8f5f-f2e3fd078a4b"
+            }
+          ],
+          "id": "99936096-545e-4480-bb5b-f5d20e7b5455",
+          "createdAt": "2026-10-22T01:10:23.000Z",
+          "updatedAt": "2026-10-22T01:10:23.000Z",
+          "uid": "35240-99936096-545e-4480-bb5b-f5d20e7b5455"
+        }
+      ],
+      "id": "f08c1d2f-376c-46f1-904d-200c89bb6b6a",
+      "createdAt": "2026-10-22T01:10:23.000Z",
+      "updatedAt": "2026-10-22T01:10:23.000Z",
+      "uid": "35240-f08c1d2f-376c-46f1-904d-200c89bb6b6a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://uapi.demandbase.com/data/intent/v1"
+    }
+  ]
+}

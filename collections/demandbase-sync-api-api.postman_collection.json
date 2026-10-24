@@ -1,0 +1,2524 @@
+{
+  "info": {
+    "_postman_id": "e5c59676-b909-4812-8108-54279bb96b47",
+    "name": "B2B Sync API",
+    "description": "The B2B API provides access to endpoints for searching, retrieving, and matching company and contact data.\n\nContact Support:\n Name: Support\n Email: support@demandbase.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:11:35.000Z",
+    "updatedAt": "2026-10-22T01:11:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e5c59676-b909-4812-8108-54279bb96b47"
+  },
+  "item": [
+    {
+      "name": "contacts",
+      "item": [
+        {
+          "name": "Search contacts",
+          "id": "dde5b0c3-b7b0-4c2c-8cb2-05420eac113c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"contactCity\": \"<string>\",\n  \"contactState\": \"<string>\",\n  \"contactCountry\": \"<string>\",\n  \"titles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyName\": \"<string>\",\n  \"companyCity\": \"<string>\",\n  \"companyState\": \"<string>\",\n  \"companyCountry\": \"<string>\",\n  \"companyWebsite\": \"<string>\",\n  \"jobLevels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"jobFunctions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"active\": \"true\",\n  \"emailRequired\": \"false\",\n  \"phoneRequired\": \"false\",\n  \"phoneType\": \"corp\",\n  \"emailValidationStatus\": \"<string>\",\n  \"minContactQualityScore\": \"<string>\",\n  \"companyIdsToInclude\": [\n    \"726263\"\n  ],\n  \"contactIdsToExclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"primaryIndustryOnly\": \"false\",\n  \"sortBy\": \"<string>\",\n  \"sortOrder\": \"desc\",\n  \"maxEmployees\": \"<string>\",\n  \"minEmployees\": \"<string>\",\n  \"industries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": \"1\",\n  \"perPage\": \"10\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://uapi.demandbase.com/data/b2b/v1/contacts",
+              "protocol": "https",
+              "host": [
+                "uapi",
+                "demandbase",
+                "com"
+              ],
+              "path": [
+                "data",
+                "b2b",
+                "v1",
+                "contacts"
+              ]
+            },
+            "description": "Use this endpoint to search for individuals at specific companies.\n\nYou can filter contacts by details such as first name, last name, email, location, job title, job level, and job function. Company-level filters include company name, website, location, industry, size, and more. Additional parameters allow you to filter by quality score, email validation status, and phone requirements.\n\nSorting and pagination are supported. You can sort results by fields such as `companyName`, and control the number of results returned using `page` and `perPage`.\n\nYou must include at least one parameter (excluding sorting and pagination) to perform a search."
+          },
+          "response": [
+            {
+              "id": "d049687c-e6db-435f-9129-5a0d15d58bc6",
+              "name": "Successful operation or No contacts found for query.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"contactCity\": \"<string>\",\n  \"contactState\": \"<string>\",\n  \"contactCountry\": \"<string>\",\n  \"titles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyName\": \"<string>\",\n  \"companyCity\": \"<string>\",\n  \"companyState\": \"<string>\",\n  \"companyCountry\": \"<string>\",\n  \"companyWebsite\": \"<string>\",\n  \"jobLevels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"jobFunctions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"active\": \"true\",\n  \"emailRequired\": \"false\",\n  \"phoneRequired\": \"false\",\n  \"phoneType\": \"corp\",\n  \"emailValidationStatus\": \"<string>\",\n  \"minContactQualityScore\": \"<string>\",\n  \"companyIdsToInclude\": [\n    \"726263\"\n  ],\n  \"contactIdsToExclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"primaryIndustryOnly\": \"false\",\n  \"sortBy\": \"<string>\",\n  \"sortOrder\": \"desc\",\n  \"maxEmployees\": \"<string>\",\n  \"minEmployees\": \"<string>\",\n  \"industries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": \"1\",\n  \"perPage\": \"10\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/contacts",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "contacts"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"contactResults\": [\n    {\n      \"dbPersonDetails\": {\n        \"dbPersonId\": \"<long>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"country\": \"<string>\",\n        \"city\": \"<string>\"\n      },\n      \"employmentDetails\": {\n        \"contactId\": \"<long>\",\n        \"companyId\": \"<long>\",\n        \"companyName\": \"<string>\",\n        \"titles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"jobLevels\": [\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\"\n          }\n        ],\n        \"jobFunctions\": [\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\"\n          }\n        ],\n        \"active\": \"<boolean>\",\n        \"hasPhone\": \"<boolean>\",\n        \"hasEmail\": \"<boolean>\",\n        \"contactQualityScore\": \"<string>\"\n      }\n    },\n    {\n      \"dbPersonDetails\": {\n        \"dbPersonId\": \"<long>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"country\": \"<string>\",\n        \"city\": \"<string>\"\n      },\n      \"employmentDetails\": {\n        \"contactId\": \"<long>\",\n        \"companyId\": \"<long>\",\n        \"companyName\": \"<string>\",\n        \"titles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"jobLevels\": [\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\"\n          }\n        ],\n        \"jobFunctions\": [\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\"\n          }\n        ],\n        \"active\": \"<boolean>\",\n        \"hasPhone\": \"<boolean>\",\n        \"hasEmail\": \"<boolean>\",\n        \"contactQualityScore\": \"<string>\"\n      }\n    }\n  ],\n  \"totalCount\": \"<long>\",\n  \"pageNo\": \"<long>\",\n  \"pageSize\": \"<long>\"\n}",
+              "createdAt": "2026-10-22T01:11:36.000Z",
+              "updatedAt": "2026-10-22T01:11:36.000Z",
+              "uid": "35240-d049687c-e6db-435f-9129-5a0d15d58bc6"
+            },
+            {
+              "id": "01f4ba9e-96fc-4939-a03b-fb5be4b8dbcd",
+              "name": "Bad Request because required query params are missing, perPage must be greater than 0 and less than equal to 50, or page number must be greater than or equal to 1.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"contactCity\": \"<string>\",\n  \"contactState\": \"<string>\",\n  \"contactCountry\": \"<string>\",\n  \"titles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyName\": \"<string>\",\n  \"companyCity\": \"<string>\",\n  \"companyState\": \"<string>\",\n  \"companyCountry\": \"<string>\",\n  \"companyWebsite\": \"<string>\",\n  \"jobLevels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"jobFunctions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"active\": \"true\",\n  \"emailRequired\": \"false\",\n  \"phoneRequired\": \"false\",\n  \"phoneType\": \"corp\",\n  \"emailValidationStatus\": \"<string>\",\n  \"minContactQualityScore\": \"<string>\",\n  \"companyIdsToInclude\": [\n    \"726263\"\n  ],\n  \"contactIdsToExclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"primaryIndustryOnly\": \"false\",\n  \"sortBy\": \"<string>\",\n  \"sortOrder\": \"desc\",\n  \"maxEmployees\": \"<string>\",\n  \"minEmployees\": \"<string>\",\n  \"industries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": \"1\",\n  \"perPage\": \"10\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/contacts",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "contacts"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:11:36.000Z",
+              "updatedAt": "2026-10-22T01:11:36.000Z",
+              "uid": "35240-01f4ba9e-96fc-4939-a03b-fb5be4b8dbcd"
+            },
+            {
+              "id": "921b00f9-6d37-4731-ba7e-6a38c9731ebf",
+              "name": "Unauthorized because the user is not authenticated.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"contactCity\": \"<string>\",\n  \"contactState\": \"<string>\",\n  \"contactCountry\": \"<string>\",\n  \"titles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyName\": \"<string>\",\n  \"companyCity\": \"<string>\",\n  \"companyState\": \"<string>\",\n  \"companyCountry\": \"<string>\",\n  \"companyWebsite\": \"<string>\",\n  \"jobLevels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"jobFunctions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"active\": \"true\",\n  \"emailRequired\": \"false\",\n  \"phoneRequired\": \"false\",\n  \"phoneType\": \"corp\",\n  \"emailValidationStatus\": \"<string>\",\n  \"minContactQualityScore\": \"<string>\",\n  \"companyIdsToInclude\": [\n    \"726263\"\n  ],\n  \"contactIdsToExclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"primaryIndustryOnly\": \"false\",\n  \"sortBy\": \"<string>\",\n  \"sortOrder\": \"desc\",\n  \"maxEmployees\": \"<string>\",\n  \"minEmployees\": \"<string>\",\n  \"industries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": \"1\",\n  \"perPage\": \"10\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/contacts",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "contacts"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-22T01:11:36.000Z",
+              "updatedAt": "2026-10-22T01:11:36.000Z",
+              "uid": "35240-921b00f9-6d37-4731-ba7e-6a38c9731ebf"
+            }
+          ],
+          "createdAt": "2026-10-22T01:11:35.000Z",
+          "updatedAt": "2026-10-22T01:11:35.000Z",
+          "uid": "35240-dde5b0c3-b7b0-4c2c-8cb2-05420eac113c"
+        }
+      ],
+      "id": "c1bff766-9d23-496e-9008-d3c4df7ffce1",
+      "createdAt": "2026-10-22T01:11:35.000Z",
+      "updatedAt": "2026-10-22T01:11:35.000Z",
+      "uid": "35240-c1bff766-9d23-496e-9008-d3c4df7ffce1"
+    },
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "Search companies",
+          "id": "746f7b62-a5eb-4bcc-8ffc-792c36b0647f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"website\": \"<string>\",\n  \"ticker\": \"<string>\",\n  \"state\": \"<string>\",\n  \"areaCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cities\": \"<string>\",\n  \"businessTypes\": [\n    \"public\",\n    \"government\"\n  ],\n  \"country\": \"<string>\",\n  \"companyStatus\": [\n    \"non-operating\",\n    \"unassigned\"\n  ],\n  \"fiscalYearEnd\": \"<string>\",\n  \"fortuneRanking\": \"fortune500\",\n  \"industries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"minEmployees\": \"<string>\",\n  \"maxEmployees\": \"<string>\",\n  \"minRevenue\": \"<string>\",\n  \"maxRevenue\": \"<string>\",\n  \"naics\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sicCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"regions\": [\n    \"africa\",\n    \"middleeast\"\n  ],\n  \"street\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyType\": [\n    \"organization\",\n    \"organization\"\n  ],\n  \"businessStructure\": \"branch\",\n  \"zipCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sortBy\": \"<string>\",\n  \"sortOrder\": \"asc\",\n  \"primaryIndustryOnly\": \"false\",\n  \"primarySICOnly\": \"false\",\n  \"gender\": \"male\",\n  \"ethnicity\": [\n    \"2\",\n    \"4\"\n  ],\n  \"wbe\": \"<string>\",\n  \"vbe\": \"<string>\",\n  \"dbe\": \"<string>\",\n  \"mbe\": \"<string>\",\n  \"lgbt\": \"<string>\",\n  \"disabled\": \"<string>\",\n  \"companyIdsToExclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": \"<string>\",\n  \"perPage\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://uapi.demandbase.com/data/b2b/v1/companies",
+              "protocol": "https",
+              "host": [
+                "uapi",
+                "demandbase",
+                "com"
+              ],
+              "path": [
+                "data",
+                "b2b",
+                "v1",
+                "companies"
+              ]
+            },
+            "description": "Use this endpoint to search for companies based on a variety of attributes.\n\nYou can search companies by name, website, ticker, location (city, state, country, ZIP), industry classification (NAICS, SIC), or attributes like fiscal year end, business structure, and fortune ranking.\n\nAdditional filters let you set employee or revenue ranges, include only primary industry or SIC classifications, and apply diversity criteria (e.g., minority-owned or women-owned businesses).\n\nSorting and pagination are supported. You can sort results by fields such as `companyRevenue` and more, and control the number of results returned using `page` and `perPage`."
+          },
+          "response": [
+            {
+              "id": "72e7aaab-f300-40bc-958a-b4a13a4788fa",
+              "name": "Successful operation or No companies found for query.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"website\": \"<string>\",\n  \"ticker\": \"<string>\",\n  \"state\": \"<string>\",\n  \"areaCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cities\": \"<string>\",\n  \"businessTypes\": [\n    \"public\",\n    \"government\"\n  ],\n  \"country\": \"<string>\",\n  \"companyStatus\": [\n    \"non-operating\",\n    \"unassigned\"\n  ],\n  \"fiscalYearEnd\": \"<string>\",\n  \"fortuneRanking\": \"fortune500\",\n  \"industries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"minEmployees\": \"<string>\",\n  \"maxEmployees\": \"<string>\",\n  \"minRevenue\": \"<string>\",\n  \"maxRevenue\": \"<string>\",\n  \"naics\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sicCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"regions\": [\n    \"africa\",\n    \"middleeast\"\n  ],\n  \"street\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyType\": [\n    \"organization\",\n    \"organization\"\n  ],\n  \"businessStructure\": \"branch\",\n  \"zipCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sortBy\": \"<string>\",\n  \"sortOrder\": \"asc\",\n  \"primaryIndustryOnly\": \"false\",\n  \"primarySICOnly\": \"false\",\n  \"gender\": \"male\",\n  \"ethnicity\": [\n    \"2\",\n    \"4\"\n  ],\n  \"wbe\": \"<string>\",\n  \"vbe\": \"<string>\",\n  \"dbe\": \"<string>\",\n  \"mbe\": \"<string>\",\n  \"lgbt\": \"<string>\",\n  \"disabled\": \"<string>\",\n  \"companyIdsToExclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": \"<string>\",\n  \"perPage\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/companies",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "companies"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"companies\": [\n    {\n      \"name\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"companyId\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"companyId\": \"<integer>\"\n    }\n  ],\n  \"totalCount\": \"<long>\",\n  \"pageNo\": \"<long>\",\n  \"pageSize\": \"<long>\"\n}",
+              "createdAt": "2026-10-22T01:11:36.000Z",
+              "updatedAt": "2026-10-22T01:11:36.000Z",
+              "uid": "35240-72e7aaab-f300-40bc-958a-b4a13a4788fa"
+            },
+            {
+              "id": "a590aa8e-def1-467b-bd9d-197b4c13ff25",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"website\": \"<string>\",\n  \"ticker\": \"<string>\",\n  \"state\": \"<string>\",\n  \"areaCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cities\": \"<string>\",\n  \"businessTypes\": [\n    \"public\",\n    \"government\"\n  ],\n  \"country\": \"<string>\",\n  \"companyStatus\": [\n    \"non-operating\",\n    \"unassigned\"\n  ],\n  \"fiscalYearEnd\": \"<string>\",\n  \"fortuneRanking\": \"fortune500\",\n  \"industries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"minEmployees\": \"<string>\",\n  \"maxEmployees\": \"<string>\",\n  \"minRevenue\": \"<string>\",\n  \"maxRevenue\": \"<string>\",\n  \"naics\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sicCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"regions\": [\n    \"africa\",\n    \"middleeast\"\n  ],\n  \"street\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyType\": [\n    \"organization\",\n    \"organization\"\n  ],\n  \"businessStructure\": \"branch\",\n  \"zipCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sortBy\": \"<string>\",\n  \"sortOrder\": \"asc\",\n  \"primaryIndustryOnly\": \"false\",\n  \"primarySICOnly\": \"false\",\n  \"gender\": \"male\",\n  \"ethnicity\": [\n    \"2\",\n    \"4\"\n  ],\n  \"wbe\": \"<string>\",\n  \"vbe\": \"<string>\",\n  \"dbe\": \"<string>\",\n  \"mbe\": \"<string>\",\n  \"lgbt\": \"<string>\",\n  \"disabled\": \"<string>\",\n  \"companyIdsToExclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": \"<string>\",\n  \"perPage\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/companies",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "companies"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:11:36.000Z",
+              "updatedAt": "2026-10-22T01:11:36.000Z",
+              "uid": "35240-a590aa8e-def1-467b-bd9d-197b4c13ff25"
+            },
+            {
+              "id": "85e30887-bd2a-470a-a6f5-31aa44454743",
+              "name": "Unauthorized because the user is not authenticated.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"website\": \"<string>\",\n  \"ticker\": \"<string>\",\n  \"state\": \"<string>\",\n  \"areaCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cities\": \"<string>\",\n  \"businessTypes\": [\n    \"public\",\n    \"government\"\n  ],\n  \"country\": \"<string>\",\n  \"companyStatus\": [\n    \"non-operating\",\n    \"unassigned\"\n  ],\n  \"fiscalYearEnd\": \"<string>\",\n  \"fortuneRanking\": \"fortune500\",\n  \"industries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"minEmployees\": \"<string>\",\n  \"maxEmployees\": \"<string>\",\n  \"minRevenue\": \"<string>\",\n  \"maxRevenue\": \"<string>\",\n  \"naics\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sicCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"regions\": [\n    \"africa\",\n    \"middleeast\"\n  ],\n  \"street\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyType\": [\n    \"organization\",\n    \"organization\"\n  ],\n  \"businessStructure\": \"branch\",\n  \"zipCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sortBy\": \"<string>\",\n  \"sortOrder\": \"asc\",\n  \"primaryIndustryOnly\": \"false\",\n  \"primarySICOnly\": \"false\",\n  \"gender\": \"male\",\n  \"ethnicity\": [\n    \"2\",\n    \"4\"\n  ],\n  \"wbe\": \"<string>\",\n  \"vbe\": \"<string>\",\n  \"dbe\": \"<string>\",\n  \"mbe\": \"<string>\",\n  \"lgbt\": \"<string>\",\n  \"disabled\": \"<string>\",\n  \"companyIdsToExclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": \"<string>\",\n  \"perPage\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/companies",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "companies"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-22T01:11:36.000Z",
+              "updatedAt": "2026-10-22T01:11:36.000Z",
+              "uid": "35240-85e30887-bd2a-470a-a6f5-31aa44454743"
+            }
+          ],
+          "createdAt": "2026-10-22T01:11:35.000Z",
+          "updatedAt": "2026-10-22T01:11:35.000Z",
+          "uid": "35240-746f7b62-a5eb-4bcc-8ffc-792c36b0647f"
+        }
+      ],
+      "id": "b8c6cdc0-b2e7-4f29-a651-f817de0e4838",
+      "createdAt": "2026-10-22T01:11:35.000Z",
+      "updatedAt": "2026-10-22T01:11:35.000Z",
+      "uid": "35240-b8c6cdc0-b2e7-4f29-a651-f817de0e4838"
+    },
+    {
+      "name": "contact",
+      "item": [
+        {
+          "name": "{contactId}",
+          "item": [
+            {
+              "name": "Fetch contact details",
+              "id": "0c16cac1-764f-4b31-a227-69145ca78247",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/contact/:contactId?include=other_employments&contactFields=<string>&peopleFields=<string>",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "contact",
+                    ":contactId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Additional data to include in the response, e.g., other employment",
+                      "key": "include",
+                      "value": "other_employments"
+                    },
+                    {
+                      "description": "Comma-separated contact fields to return.",
+                      "key": "contactFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated person fields to return.",
+                      "key": "peopleFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "17b5682f-920a-4cc7-8a17-38d0751edb3a",
+                      "key": "contactId",
+                      "value": "<string>",
+                      "description": "(Required) Contact ID"
+                    }
+                  ]
+                },
+                "description": "Use this endpoint to fetch detailed employment and personal information for a specific contact.\n\nRetrieve data such as job titles, phone numbers, job levels, salary ranges, social profiles, and education history.\n\nYou can control the response using query parameters to include specific fields or additional related data."
+              },
+              "response": [
+                {
+                  "id": "73e9e00f-a226-43af-9105-17c1fe7d3f0f",
+                  "name": "Contact details fetched successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/contact/:contactId?include=other_employments&contactFields=<string>&peopleFields=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "contact",
+                        ":contactId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Additional data to include in the response, e.g., other employment",
+                          "key": "include",
+                          "value": "other_employments"
+                        },
+                        {
+                          "description": "Comma-separated contact fields to return.",
+                          "key": "contactFields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated person fields to return.",
+                          "key": "peopleFields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "contactId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"dbPersonDetails\": {\n    \"dbPersonId\": \"<integer>\",\n    \"firstName\": \"<string>\",\n    \"middleName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"age\": \"<integer>\",\n    \"mobileNumber\": \"<string>\",\n    \"educationList\": [\n      {\n        \"degree\": \"<string>\",\n        \"major\": \"<string>\",\n        \"university\": \"<string>\"\n      },\n      {\n        \"degree\": \"<string>\",\n        \"major\": \"<string>\",\n        \"university\": \"<string>\"\n      }\n    ],\n    \"imageUrl\": \"<string>\",\n    \"socialHandles\": {\n      \"twitter\": \"<string>\",\n      \"facebook\": \"<string>\",\n      \"linkedIn\": \"<string>\"\n    },\n    \"address\": {\n      \"street\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"stateCode\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"area\": \"<string>\"\n    }\n  },\n  \"employmentDetails\": {\n    \"contactId\": \"<integer>\",\n    \"companyId\": \"<integer>\",\n    \"companyName\": \"<string>\",\n    \"contactQualityScore\": \"<string>\",\n    \"description\": \"<string>\",\n    \"startDate\": \"<string>\",\n    \"salary\": \"<string>\",\n    \"salaryCurrency\": \"<string>\",\n    \"active\": \"<string>\",\n    \"emails\": [\n      {\n        \"email\": \"<string>\",\n        \"validationStatus\": \"<string>\"\n      },\n      {\n        \"email\": \"<string>\",\n        \"validationStatus\": \"<string>\"\n      }\n    ],\n    \"lastValidatedDate\": \"<string>\",\n    \"phoneNumbers\": {\n      \"directNumber\": \"<string>\",\n      \"corporateNumber\": \"<string>\"\n    },\n    \"jobLevels\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      }\n    ],\n    \"jobFunctions\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      }\n    ],\n    \"titles\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"employmentHistoryList\": [\n    {\n      \"contactId\": \"<integer>\",\n      \"companyId\": \"<integer>\",\n      \"companyName\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"phoneNumbers\": {\n        \"directNumber\": \"<string>\",\n        \"corporateNumber\": \"<string>\"\n      },\n      \"active\": \"<string>\",\n      \"jobLevels\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"jobFunctions\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"titles\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"contactId\": \"<integer>\",\n      \"companyId\": \"<integer>\",\n      \"companyName\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"phoneNumbers\": {\n        \"directNumber\": \"<string>\",\n        \"corporateNumber\": \"<string>\"\n      },\n      \"active\": \"<string>\",\n      \"jobLevels\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"jobFunctions\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"titles\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T01:11:36.000Z",
+                  "updatedAt": "2026-10-22T01:11:36.000Z",
+                  "uid": "35240-73e9e00f-a226-43af-9105-17c1fe7d3f0f"
+                },
+                {
+                  "id": "25515f43-aea2-4e50-aa1f-87c0eb371ba4",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/contact/:contactId?include=other_employments&contactFields=<string>&peopleFields=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "contact",
+                        ":contactId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Additional data to include in the response, e.g., other employment",
+                          "key": "include",
+                          "value": "other_employments"
+                        },
+                        {
+                          "description": "Comma-separated contact fields to return.",
+                          "key": "contactFields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated person fields to return.",
+                          "key": "peopleFields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "contactId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:36.000Z",
+                  "updatedAt": "2026-10-22T01:11:36.000Z",
+                  "uid": "35240-25515f43-aea2-4e50-aa1f-87c0eb371ba4"
+                },
+                {
+                  "id": "5d7c0afc-1ec5-405a-8de4-38a1bea94a15",
+                  "name": "Unauthorized because the user is not authenticated.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/contact/:contactId?include=other_employments&contactFields=<string>&peopleFields=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "contact",
+                        ":contactId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Additional data to include in the response, e.g., other employment",
+                          "key": "include",
+                          "value": "other_employments"
+                        },
+                        {
+                          "description": "Comma-separated contact fields to return.",
+                          "key": "contactFields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated person fields to return.",
+                          "key": "peopleFields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "contactId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:11:36.000Z",
+                  "updatedAt": "2026-10-22T01:11:36.000Z",
+                  "uid": "35240-5d7c0afc-1ec5-405a-8de4-38a1bea94a15"
+                },
+                {
+                  "id": "4a301673-c8a0-41aa-9424-448a1e682d1e",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/contact/:contactId?include=other_employments&contactFields=<string>&peopleFields=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "contact",
+                        ":contactId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Additional data to include in the response, e.g., other employment",
+                          "key": "include",
+                          "value": "other_employments"
+                        },
+                        {
+                          "description": "Comma-separated contact fields to return.",
+                          "key": "contactFields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated person fields to return.",
+                          "key": "peopleFields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "contactId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:36.000Z",
+                  "updatedAt": "2026-10-22T01:11:36.000Z",
+                  "uid": "35240-4a301673-c8a0-41aa-9424-448a1e682d1e"
+                }
+              ],
+              "createdAt": "2026-10-22T01:11:35.000Z",
+              "updatedAt": "2026-10-22T01:11:35.000Z",
+              "uid": "35240-0c16cac1-764f-4b31-a227-69145ca78247"
+            }
+          ],
+          "id": "f0f9ea5c-1cea-41de-80d7-be6a66c7a31a",
+          "createdAt": "2026-10-22T01:11:35.000Z",
+          "updatedAt": "2026-10-22T01:11:35.000Z",
+          "uid": "35240-f0f9ea5c-1cea-41de-80d7-be6a66c7a31a"
+        }
+      ],
+      "id": "5fbb8541-8242-4592-b982-9a6bef29d0a4",
+      "createdAt": "2026-10-22T01:11:35.000Z",
+      "updatedAt": "2026-10-22T01:11:35.000Z",
+      "uid": "35240-5fbb8541-8242-4592-b982-9a6bef29d0a4"
+    },
+    {
+      "name": "company",
+      "item": [
+        {
+          "name": "{companyId}",
+          "item": [
+            {
+              "name": "news",
+              "item": [
+                {
+                  "name": "Fetch company news by category",
+                  "id": "418f27d0-0002-4e45-b43b-5ee406ab9d5e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/news?newsCategories=<string>&page=<string>&perPage=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "company",
+                        ":companyId",
+                        "news"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) <a href='https://developer.demandbase.com/reference/reference-tables#news-categories-reference' target='_blank'>Allowed Values</a>",
+                          "key": "newsCategories",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Page number",
+                          "key": "page",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Results per page",
+                          "key": "perPage",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "3718ce15-730e-46c9-87ae-3acb26e6e8c6",
+                          "key": "companyId",
+                          "value": "<string>",
+                          "description": "(Required) Company ID"
+                        }
+                      ]
+                    },
+                    "description": "Use this endpoint to fetch recent news articles related to a specific company.\n\nYou can filter articles by one or more news categories, such as acquisitions or leadership changes.\n\nPagination is supported to control the number of results per request."
+                  },
+                  "response": [
+                    {
+                      "id": "fae88aa8-778a-4617-bfa7-7e3aaed7faeb",
+                      "name": "Company news fetched successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/news?newsCategories=<string>&page=<string>&perPage=<string>",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "company",
+                            ":companyId",
+                            "news"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) <a href='https://developer.demandbase.com/reference/reference-tables#news-categories-reference' target='_blank'>Allowed Values</a>",
+                              "key": "newsCategories",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Results per page",
+                              "key": "perPage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"companyNews\": [\n    {\n      \"title\": \"<string>\",\n      \"url\": \"<string>\",\n      \"publicationDate\": \"<string>\",\n      \"source\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"newsCategory\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"url\": \"<string>\",\n      \"publicationDate\": \"<string>\",\n      \"source\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"newsCategory\": \"<string>\"\n    }\n  ],\n  \"pageNo\": \"<integer>\",\n  \"pageSize\": \"<integer>\",\n  \"totalCount\": \"<long>\",\n  \"companyId\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:36.000Z",
+                      "updatedAt": "2026-10-22T01:11:36.000Z",
+                      "uid": "35240-fae88aa8-778a-4617-bfa7-7e3aaed7faeb"
+                    },
+                    {
+                      "id": "7f31162f-c7e4-49ed-8fae-74baca9448b6",
+                      "name": "Bad Request because required query params are missing, perPage must be greater than 0 and less than equal to 50, or page number must be greater than or equal to 1.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/news?newsCategories=<string>&page=<string>&perPage=<string>",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "company",
+                            ":companyId",
+                            "news"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) <a href='https://developer.demandbase.com/reference/reference-tables#news-categories-reference' target='_blank'>Allowed Values</a>",
+                              "key": "newsCategories",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Results per page",
+                              "key": "perPage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:36.000Z",
+                      "updatedAt": "2026-10-22T01:11:36.000Z",
+                      "uid": "35240-7f31162f-c7e4-49ed-8fae-74baca9448b6"
+                    },
+                    {
+                      "id": "8c68597e-63f7-4674-8ee5-663661a4c853",
+                      "name": "Unauthorized because the user is not authenticated.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/news?newsCategories=<string>&page=<string>&perPage=<string>",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "company",
+                            ":companyId",
+                            "news"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) <a href='https://developer.demandbase.com/reference/reference-tables#news-categories-reference' target='_blank'>Allowed Values</a>",
+                              "key": "newsCategories",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Results per page",
+                              "key": "perPage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:11:36.000Z",
+                      "updatedAt": "2026-10-22T01:11:36.000Z",
+                      "uid": "35240-8c68597e-63f7-4674-8ee5-663661a4c853"
+                    },
+                    {
+                      "id": "92f76392-00b9-4f78-bcc3-f79fff3b31ce",
+                      "name": "Not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/news?newsCategories=<string>&page=<string>&perPage=<string>",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "company",
+                            ":companyId",
+                            "news"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) <a href='https://developer.demandbase.com/reference/reference-tables#news-categories-reference' target='_blank'>Allowed Values</a>",
+                              "key": "newsCategories",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Results per page",
+                              "key": "perPage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:36.000Z",
+                      "updatedAt": "2026-10-22T01:11:36.000Z",
+                      "uid": "35240-92f76392-00b9-4f78-bcc3-f79fff3b31ce"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:11:35.000Z",
+                  "updatedAt": "2026-10-22T01:11:35.000Z",
+                  "uid": "35240-418f27d0-0002-4e45-b43b-5ee406ab9d5e"
+                }
+              ],
+              "id": "305871a4-9e42-4a38-8326-35979eeeedcd",
+              "createdAt": "2026-10-22T01:11:35.000Z",
+              "updatedAt": "2026-10-22T01:11:35.000Z",
+              "uid": "35240-305871a4-9e42-4a38-8326-35979eeeedcd"
+            },
+            {
+              "name": "newsFeed",
+              "item": [
+                {
+                  "name": "Fetch company news feed",
+                  "id": "0e5db320-81fd-4171-8af6-817717dccc2a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/newsFeed?page=<string>&perPage=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "company",
+                        ":companyId",
+                        "newsFeed"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number",
+                          "key": "page",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Results per page",
+                          "key": "perPage",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "627be7e8-904e-4d42-8753-c7a67aba063f",
+                          "key": "companyId",
+                          "value": "<string>",
+                          "description": "(Required) Company ID"
+                        }
+                      ]
+                    },
+                    "description": "Use this endpoint to return a paginated list of recent news articles for a specific company.\n\nUnlike the `/news` endpoint, this feed does not require specifying news categories. It provides a general stream of company-related articles."
+                  },
+                  "response": [
+                    {
+                      "id": "4d97ee14-9f16-4f48-9884-344649763c52",
+                      "name": "Company news fetched successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/newsFeed?page=<string>&perPage=<string>",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "company",
+                            ":companyId",
+                            "newsFeed"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Results per page",
+                              "key": "perPage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"companyNews\": [\n    {\n      \"title\": \"<string>\",\n      \"url\": \"<string>\",\n      \"publicationDate\": \"<string>\",\n      \"source\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"newsCategory\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"url\": \"<string>\",\n      \"publicationDate\": \"<string>\",\n      \"source\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"newsCategory\": \"<string>\"\n    }\n  ],\n  \"pageNo\": \"<integer>\",\n  \"pageSize\": \"<integer>\",\n  \"totalCount\": \"<long>\",\n  \"companyId\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:36.000Z",
+                      "updatedAt": "2026-10-22T01:11:36.000Z",
+                      "uid": "35240-4d97ee14-9f16-4f48-9884-344649763c52"
+                    },
+                    {
+                      "id": "1c8f30c5-7278-487f-a1f0-5da1140882c7",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/newsFeed?page=<string>&perPage=<string>",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "company",
+                            ":companyId",
+                            "newsFeed"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Results per page",
+                              "key": "perPage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:36.000Z",
+                      "updatedAt": "2026-10-22T01:11:36.000Z",
+                      "uid": "35240-1c8f30c5-7278-487f-a1f0-5da1140882c7"
+                    },
+                    {
+                      "id": "849a61ce-efa3-4907-9a25-62ac4fc0622c",
+                      "name": "Unauthorized because the user is not authenticated.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/newsFeed?page=<string>&perPage=<string>",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "company",
+                            ":companyId",
+                            "newsFeed"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Results per page",
+                              "key": "perPage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:11:36.000Z",
+                      "updatedAt": "2026-10-22T01:11:36.000Z",
+                      "uid": "35240-849a61ce-efa3-4907-9a25-62ac4fc0622c"
+                    },
+                    {
+                      "id": "33c54f99-7ba4-4097-86e3-a9db07d348d5",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/newsFeed?page=<string>&perPage=<string>",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "company",
+                            ":companyId",
+                            "newsFeed"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Results per page",
+                              "key": "perPage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"examples\": {\n    \"CompanyNotFoundErrorResponse\": {\n      \"description\": \"CompanyNotFoundErrorResponse\",\n      \"value\": {\n        \"errorCode\": \"404-100\",\n        \"errorMessage\": \"Invalid ID, record not found.\",\n        \"diagnosticCode\": \"ccb84f25-236e-4bcf-be01-88b7dd673fb4\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:11:36.000Z",
+                      "updatedAt": "2026-10-22T01:11:36.000Z",
+                      "uid": "35240-33c54f99-7ba4-4097-86e3-a9db07d348d5"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:11:35.000Z",
+                  "updatedAt": "2026-10-22T01:11:35.000Z",
+                  "uid": "35240-0e5db320-81fd-4171-8af6-817717dccc2a"
+                }
+              ],
+              "id": "b31b72b0-90fb-49cd-b00d-7563772a0d91",
+              "createdAt": "2026-10-22T01:11:35.000Z",
+              "updatedAt": "2026-10-22T01:11:35.000Z",
+              "uid": "35240-b31b72b0-90fb-49cd-b00d-7563772a0d91"
+            },
+            {
+              "name": "logos",
+              "item": [
+                {
+                  "name": "{logoSize}",
+                  "item": [
+                    {
+                      "name": "Fetch company logo",
+                      "id": "bd377eac-6094-47cf-a1f0-111a3ad99c90",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "image/png"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/logos/:logoSize",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "data",
+                            "b2b",
+                            "v1",
+                            "company",
+                            ":companyId",
+                            "logos",
+                            ":logoSize"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6e855572-ae2e-4b52-9961-e91caec5049d",
+                              "key": "companyId",
+                              "value": "<string>",
+                              "description": "(Required) Company ID"
+                            },
+                            {
+                              "id": "78e705a1-5b38-4451-97fb-139eb32379fb",
+                              "key": "logoSize",
+                              "value": "<string>",
+                              "description": "(Required) Logo Size"
+                            }
+                          ]
+                        },
+                        "description": "Use this endpoint to fetch a company's logo in PNG format at the requested size.\n\nSupported sizes are 100, 200, or 400 pixels.\n\nIf a logo in the specified size is not available, the API returns an error response."
+                      },
+                      "response": [
+                        {
+                          "id": "cfbe2a1d-8f43-48e3-8786-20e3e1156179",
+                          "name": "A png image of the company logo is returned.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "image/png"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/logos/:logoSize",
+                              "protocol": "https",
+                              "host": [
+                                "uapi",
+                                "demandbase",
+                                "com"
+                              ],
+                              "path": [
+                                "data",
+                                "b2b",
+                                "v1",
+                                "company",
+                                ":companyId",
+                                "logos",
+                                ":logoSize"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "logoSize"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "image/png"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<binary>",
+                          "createdAt": "2026-10-22T01:11:36.000Z",
+                          "updatedAt": "2026-10-22T01:11:36.000Z",
+                          "uid": "35240-cfbe2a1d-8f43-48e3-8786-20e3e1156179"
+                        },
+                        {
+                          "id": "cc8965d2-2c3f-4e54-8076-1522adfa7c20",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/logos/:logoSize",
+                              "protocol": "https",
+                              "host": [
+                                "uapi",
+                                "demandbase",
+                                "com"
+                              ],
+                              "path": [
+                                "data",
+                                "b2b",
+                                "v1",
+                                "company",
+                                ":companyId",
+                                "logos",
+                                ":logoSize"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "logoSize"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:11:36.000Z",
+                          "updatedAt": "2026-10-22T01:11:36.000Z",
+                          "uid": "35240-cc8965d2-2c3f-4e54-8076-1522adfa7c20"
+                        },
+                        {
+                          "id": "177ac968-bfcf-40e7-83e8-55a9ca1f9847",
+                          "name": "Unauthorized because the user is not authenticated.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId/logos/:logoSize",
+                              "protocol": "https",
+                              "host": [
+                                "uapi",
+                                "demandbase",
+                                "com"
+                              ],
+                              "path": [
+                                "data",
+                                "b2b",
+                                "v1",
+                                "company",
+                                ":companyId",
+                                "logos",
+                                ":logoSize"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "logoSize"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                          "createdAt": "2026-10-22T01:11:36.000Z",
+                          "updatedAt": "2026-10-22T01:11:36.000Z",
+                          "uid": "35240-177ac968-bfcf-40e7-83e8-55a9ca1f9847"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:11:35.000Z",
+                      "updatedAt": "2026-10-22T01:11:35.000Z",
+                      "uid": "35240-bd377eac-6094-47cf-a1f0-111a3ad99c90"
+                    }
+                  ],
+                  "id": "cf3e7b3d-241c-4090-9b55-fceacc27ffea",
+                  "createdAt": "2026-10-22T01:11:35.000Z",
+                  "updatedAt": "2026-10-22T01:11:35.000Z",
+                  "uid": "35240-cf3e7b3d-241c-4090-9b55-fceacc27ffea"
+                }
+              ],
+              "id": "19374dd7-2ffc-475b-b555-5dbe7ffc67d3",
+              "createdAt": "2026-10-22T01:11:35.000Z",
+              "updatedAt": "2026-10-22T01:11:35.000Z",
+              "uid": "35240-19374dd7-2ffc-475b-b555-5dbe7ffc67d3"
+            },
+            {
+              "name": "Fetch company details",
+              "id": "00ebfa2b-381f-4eec-a10f-7e10e1251898",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId?fields=competitors,installedtech&sortBy=popularity&companyFields=<string>",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "company",
+                    ":companyId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated related-data expansions. Use `installedtech` to include technographics under `techUsed`.",
+                      "key": "fields",
+                      "value": "competitors,installedtech"
+                    },
+                    {
+                      "description": "Sort order for family tree results.",
+                      "key": "sortBy",
+                      "value": "popularity"
+                    },
+                    {
+                      "description": "Comma-separated company fields to retrieve.",
+                      "key": "companyFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "62a7dc5b-b97e-4080-9fde-39ffa14f0ba4",
+                      "key": "companyId",
+                      "value": "<string>",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "description": "Use this endpoint to fetch detailed information about a single company, including name, location, phone number, revenue, employee count, industry classification, and social media links.\n\nYou can optionally expand the response to include related data such as the company's family tree, competitors, installed technologies, and logos.\n\nInstalled technologies are returned under `techUsed`, grouped by category, subcategory, and product. The response includes taxonomy identifiers and display names; it does not include confidence, observation dates, vendor, or product descriptions."
+              },
+              "response": [
+                {
+                  "id": "6f08084f-c5e8-4ec1-83b3-2c25aa8952bd",
+                  "name": "Company details fetched successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId?fields=competitors,installedtech&sortBy=popularity&companyFields=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "company",
+                        ":companyId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated related-data expansions. Use `installedtech` to include technographics under `techUsed`.",
+                          "key": "fields",
+                          "value": "competitors,installedtech"
+                        },
+                        {
+                          "description": "Sort order for family tree results.",
+                          "key": "sortBy",
+                          "value": "popularity"
+                        },
+                        {
+                          "description": "Comma-separated company fields to retrieve.",
+                          "key": "companyFields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "companyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"companyId\": \"<integer>\",\n  \"companyName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"companyType\": \"<string>\",\n  \"companyStatus\": \"<string>\",\n  \"tickers\": [\n    {\n      \"tickerName\": \"<string>\",\n      \"exchange\": \"<string>\"\n    },\n    {\n      \"tickerName\": \"<string>\",\n      \"exchange\": \"<string>\"\n    }\n  ],\n  \"classification\": {\n    \"primaryBusiness\": {\n      \"industry\": \"<string>\",\n      \"industryCode\": \"<string>\",\n      \"subIndustry\": \"<string>\",\n      \"subIndustryCode\": \"<string>\"\n    },\n    \"secondaryBusinesses\": [\n      {\n        \"industry\": \"<string>\",\n        \"industryCode\": \"<string>\",\n        \"subIndustry\": \"<string>\",\n        \"subIndustryCode\": \"<string>\"\n      },\n      {\n        \"industry\": \"<string>\",\n        \"industryCode\": \"<string>\",\n        \"subIndustry\": \"<string>\",\n        \"subIndustryCode\": \"<string>\"\n      }\n    ]\n  },\n  \"address\": {\n    \"street\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"latitude\": \"<string>\",\n    \"longitude\": \"<string>\",\n    \"area\": \"<string>\"\n  },\n  \"phone\": \"<string>\",\n  \"revenue\": \"<double>\",\n  \"revenueCurrency\": \"<string>\",\n  \"employeeCount\": \"<integer>\",\n  \"sic\": \"<string>\",\n  \"sicDescription\": \"<string>\",\n  \"naics\": \"<string>\",\n  \"naicsDescription\": \"<string>\",\n  \"financialYearEnd\": \"<string>\",\n  \"equifaxId\": \"<string>\",\n  \"companyTaxId\": \"<string>\",\n  \"fortuneRanking\": \"<string>\",\n  \"britishSics\": [\n    {\n      \"britishSic\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"britishSic\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"foundedIn\": \"<string>\",\n  \"socialHandles\": {\n    \"twitter\": \"<string>\",\n    \"facebook\": \"<string>\",\n    \"blog\": \"<string>\",\n    \"linkedIn\": \"<string>\"\n  },\n  \"diversity\": {\n    \"gender\": \"<string>\",\n    \"ethnicity\": \"<string>\",\n    \"certifications\": {\n      \"wbe\": \"<boolean>\",\n      \"mbe\": \"<boolean>\",\n      \"vbe\": \"<boolean>\",\n      \"disabled\": \"<boolean>\",\n      \"dbe\": \"<boolean>\",\n      \"lgbt\": \"<boolean>\"\n    }\n  },\n  \"siteTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"siteCount\": \"<integer>\",\n  \"siteLocationCount\": \"<integer>\",\n  \"businessStructure\": \"<string>\",\n  \"currentCompanyId\": \"<integer>\",\n  \"websites\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyCompetitorIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"familyTree\": {\n    \"company\": {\n      \"name\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"companyId\": \"<integer>\"\n    },\n    \"children\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/FamilyTreeResultDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/FamilyTreeResultDTO detected>\"\n      }\n    ]\n  },\n  \"acquisitions\": {\n    \"companies\": [\n      {\n        \"name\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"country\": \"<string>\",\n        \"companyId\": \"<integer>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"country\": \"<string>\",\n        \"companyId\": \"<integer>\"\n      }\n    ]\n  },\n  \"techUsed\": {\n    \"categories\": [\n      {\n        \"categoryId\": \"<string>\",\n        \"categoryName\": \"<string>\",\n        \"subCategories\": [\n          {\n            \"subCategoryId\": \"<string>\",\n            \"subCategoryName\": \"<string>\",\n            \"products\": [\n              {\n                \"productId\": \"<string>\",\n                \"productName\": \"<string>\"\n              },\n              {\n                \"productId\": \"<string>\",\n                \"productName\": \"<string>\"\n              }\n            ]\n          },\n          {\n            \"subCategoryId\": \"<string>\",\n            \"subCategoryName\": \"<string>\",\n            \"products\": [\n              {\n                \"productId\": \"<string>\",\n                \"productName\": \"<string>\"\n              },\n              {\n                \"productId\": \"<string>\",\n                \"productName\": \"<string>\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"categoryId\": \"<string>\",\n        \"categoryName\": \"<string>\",\n        \"subCategories\": [\n          {\n            \"subCategoryId\": \"<string>\",\n            \"subCategoryName\": \"<string>\",\n            \"products\": [\n              {\n                \"productId\": \"<string>\",\n                \"productName\": \"<string>\"\n              },\n              {\n                \"productId\": \"<string>\",\n                \"productName\": \"<string>\"\n              }\n            ]\n          },\n          {\n            \"subCategoryId\": \"<string>\",\n            \"subCategoryName\": \"<string>\",\n            \"products\": [\n              {\n                \"productId\": \"<string>\",\n                \"productName\": \"<string>\"\n              },\n              {\n                \"productId\": \"<string>\",\n                \"productName\": \"<string>\"\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  \"companyLogos\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"competitors\": [\n    {\n      \"name\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"companyId\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"companyId\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T01:11:36.000Z",
+                  "updatedAt": "2026-10-22T01:11:36.000Z",
+                  "uid": "35240-6f08084f-c5e8-4ec1-83b3-2c25aa8952bd"
+                },
+                {
+                  "id": "d0d43d3f-501d-4ea5-bb42-ec3b4afc59bc",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId?fields=competitors,installedtech&sortBy=popularity&companyFields=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "company",
+                        ":companyId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated related-data expansions. Use `installedtech` to include technographics under `techUsed`.",
+                          "key": "fields",
+                          "value": "competitors,installedtech"
+                        },
+                        {
+                          "description": "Sort order for family tree results.",
+                          "key": "sortBy",
+                          "value": "popularity"
+                        },
+                        {
+                          "description": "Comma-separated company fields to retrieve.",
+                          "key": "companyFields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "companyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:36.000Z",
+                  "updatedAt": "2026-10-22T01:11:36.000Z",
+                  "uid": "35240-d0d43d3f-501d-4ea5-bb42-ec3b4afc59bc"
+                },
+                {
+                  "id": "0d80f3ad-0a18-407e-b9e8-d3900d58f6a2",
+                  "name": "Unauthorized because the user is not authenticated.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId?fields=competitors,installedtech&sortBy=popularity&companyFields=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "company",
+                        ":companyId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated related-data expansions. Use `installedtech` to include technographics under `techUsed`.",
+                          "key": "fields",
+                          "value": "competitors,installedtech"
+                        },
+                        {
+                          "description": "Sort order for family tree results.",
+                          "key": "sortBy",
+                          "value": "popularity"
+                        },
+                        {
+                          "description": "Comma-separated company fields to retrieve.",
+                          "key": "companyFields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "companyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:11:36.000Z",
+                  "updatedAt": "2026-10-22T01:11:36.000Z",
+                  "uid": "35240-0d80f3ad-0a18-407e-b9e8-d3900d58f6a2"
+                },
+                {
+                  "id": "5b742337-32e2-4696-9840-2513109f27fc",
+                  "name": "Bad request because the company does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/company/:companyId?fields=competitors,installedtech&sortBy=popularity&companyFields=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "company",
+                        ":companyId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated related-data expansions. Use `installedtech` to include technographics under `techUsed`.",
+                          "key": "fields",
+                          "value": "competitors,installedtech"
+                        },
+                        {
+                          "description": "Sort order for family tree results.",
+                          "key": "sortBy",
+                          "value": "popularity"
+                        },
+                        {
+                          "description": "Comma-separated company fields to retrieve.",
+                          "key": "companyFields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "companyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"CompanyNotFoundErrorResponse\": {\n      \"description\": \"CompanyNotFoundErrorResponse\",\n      \"value\": {\n        \"errorCode\": \"404-100\",\n        \"errorMessage\": \"Invalid ID, record not found.\",\n        \"diagnosticCode\": \"ccb84f25-236e-4bcf-be01-88b7dd673fb4\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:11:36.000Z",
+                  "updatedAt": "2026-10-22T01:11:36.000Z",
+                  "uid": "35240-5b742337-32e2-4696-9840-2513109f27fc"
+                }
+              ],
+              "createdAt": "2026-10-22T01:11:35.000Z",
+              "updatedAt": "2026-10-22T01:11:35.000Z",
+              "uid": "35240-00ebfa2b-381f-4eec-a10f-7e10e1251898"
+            }
+          ],
+          "id": "47ffa0cb-f03d-4a62-8d3a-9a91ced9609b",
+          "createdAt": "2026-10-22T01:11:35.000Z",
+          "updatedAt": "2026-10-22T01:11:35.000Z",
+          "uid": "35240-47ffa0cb-f03d-4a62-8d3a-9a91ced9609b"
+        }
+      ],
+      "id": "22062505-bba3-4112-b73f-26dca62006b4",
+      "createdAt": "2026-10-22T01:11:35.000Z",
+      "updatedAt": "2026-10-22T01:11:35.000Z",
+      "uid": "35240-22062505-bba3-4112-b73f-26dca62006b4"
+    },
+    {
+      "name": "match",
+      "item": [
+        {
+          "name": "Match companies and contact",
+          "id": "867461b3-46c3-4458-b3fb-04b008f59b7d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requests\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"country\": \"<string>\",\n      \"state\": \"<string>\",\n      \"city\": \"<string>\",\n      \"street\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"websites\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ticker\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"isPhoneRequired\": \"<boolean>\",\n      \"isEmailRequired\": \"<boolean>\",\n      \"executiveLinkedInHandle\": \"<string>\",\n      \"contactMatching\": \"<string>\",\n      \"contactStatus\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"country\": \"<string>\",\n      \"state\": \"<string>\",\n      \"city\": \"<string>\",\n      \"street\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"websites\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ticker\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"isPhoneRequired\": \"<boolean>\",\n      \"isEmailRequired\": \"<boolean>\",\n      \"executiveLinkedInHandle\": \"<string>\",\n      \"contactMatching\": \"<string>\",\n      \"contactStatus\": \"<string>\"\n    }\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limitResults\": \"<string>\",\n  \"matchBranch\": \"<string>\",\n  \"minContactQualityScore\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://uapi.demandbase.com/data/b2b/v1/match",
+              "protocol": "https",
+              "host": [
+                "uapi",
+                "demandbase",
+                "com"
+              ],
+              "path": [
+                "data",
+                "b2b",
+                "v1",
+                "match"
+              ]
+            },
+            "description": "This endpoint matches companies and contacts against Demandbase's database based on provided firmographic and contact details. This endpoint supports batch matching by accepting an array of match requests.\n\nEach object in the requests array must include a unique id and a useful combination of attributes for matching.\n\nAt a minimum, at least one of the following company identifiers is required:\n- `name`\n- `websites`\n- `email`\n- `executiveLinkedInHandle`"
+          },
+          "response": [
+            {
+              "id": "fcb561df-44c1-4e03-9127-bd5fcd2e34b8",
+              "name": "Successful operation or No companies found for query.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requests\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"country\": \"<string>\",\n      \"state\": \"<string>\",\n      \"city\": \"<string>\",\n      \"street\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"websites\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ticker\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"isPhoneRequired\": \"<boolean>\",\n      \"isEmailRequired\": \"<boolean>\",\n      \"executiveLinkedInHandle\": \"<string>\",\n      \"contactMatching\": \"<string>\",\n      \"contactStatus\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"country\": \"<string>\",\n      \"state\": \"<string>\",\n      \"city\": \"<string>\",\n      \"street\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"websites\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ticker\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"isPhoneRequired\": \"<boolean>\",\n      \"isEmailRequired\": \"<boolean>\",\n      \"executiveLinkedInHandle\": \"<string>\",\n      \"contactMatching\": \"<string>\",\n      \"contactStatus\": \"<string>\"\n    }\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limitResults\": \"<string>\",\n  \"matchBranch\": \"<string>\",\n  \"minContactQualityScore\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/match",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "match"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"matches\": [\n    {\n      \"id\": \"<string>\",\n      \"companyMatches\": [\n        {\n          \"company\": {\n            \"companyId\": \"<integer>\",\n            \"companyName\": \"<string>\",\n            \"description\": \"<string>\",\n            \"companyType\": \"<string>\",\n            \"companyStatus\": \"<string>\",\n            \"tickers\": [\n              {\n                \"tickerName\": \"<string>\",\n                \"exchange\": \"<string>\"\n              },\n              {\n                \"tickerName\": \"<string>\",\n                \"exchange\": \"<string>\"\n              }\n            ],\n            \"classification\": {\n              \"primaryBusiness\": {\n                \"industry\": \"<string>\",\n                \"industryCode\": \"<string>\",\n                \"subIndustry\": \"<string>\",\n                \"subIndustryCode\": \"<string>\"\n              },\n              \"secondaryBusinesses\": [\n                {\n                  \"industry\": \"<string>\",\n                  \"industryCode\": \"<string>\",\n                  \"subIndustry\": \"<string>\",\n                  \"subIndustryCode\": \"<string>\"\n                },\n                {\n                  \"industry\": \"<string>\",\n                  \"industryCode\": \"<string>\",\n                  \"subIndustry\": \"<string>\",\n                  \"subIndustryCode\": \"<string>\"\n                }\n              ]\n            },\n            \"address\": {\n              \"street\": \"<string>\",\n              \"city\": \"<string>\",\n              \"state\": \"<string>\",\n              \"zip\": \"<string>\",\n              \"country\": \"<string>\",\n              \"latitude\": \"<string>\",\n              \"longitude\": \"<string>\",\n              \"area\": \"<string>\"\n            },\n            \"phone\": \"<string>\",\n            \"revenue\": \"<double>\",\n            \"revenueCurrency\": \"<string>\",\n            \"employeeCount\": \"<integer>\",\n            \"sic\": \"<string>\",\n            \"sicDescription\": \"<string>\",\n            \"naics\": \"<string>\",\n            \"naicsDescription\": \"<string>\",\n            \"financialYearEnd\": \"<string>\",\n            \"equifaxId\": \"<string>\",\n            \"companyTaxId\": \"<string>\",\n            \"fortuneRanking\": \"<string>\",\n            \"britishSics\": [\n              {\n                \"britishSic\": \"<string>\",\n                \"description\": \"<string>\"\n              },\n              {\n                \"britishSic\": \"<string>\",\n                \"description\": \"<string>\"\n              }\n            ],\n            \"foundedIn\": \"<string>\",\n            \"socialHandles\": {\n              \"twitter\": \"<string>\",\n              \"facebook\": \"<string>\",\n              \"blog\": \"<string>\",\n              \"linkedIn\": \"<string>\"\n            },\n            \"diversity\": {\n              \"gender\": \"<string>\",\n              \"ethnicity\": \"<string>\",\n              \"certifications\": {\n                \"wbe\": \"<boolean>\",\n                \"mbe\": \"<boolean>\",\n                \"vbe\": \"<boolean>\",\n                \"disabled\": \"<boolean>\",\n                \"dbe\": \"<boolean>\",\n                \"lgbt\": \"<boolean>\"\n              }\n            },\n            \"siteTypes\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"siteCount\": \"<integer>\",\n            \"siteLocationCount\": \"<integer>\",\n            \"businessStructure\": \"<string>\",\n            \"currentCompanyId\": \"<integer>\",\n            \"websites\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"companyCompetitorIds\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"familyTree\": {\n              \"company\": {\n                \"name\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"country\": \"<string>\",\n                \"companyId\": \"<integer>\"\n              },\n              \"children\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/FamilyTreeResultDTO detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/FamilyTreeResultDTO detected>\"\n                }\n              ]\n            },\n            \"acquisitions\": {\n              \"companies\": [\n                {\n                  \"name\": \"<string>\",\n                  \"city\": \"<string>\",\n                  \"state\": \"<string>\",\n                  \"country\": \"<string>\",\n                  \"companyId\": \"<integer>\"\n                },\n                {\n                  \"name\": \"<string>\",\n                  \"city\": \"<string>\",\n                  \"state\": \"<string>\",\n                  \"country\": \"<string>\",\n                  \"companyId\": \"<integer>\"\n                }\n              ]\n            },\n            \"techUsed\": {\n              \"categories\": [\n                {\n                  \"categoryId\": \"<string>\",\n                  \"categoryName\": \"<string>\",\n                  \"subCategories\": [\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    },\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    }\n                  ]\n                },\n                {\n                  \"categoryId\": \"<string>\",\n                  \"categoryName\": \"<string>\",\n                  \"subCategories\": [\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    },\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    }\n                  ]\n                }\n              ]\n            },\n            \"companyLogos\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"competitors\": [\n              {\n                \"name\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"country\": \"<string>\",\n                \"companyId\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"country\": \"<string>\",\n                \"companyId\": \"<integer>\"\n              }\n            ]\n          }\n        },\n        {\n          \"company\": {\n            \"companyId\": \"<integer>\",\n            \"companyName\": \"<string>\",\n            \"description\": \"<string>\",\n            \"companyType\": \"<string>\",\n            \"companyStatus\": \"<string>\",\n            \"tickers\": [\n              {\n                \"tickerName\": \"<string>\",\n                \"exchange\": \"<string>\"\n              },\n              {\n                \"tickerName\": \"<string>\",\n                \"exchange\": \"<string>\"\n              }\n            ],\n            \"classification\": {\n              \"primaryBusiness\": {\n                \"industry\": \"<string>\",\n                \"industryCode\": \"<string>\",\n                \"subIndustry\": \"<string>\",\n                \"subIndustryCode\": \"<string>\"\n              },\n              \"secondaryBusinesses\": [\n                {\n                  \"industry\": \"<string>\",\n                  \"industryCode\": \"<string>\",\n                  \"subIndustry\": \"<string>\",\n                  \"subIndustryCode\": \"<string>\"\n                },\n                {\n                  \"industry\": \"<string>\",\n                  \"industryCode\": \"<string>\",\n                  \"subIndustry\": \"<string>\",\n                  \"subIndustryCode\": \"<string>\"\n                }\n              ]\n            },\n            \"address\": {\n              \"street\": \"<string>\",\n              \"city\": \"<string>\",\n              \"state\": \"<string>\",\n              \"zip\": \"<string>\",\n              \"country\": \"<string>\",\n              \"latitude\": \"<string>\",\n              \"longitude\": \"<string>\",\n              \"area\": \"<string>\"\n            },\n            \"phone\": \"<string>\",\n            \"revenue\": \"<double>\",\n            \"revenueCurrency\": \"<string>\",\n            \"employeeCount\": \"<integer>\",\n            \"sic\": \"<string>\",\n            \"sicDescription\": \"<string>\",\n            \"naics\": \"<string>\",\n            \"naicsDescription\": \"<string>\",\n            \"financialYearEnd\": \"<string>\",\n            \"equifaxId\": \"<string>\",\n            \"companyTaxId\": \"<string>\",\n            \"fortuneRanking\": \"<string>\",\n            \"britishSics\": [\n              {\n                \"britishSic\": \"<string>\",\n                \"description\": \"<string>\"\n              },\n              {\n                \"britishSic\": \"<string>\",\n                \"description\": \"<string>\"\n              }\n            ],\n            \"foundedIn\": \"<string>\",\n            \"socialHandles\": {\n              \"twitter\": \"<string>\",\n              \"facebook\": \"<string>\",\n              \"blog\": \"<string>\",\n              \"linkedIn\": \"<string>\"\n            },\n            \"diversity\": {\n              \"gender\": \"<string>\",\n              \"ethnicity\": \"<string>\",\n              \"certifications\": {\n                \"wbe\": \"<boolean>\",\n                \"mbe\": \"<boolean>\",\n                \"vbe\": \"<boolean>\",\n                \"disabled\": \"<boolean>\",\n                \"dbe\": \"<boolean>\",\n                \"lgbt\": \"<boolean>\"\n              }\n            },\n            \"siteTypes\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"siteCount\": \"<integer>\",\n            \"siteLocationCount\": \"<integer>\",\n            \"businessStructure\": \"<string>\",\n            \"currentCompanyId\": \"<integer>\",\n            \"websites\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"companyCompetitorIds\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"familyTree\": {\n              \"company\": {\n                \"name\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"country\": \"<string>\",\n                \"companyId\": \"<integer>\"\n              },\n              \"children\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/FamilyTreeResultDTO detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/FamilyTreeResultDTO detected>\"\n                }\n              ]\n            },\n            \"acquisitions\": {\n              \"companies\": [\n                {\n                  \"name\": \"<string>\",\n                  \"city\": \"<string>\",\n                  \"state\": \"<string>\",\n                  \"country\": \"<string>\",\n                  \"companyId\": \"<integer>\"\n                },\n                {\n                  \"name\": \"<string>\",\n                  \"city\": \"<string>\",\n                  \"state\": \"<string>\",\n                  \"country\": \"<string>\",\n                  \"companyId\": \"<integer>\"\n                }\n              ]\n            },\n            \"techUsed\": {\n              \"categories\": [\n                {\n                  \"categoryId\": \"<string>\",\n                  \"categoryName\": \"<string>\",\n                  \"subCategories\": [\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    },\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    }\n                  ]\n                },\n                {\n                  \"categoryId\": \"<string>\",\n                  \"categoryName\": \"<string>\",\n                  \"subCategories\": [\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    },\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    }\n                  ]\n                }\n              ]\n            },\n            \"companyLogos\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"competitors\": [\n              {\n                \"name\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"country\": \"<string>\",\n                \"companyId\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"country\": \"<string>\",\n                \"companyId\": \"<integer>\"\n              }\n            ]\n          }\n        }\n      ],\n      \"contactMatches\": [\n        {\n          \"contact\": {\n            \"dbPersonDetails\": {\n              \"dbPersonId\": \"<integer>\",\n              \"firstName\": \"<string>\",\n              \"middleName\": \"<string>\",\n              \"lastName\": \"<string>\",\n              \"age\": \"<integer>\",\n              \"mobileNumber\": \"<string>\",\n              \"educationList\": [\n                {\n                  \"degree\": \"<string>\",\n                  \"major\": \"<string>\",\n                  \"university\": \"<string>\"\n                },\n                {\n                  \"degree\": \"<string>\",\n                  \"major\": \"<string>\",\n                  \"university\": \"<string>\"\n                }\n              ],\n              \"imageUrl\": \"<string>\",\n              \"socialHandles\": {\n                \"twitter\": \"<string>\",\n                \"facebook\": \"<string>\",\n                \"linkedIn\": \"<string>\"\n              },\n              \"address\": {\n                \"street\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"stateCode\": \"<string>\",\n                \"zip\": \"<string>\",\n                \"country\": \"<string>\",\n                \"countryCode\": \"<string>\",\n                \"latitude\": \"<string>\",\n                \"longitude\": \"<string>\",\n                \"area\": \"<string>\"\n              }\n            },\n            \"employmentDetails\": {\n              \"contactId\": \"<integer>\",\n              \"companyId\": \"<integer>\",\n              \"companyName\": \"<string>\",\n              \"contactQualityScore\": \"<string>\",\n              \"description\": \"<string>\",\n              \"startDate\": \"<string>\",\n              \"salary\": \"<string>\",\n              \"salaryCurrency\": \"<string>\",\n              \"active\": \"<string>\",\n              \"emails\": [\n                {\n                  \"email\": \"<string>\",\n                  \"validationStatus\": \"<string>\"\n                },\n                {\n                  \"email\": \"<string>\",\n                  \"validationStatus\": \"<string>\"\n                }\n              ],\n              \"lastValidatedDate\": \"<string>\",\n              \"phoneNumbers\": {\n                \"directNumber\": \"<string>\",\n                \"corporateNumber\": \"<string>\"\n              },\n              \"jobLevels\": [\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                },\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                }\n              ],\n              \"jobFunctions\": [\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                },\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                }\n              ],\n              \"titles\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"employmentHistoryList\": [\n              {\n                \"contactId\": \"<integer>\",\n                \"companyId\": \"<integer>\",\n                \"companyName\": \"<string>\",\n                \"emails\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"phoneNumbers\": {\n                  \"directNumber\": \"<string>\",\n                  \"corporateNumber\": \"<string>\"\n                },\n                \"active\": \"<string>\",\n                \"jobLevels\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"jobFunctions\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"titles\": [\n                  \"<string>\",\n                  \"<string>\"\n                ]\n              },\n              {\n                \"contactId\": \"<integer>\",\n                \"companyId\": \"<integer>\",\n                \"companyName\": \"<string>\",\n                \"emails\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"phoneNumbers\": {\n                  \"directNumber\": \"<string>\",\n                  \"corporateNumber\": \"<string>\"\n                },\n                \"active\": \"<string>\",\n                \"jobLevels\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"jobFunctions\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"titles\": [\n                  \"<string>\",\n                  \"<string>\"\n                ]\n              }\n            ]\n          }\n        },\n        {\n          \"contact\": {\n            \"dbPersonDetails\": {\n              \"dbPersonId\": \"<integer>\",\n              \"firstName\": \"<string>\",\n              \"middleName\": \"<string>\",\n              \"lastName\": \"<string>\",\n              \"age\": \"<integer>\",\n              \"mobileNumber\": \"<string>\",\n              \"educationList\": [\n                {\n                  \"degree\": \"<string>\",\n                  \"major\": \"<string>\",\n                  \"university\": \"<string>\"\n                },\n                {\n                  \"degree\": \"<string>\",\n                  \"major\": \"<string>\",\n                  \"university\": \"<string>\"\n                }\n              ],\n              \"imageUrl\": \"<string>\",\n              \"socialHandles\": {\n                \"twitter\": \"<string>\",\n                \"facebook\": \"<string>\",\n                \"linkedIn\": \"<string>\"\n              },\n              \"address\": {\n                \"street\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"stateCode\": \"<string>\",\n                \"zip\": \"<string>\",\n                \"country\": \"<string>\",\n                \"countryCode\": \"<string>\",\n                \"latitude\": \"<string>\",\n                \"longitude\": \"<string>\",\n                \"area\": \"<string>\"\n              }\n            },\n            \"employmentDetails\": {\n              \"contactId\": \"<integer>\",\n              \"companyId\": \"<integer>\",\n              \"companyName\": \"<string>\",\n              \"contactQualityScore\": \"<string>\",\n              \"description\": \"<string>\",\n              \"startDate\": \"<string>\",\n              \"salary\": \"<string>\",\n              \"salaryCurrency\": \"<string>\",\n              \"active\": \"<string>\",\n              \"emails\": [\n                {\n                  \"email\": \"<string>\",\n                  \"validationStatus\": \"<string>\"\n                },\n                {\n                  \"email\": \"<string>\",\n                  \"validationStatus\": \"<string>\"\n                }\n              ],\n              \"lastValidatedDate\": \"<string>\",\n              \"phoneNumbers\": {\n                \"directNumber\": \"<string>\",\n                \"corporateNumber\": \"<string>\"\n              },\n              \"jobLevels\": [\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                },\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                }\n              ],\n              \"jobFunctions\": [\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                },\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                }\n              ],\n              \"titles\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"employmentHistoryList\": [\n              {\n                \"contactId\": \"<integer>\",\n                \"companyId\": \"<integer>\",\n                \"companyName\": \"<string>\",\n                \"emails\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"phoneNumbers\": {\n                  \"directNumber\": \"<string>\",\n                  \"corporateNumber\": \"<string>\"\n                },\n                \"active\": \"<string>\",\n                \"jobLevels\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"jobFunctions\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"titles\": [\n                  \"<string>\",\n                  \"<string>\"\n                ]\n              },\n              {\n                \"contactId\": \"<integer>\",\n                \"companyId\": \"<integer>\",\n                \"companyName\": \"<string>\",\n                \"emails\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"phoneNumbers\": {\n                  \"directNumber\": \"<string>\",\n                  \"corporateNumber\": \"<string>\"\n                },\n                \"active\": \"<string>\",\n                \"jobLevels\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"jobFunctions\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"titles\": [\n                  \"<string>\",\n                  \"<string>\"\n                ]\n              }\n            ]\n          }\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"companyMatches\": [\n        {\n          \"company\": {\n            \"companyId\": \"<integer>\",\n            \"companyName\": \"<string>\",\n            \"description\": \"<string>\",\n            \"companyType\": \"<string>\",\n            \"companyStatus\": \"<string>\",\n            \"tickers\": [\n              {\n                \"tickerName\": \"<string>\",\n                \"exchange\": \"<string>\"\n              },\n              {\n                \"tickerName\": \"<string>\",\n                \"exchange\": \"<string>\"\n              }\n            ],\n            \"classification\": {\n              \"primaryBusiness\": {\n                \"industry\": \"<string>\",\n                \"industryCode\": \"<string>\",\n                \"subIndustry\": \"<string>\",\n                \"subIndustryCode\": \"<string>\"\n              },\n              \"secondaryBusinesses\": [\n                {\n                  \"industry\": \"<string>\",\n                  \"industryCode\": \"<string>\",\n                  \"subIndustry\": \"<string>\",\n                  \"subIndustryCode\": \"<string>\"\n                },\n                {\n                  \"industry\": \"<string>\",\n                  \"industryCode\": \"<string>\",\n                  \"subIndustry\": \"<string>\",\n                  \"subIndustryCode\": \"<string>\"\n                }\n              ]\n            },\n            \"address\": {\n              \"street\": \"<string>\",\n              \"city\": \"<string>\",\n              \"state\": \"<string>\",\n              \"zip\": \"<string>\",\n              \"country\": \"<string>\",\n              \"latitude\": \"<string>\",\n              \"longitude\": \"<string>\",\n              \"area\": \"<string>\"\n            },\n            \"phone\": \"<string>\",\n            \"revenue\": \"<double>\",\n            \"revenueCurrency\": \"<string>\",\n            \"employeeCount\": \"<integer>\",\n            \"sic\": \"<string>\",\n            \"sicDescription\": \"<string>\",\n            \"naics\": \"<string>\",\n            \"naicsDescription\": \"<string>\",\n            \"financialYearEnd\": \"<string>\",\n            \"equifaxId\": \"<string>\",\n            \"companyTaxId\": \"<string>\",\n            \"fortuneRanking\": \"<string>\",\n            \"britishSics\": [\n              {\n                \"britishSic\": \"<string>\",\n                \"description\": \"<string>\"\n              },\n              {\n                \"britishSic\": \"<string>\",\n                \"description\": \"<string>\"\n              }\n            ],\n            \"foundedIn\": \"<string>\",\n            \"socialHandles\": {\n              \"twitter\": \"<string>\",\n              \"facebook\": \"<string>\",\n              \"blog\": \"<string>\",\n              \"linkedIn\": \"<string>\"\n            },\n            \"diversity\": {\n              \"gender\": \"<string>\",\n              \"ethnicity\": \"<string>\",\n              \"certifications\": {\n                \"wbe\": \"<boolean>\",\n                \"mbe\": \"<boolean>\",\n                \"vbe\": \"<boolean>\",\n                \"disabled\": \"<boolean>\",\n                \"dbe\": \"<boolean>\",\n                \"lgbt\": \"<boolean>\"\n              }\n            },\n            \"siteTypes\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"siteCount\": \"<integer>\",\n            \"siteLocationCount\": \"<integer>\",\n            \"businessStructure\": \"<string>\",\n            \"currentCompanyId\": \"<integer>\",\n            \"websites\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"companyCompetitorIds\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"familyTree\": {\n              \"company\": {\n                \"name\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"country\": \"<string>\",\n                \"companyId\": \"<integer>\"\n              },\n              \"children\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/FamilyTreeResultDTO detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/FamilyTreeResultDTO detected>\"\n                }\n              ]\n            },\n            \"acquisitions\": {\n              \"companies\": [\n                {\n                  \"name\": \"<string>\",\n                  \"city\": \"<string>\",\n                  \"state\": \"<string>\",\n                  \"country\": \"<string>\",\n                  \"companyId\": \"<integer>\"\n                },\n                {\n                  \"name\": \"<string>\",\n                  \"city\": \"<string>\",\n                  \"state\": \"<string>\",\n                  \"country\": \"<string>\",\n                  \"companyId\": \"<integer>\"\n                }\n              ]\n            },\n            \"techUsed\": {\n              \"categories\": [\n                {\n                  \"categoryId\": \"<string>\",\n                  \"categoryName\": \"<string>\",\n                  \"subCategories\": [\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    },\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    }\n                  ]\n                },\n                {\n                  \"categoryId\": \"<string>\",\n                  \"categoryName\": \"<string>\",\n                  \"subCategories\": [\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    },\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    }\n                  ]\n                }\n              ]\n            },\n            \"companyLogos\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"competitors\": [\n              {\n                \"name\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"country\": \"<string>\",\n                \"companyId\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"country\": \"<string>\",\n                \"companyId\": \"<integer>\"\n              }\n            ]\n          }\n        },\n        {\n          \"company\": {\n            \"companyId\": \"<integer>\",\n            \"companyName\": \"<string>\",\n            \"description\": \"<string>\",\n            \"companyType\": \"<string>\",\n            \"companyStatus\": \"<string>\",\n            \"tickers\": [\n              {\n                \"tickerName\": \"<string>\",\n                \"exchange\": \"<string>\"\n              },\n              {\n                \"tickerName\": \"<string>\",\n                \"exchange\": \"<string>\"\n              }\n            ],\n            \"classification\": {\n              \"primaryBusiness\": {\n                \"industry\": \"<string>\",\n                \"industryCode\": \"<string>\",\n                \"subIndustry\": \"<string>\",\n                \"subIndustryCode\": \"<string>\"\n              },\n              \"secondaryBusinesses\": [\n                {\n                  \"industry\": \"<string>\",\n                  \"industryCode\": \"<string>\",\n                  \"subIndustry\": \"<string>\",\n                  \"subIndustryCode\": \"<string>\"\n                },\n                {\n                  \"industry\": \"<string>\",\n                  \"industryCode\": \"<string>\",\n                  \"subIndustry\": \"<string>\",\n                  \"subIndustryCode\": \"<string>\"\n                }\n              ]\n            },\n            \"address\": {\n              \"street\": \"<string>\",\n              \"city\": \"<string>\",\n              \"state\": \"<string>\",\n              \"zip\": \"<string>\",\n              \"country\": \"<string>\",\n              \"latitude\": \"<string>\",\n              \"longitude\": \"<string>\",\n              \"area\": \"<string>\"\n            },\n            \"phone\": \"<string>\",\n            \"revenue\": \"<double>\",\n            \"revenueCurrency\": \"<string>\",\n            \"employeeCount\": \"<integer>\",\n            \"sic\": \"<string>\",\n            \"sicDescription\": \"<string>\",\n            \"naics\": \"<string>\",\n            \"naicsDescription\": \"<string>\",\n            \"financialYearEnd\": \"<string>\",\n            \"equifaxId\": \"<string>\",\n            \"companyTaxId\": \"<string>\",\n            \"fortuneRanking\": \"<string>\",\n            \"britishSics\": [\n              {\n                \"britishSic\": \"<string>\",\n                \"description\": \"<string>\"\n              },\n              {\n                \"britishSic\": \"<string>\",\n                \"description\": \"<string>\"\n              }\n            ],\n            \"foundedIn\": \"<string>\",\n            \"socialHandles\": {\n              \"twitter\": \"<string>\",\n              \"facebook\": \"<string>\",\n              \"blog\": \"<string>\",\n              \"linkedIn\": \"<string>\"\n            },\n            \"diversity\": {\n              \"gender\": \"<string>\",\n              \"ethnicity\": \"<string>\",\n              \"certifications\": {\n                \"wbe\": \"<boolean>\",\n                \"mbe\": \"<boolean>\",\n                \"vbe\": \"<boolean>\",\n                \"disabled\": \"<boolean>\",\n                \"dbe\": \"<boolean>\",\n                \"lgbt\": \"<boolean>\"\n              }\n            },\n            \"siteTypes\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"siteCount\": \"<integer>\",\n            \"siteLocationCount\": \"<integer>\",\n            \"businessStructure\": \"<string>\",\n            \"currentCompanyId\": \"<integer>\",\n            \"websites\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"companyCompetitorIds\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"familyTree\": {\n              \"company\": {\n                \"name\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"country\": \"<string>\",\n                \"companyId\": \"<integer>\"\n              },\n              \"children\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/FamilyTreeResultDTO detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/FamilyTreeResultDTO detected>\"\n                }\n              ]\n            },\n            \"acquisitions\": {\n              \"companies\": [\n                {\n                  \"name\": \"<string>\",\n                  \"city\": \"<string>\",\n                  \"state\": \"<string>\",\n                  \"country\": \"<string>\",\n                  \"companyId\": \"<integer>\"\n                },\n                {\n                  \"name\": \"<string>\",\n                  \"city\": \"<string>\",\n                  \"state\": \"<string>\",\n                  \"country\": \"<string>\",\n                  \"companyId\": \"<integer>\"\n                }\n              ]\n            },\n            \"techUsed\": {\n              \"categories\": [\n                {\n                  \"categoryId\": \"<string>\",\n                  \"categoryName\": \"<string>\",\n                  \"subCategories\": [\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    },\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    }\n                  ]\n                },\n                {\n                  \"categoryId\": \"<string>\",\n                  \"categoryName\": \"<string>\",\n                  \"subCategories\": [\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    },\n                    {\n                      \"subCategoryId\": \"<string>\",\n                      \"subCategoryName\": \"<string>\",\n                      \"products\": [\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        },\n                        {\n                          \"productId\": \"<string>\",\n                          \"productName\": \"<string>\"\n                        }\n                      ]\n                    }\n                  ]\n                }\n              ]\n            },\n            \"companyLogos\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"competitors\": [\n              {\n                \"name\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"country\": \"<string>\",\n                \"companyId\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"country\": \"<string>\",\n                \"companyId\": \"<integer>\"\n              }\n            ]\n          }\n        }\n      ],\n      \"contactMatches\": [\n        {\n          \"contact\": {\n            \"dbPersonDetails\": {\n              \"dbPersonId\": \"<integer>\",\n              \"firstName\": \"<string>\",\n              \"middleName\": \"<string>\",\n              \"lastName\": \"<string>\",\n              \"age\": \"<integer>\",\n              \"mobileNumber\": \"<string>\",\n              \"educationList\": [\n                {\n                  \"degree\": \"<string>\",\n                  \"major\": \"<string>\",\n                  \"university\": \"<string>\"\n                },\n                {\n                  \"degree\": \"<string>\",\n                  \"major\": \"<string>\",\n                  \"university\": \"<string>\"\n                }\n              ],\n              \"imageUrl\": \"<string>\",\n              \"socialHandles\": {\n                \"twitter\": \"<string>\",\n                \"facebook\": \"<string>\",\n                \"linkedIn\": \"<string>\"\n              },\n              \"address\": {\n                \"street\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"stateCode\": \"<string>\",\n                \"zip\": \"<string>\",\n                \"country\": \"<string>\",\n                \"countryCode\": \"<string>\",\n                \"latitude\": \"<string>\",\n                \"longitude\": \"<string>\",\n                \"area\": \"<string>\"\n              }\n            },\n            \"employmentDetails\": {\n              \"contactId\": \"<integer>\",\n              \"companyId\": \"<integer>\",\n              \"companyName\": \"<string>\",\n              \"contactQualityScore\": \"<string>\",\n              \"description\": \"<string>\",\n              \"startDate\": \"<string>\",\n              \"salary\": \"<string>\",\n              \"salaryCurrency\": \"<string>\",\n              \"active\": \"<string>\",\n              \"emails\": [\n                {\n                  \"email\": \"<string>\",\n                  \"validationStatus\": \"<string>\"\n                },\n                {\n                  \"email\": \"<string>\",\n                  \"validationStatus\": \"<string>\"\n                }\n              ],\n              \"lastValidatedDate\": \"<string>\",\n              \"phoneNumbers\": {\n                \"directNumber\": \"<string>\",\n                \"corporateNumber\": \"<string>\"\n              },\n              \"jobLevels\": [\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                },\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                }\n              ],\n              \"jobFunctions\": [\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                },\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                }\n              ],\n              \"titles\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"employmentHistoryList\": [\n              {\n                \"contactId\": \"<integer>\",\n                \"companyId\": \"<integer>\",\n                \"companyName\": \"<string>\",\n                \"emails\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"phoneNumbers\": {\n                  \"directNumber\": \"<string>\",\n                  \"corporateNumber\": \"<string>\"\n                },\n                \"active\": \"<string>\",\n                \"jobLevels\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"jobFunctions\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"titles\": [\n                  \"<string>\",\n                  \"<string>\"\n                ]\n              },\n              {\n                \"contactId\": \"<integer>\",\n                \"companyId\": \"<integer>\",\n                \"companyName\": \"<string>\",\n                \"emails\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"phoneNumbers\": {\n                  \"directNumber\": \"<string>\",\n                  \"corporateNumber\": \"<string>\"\n                },\n                \"active\": \"<string>\",\n                \"jobLevels\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"jobFunctions\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"titles\": [\n                  \"<string>\",\n                  \"<string>\"\n                ]\n              }\n            ]\n          }\n        },\n        {\n          \"contact\": {\n            \"dbPersonDetails\": {\n              \"dbPersonId\": \"<integer>\",\n              \"firstName\": \"<string>\",\n              \"middleName\": \"<string>\",\n              \"lastName\": \"<string>\",\n              \"age\": \"<integer>\",\n              \"mobileNumber\": \"<string>\",\n              \"educationList\": [\n                {\n                  \"degree\": \"<string>\",\n                  \"major\": \"<string>\",\n                  \"university\": \"<string>\"\n                },\n                {\n                  \"degree\": \"<string>\",\n                  \"major\": \"<string>\",\n                  \"university\": \"<string>\"\n                }\n              ],\n              \"imageUrl\": \"<string>\",\n              \"socialHandles\": {\n                \"twitter\": \"<string>\",\n                \"facebook\": \"<string>\",\n                \"linkedIn\": \"<string>\"\n              },\n              \"address\": {\n                \"street\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"stateCode\": \"<string>\",\n                \"zip\": \"<string>\",\n                \"country\": \"<string>\",\n                \"countryCode\": \"<string>\",\n                \"latitude\": \"<string>\",\n                \"longitude\": \"<string>\",\n                \"area\": \"<string>\"\n              }\n            },\n            \"employmentDetails\": {\n              \"contactId\": \"<integer>\",\n              \"companyId\": \"<integer>\",\n              \"companyName\": \"<string>\",\n              \"contactQualityScore\": \"<string>\",\n              \"description\": \"<string>\",\n              \"startDate\": \"<string>\",\n              \"salary\": \"<string>\",\n              \"salaryCurrency\": \"<string>\",\n              \"active\": \"<string>\",\n              \"emails\": [\n                {\n                  \"email\": \"<string>\",\n                  \"validationStatus\": \"<string>\"\n                },\n                {\n                  \"email\": \"<string>\",\n                  \"validationStatus\": \"<string>\"\n                }\n              ],\n              \"lastValidatedDate\": \"<string>\",\n              \"phoneNumbers\": {\n                \"directNumber\": \"<string>\",\n                \"corporateNumber\": \"<string>\"\n              },\n              \"jobLevels\": [\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                },\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                }\n              ],\n              \"jobFunctions\": [\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                },\n                {\n                  \"id\": \"<string>\",\n                  \"name\": \"<string>\"\n                }\n              ],\n              \"titles\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"employmentHistoryList\": [\n              {\n                \"contactId\": \"<integer>\",\n                \"companyId\": \"<integer>\",\n                \"companyName\": \"<string>\",\n                \"emails\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"phoneNumbers\": {\n                  \"directNumber\": \"<string>\",\n                  \"corporateNumber\": \"<string>\"\n                },\n                \"active\": \"<string>\",\n                \"jobLevels\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"jobFunctions\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"titles\": [\n                  \"<string>\",\n                  \"<string>\"\n                ]\n              },\n              {\n                \"contactId\": \"<integer>\",\n                \"companyId\": \"<integer>\",\n                \"companyName\": \"<string>\",\n                \"emails\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"phoneNumbers\": {\n                  \"directNumber\": \"<string>\",\n                  \"corporateNumber\": \"<string>\"\n                },\n                \"active\": \"<string>\",\n                \"jobLevels\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"jobFunctions\": [\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  },\n                  {\n                    \"id\": \"<string>\",\n                    \"name\": \"<string>\"\n                  }\n                ],\n                \"titles\": [\n                  \"<string>\",\n                  \"<string>\"\n                ]\n              }\n            ]\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T01:11:36.000Z",
+              "updatedAt": "2026-10-22T01:11:36.000Z",
+              "uid": "35240-fcb561df-44c1-4e03-9127-bd5fcd2e34b8"
+            },
+            {
+              "id": "98d8edf1-3ed3-43be-9a92-57f5595fd5c6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requests\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"country\": \"<string>\",\n      \"state\": \"<string>\",\n      \"city\": \"<string>\",\n      \"street\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"websites\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ticker\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"isPhoneRequired\": \"<boolean>\",\n      \"isEmailRequired\": \"<boolean>\",\n      \"executiveLinkedInHandle\": \"<string>\",\n      \"contactMatching\": \"<string>\",\n      \"contactStatus\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"country\": \"<string>\",\n      \"state\": \"<string>\",\n      \"city\": \"<string>\",\n      \"street\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"websites\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ticker\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"isPhoneRequired\": \"<boolean>\",\n      \"isEmailRequired\": \"<boolean>\",\n      \"executiveLinkedInHandle\": \"<string>\",\n      \"contactMatching\": \"<string>\",\n      \"contactStatus\": \"<string>\"\n    }\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limitResults\": \"<string>\",\n  \"matchBranch\": \"<string>\",\n  \"minContactQualityScore\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/match",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "match"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:11:36.000Z",
+              "updatedAt": "2026-10-22T01:11:36.000Z",
+              "uid": "35240-98d8edf1-3ed3-43be-9a92-57f5595fd5c6"
+            },
+            {
+              "id": "271e73fe-c20f-4cc6-a872-928a5ae48aa5",
+              "name": "Unauthorized because the user is not authenticated.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requests\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"country\": \"<string>\",\n      \"state\": \"<string>\",\n      \"city\": \"<string>\",\n      \"street\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"websites\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ticker\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"isPhoneRequired\": \"<boolean>\",\n      \"isEmailRequired\": \"<boolean>\",\n      \"executiveLinkedInHandle\": \"<string>\",\n      \"contactMatching\": \"<string>\",\n      \"contactStatus\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"country\": \"<string>\",\n      \"state\": \"<string>\",\n      \"city\": \"<string>\",\n      \"street\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"websites\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ticker\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"isPhoneRequired\": \"<boolean>\",\n      \"isEmailRequired\": \"<boolean>\",\n      \"executiveLinkedInHandle\": \"<string>\",\n      \"contactMatching\": \"<string>\",\n      \"contactStatus\": \"<string>\"\n    }\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limitResults\": \"<string>\",\n  \"matchBranch\": \"<string>\",\n  \"minContactQualityScore\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/match",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "match"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-22T01:11:36.000Z",
+              "updatedAt": "2026-10-22T01:11:36.000Z",
+              "uid": "35240-271e73fe-c20f-4cc6-a872-928a5ae48aa5"
+            }
+          ],
+          "createdAt": "2026-10-22T01:11:35.000Z",
+          "updatedAt": "2026-10-22T01:11:35.000Z",
+          "uid": "35240-867461b3-46c3-4458-b3fb-04b008f59b7d"
+        }
+      ],
+      "id": "95d3da1d-8eff-4fcc-81a7-163724f6754c",
+      "createdAt": "2026-10-22T01:11:35.000Z",
+      "updatedAt": "2026-10-22T01:11:35.000Z",
+      "uid": "35240-95d3da1d-8eff-4fcc-81a7-163724f6754c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://uapi.demandbase.com/data/b2b/v1"
+    }
+  ]
+}

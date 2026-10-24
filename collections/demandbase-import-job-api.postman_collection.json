@@ -1,0 +1,2094 @@
+{
+  "info": {
+    "_postman_id": "f11b4dbb-556e-45ad-b697-e64ab650b090",
+    "name": "Data Import Import Job API",
+    "description": "This API is designed to facilitate the bulk import of structured data (such as Accounts, People, and Activities) directly into the Demandbase platform. It allows users to programmatically upload files for processing, ensuring that Demandbase targets and segments are consistently updated with the freshest data from your external systems.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:11:12.000Z",
+    "updatedAt": "2026-10-22T01:11:12.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f11b4dbb-556e-45ad-b697-e64ab650b090"
+  },
+  "item": [
+    {
+      "name": "job",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "data",
+              "item": [
+                {
+                  "name": "Submit import data",
+                  "id": "f0c50908-d1c7-4615-8131-76b97239dc65",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/xml"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "xml",
+                          "language": "xml"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/import/v1/job/:id/data?listAction=replace",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "import",
+                        "v1",
+                        "job",
+                        ":id",
+                        "data"
+                      ],
+                      "query": [
+                        {
+                          "description": "The listAction query parameter specifies how the imported data affects the membership of the account list associated with this job ID.   <table> <tr> <th>Allowed Value</th> <th>Description</th> </tr> <tr> <td>replace (default)</td> <td>Removes all existing members from the associated account list and adds the members from the current import file.</td> </tr> <tr> <td>insert</td> <td>Adds new members from the current import file to the existing account list. If no account list is associated with this job, one will be created.</td> </tr> <tr> <td>delete</td> <td>Removes members from the existing account list if they are matched in the import data.</td> </tr> <tr> <td>noop</td> <td>Processes and imports the data but does not make any changes to the associated account list membership.</td> </tr>  </table> ",
+                          "key": "listAction",
+                          "value": "replace"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "f6c4b8f4-6fd0-41d9-ab89-92f053497968",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "This endpoint is used to submit the data file to an existing import job identified by the path parameter {id}.\n\nSubmitting the data file triggers the asynchronous processing of the data. You can monitor the progress and final status of the data processing using the dedicated job status endpoint.\n\nNote: There is currently no limit to the number of rows you can upload per Submit request, however, files are limited to **5GB**."
+                  },
+                  "response": [
+                    {
+                      "id": "0be17fb0-41f7-45ce-b8b9-80d7fea1330e",
+                      "name": "Returns the status of the job after successfull upload.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/xml"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "xml",
+                              "language": "xml"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/import/v1/job/:id/data?listAction=replace",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "import",
+                            "v1",
+                            "job",
+                            ":id",
+                            "data"
+                          ],
+                          "query": [
+                            {
+                              "description": "The listAction query parameter specifies how the imported data affects the membership of the account list associated with this job ID.   <table> <tr> <th>Allowed Value</th> <th>Description</th> </tr> <tr> <td>replace (default)</td> <td>Removes all existing members from the associated account list and adds the members from the current import file.</td> </tr> <tr> <td>insert</td> <td>Adds new members from the current import file to the existing account list. If no account list is associated with this job, one will be created.</td> </tr> <tr> <td>delete</td> <td>Removes members from the existing account list if they are matched in the import data.</td> </tr> <tr> <td>noop</td> <td>Processes and imports the data but does not make any changes to the associated account list membership.</td> </tr>  </table> ",
+                              "key": "listAction",
+                              "value": "replace"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<long>\",\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"state\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"createdAt\": \"<dateTime>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T01:11:13.000Z",
+                      "updatedAt": "2026-10-22T01:11:13.000Z",
+                      "uid": "35240-0be17fb0-41f7-45ce-b8b9-80d7fea1330e"
+                    },
+                    {
+                      "id": "87af97e4-929d-4698-8eb8-1bcd3b34150a",
+                      "name": "Bad Request Error",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/xml"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "xml",
+                              "language": "xml"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/import/v1/job/:id/data?listAction=replace",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "import",
+                            "v1",
+                            "job",
+                            ":id",
+                            "data"
+                          ],
+                          "query": [
+                            {
+                              "description": "The listAction query parameter specifies how the imported data affects the membership of the account list associated with this job ID.   <table> <tr> <th>Allowed Value</th> <th>Description</th> </tr> <tr> <td>replace (default)</td> <td>Removes all existing members from the associated account list and adds the members from the current import file.</td> </tr> <tr> <td>insert</td> <td>Adds new members from the current import file to the existing account list. If no account list is associated with this job, one will be created.</td> </tr> <tr> <td>delete</td> <td>Removes members from the existing account list if they are matched in the import data.</td> </tr> <tr> <td>noop</td> <td>Processes and imports the data but does not make any changes to the associated account list membership.</td> </tr>  </table> ",
+                              "key": "listAction",
+                              "value": "replace"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:13.000Z",
+                      "updatedAt": "2026-10-22T01:11:13.000Z",
+                      "uid": "35240-87af97e4-929d-4698-8eb8-1bcd3b34150a"
+                    },
+                    {
+                      "id": "d6783758-c4d0-44d8-b411-b5d9944e8e96",
+                      "name": "Returned if the authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/xml"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "xml",
+                              "language": "xml"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/import/v1/job/:id/data?listAction=replace",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "import",
+                            "v1",
+                            "job",
+                            ":id",
+                            "data"
+                          ],
+                          "query": [
+                            {
+                              "description": "The listAction query parameter specifies how the imported data affects the membership of the account list associated with this job ID.   <table> <tr> <th>Allowed Value</th> <th>Description</th> </tr> <tr> <td>replace (default)</td> <td>Removes all existing members from the associated account list and adds the members from the current import file.</td> </tr> <tr> <td>insert</td> <td>Adds new members from the current import file to the existing account list. If no account list is associated with this job, one will be created.</td> </tr> <tr> <td>delete</td> <td>Removes members from the existing account list if they are matched in the import data.</td> </tr> <tr> <td>noop</td> <td>Processes and imports the data but does not make any changes to the associated account list membership.</td> </tr>  </table> ",
+                              "key": "listAction",
+                              "value": "replace"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:13.000Z",
+                      "updatedAt": "2026-10-22T01:11:13.000Z",
+                      "uid": "35240-d6783758-c4d0-44d8-b411-b5d9944e8e96"
+                    },
+                    {
+                      "id": "d71b8f41-d466-4b16-8a78-9e8e5465da90",
+                      "name": "Returned if the authenticated user lacks the \"Import Data\" permission",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/xml"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "xml",
+                              "language": "xml"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/import/v1/job/:id/data?listAction=replace",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "import",
+                            "v1",
+                            "job",
+                            ":id",
+                            "data"
+                          ],
+                          "query": [
+                            {
+                              "description": "The listAction query parameter specifies how the imported data affects the membership of the account list associated with this job ID.   <table> <tr> <th>Allowed Value</th> <th>Description</th> </tr> <tr> <td>replace (default)</td> <td>Removes all existing members from the associated account list and adds the members from the current import file.</td> </tr> <tr> <td>insert</td> <td>Adds new members from the current import file to the existing account list. If no account list is associated with this job, one will be created.</td> </tr> <tr> <td>delete</td> <td>Removes members from the existing account list if they are matched in the import data.</td> </tr> <tr> <td>noop</td> <td>Processes and imports the data but does not make any changes to the associated account list membership.</td> </tr>  </table> ",
+                              "key": "listAction",
+                              "value": "replace"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:13.000Z",
+                      "updatedAt": "2026-10-22T01:11:13.000Z",
+                      "uid": "35240-d71b8f41-d466-4b16-8a78-9e8e5465da90"
+                    },
+                    {
+                      "id": "3ac70e26-b8d8-4b1d-91af-e0616e1395b5",
+                      "name": "Returned if the referenced job is not found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/xml"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "xml",
+                              "language": "xml"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/import/v1/job/:id/data?listAction=replace",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "import",
+                            "v1",
+                            "job",
+                            ":id",
+                            "data"
+                          ],
+                          "query": [
+                            {
+                              "description": "The listAction query parameter specifies how the imported data affects the membership of the account list associated with this job ID.   <table> <tr> <th>Allowed Value</th> <th>Description</th> </tr> <tr> <td>replace (default)</td> <td>Removes all existing members from the associated account list and adds the members from the current import file.</td> </tr> <tr> <td>insert</td> <td>Adds new members from the current import file to the existing account list. If no account list is associated with this job, one will be created.</td> </tr> <tr> <td>delete</td> <td>Removes members from the existing account list if they are matched in the import data.</td> </tr> <tr> <td>noop</td> <td>Processes and imports the data but does not make any changes to the associated account list membership.</td> </tr>  </table> ",
+                              "key": "listAction",
+                              "value": "replace"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:13.000Z",
+                      "updatedAt": "2026-10-22T01:11:13.000Z",
+                      "uid": "35240-3ac70e26-b8d8-4b1d-91af-e0616e1395b5"
+                    },
+                    {
+                      "id": "039c886b-8f81-4e93-9ee9-a10246c1ee02",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/xml"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "xml",
+                              "language": "xml"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "https://uapi.demandbase.com/import/v1/job/:id/data?listAction=replace",
+                          "protocol": "https",
+                          "host": [
+                            "uapi",
+                            "demandbase",
+                            "com"
+                          ],
+                          "path": [
+                            "import",
+                            "v1",
+                            "job",
+                            ":id",
+                            "data"
+                          ],
+                          "query": [
+                            {
+                              "description": "The listAction query parameter specifies how the imported data affects the membership of the account list associated with this job ID.   <table> <tr> <th>Allowed Value</th> <th>Description</th> </tr> <tr> <td>replace (default)</td> <td>Removes all existing members from the associated account list and adds the members from the current import file.</td> </tr> <tr> <td>insert</td> <td>Adds new members from the current import file to the existing account list. If no account list is associated with this job, one will be created.</td> </tr> <tr> <td>delete</td> <td>Removes members from the existing account list if they are matched in the import data.</td> </tr> <tr> <td>noop</td> <td>Processes and imports the data but does not make any changes to the associated account list membership.</td> </tr>  </table> ",
+                              "key": "listAction",
+                              "value": "replace"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:11:13.000Z",
+                      "updatedAt": "2026-10-22T01:11:13.000Z",
+                      "uid": "35240-039c886b-8f81-4e93-9ee9-a10246c1ee02"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:11:13.000Z",
+                  "updatedAt": "2026-10-22T01:11:13.000Z",
+                  "uid": "35240-f0c50908-d1c7-4615-8131-76b97239dc65"
+                }
+              ],
+              "id": "41d1171e-8930-4d5b-9ffa-1047b43eb0d7",
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-41d1171e-8930-4d5b-9ffa-1047b43eb0d7"
+            },
+            {
+              "name": "Job status",
+              "id": "3a89d2f3-4811-4fdd-9c31-43f41d88f9d4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/import/v1/job/:id",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "import",
+                    "v1",
+                    "job",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "47bc7fc0-584e-41c0-9b8c-5ee8c7866ed5",
+                      "key": "id",
+                      "value": "<long>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Use this endpoint to retrieve the current status and relevant details of a specific data import job.\n\nThe job is identified by the unique path parameter {id} that was returned when the job was initially created."
+              },
+              "response": [
+                {
+                  "id": "42220e29-d724-49d9-9ba9-17f03099c443",
+                  "name": "The response body contains the comprehensive details of the job's current status and metadata.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/import/v1/job/:id",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "import",
+                        "v1",
+                        "job",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<long>\",\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"state\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"createdAt\": \"<dateTime>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:11:13.000Z",
+                  "updatedAt": "2026-10-22T01:11:13.000Z",
+                  "uid": "35240-42220e29-d724-49d9-9ba9-17f03099c443"
+                },
+                {
+                  "id": "33e18654-a931-4a37-95c9-cb0f1591c9a2",
+                  "name": "Bad Request Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/import/v1/job/:id",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "import",
+                        "v1",
+                        "job",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:13.000Z",
+                  "updatedAt": "2026-10-22T01:11:13.000Z",
+                  "uid": "35240-33e18654-a931-4a37-95c9-cb0f1591c9a2"
+                },
+                {
+                  "id": "d5761721-fb26-4665-971e-c11847108ea1",
+                  "name": "Returned if the authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/import/v1/job/:id",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "import",
+                        "v1",
+                        "job",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:13.000Z",
+                  "updatedAt": "2026-10-22T01:11:13.000Z",
+                  "uid": "35240-d5761721-fb26-4665-971e-c11847108ea1"
+                },
+                {
+                  "id": "3d71173f-62b2-40d6-b267-1c536e93f0bb",
+                  "name": "Returned if the authenticated user lacks the \"Import Data\" permission",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/import/v1/job/:id",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "import",
+                        "v1",
+                        "job",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:13.000Z",
+                  "updatedAt": "2026-10-22T01:11:13.000Z",
+                  "uid": "35240-3d71173f-62b2-40d6-b267-1c536e93f0bb"
+                },
+                {
+                  "id": "92f6ec15-f086-4b20-a37c-26b603c1b6ab",
+                  "name": "Returned if the referenced job is not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/import/v1/job/:id",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "import",
+                        "v1",
+                        "job",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:13.000Z",
+                  "updatedAt": "2026-10-22T01:11:13.000Z",
+                  "uid": "35240-92f6ec15-f086-4b20-a37c-26b603c1b6ab"
+                },
+                {
+                  "id": "3166e90e-2d2a-4b12-b749-1b792be49e94",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/import/v1/job/:id",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "import",
+                        "v1",
+                        "job",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:13.000Z",
+                  "updatedAt": "2026-10-22T01:11:13.000Z",
+                  "uid": "35240-3166e90e-2d2a-4b12-b749-1b792be49e94"
+                }
+              ],
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-3a89d2f3-4811-4fdd-9c31-43f41d88f9d4"
+            }
+          ],
+          "id": "595f18f4-be37-4921-87e5-4044ec4bc3e5",
+          "createdAt": "2026-10-22T01:11:13.000Z",
+          "updatedAt": "2026-10-22T01:11:13.000Z",
+          "uid": "35240-595f18f4-be37-4921-87e5-4044ec4bc3e5"
+        },
+        {
+          "name": "Create an import job",
+          "id": "dad8ecc0-03aa-4708-b3dc-ed1144799662",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://uapi.demandbase.com/import/v1/job",
+              "protocol": "https",
+              "host": [
+                "uapi",
+                "demandbase",
+                "com"
+              ],
+              "path": [
+                "import",
+                "v1",
+                "job"
+              ]
+            },
+            "description": "Create a new job to perform a Data Import. This is prerequisite before posting a file with records to be imported."
+          },
+          "response": [
+            {
+              "id": "90825bfc-8509-4427-b24d-d4ebd74df232",
+              "name": "Returns a JSON object of the newly-created job. The Job ID will be used to upload data and to check on job status.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/import/v1/job",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "import",
+                    "v1",
+                    "job"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<long>\",\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"state\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"createdAt\": \"<dateTime>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-90825bfc-8509-4427-b24d-d4ebd74df232"
+            },
+            {
+              "id": "cb4b1eaf-404e-4099-92cb-081ca8a25019",
+              "name": "Returned if the job specification in the request body does not match the required format.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/import/v1/job",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "import",
+                    "v1",
+                    "job"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-cb4b1eaf-404e-4099-92cb-081ca8a25019"
+            },
+            {
+              "id": "08e8da43-2538-4f85-864a-ba625d214018",
+              "name": "Returned if the authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/import/v1/job",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "import",
+                    "v1",
+                    "job"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-08e8da43-2538-4f85-864a-ba625d214018"
+            },
+            {
+              "id": "84e30d63-416f-4e87-a52f-5205106778dd",
+              "name": "Returned if the authenticated user lacks the \"Import Data\" permission",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/import/v1/job",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "import",
+                    "v1",
+                    "job"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-84e30d63-416f-4e87-a52f-5205106778dd"
+            },
+            {
+              "id": "b53c5dd4-2938-4d51-810c-319c79a64080",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataImportName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"source\": \"<string>\",\n  \"activityTypeId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/import/v1/job",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "import",
+                    "v1",
+                    "job"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-b53c5dd4-2938-4d51-810c-319c79a64080"
+            }
+          ],
+          "createdAt": "2026-10-22T01:11:13.000Z",
+          "updatedAt": "2026-10-22T01:11:13.000Z",
+          "uid": "35240-dad8ecc0-03aa-4708-b3dc-ed1144799662"
+        }
+      ],
+      "id": "54def64e-7910-4614-9ef8-142008be49f6",
+      "createdAt": "2026-10-22T01:11:13.000Z",
+      "updatedAt": "2026-10-22T01:11:13.000Z",
+      "uid": "35240-54def64e-7910-4614-9ef8-142008be49f6"
+    },
+    {
+      "name": "{entityType}",
+      "item": [
+        {
+          "name": "sources",
+          "item": [
+            {
+              "name": "Sources",
+              "id": "86ca138d-380a-4562-ad6b-f6e6f9699a67",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/import/v1/:entityType/sources",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "import",
+                    "v1",
+                    ":entityType",
+                    "sources"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3ddeccc2-70ae-4c8e-a496-6d5840953a7c",
+                      "key": "entityType",
+                      "value": "<string>",
+                      "description": "(Required) One of 'Account', 'Opportunity', 'Person' or 'Activity'"
+                    }
+                  ]
+                },
+                "description": "Returns a list of eligible sources."
+              },
+              "response": [
+                {
+                  "id": "3173c8bf-d713-4343-8947-9a5adb17457e",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/import/v1/:entityType/sources",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "import",
+                        "v1",
+                        ":entityType",
+                        "sources"
+                      ],
+                      "variable": [
+                        {
+                          "key": "entityType"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-10-22T01:11:13.000Z",
+                  "updatedAt": "2026-10-22T01:11:13.000Z",
+                  "uid": "35240-3173c8bf-d713-4343-8947-9a5adb17457e"
+                },
+                {
+                  "id": "66649243-a753-420d-9045-5221a1adb334",
+                  "name": "Bad Request Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/import/v1/:entityType/sources",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "import",
+                        "v1",
+                        ":entityType",
+                        "sources"
+                      ],
+                      "variable": [
+                        {
+                          "key": "entityType"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:13.000Z",
+                  "updatedAt": "2026-10-22T01:11:13.000Z",
+                  "uid": "35240-66649243-a753-420d-9045-5221a1adb334"
+                },
+                {
+                  "id": "98c3c06d-e32b-4e75-bd65-4089b96b9ed4",
+                  "name": "Returned if the authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/import/v1/:entityType/sources",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "import",
+                        "v1",
+                        ":entityType",
+                        "sources"
+                      ],
+                      "variable": [
+                        {
+                          "key": "entityType"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:13.000Z",
+                  "updatedAt": "2026-10-22T01:11:13.000Z",
+                  "uid": "35240-98c3c06d-e32b-4e75-bd65-4089b96b9ed4"
+                },
+                {
+                  "id": "25caf96b-1c8a-4283-97c7-1e0116f61fc3",
+                  "name": "Returned if the authenticated user lacks the \"Import Data\" permission",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/import/v1/:entityType/sources",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "import",
+                        "v1",
+                        ":entityType",
+                        "sources"
+                      ],
+                      "variable": [
+                        {
+                          "key": "entityType"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:13.000Z",
+                  "updatedAt": "2026-10-22T01:11:13.000Z",
+                  "uid": "35240-25caf96b-1c8a-4283-97c7-1e0116f61fc3"
+                },
+                {
+                  "id": "150ac7ec-cac7-41b6-982b-8dc96d68f071",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/import/v1/:entityType/sources",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "import",
+                        "v1",
+                        ":entityType",
+                        "sources"
+                      ],
+                      "variable": [
+                        {
+                          "key": "entityType"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:13.000Z",
+                  "updatedAt": "2026-10-22T01:11:13.000Z",
+                  "uid": "35240-150ac7ec-cac7-41b6-982b-8dc96d68f071"
+                }
+              ],
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-86ca138d-380a-4562-ad6b-f6e6f9699a67"
+            }
+          ],
+          "id": "d02c4ee8-da00-499f-b108-c2d5c9ff8132",
+          "createdAt": "2026-10-22T01:11:13.000Z",
+          "updatedAt": "2026-10-22T01:11:13.000Z",
+          "uid": "35240-d02c4ee8-da00-499f-b108-c2d5c9ff8132"
+        }
+      ],
+      "id": "87daa82d-a834-47ae-a746-05628393836b",
+      "createdAt": "2026-10-22T01:11:13.000Z",
+      "updatedAt": "2026-10-22T01:11:13.000Z",
+      "uid": "35240-87daa82d-a834-47ae-a746-05628393836b"
+    },
+    {
+      "name": "jobs",
+      "item": [
+        {
+          "name": "Jobs list",
+          "id": "3a28929d-265c-47c9-952e-56ed040c4df8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://uapi.demandbase.com/import/v1/jobs?entityType=<string>&state=<string>&sort=<string>&page=<integer>&perPage=<integer>",
+              "protocol": "https",
+              "host": [
+                "uapi",
+                "demandbase",
+                "com"
+              ],
+              "path": [
+                "import",
+                "v1",
+                "jobs"
+              ],
+              "query": [
+                {
+                  "description": "One of 'Account', 'Opportunity', 'Person' or 'Activity', case insensitive",
+                  "key": "entityType",
+                  "value": "<string>"
+                },
+                {
+                  "description": "One of 'new', 'processing', 'completed', 'failed'",
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "perPage",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Returns a list of import jobs. This provides an overview of all historical and current data import activities within the Demandbase platform."
+          },
+          "response": [
+            {
+              "id": "0b476fe0-2923-409a-a70e-65a6241dc3a1",
+              "name": "The response is a JSON object containing a total count and an array of job objects. Each job object in the array contains the full metadata for a specific data import job.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/import/v1/jobs?entityType=<string>&state=<string>&sort=<string>&page=<integer>&perPage=<integer>",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "import",
+                    "v1",
+                    "jobs"
+                  ],
+                  "query": [
+                    {
+                      "description": "One of 'Account', 'Opportunity', 'Person' or 'Activity', case insensitive",
+                      "key": "entityType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "One of 'new', 'processing', 'completed', 'failed'",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"totalCount\": \"<long>\",\n  \"data\": [\n    {\n      \"id\": \"<long>\",\n      \"dataImportName\": \"<string>\",\n      \"entityType\": \"<string>\",\n      \"state\": \"<string>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"source\": \"<string>\",\n      \"activityTypeId\": \"<integer>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"dataImportName\": \"<string>\",\n      \"entityType\": \"<string>\",\n      \"state\": \"<string>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"source\": \"<string>\",\n      \"activityTypeId\": \"<integer>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-0b476fe0-2923-409a-a70e-65a6241dc3a1"
+            },
+            {
+              "id": "f5260b17-b639-4a63-978e-92ba78fcac42",
+              "name": "Bad Request Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/import/v1/jobs?entityType=<string>&state=<string>&sort=<string>&page=<integer>&perPage=<integer>",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "import",
+                    "v1",
+                    "jobs"
+                  ],
+                  "query": [
+                    {
+                      "description": "One of 'Account', 'Opportunity', 'Person' or 'Activity', case insensitive",
+                      "key": "entityType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "One of 'new', 'processing', 'completed', 'failed'",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-f5260b17-b639-4a63-978e-92ba78fcac42"
+            },
+            {
+              "id": "48e51802-65ca-47a1-b1df-dc3229e2d826",
+              "name": "Returned if the authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/import/v1/jobs?entityType=<string>&state=<string>&sort=<string>&page=<integer>&perPage=<integer>",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "import",
+                    "v1",
+                    "jobs"
+                  ],
+                  "query": [
+                    {
+                      "description": "One of 'Account', 'Opportunity', 'Person' or 'Activity', case insensitive",
+                      "key": "entityType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "One of 'new', 'processing', 'completed', 'failed'",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-48e51802-65ca-47a1-b1df-dc3229e2d826"
+            },
+            {
+              "id": "419f548f-520b-4089-a248-67ab5429d8af",
+              "name": "Returned if the authenticated user lacks the \"Import Data\" permission",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/import/v1/jobs?entityType=<string>&state=<string>&sort=<string>&page=<integer>&perPage=<integer>",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "import",
+                    "v1",
+                    "jobs"
+                  ],
+                  "query": [
+                    {
+                      "description": "One of 'Account', 'Opportunity', 'Person' or 'Activity', case insensitive",
+                      "key": "entityType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "One of 'new', 'processing', 'completed', 'failed'",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-419f548f-520b-4089-a248-67ab5429d8af"
+            },
+            {
+              "id": "97d249f8-e3b7-4064-b443-4b65ca3d5c12",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/import/v1/jobs?entityType=<string>&state=<string>&sort=<string>&page=<integer>&perPage=<integer>",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "import",
+                    "v1",
+                    "jobs"
+                  ],
+                  "query": [
+                    {
+                      "description": "One of 'Account', 'Opportunity', 'Person' or 'Activity', case insensitive",
+                      "key": "entityType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "One of 'new', 'processing', 'completed', 'failed'",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:11:13.000Z",
+              "updatedAt": "2026-10-22T01:11:13.000Z",
+              "uid": "35240-97d249f8-e3b7-4064-b443-4b65ca3d5c12"
+            }
+          ],
+          "createdAt": "2026-10-22T01:11:13.000Z",
+          "updatedAt": "2026-10-22T01:11:13.000Z",
+          "uid": "35240-3a28929d-265c-47c9-952e-56ed040c4df8"
+        }
+      ],
+      "id": "0a018112-3f2a-48f0-991a-f0c5537107fc",
+      "createdAt": "2026-10-22T01:11:13.000Z",
+      "updatedAt": "2026-10-22T01:11:13.000Z",
+      "uid": "35240-0a018112-3f2a-48f0-991a-f0c5537107fc"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://uapi.demandbase.com/import/v1"
+    }
+  ]
+}

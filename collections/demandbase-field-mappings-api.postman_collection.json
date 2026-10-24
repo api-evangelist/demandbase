@@ -1,0 +1,809 @@
+{
+  "info": {
+    "_postman_id": "403043a0-663e-4040-b465-492b9e3e932e",
+    "name": "Custom Sources Field Mappings API",
+    "description": "Manage custom sources in the Demandbase platform. Custom sources let you define\nnamed data origins and configure field mappings for the data they provide.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:10:47.000Z",
+    "updatedAt": "2026-10-22T01:10:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-403043a0-663e-4040-b465-492b9e3e932e"
+  },
+  "item": [
+    {
+      "name": "integration",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "custom-sources",
+              "item": [
+                {
+                  "name": "{source_id}",
+                  "item": [
+                    {
+                      "name": "field-mappings",
+                      "item": [
+                        {
+                          "name": "{object_type}",
+                          "item": [
+                            {
+                              "name": "Get field mappings",
+                              "id": "13888b48-c46d-4872-961c-26cf7f3855e5",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "integration",
+                                    "v1",
+                                    "custom-sources",
+                                    ":source_id",
+                                    "field-mappings",
+                                    ":object_type"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "32aa9a8f-7117-475f-ae55-87bfcc441dae",
+                                      "key": "source_id",
+                                      "value": "<long>",
+                                      "description": "(Required) The unique ID of the source."
+                                    },
+                                    {
+                                      "id": "3669c66d-898f-470c-beb5-bd0b1d7ccb10",
+                                      "key": "object_type",
+                                      "value": "person",
+                                      "description": "(Required) The object type for which field mappings are configured."
+                                    }
+                                  ]
+                                },
+                                "description": "Returns the field mappings configured for the given source and object type."
+                              },
+                              "response": [
+                                {
+                                  "id": "6ad452da-febd-42e9-9e85-f59233f94178",
+                                  "name": "Field mappings for the specified source and object type.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "integration",
+                                        "v1",
+                                        "custom-sources",
+                                        ":source_id",
+                                        "field-mappings",
+                                        ":object_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "source_id"
+                                        },
+                                        {
+                                          "key": "object_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"fieldMappings\": [\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    },\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-10-22T01:10:47.000Z",
+                                  "updatedAt": "2026-10-22T01:10:47.000Z",
+                                  "uid": "35240-6ad452da-febd-42e9-9e85-f59233f94178"
+                                },
+                                {
+                                  "id": "858297a3-95cd-470a-b322-54d555d57ccb",
+                                  "name": "The request body or query parameters are invalid.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "integration",
+                                        "v1",
+                                        "custom-sources",
+                                        ":source_id",
+                                        "field-mappings",
+                                        ":object_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "source_id"
+                                        },
+                                        {
+                                          "key": "object_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T01:10:47.000Z",
+                                  "updatedAt": "2026-10-22T01:10:47.000Z",
+                                  "uid": "35240-858297a3-95cd-470a-b322-54d555d57ccb"
+                                },
+                                {
+                                  "id": "f8b7bf5d-8e70-444d-b46f-dbbd660dc145",
+                                  "name": "Authentication credentials are missing or invalid.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "integration",
+                                        "v1",
+                                        "custom-sources",
+                                        ":source_id",
+                                        "field-mappings",
+                                        ":object_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "source_id"
+                                        },
+                                        {
+                                          "key": "object_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T01:10:47.000Z",
+                                  "updatedAt": "2026-10-22T01:10:47.000Z",
+                                  "uid": "35240-f8b7bf5d-8e70-444d-b46f-dbbd660dc145"
+                                },
+                                {
+                                  "id": "031f98e9-fee4-4c9f-96fe-a53394cfb385",
+                                  "name": "The requested resource was not found.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "integration",
+                                        "v1",
+                                        "custom-sources",
+                                        ":source_id",
+                                        "field-mappings",
+                                        ":object_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "source_id"
+                                        },
+                                        {
+                                          "key": "object_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T01:10:47.000Z",
+                                  "updatedAt": "2026-10-22T01:10:47.000Z",
+                                  "uid": "35240-031f98e9-fee4-4c9f-96fe-a53394cfb385"
+                                },
+                                {
+                                  "id": "a378d3d0-b9c5-4f81-be20-72eddff15086",
+                                  "name": "An unexpected server error occurred.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "integration",
+                                        "v1",
+                                        "custom-sources",
+                                        ":source_id",
+                                        "field-mappings",
+                                        ":object_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "source_id"
+                                        },
+                                        {
+                                          "key": "object_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Internal Server Error",
+                                  "code": 500,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T01:10:47.000Z",
+                                  "updatedAt": "2026-10-22T01:10:47.000Z",
+                                  "uid": "35240-a378d3d0-b9c5-4f81-be20-72eddff15086"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T01:10:47.000Z",
+                              "updatedAt": "2026-10-22T01:10:47.000Z",
+                              "uid": "35240-13888b48-c46d-4872-961c-26cf7f3855e5"
+                            },
+                            {
+                              "name": "Upsert field mappings",
+                              "id": "d21d5c89-d1af-45ee-8eac-7a36d09e76aa",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"fieldMappings\": [\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    },\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "integration",
+                                    "v1",
+                                    "custom-sources",
+                                    ":source_id",
+                                    "field-mappings",
+                                    ":object_type"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "d08a493b-4ffd-4c6d-9672-0943001ecd53",
+                                      "key": "source_id",
+                                      "value": "<long>",
+                                      "description": "(Required) The unique ID of the source."
+                                    },
+                                    {
+                                      "id": "4e8517ad-179f-41bf-b958-4155088f5423",
+                                      "key": "object_type",
+                                      "value": "person",
+                                      "description": "(Required) The object type for which field mappings are configured."
+                                    }
+                                  ]
+                                },
+                                "description": "Creates or replaces the field mappings for the given source and object type.\nThe full set of mappings provided in the request body replaces any existing mappings."
+                              },
+                              "response": [
+                                {
+                                  "id": "51395ecc-2afe-43be-bc6c-e98813ee1134",
+                                  "name": "Field mappings upserted successfully. No content returned.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"fieldMappings\": [\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    },\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "integration",
+                                        "v1",
+                                        "custom-sources",
+                                        ":source_id",
+                                        "field-mappings",
+                                        ":object_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "source_id"
+                                        },
+                                        {
+                                          "key": "object_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Created",
+                                  "code": 201,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-10-22T01:10:47.000Z",
+                                  "updatedAt": "2026-10-22T01:10:47.000Z",
+                                  "uid": "35240-51395ecc-2afe-43be-bc6c-e98813ee1134"
+                                },
+                                {
+                                  "id": "f61923ae-a19b-4181-af0e-a5554c74ac1f",
+                                  "name": "The request body or query parameters are invalid.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"fieldMappings\": [\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    },\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "integration",
+                                        "v1",
+                                        "custom-sources",
+                                        ":source_id",
+                                        "field-mappings",
+                                        ":object_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "source_id"
+                                        },
+                                        {
+                                          "key": "object_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T01:10:47.000Z",
+                                  "updatedAt": "2026-10-22T01:10:47.000Z",
+                                  "uid": "35240-f61923ae-a19b-4181-af0e-a5554c74ac1f"
+                                },
+                                {
+                                  "id": "84b44269-6175-4650-b426-c500e211b326",
+                                  "name": "Authentication credentials are missing or invalid.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"fieldMappings\": [\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    },\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "integration",
+                                        "v1",
+                                        "custom-sources",
+                                        ":source_id",
+                                        "field-mappings",
+                                        ":object_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "source_id"
+                                        },
+                                        {
+                                          "key": "object_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T01:10:47.000Z",
+                                  "updatedAt": "2026-10-22T01:10:47.000Z",
+                                  "uid": "35240-84b44269-6175-4650-b426-c500e211b326"
+                                },
+                                {
+                                  "id": "8fc3f6b0-7ba1-46a9-b98a-0360dd22eab4",
+                                  "name": "The requested resource was not found.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"fieldMappings\": [\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    },\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "integration",
+                                        "v1",
+                                        "custom-sources",
+                                        ":source_id",
+                                        "field-mappings",
+                                        ":object_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "source_id"
+                                        },
+                                        {
+                                          "key": "object_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T01:10:47.000Z",
+                                  "updatedAt": "2026-10-22T01:10:47.000Z",
+                                  "uid": "35240-8fc3f6b0-7ba1-46a9-b98a-0360dd22eab4"
+                                },
+                                {
+                                  "id": "07fbbf43-d4f2-43ef-8ccf-230b304dc445",
+                                  "name": "An unexpected server error occurred.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"fieldMappings\": [\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    },\n    {\n      \"sourceFieldLabel\": \"<string>\",\n      \"demandbaseFieldName\": \"<string>\",\n      \"dataType\": \"<string>\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/integration/v1/custom-sources/:source_id/field-mappings/:object_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "integration",
+                                        "v1",
+                                        "custom-sources",
+                                        ":source_id",
+                                        "field-mappings",
+                                        ":object_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "source_id"
+                                        },
+                                        {
+                                          "key": "object_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Internal Server Error",
+                                  "code": 500,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T01:10:47.000Z",
+                                  "updatedAt": "2026-10-22T01:10:47.000Z",
+                                  "uid": "35240-07fbbf43-d4f2-43ef-8ccf-230b304dc445"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T01:10:47.000Z",
+                              "updatedAt": "2026-10-22T01:10:47.000Z",
+                              "uid": "35240-d21d5c89-d1af-45ee-8eac-7a36d09e76aa"
+                            }
+                          ],
+                          "id": "b4a6f294-d9ad-40b1-9b50-bc48d13eba0c",
+                          "createdAt": "2026-10-22T01:10:47.000Z",
+                          "updatedAt": "2026-10-22T01:10:47.000Z",
+                          "uid": "35240-b4a6f294-d9ad-40b1-9b50-bc48d13eba0c"
+                        }
+                      ],
+                      "id": "4a92aa3b-8952-4c3f-837a-0fee41da78a0",
+                      "createdAt": "2026-10-22T01:10:47.000Z",
+                      "updatedAt": "2026-10-22T01:10:47.000Z",
+                      "uid": "35240-4a92aa3b-8952-4c3f-837a-0fee41da78a0"
+                    }
+                  ],
+                  "id": "ecadd071-1d8a-461f-824b-c910376883c6",
+                  "createdAt": "2026-10-22T01:10:47.000Z",
+                  "updatedAt": "2026-10-22T01:10:47.000Z",
+                  "uid": "35240-ecadd071-1d8a-461f-824b-c910376883c6"
+                }
+              ],
+              "id": "14b6f101-66eb-4b6e-92b8-a40d3a012d6b",
+              "createdAt": "2026-10-22T01:10:47.000Z",
+              "updatedAt": "2026-10-22T01:10:47.000Z",
+              "uid": "35240-14b6f101-66eb-4b6e-92b8-a40d3a012d6b"
+            }
+          ],
+          "id": "b4ca5f38-c5d2-4985-b514-8d54257e2600",
+          "createdAt": "2026-10-22T01:10:47.000Z",
+          "updatedAt": "2026-10-22T01:10:47.000Z",
+          "uid": "35240-b4ca5f38-c5d2-4985-b514-8d54257e2600"
+        }
+      ],
+      "id": "eca55f0e-7113-49ee-bb31-7032f2befa2e",
+      "createdAt": "2026-10-22T01:10:47.000Z",
+      "updatedAt": "2026-10-22T01:10:47.000Z",
+      "uid": "35240-eca55f0e-7113-49ee-bb31-7032f2befa2e"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://uapi.demandbase.demandbase.com"
+    }
+  ]
+}

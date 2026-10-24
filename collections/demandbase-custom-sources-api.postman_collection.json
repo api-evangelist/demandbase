@@ -1,0 +1,1590 @@
+{
+  "info": {
+    "_postman_id": "4792c9da-f97b-44f4-9171-bfc8ba0572ba",
+    "name": "Custom Sources API",
+    "description": "Manage custom sources in the Demandbase platform. Custom sources let you define\nnamed data origins and configure field mappings for the data they provide.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:10:40.000Z",
+    "updatedAt": "2026-10-22T01:10:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4792c9da-f97b-44f4-9171-bfc8ba0572ba"
+  },
+  "item": [
+    {
+      "name": "integration",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "custom-sources",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Get a custom source",
+                      "id": "9deff735-d2d9-45c6-9a0e-d7505a42ba8b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integration",
+                            "v1",
+                            "custom-sources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "99d97fa5-f322-4292-88d8-2fab40068e2e",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) The unique ID of the source."
+                            }
+                          ]
+                        },
+                        "description": "Returns a single source by its ID."
+                      },
+                      "response": [
+                        {
+                          "id": "15df4ee7-78c7-4285-9396-6996cf03e076",
+                          "name": "The requested source.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"sourceGroup\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-15df4ee7-78c7-4285-9396-6996cf03e076"
+                        },
+                        {
+                          "id": "d14bd7bf-8714-4a2b-94d7-76f635e62086",
+                          "name": "The request body or query parameters are invalid.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-d14bd7bf-8714-4a2b-94d7-76f635e62086"
+                        },
+                        {
+                          "id": "97ca653d-2def-45e2-99bc-60dfcc58a6ed",
+                          "name": "Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-97ca653d-2def-45e2-99bc-60dfcc58a6ed"
+                        },
+                        {
+                          "id": "7d3feb63-3a5a-4642-9510-d020e412441b",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-7d3feb63-3a5a-4642-9510-d020e412441b"
+                        },
+                        {
+                          "id": "0417f26e-08d1-4fbc-b6b9-eb4a68e2a7db",
+                          "name": "An unexpected server error occurred.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-0417f26e-08d1-4fbc-b6b9-eb4a68e2a7db"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:10:41.000Z",
+                      "updatedAt": "2026-10-22T01:10:41.000Z",
+                      "uid": "35240-9deff735-d2d9-45c6-9a0e-d7505a42ba8b"
+                    },
+                    {
+                      "name": "Update a custom source",
+                      "id": "16f3e977-0ef6-4a3d-97a5-ecc6b66d0cb6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integration",
+                            "v1",
+                            "custom-sources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9da61aac-393d-4fa5-8289-f47d2367b2f5",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) The unique ID of the source."
+                            }
+                          ]
+                        },
+                        "description": "Updates an existing source by its ID and returns the updated resource."
+                      },
+                      "response": [
+                        {
+                          "id": "3fc849df-575a-4cc3-8c2b-1d7403eefe86",
+                          "name": "The updated source.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"sourceGroup\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-3fc849df-575a-4cc3-8c2b-1d7403eefe86"
+                        },
+                        {
+                          "id": "5faf8259-6a38-42b4-b0c9-1063de343f78",
+                          "name": "The request body or query parameters are invalid.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-5faf8259-6a38-42b4-b0c9-1063de343f78"
+                        },
+                        {
+                          "id": "c8ead447-34a4-4c6c-9ea1-598de7788b81",
+                          "name": "Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-c8ead447-34a4-4c6c-9ea1-598de7788b81"
+                        },
+                        {
+                          "id": "d61516ab-6747-49cc-886d-2bd4f6536bb2",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-d61516ab-6747-49cc-886d-2bd4f6536bb2"
+                        },
+                        {
+                          "id": "0b4c7f68-0211-4387-b65c-afc6dafa8928",
+                          "name": "An unexpected server error occurred.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-0b4c7f68-0211-4387-b65c-afc6dafa8928"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:10:41.000Z",
+                      "updatedAt": "2026-10-22T01:10:41.000Z",
+                      "uid": "35240-16f3e977-0ef6-4a3d-97a5-ecc6b66d0cb6"
+                    },
+                    {
+                      "name": "Delete a custom source",
+                      "id": "207dcfcc-fc42-4711-81c5-014ce910448e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integration",
+                            "v1",
+                            "custom-sources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "a8a02189-1794-45bb-9ca8-194609b76c68",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) The unique ID of the source."
+                            }
+                          ]
+                        },
+                        "description": "Deletes an existing source by its ID."
+                      },
+                      "response": [
+                        {
+                          "id": "507c2c76-ff1c-494a-8ed3-e2f847d0c53d",
+                          "name": "Source deleted successfully. No content returned.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-507c2c76-ff1c-494a-8ed3-e2f847d0c53d"
+                        },
+                        {
+                          "id": "5fcfb3a4-7361-4b35-a10f-164d2df6df9e",
+                          "name": "The request body or query parameters are invalid.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-5fcfb3a4-7361-4b35-a10f-164d2df6df9e"
+                        },
+                        {
+                          "id": "a8c4ce1c-5f60-45cc-80aa-54188df4f62a",
+                          "name": "Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-a8c4ce1c-5f60-45cc-80aa-54188df4f62a"
+                        },
+                        {
+                          "id": "0ee53d02-8749-408b-8ee7-0c656bab03e1",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-0ee53d02-8749-408b-8ee7-0c656bab03e1"
+                        },
+                        {
+                          "id": "e7a63ac7-6fe4-415a-aec6-099dda989535",
+                          "name": "An unexpected server error occurred.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/integration/v1/custom-sources/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "integration",
+                                "v1",
+                                "custom-sources",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:10:41.000Z",
+                          "updatedAt": "2026-10-22T01:10:41.000Z",
+                          "uid": "35240-e7a63ac7-6fe4-415a-aec6-099dda989535"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:10:41.000Z",
+                      "updatedAt": "2026-10-22T01:10:41.000Z",
+                      "uid": "35240-207dcfcc-fc42-4711-81c5-014ce910448e"
+                    }
+                  ],
+                  "id": "7ee1daef-6e25-46a9-a9e6-57fa6238e877",
+                  "createdAt": "2026-10-22T01:10:41.000Z",
+                  "updatedAt": "2026-10-22T01:10:41.000Z",
+                  "uid": "35240-7ee1daef-6e25-46a9-a9e6-57fa6238e877"
+                },
+                {
+                  "name": "List custom sources",
+                  "id": "c0df58fe-a185-4dca-9a9a-5104d2c2fd25",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integration/v1/custom-sources?group=all&perPage=<integer>&page=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integration",
+                        "v1",
+                        "custom-sources"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter sources by source group.",
+                          "key": "group",
+                          "value": "all"
+                        },
+                        {
+                          "description": "Number of items per page.",
+                          "key": "perPage",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page number (1-indexed).",
+                          "key": "page",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "Returns a paginated list of sources, optionally filtered by source group."
+                  },
+                  "response": [
+                    {
+                      "id": "cb3a78d3-ac05-431a-90a5-8c8759ff8f6a",
+                      "name": "A paginated list of sources.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/integration/v1/custom-sources?group=all&perPage=<integer>&page=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integration",
+                            "v1",
+                            "custom-sources"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter sources by source group.",
+                              "key": "group",
+                              "value": "all"
+                            },
+                            {
+                              "description": "Number of items per page.",
+                              "key": "perPage",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Page number (1-indexed).",
+                              "key": "page",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"totalCount\": \"<long>\",\n  \"data\": [\n    {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"sourceGroup\": \"<string>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"sourceGroup\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T01:10:41.000Z",
+                      "updatedAt": "2026-10-22T01:10:41.000Z",
+                      "uid": "35240-cb3a78d3-ac05-431a-90a5-8c8759ff8f6a"
+                    },
+                    {
+                      "id": "a1a626c9-6fad-43ec-a589-72fe24eb986b",
+                      "name": "The request body or query parameters are invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/integration/v1/custom-sources?group=all&perPage=<integer>&page=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integration",
+                            "v1",
+                            "custom-sources"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter sources by source group.",
+                              "key": "group",
+                              "value": "all"
+                            },
+                            {
+                              "description": "Number of items per page.",
+                              "key": "perPage",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Page number (1-indexed).",
+                              "key": "page",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:10:41.000Z",
+                      "updatedAt": "2026-10-22T01:10:41.000Z",
+                      "uid": "35240-a1a626c9-6fad-43ec-a589-72fe24eb986b"
+                    },
+                    {
+                      "id": "f1ab7eab-64fe-4cb1-9b0d-a71f3c756075",
+                      "name": "Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/integration/v1/custom-sources?group=all&perPage=<integer>&page=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integration",
+                            "v1",
+                            "custom-sources"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter sources by source group.",
+                              "key": "group",
+                              "value": "all"
+                            },
+                            {
+                              "description": "Number of items per page.",
+                              "key": "perPage",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Page number (1-indexed).",
+                              "key": "page",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:10:41.000Z",
+                      "updatedAt": "2026-10-22T01:10:41.000Z",
+                      "uid": "35240-f1ab7eab-64fe-4cb1-9b0d-a71f3c756075"
+                    },
+                    {
+                      "id": "7bc316c6-18b3-420c-b3d5-8a4856a3ce39",
+                      "name": "An unexpected server error occurred.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/integration/v1/custom-sources?group=all&perPage=<integer>&page=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integration",
+                            "v1",
+                            "custom-sources"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter sources by source group.",
+                              "key": "group",
+                              "value": "all"
+                            },
+                            {
+                              "description": "Number of items per page.",
+                              "key": "perPage",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Page number (1-indexed).",
+                              "key": "page",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:10:41.000Z",
+                      "updatedAt": "2026-10-22T01:10:41.000Z",
+                      "uid": "35240-7bc316c6-18b3-420c-b3d5-8a4856a3ce39"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:10:41.000Z",
+                  "updatedAt": "2026-10-22T01:10:41.000Z",
+                  "uid": "35240-c0df58fe-a185-4dca-9a9a-5104d2c2fd25"
+                },
+                {
+                  "name": "Create a custom source",
+                  "id": "143f5027-6398-4ec0-9dc1-c394e5ab8179",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/integration/v1/custom-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integration",
+                        "v1",
+                        "custom-sources"
+                      ]
+                    },
+                    "description": "Creates a new custom source and returns the created resource."
+                  },
+                  "response": [
+                    {
+                      "id": "f510e89b-b12e-4770-ae6d-6aa56471dfcb",
+                      "name": "The newly created source.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integration/v1/custom-sources",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integration",
+                            "v1",
+                            "custom-sources"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"sourceGroup\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:10:41.000Z",
+                      "updatedAt": "2026-10-22T01:10:41.000Z",
+                      "uid": "35240-f510e89b-b12e-4770-ae6d-6aa56471dfcb"
+                    },
+                    {
+                      "id": "cbe77fff-d0da-478f-9cdc-2258820b145b",
+                      "name": "The request body or query parameters are invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integration/v1/custom-sources",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integration",
+                            "v1",
+                            "custom-sources"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:10:41.000Z",
+                      "updatedAt": "2026-10-22T01:10:41.000Z",
+                      "uid": "35240-cbe77fff-d0da-478f-9cdc-2258820b145b"
+                    },
+                    {
+                      "id": "90e8e19e-a710-4b75-940a-a017b51626a7",
+                      "name": "Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integration/v1/custom-sources",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integration",
+                            "v1",
+                            "custom-sources"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:10:41.000Z",
+                      "updatedAt": "2026-10-22T01:10:41.000Z",
+                      "uid": "35240-90e8e19e-a710-4b75-940a-a017b51626a7"
+                    },
+                    {
+                      "id": "ff7e267a-b80d-466d-adf4-c12c7b5e0f8c",
+                      "name": "An unexpected server error occurred.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integration/v1/custom-sources",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integration",
+                            "v1",
+                            "custom-sources"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"diagnosticCode\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:10:41.000Z",
+                      "updatedAt": "2026-10-22T01:10:41.000Z",
+                      "uid": "35240-ff7e267a-b80d-466d-adf4-c12c7b5e0f8c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:10:41.000Z",
+                  "updatedAt": "2026-10-22T01:10:41.000Z",
+                  "uid": "35240-143f5027-6398-4ec0-9dc1-c394e5ab8179"
+                }
+              ],
+              "id": "ed5449f1-88f5-419b-b211-6cdab5ce695d",
+              "createdAt": "2026-10-22T01:10:41.000Z",
+              "updatedAt": "2026-10-22T01:10:41.000Z",
+              "uid": "35240-ed5449f1-88f5-419b-b211-6cdab5ce695d"
+            }
+          ],
+          "id": "60abd0f1-78f4-41b8-afa6-57582d8e6fb0",
+          "createdAt": "2026-10-22T01:10:41.000Z",
+          "updatedAt": "2026-10-22T01:10:41.000Z",
+          "uid": "35240-60abd0f1-78f4-41b8-afa6-57582d8e6fb0"
+        }
+      ],
+      "id": "3c9ffddf-048d-45da-949e-fd8df199454c",
+      "createdAt": "2026-10-22T01:10:41.000Z",
+      "updatedAt": "2026-10-22T01:10:41.000Z",
+      "uid": "35240-3c9ffddf-048d-45da-949e-fd8df199454c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://uapi.demandbase.demandbase.com"
+    }
+  ]
+}

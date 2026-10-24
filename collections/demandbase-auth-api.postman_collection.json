@@ -1,0 +1,191 @@
+{
+  "info": {
+    "_postman_id": "fc7b958d-eed5-41dd-80e4-4d2b3cf5ccd5",
+    "name": "Demandbase Auth API",
+    "description": "Obtain an access token for Demandbase API using client credentials.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:10:16.000Z",
+    "updatedAt": "2026-10-22T01:10:16.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fc7b958d-eed5-41dd-80e4-4d2b3cf5ccd5"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "token",
+              "item": [
+                {
+                  "name": "Generate an access token",
+                  "id": "5b3dc799-d37e-4e84-ad6d-786c7f584499",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"grantType\": \"client_credentials\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/v1/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "v1",
+                        "token"
+                      ]
+                    },
+                    "description": "This endpoint issues an OAuth2 bearer token for authenticating with Demandbase APIs."
+                  },
+                  "response": [
+                    {
+                      "id": "94b0bbff-d2dd-4b2e-89bb-4b69736b4fab",
+                      "name": "Successful token response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"grantType\": \"client_credentials\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/auth/v1/token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "auth",
+                            "v1",
+                            "token"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"accessToken\": \"<string>\",\n  \"tokenType\": \"<string>\",\n  \"expiresIn\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T01:10:17.000Z",
+                      "updatedAt": "2026-10-22T01:10:17.000Z",
+                      "uid": "35240-94b0bbff-d2dd-4b2e-89bb-4b69736b4fab"
+                    },
+                    {
+                      "id": "4d71dbb1-36d3-4362-a312-81777316d2a4",
+                      "name": "Invalid request (missing or incorrect parameters)",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"grantType\": \"client_credentials\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/auth/v1/token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "auth",
+                            "v1",
+                            "token"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:10:17.000Z",
+                      "updatedAt": "2026-10-22T01:10:17.000Z",
+                      "uid": "35240-4d71dbb1-36d3-4362-a312-81777316d2a4"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:10:17.000Z",
+                  "updatedAt": "2026-10-22T01:10:17.000Z",
+                  "uid": "35240-5b3dc799-d37e-4e84-ad6d-786c7f584499"
+                }
+              ],
+              "id": "011a0af2-b949-461e-9201-77dd64f49f97",
+              "createdAt": "2026-10-22T01:10:17.000Z",
+              "updatedAt": "2026-10-22T01:10:17.000Z",
+              "uid": "35240-011a0af2-b949-461e-9201-77dd64f49f97"
+            }
+          ],
+          "id": "06e4dfba-8033-4508-8e1c-6d4aa4662b7d",
+          "createdAt": "2026-10-22T01:10:17.000Z",
+          "updatedAt": "2026-10-22T01:10:17.000Z",
+          "uid": "35240-06e4dfba-8033-4508-8e1c-6d4aa4662b7d"
+        }
+      ],
+      "id": "a66666e0-fcd5-4fb5-b9a5-77a7618e54d2",
+      "createdAt": "2026-10-22T01:10:17.000Z",
+      "updatedAt": "2026-10-22T01:10:17.000Z",
+      "uid": "35240-a66666e0-fcd5-4fb5-b9a5-77a7618e54d2"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://uapi.demandbase.com"
+    }
+  ]
+}

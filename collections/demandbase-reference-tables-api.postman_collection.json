@@ -1,0 +1,320 @@
+{
+  "info": {
+    "_postman_id": "fa196cfc-805e-476f-886e-ba3f89eb89bd",
+    "name": "B2B Reference Tables API",
+    "description": "The B2B API provides access to endpoints for searching, retrieving, and matching company and contact data.\n\nContact Support:\n Name: Support\n Email: support@demandbase.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:11:19.000Z",
+    "updatedAt": "2026-10-22T01:11:20.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fa196cfc-805e-476f-886e-ba3f89eb89bd"
+  },
+  "item": [
+    {
+      "name": "reference",
+      "item": [
+        {
+          "name": "{object}",
+          "item": [
+            {
+              "name": "Get reference data for an object",
+              "id": "7b7eda98-b138-4677-994e-704d01061ea3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/reference/:object",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "reference",
+                    ":object"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ffe966a5-ae79-4799-b202-e3224e3a61d6",
+                      "key": "object",
+                      "value": "JobFunction",
+                      "description": "(Required) Reference object to retrieve."
+                    }
+                  ]
+                },
+                "description": "Returns tenant-specific reference values for the requested object. This B2B API route is backed by the Data Export API reference service and accepts B2B API credentials.\n\nObject names are case-insensitive."
+              },
+              "response": [
+                {
+                  "id": "287ab35b-f767-4363-abaa-954deb97af84",
+                  "name": "Reference data fetched successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/reference/:object",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "reference",
+                        ":object"
+                      ],
+                      "variable": [
+                        {
+                          "key": "object"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"objectType\": \"<string>\",\n  \"data\": [\n    {\n      \"eta78\": \"sunt Ut culpa deserunt ex\",\n      \"ipsum_ef\": -83714406,\n      \"id_321\": \"aute occaecat magna pariatu\",\n      \"tempor_d\": -98866574.0247622,\n      \"nullae4\": -62960168\n    },\n    {\n      \"Duis_2ee\": false,\n      \"consectetur32\": \"fugiat id proident\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T01:11:20.000Z",
+                  "updatedAt": "2026-10-22T01:11:20.000Z",
+                  "uid": "35240-287ab35b-f767-4363-abaa-954deb97af84"
+                },
+                {
+                  "id": "95fcf86c-9608-4400-b308-b3e787ed4482",
+                  "name": "The requested reference object is invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/reference/:object",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "reference",
+                        ":object"
+                      ],
+                      "variable": [
+                        {
+                          "key": "object"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:20.000Z",
+                  "updatedAt": "2026-10-22T01:11:20.000Z",
+                  "uid": "35240-95fcf86c-9608-4400-b308-b3e787ed4482"
+                },
+                {
+                  "id": "8b37bd8d-6f73-4d53-8cae-a80713a1d96e",
+                  "name": "Unauthorized because the user is not authenticated.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/reference/:object",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "reference",
+                        ":object"
+                      ],
+                      "variable": [
+                        {
+                          "key": "object"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:20.000Z",
+                  "updatedAt": "2026-10-22T01:11:20.000Z",
+                  "uid": "35240-8b37bd8d-6f73-4d53-8cae-a80713a1d96e"
+                },
+                {
+                  "id": "17e5dd7d-ebcc-4291-bc8c-55356e4665db",
+                  "name": "The API key does not have permission to access this resource.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/reference/:object",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "reference",
+                        ":object"
+                      ],
+                      "variable": [
+                        {
+                          "key": "object"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:11:20.000Z",
+                  "updatedAt": "2026-10-22T01:11:20.000Z",
+                  "uid": "35240-17e5dd7d-ebcc-4291-bc8c-55356e4665db"
+                }
+              ],
+              "createdAt": "2026-10-22T01:11:20.000Z",
+              "updatedAt": "2026-10-22T01:11:20.000Z",
+              "uid": "35240-7b7eda98-b138-4677-994e-704d01061ea3"
+            }
+          ],
+          "id": "8ee996c2-017a-4416-873c-db95fd3c595b",
+          "createdAt": "2026-10-22T01:11:20.000Z",
+          "updatedAt": "2026-10-22T01:11:20.000Z",
+          "uid": "35240-8ee996c2-017a-4416-873c-db95fd3c595b"
+        }
+      ],
+      "id": "1141dd19-449c-441b-8390-a0cd7ea9aa8d",
+      "createdAt": "2026-10-22T01:11:20.000Z",
+      "updatedAt": "2026-10-22T01:11:20.000Z",
+      "uid": "35240-1141dd19-449c-441b-8390-a0cd7ea9aa8d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://uapi.demandbase.com/data/b2b/v1"
+    }
+  ]
+}

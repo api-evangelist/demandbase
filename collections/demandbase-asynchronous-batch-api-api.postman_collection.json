@@ -1,0 +1,894 @@
+{
+  "info": {
+    "_postman_id": "807fcbb9-6af1-43ea-900c-b57b1cb94dbc",
+    "name": "B2B Asynchronous (Batch) API",
+    "description": "The B2B API provides access to endpoints for searching, retrieving, and matching company and contact data.\n\nContact Support:\n Name: Support\n Email: support@demandbase.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:10:11.000Z",
+    "updatedAt": "2026-10-22T01:10:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-807fcbb9-6af1-43ea-900c-b57b1cb94dbc"
+  },
+  "item": [
+    {
+      "name": "job",
+      "item": [
+        {
+          "name": "{jobId}",
+          "item": [
+            {
+              "name": "Get Bulk Job Status",
+              "id": "6b2c189b-fc57-4753-b3da-9fe76aa80d3d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/job/:jobId",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "job",
+                    ":jobId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4b072ead-d85d-4afb-beb9-5c1b7a4b3e02",
+                      "key": "jobId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the bulk job."
+                    }
+                  ]
+                },
+                "description": "Check the status of a bulk job using its unique job ID. This endpoint supports all bulk job types, including Company Fetch, Contact Fetch, and Match. Once the job completes successfully, the response will contain a signed `resultsUrl` for downloading the results.\n\nImportant notes:\n- The `resultsUrl` is included **only when the job status is `finished`**\n- The URL remains valid for **24 hours**\n- If the job fails, an `errorMessage` field will be present in the response explaining the reason\n\n**CSV Results Format:**\n- The `resultsUrl` points to a CSV file containing the requested data\n- CSV column headers correspond exactly to the field names specified in your job request\n- For detailed information about available fields and their descriptions, refer to the field documentation in the Create a Bulk Data Retrieval Job endpoint\n- Array fields (like `titles`, `jobFunctions`) are represented as pipe-separated values (e.g., \"VP|Director|Manager\")"
+              },
+              "response": [
+                {
+                  "id": "b57c7ad1-6fbc-4c23-b5af-e785423c39a8",
+                  "name": "Bulk job status fetched successfully. Results URL is present only for finished jobs.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/job/:jobId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "job",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobName\": \"<string>\",\n  \"jobStatus\": \"<string>\",\n  \"jobType\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"createdAt\": \"<string>\",\n  \"updatedAt\": \"<string>\",\n  \"resultsUrl\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:10:11.000Z",
+                  "updatedAt": "2026-10-22T01:10:11.000Z",
+                  "uid": "35240-b57c7ad1-6fbc-4c23-b5af-e785423c39a8"
+                },
+                {
+                  "id": "fb604bd6-e8ae-4e8c-abcb-029d1b330453",
+                  "name": "Bad request. For example, job id is missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/job/:jobId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "job",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:10:11.000Z",
+                  "updatedAt": "2026-10-22T01:10:11.000Z",
+                  "uid": "35240-fb604bd6-e8ae-4e8c-abcb-029d1b330453"
+                },
+                {
+                  "id": "facf3abb-5522-4c4a-9cdd-647e8f56681c",
+                  "name": "Unauthorized - Missing or invalid tenant ID",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/job/:jobId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "job",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"Unauthorized Response\": {\n      \"summary\": \"Authentication Failed - Unauthorized.\",\n      \"description\": \"Unauthorized Response\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:10:11.000Z",
+                  "updatedAt": "2026-10-22T01:10:11.000Z",
+                  "uid": "35240-facf3abb-5522-4c4a-9cdd-647e8f56681c"
+                },
+                {
+                  "id": "210f4959-b023-4817-9169-29547e323fae",
+                  "name": "Job not found. Invalid job id.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/job/:jobId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "job",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:10:11.000Z",
+                  "updatedAt": "2026-10-22T01:10:11.000Z",
+                  "uid": "35240-210f4959-b023-4817-9169-29547e323fae"
+                },
+                {
+                  "id": "f79ce958-4c20-4fdd-9a26-ea13da51e1b4",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/job/:jobId",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "job",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"Internal Server Error\": {\n      \"summary\": \"Internal server exception occurred.\",\n      \"description\": \"Internal Server Error\",\n      \"value\": {\n        \"errorCode\": \"500\",\n        \"errorMessage\": \"Internal server exception occurred.\",\n        \"diagnosticCode\": \"15d8774c-f2a1-4352-ba65-386bf8d04ecf\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:10:11.000Z",
+                  "updatedAt": "2026-10-22T01:10:11.000Z",
+                  "uid": "35240-f79ce958-4c20-4fdd-9a26-ea13da51e1b4"
+                }
+              ],
+              "createdAt": "2026-10-22T01:10:11.000Z",
+              "updatedAt": "2026-10-22T01:10:11.000Z",
+              "uid": "35240-6b2c189b-fc57-4753-b3da-9fe76aa80d3d"
+            }
+          ],
+          "id": "51284759-71f5-4482-bb06-55965c2adc2f",
+          "createdAt": "2026-10-22T01:10:11.000Z",
+          "updatedAt": "2026-10-22T01:10:11.000Z",
+          "uid": "35240-51284759-71f5-4482-bb06-55965c2adc2f"
+        },
+        {
+          "name": "Create a Bulk Data Retrieval Job",
+          "id": "385448be-ba3d-432c-9b98-e29ef5d9a8d2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobType\": \"<string>\",\n  \"jobName\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"field\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sortOrder\": \"<string>\",\n  \"sortBy\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://uapi.demandbase.com/data/b2b/v1/job",
+              "protocol": "https",
+              "host": [
+                "uapi",
+                "demandbase",
+                "com"
+              ],
+              "path": [
+                "data",
+                "b2b",
+                "v1",
+                "job"
+              ]
+            },
+            "description": "# Overview\nCreate and run asynchronous bulk jobs to retrieve company or contact data using entity IDs or search filters. This API is ideal for large data exports with a file-based CSV output.\n\nYou can submit up to **10,000 entity IDs** in a single request. The API initiates an asynchronous job and returns a `jobId` to track its status and retrieve results using the Job Status API."
+          },
+          "response": [
+            {
+              "id": "3a2d13e6-a2ab-4ff1-9e8c-4b952b138949",
+              "name": "Bulk job created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobType\": \"<string>\",\n  \"jobName\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"field\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sortOrder\": \"<string>\",\n  \"sortBy\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/job",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "job"
+                  ]
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"jobName\": \"<string>\",\n  \"jobStatus\": \"<string>\",\n  \"jobType\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"createdAt\": \"<string>\",\n  \"updatedAt\": \"<string>\",\n  \"resultsUrl\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:10:11.000Z",
+              "updatedAt": "2026-10-22T01:10:11.000Z",
+              "uid": "35240-3a2d13e6-a2ab-4ff1-9e8c-4b952b138949"
+            },
+            {
+              "id": "041938df-64af-4252-a5c1-13642533c9d7",
+              "name": "Bad Request - Invalid input parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobType\": \"<string>\",\n  \"jobName\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"field\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sortOrder\": \"<string>\",\n  \"sortBy\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/job",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "job"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T01:10:11.000Z",
+              "updatedAt": "2026-10-22T01:10:11.000Z",
+              "uid": "35240-041938df-64af-4252-a5c1-13642533c9d7"
+            },
+            {
+              "id": "4995fca1-27aa-4af0-b9c7-891e001fe06c",
+              "name": "Unauthorized - Missing or invalid tenant ID",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobType\": \"<string>\",\n  \"jobName\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"field\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sortOrder\": \"<string>\",\n  \"sortBy\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/job",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "job"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"Unauthorized Response\": {\n      \"description\": \"Unauthorized Response\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-22T01:10:11.000Z",
+              "updatedAt": "2026-10-22T01:10:11.000Z",
+              "uid": "35240-4995fca1-27aa-4af0-b9c7-891e001fe06c"
+            }
+          ],
+          "createdAt": "2026-10-22T01:10:11.000Z",
+          "updatedAt": "2026-10-22T01:10:11.000Z",
+          "uid": "35240-385448be-ba3d-432c-9b98-e29ef5d9a8d2"
+        }
+      ],
+      "id": "b1c3ae17-f1d6-424d-90ea-f5d3c9abaf4b",
+      "createdAt": "2026-10-22T01:10:11.000Z",
+      "updatedAt": "2026-10-22T01:10:11.000Z",
+      "uid": "35240-b1c3ae17-f1d6-424d-90ea-f5d3c9abaf4b"
+    },
+    {
+      "name": "match",
+      "item": [
+        {
+          "name": "job",
+          "item": [
+            {
+              "name": "Match Companies and Contacts in Bulk",
+              "id": "bd457708-4b7a-4b33-bb1f-c7e5090d10fe",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "text/plain"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                },
+                "url": {
+                  "raw": "https://uapi.demandbase.com/data/b2b/v1/match/job?jobName=<string>",
+                  "protocol": "https",
+                  "host": [
+                    "uapi",
+                    "demandbase",
+                    "com"
+                  ],
+                  "path": [
+                    "data",
+                    "b2b",
+                    "v1",
+                    "match",
+                    "job"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Job name for the match job",
+                      "key": "jobName",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Use this endpoint to enrich company and contact records in bulk using a CSV file upload. Each row in the file represents one enrichment request and must match the supported field structure. This endpoint supports up to 10,000 records per job.\n\n**CSV Results Format:**\nThe completed job will return a CSV file with the following structure:\n- Input columns from your uploaded CSV are preserved\n- Additional columns are added for matched company data (companyId, name, city, state, country, matchScore, etc.)\n- Additional columns are added for matched contact data (contactId, firstName, lastName, title, email, matchScore, etc.)\n- Multiple matches are returned as separate rows with the same input ID\n- If no matches are found, the row will contain only the input data with empty match columns"
+              },
+              "response": [
+                {
+                  "id": "f6533079-0e7f-427c-9312-5c455ba3daae",
+                  "name": "Successful submission of match job\n\nResponse File (CSV Output)\nUpon job completion, the downloadable results file will include:\n| Field Name              | Description                                                             |\n| -----------------------",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "text/plain"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<string>"
+                    },
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/match/job?jobName=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "match",
+                        "job"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Job name for the match job",
+                          "key": "jobName",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobName\": \"<string>\",\n  \"jobStatus\": \"<string>\",\n  \"jobType\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"createdAt\": \"<string>\",\n  \"updatedAt\": \"<string>\",\n  \"resultsUrl\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:10:11.000Z",
+                  "updatedAt": "2026-10-22T01:10:11.000Z",
+                  "uid": "35240-f6533079-0e7f-427c-9312-5c455ba3daae"
+                },
+                {
+                  "id": "21cec718-1058-4ccb-af6f-5a062debe5e0",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "text/plain"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<string>"
+                    },
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/match/job?jobName=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "match",
+                        "job"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Job name for the match job",
+                          "key": "jobName",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"diagnosticCode\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:10:11.000Z",
+                  "updatedAt": "2026-10-22T01:10:11.000Z",
+                  "uid": "35240-21cec718-1058-4ccb-af6f-5a062debe5e0"
+                },
+                {
+                  "id": "67ce33a1-4223-4f88-83db-988f29afa3d1",
+                  "name": "Unauthorized because the user is not authenticated.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "text/plain"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<string>"
+                    },
+                    "url": {
+                      "raw": "https://uapi.demandbase.com/data/b2b/v1/match/job?jobName=<string>",
+                      "protocol": "https",
+                      "host": [
+                        "uapi",
+                        "demandbase",
+                        "com"
+                      ],
+                      "path": [
+                        "data",
+                        "b2b",
+                        "v1",
+                        "match",
+                        "job"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Job name for the match job",
+                          "key": "jobName",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"UnauthorizedResponse\": {\n      \"description\": \"UnauthorizedResponse\",\n      \"value\": {\n        \"status\": \"Authentication Failed - Unauthorized.\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:10:11.000Z",
+                  "updatedAt": "2026-10-22T01:10:11.000Z",
+                  "uid": "35240-67ce33a1-4223-4f88-83db-988f29afa3d1"
+                }
+              ],
+              "createdAt": "2026-10-22T01:10:11.000Z",
+              "updatedAt": "2026-10-22T01:10:11.000Z",
+              "uid": "35240-bd457708-4b7a-4b33-bb1f-c7e5090d10fe"
+            }
+          ],
+          "id": "7d660377-68b1-45ed-b3ac-f36b00b3582b",
+          "createdAt": "2026-10-22T01:10:11.000Z",
+          "updatedAt": "2026-10-22T01:10:11.000Z",
+          "uid": "35240-7d660377-68b1-45ed-b3ac-f36b00b3582b"
+        }
+      ],
+      "id": "45b466bf-e423-4360-ac75-7f85396b3c45",
+      "createdAt": "2026-10-22T01:10:11.000Z",
+      "updatedAt": "2026-10-22T01:10:11.000Z",
+      "uid": "35240-45b466bf-e423-4360-ac75-7f85396b3c45"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://uapi.demandbase.com/data/b2b/v1"
+    }
+  ]
+}

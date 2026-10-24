@@ -1,0 +1,433 @@
+{
+  "info": {
+    "_postman_id": "f5d2496f-5585-41b2-8156-0d3edf2c5b6f",
+    "name": "Data Export Get Fields API",
+    "description": "Export data in bulk from the Demandbase platform.\n\nAuthenticate using a bearer token. Pass a header like: `Authorization: {{bearer_token}}`\n\nThe part after 'Bearer' is your API token.\nFor instructions on generating API tokens, see the Generate and Manage API Key Set article at the Demandbase Help Center",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:10:52.000Z",
+    "updatedAt": "2026-10-22T01:10:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f5d2496f-5585-41b2-8156-0d3edf2c5b6f"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "fields",
+          "item": [
+            {
+              "name": "Export fields",
+              "id": "6c26c492-3889-4cd0-8acd-d2fdb5f2c578",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/fields?entityType=opportunity&adReportType=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "fields"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Specifies the entity for which to retrieve available export fields.",
+                      "key": "entityType",
+                      "value": "opportunity"
+                    },
+                    {
+                      "description": "Specifies the adReportType for which to retrieve available export fields.",
+                      "key": "adReportType",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "The Fields endpoint returns a list of all fields available for specific data export jobs.\nFor `campaign` and `creative` export jobs, the query parameter `adReportType` is required."
+              },
+              "response": [
+                {
+                  "id": "c502ddbe-cb5a-4560-a644-5a03d21c2523",
+                  "name": "An array of fields.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/fields?entityType=opportunity&adReportType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "fields"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Specifies the entity for which to retrieve available export fields.",
+                          "key": "entityType",
+                          "value": "opportunity"
+                        },
+                        {
+                          "description": "Specifies the adReportType for which to retrieve available export fields.",
+                          "key": "adReportType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"name\": \"<string>\",\n    \"dataType\": \"<string>\",\n    \"label\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"dataType\": \"<string>\",\n    \"label\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-10-22T01:10:52.000Z",
+                  "updatedAt": "2026-10-22T01:10:52.000Z",
+                  "uid": "35240-c502ddbe-cb5a-4560-a644-5a03d21c2523"
+                },
+                {
+                  "id": "47f542e6-8ad7-418a-bda4-9d8708e54958",
+                  "name": "Invalid entityType.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/fields?entityType=opportunity&adReportType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "fields"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Specifies the entity for which to retrieve available export fields.",
+                          "key": "entityType",
+                          "value": "opportunity"
+                        },
+                        {
+                          "description": "Specifies the adReportType for which to retrieve available export fields.",
+                          "key": "adReportType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"diagnosticCode\": \"<string>\",\n  \"errorMessage\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:10:52.000Z",
+                  "updatedAt": "2026-10-22T01:10:52.000Z",
+                  "uid": "35240-47f542e6-8ad7-418a-bda4-9d8708e54958"
+                },
+                {
+                  "id": "35f2b280-be8f-440e-87a4-6924fd0b7d77",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/fields?entityType=opportunity&adReportType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "fields"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Specifies the entity for which to retrieve available export fields.",
+                          "key": "entityType",
+                          "value": "opportunity"
+                        },
+                        {
+                          "description": "Specifies the adReportType for which to retrieve available export fields.",
+                          "key": "adReportType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"diagnosticCode\": \"<string>\",\n  \"errorMessage\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:10:52.000Z",
+                  "updatedAt": "2026-10-22T01:10:52.000Z",
+                  "uid": "35240-35f2b280-be8f-440e-87a4-6924fd0b7d77"
+                },
+                {
+                  "id": "68b29c08-30d0-4d19-b7b2-906418666864",
+                  "name": "The authenticated user does not have permission to access this resource.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/fields?entityType=opportunity&adReportType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "fields"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Specifies the entity for which to retrieve available export fields.",
+                          "key": "entityType",
+                          "value": "opportunity"
+                        },
+                        {
+                          "description": "Specifies the adReportType for which to retrieve available export fields.",
+                          "key": "adReportType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"diagnosticCode\": \"<string>\",\n  \"errorMessage\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:10:52.000Z",
+                  "updatedAt": "2026-10-22T01:10:52.000Z",
+                  "uid": "35240-68b29c08-30d0-4d19-b7b2-906418666864"
+                },
+                {
+                  "id": "950dd131-787c-42ef-b20d-11438358bdfb",
+                  "name": "An endpoint request limit, concurrent-job limit, or export quota was exceeded.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/fields?entityType=opportunity&adReportType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "fields"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Specifies the entity for which to retrieve available export fields.",
+                          "key": "entityType",
+                          "value": "opportunity"
+                        },
+                        {
+                          "description": "Specifies the adReportType for which to retrieve available export fields.",
+                          "key": "adReportType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"diagnosticCode\": \"<string>\",\n  \"errorMessage\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:10:52.000Z",
+                  "updatedAt": "2026-10-22T01:10:52.000Z",
+                  "uid": "35240-950dd131-787c-42ef-b20d-11438358bdfb"
+                },
+                {
+                  "id": "7dc57541-611d-4122-aaa8-9189c844221a",
+                  "name": "An unexpected internal service error occurred.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/fields?entityType=opportunity&adReportType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "fields"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Specifies the entity for which to retrieve available export fields.",
+                          "key": "entityType",
+                          "value": "opportunity"
+                        },
+                        {
+                          "description": "Specifies the adReportType for which to retrieve available export fields.",
+                          "key": "adReportType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"diagnosticCode\": \"<string>\",\n  \"errorMessage\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:10:52.000Z",
+                  "updatedAt": "2026-10-22T01:10:52.000Z",
+                  "uid": "35240-7dc57541-611d-4122-aaa8-9189c844221a"
+                }
+              ],
+              "createdAt": "2026-10-22T01:10:52.000Z",
+              "updatedAt": "2026-10-22T01:10:52.000Z",
+              "uid": "35240-6c26c492-3889-4cd0-8acd-d2fdb5f2c578"
+            }
+          ],
+          "id": "efa8f412-22db-4ad7-bd0c-0103a55f79c3",
+          "createdAt": "2026-10-22T01:10:52.000Z",
+          "updatedAt": "2026-10-22T01:10:52.000Z",
+          "uid": "35240-efa8f412-22db-4ad7-bd0c-0103a55f79c3"
+        }
+      ],
+      "id": "48a26d29-7f92-4cd5-9c95-78cb70483471",
+      "createdAt": "2026-10-22T01:10:52.000Z",
+      "updatedAt": "2026-10-22T01:10:52.000Z",
+      "uid": "35240-48a26d29-7f92-4cd5-9c95-78cb70483471"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "id": "36d9c964-4f03-4a1b-9184-4b861b32a142",
+      "key": "baseUrl",
+      "value": "https://uapi.demandbase.com/data/export"
+    }
+  ]
+}
