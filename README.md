@@ -1,4 +1,4 @@
-# Demandbase (demandbase)
+# Demandbase
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,211 +66,188 @@
 
 Demandbase is a B2B go-to-market platform that unifies account intelligence, intent data, advertising, orchestration, personalization and sales intelligence into a single pipeline engine. Its developer surface is eight OpenAPI-documented REST APIs on uapi.demandbase.com — B2B company/contact intelligence, Data Export, Data Import, Admin, Intent (beta), Usage, Custom Sources and Auth — plus a hosted, OAuth-protected Model Context Protocol server that exposes account, person, intent, buying-group and account-brief capabilities to AI assistants, an official Python SDK, and a change-subscription webhook surface.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/demandbase/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/demandbase/refs/heads/main/apis.yml)
+**Areas:** Account Based Marketing · Advertising · AI Agents · B2B Marketing · Company Data · Contact Data · Data Enrichment · Intent Data · MCP · Personalization · Sales Intelligence · Technographics
 
-## Scope
+## Demandbase on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Demandbase is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/demandbase/](https://apis.io/providers/demandbase/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (18)
 
-- Account-Based Marketing
-- Advertising
-- AI Agents
-- B2B Marketing
-- Company Data
-- Contact Data
-- Data Enrichment
-- Intent Data
-- MCP
-- Personalization
-- Sales Intelligence
-- Technographics
+- [Demandbase MCP Server](https://apis.io/apis/demandbase/demandbase-mcp-server/) — Hosted remote Model Context Protocol server exposing Demandbase account, person, intent, buying-group, account-brief, global company/contact and reference…
+- [Demandbase IP-API v3](https://apis.io/apis/demandbase/demandbase-ip-api-v3/) — Real-time visitor identification: resolves a visitor IP address to a Demandbase company ID, firmographics and corporate hierarchy for web personalization,…
+- [Demandbase Activities Management API](https://apis.io/apis/demandbase/demandbase-activities-management-api/) — The Activities Management API from Demandbase — 3 operation(s) for activities management.
+- [Demandbase Asynchronous (Batch) API](https://apis.io/apis/demandbase/demandbase-asynchronous-batch-api-api/) — Asynchronous bulk jobs for high-volume data retrieval and matching.
+- [Demandbase Auth API](https://apis.io/apis/demandbase/demandbase-auth-api/) — The Auth API from Demandbase — 1 operation(s) for auth.
+- [Demandbase Company Intent API](https://apis.io/apis/demandbase/demandbase-company-intent-api/) — Retrieve company-level intent signals and research activity.
+- [Demandbase Create Export Job API](https://apis.io/apis/demandbase/demandbase-create-export-job-api/) — The Create Export Job API from Demandbase — 3 operation(s) for create export job.
+- [Demandbase Credit Usage API](https://apis.io/apis/demandbase/demandbase-credit-usage-api/) — The Credit Usage API from Demandbase — 1 operation(s) for credit usage.
+- [Demandbase Custom Sources API](https://apis.io/apis/demandbase/demandbase-custom-sources-api/) — Create and manage custom sources.
+- [Demandbase Field Mappings API](https://apis.io/apis/demandbase/demandbase-field-mappings-api/) — Configure field mappings for a source and object type.
+- [Demandbase Get Fields API](https://apis.io/apis/demandbase/demandbase-get-fields-api/) — The Get Fields API from Demandbase — 1 operation(s) for get fields.
+- [Demandbase Get Job Details API](https://apis.io/apis/demandbase/demandbase-get-job-details-api/) — The Get Job Details API from Demandbase — 2 operation(s) for get job details.
+- [Demandbase Get Reference Data API](https://apis.io/apis/demandbase/demandbase-get-reference-data-api/) — The Get Reference Data API from Demandbase — 2 operation(s) for get reference data.
+- [Demandbase Import Job API](https://apis.io/apis/demandbase/demandbase-import-job-api/) — The Import Job API from Demandbase — 5 operation(s) for import job.
+- [Demandbase Reference Tables API](https://apis.io/apis/demandbase/demandbase-reference-tables-api/) — Reference schemas and allowed values used by the B2B API.
+- [Demandbase Subscription API](https://apis.io/apis/demandbase/demandbase-subscription-api-api/) — Subscription creation, updates, status, alerts, and lifecycle operations.
+- [Demandbase Sync API](https://apis.io/apis/demandbase/demandbase-sync-api-api/) — Synchronous company, contact, matching, news, and logo operations.
+- [Demandbase User Management API](https://apis.io/apis/demandbase/demandbase-user-management-api/) — The User Management API from Demandbase — 3 operation(s) for user management.
 
-## APIs
+### Published properties
 
-### Demandbase B2B API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Company and contact intelligence: search and fetch companies and contacts, company news, logos, installed technologies and corporate hierarchy; synchronous and bulk matching; asynchronous bulk data retrieval; and change subscriptions with webhook alerts for company, company-news, family-tree and person records. 22 operations.
+#### AsyncAPI (1)
 
-- **Human URL:** https://developer.demandbase.com/docs/b2b-overview
-- **Base URL:** `https://uapi.demandbase.com/data/b2b/v1`
-- **OpenAPI:** openapi/demandbase-b2b-openapi.yml
-- **Documentation:** https://developer.demandbase.com/docs/b2b-overview
-- **APIReference:** https://developer.demandbase.com/reference/companysearch_1
-- **GettingStarted:** https://developer.demandbase.com/docs/b2b-make-your-first-request
-- **Authentication:** https://developer.demandbase.com/docs/b2b-authentication
-- **RateLimits:** https://developer.demandbase.com/docs/b2b-rate-limits
-- **Webhooks:** asyncapi/demandbase-webhooks.yml
-- **Overlay:** overlays/demandbase-b2b-overlay.yaml
-- **BestPractices:** https://developer.demandbase.com/docs/b2b-best-practices
-- **FAQ:** https://developer.demandbase.com/docs/faq
+Event-driven and webhook contracts.
 
-### Demandbase Data Export API
+- [Demandbase Webhooks](https://apis.io/asyncapis/demandbase/demandbase-webhooks/)
 
-Asynchronous export of Demandbase platform data — Account, Opportunity, Person, Activity, Campaign, Creative, Account List and Person List entities — to CSV or JSON behind a signed download URL. Field availability is governed by the tenant Export Collection. 8 operations.
+#### MCP servers (1)
 
-- **Human URL:** https://developer.demandbase.com/docs/export-overview
-- **Base URL:** `https://uapi.demandbase.com/data/export`
-- **OpenAPI:** openapi/demandbase-data-export-openapi.yml
-- **Documentation:** https://developer.demandbase.com/docs/export-overview
-- **APIReference:** https://developer.demandbase.com/reference/createexportjob
-- **GettingStarted:** https://developer.demandbase.com/docs/make-your-first-request
-- **Authentication:** https://developer.demandbase.com/docs/authentication
-- **RateLimits:** https://developer.demandbase.com/docs/rate-limits
-- **ErrorCatalog:** https://developer.demandbase.com/docs/handling-errors
-- **Overlay:** overlays/demandbase-data-export-overlay.yaml
-- **Filters:** https://developer.demandbase.com/docs/how-to-use-filters
+Model Context Protocol servers that expose the API to agents.
 
-### Demandbase Data Import API
+- [db-mcp](https://apis.io/servers/demandbase/db-mcp/)
 
-Asynchronous import of customer data and intent activity into the Demandbase platform. Create an import job, submit a data file of up to 5 GB, poll the job, and manage custom activity types and CSV record matching / data mapping. 9 operations.
+#### Agentic access (1)
 
-- **Human URL:** https://developer.demandbase.com/docs/import-overview
-- **Base URL:** `https://uapi.demandbase.com/import/v1`
-- **OpenAPI:** openapi/demandbase-data-import-openapi.yml
-- **Documentation:** https://developer.demandbase.com/docs/import-overview
-- **APIReference:** https://developer.demandbase.com/reference/post_job
-- **GettingStarted:** https://developer.demandbase.com/docs/make-your-first-request-1
-- **Authentication:** https://developer.demandbase.com/docs/authentication-1
-- **RateLimits:** https://developer.demandbase.com/docs/rate-limits-1
-- **Overlay:** overlays/demandbase-data-import-overlay.yaml
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Demandbase Intent API
+- [Demandbase Agentic Access](https://apis.io/agentic-access/demandbase/demandbase-agentic-access/)
 
-Beta. Company-level intent signals and research activity: query by company IDs, keyword set IDs or keywords over a date range, filtered by intent strength or number of people researching, with cursor-based pagination. 1 operation.
+#### Vocabulary (1)
 
-- **Human URL:** https://developer.demandbase.com/reference/company-intent
-- **Base URL:** `https://uapi.demandbase.com/data/intent/v1`
-- **OpenAPI:** openapi/demandbase-intent-openapi.yml
-- **Documentation:** https://developer.demandbase.com/reference/company-intent
-- **APIReference:** https://developer.demandbase.com/reference/companyintent-1
-- **ChangeLog:** https://developer.demandbase.com/changelog/new-beta-company-intent-api
-- **Overlay:** overlays/demandbase-intent-overlay.yaml
+The provider's domain terms, defined.
 
-### Demandbase Admin API
+- [Demandbase Vocabulary](https://apis.io/vocabularies/demandbase/demandbase-vocabulary/)
 
-User administration for a Demandbase tenant: create, update, retrieve, list and delete users, with filters for departments, views, permission sets and workspaces. 5 operations.
+#### Collections (8)
 
-- **Human URL:** https://developer.demandbase.com/docs/user-admin-overview
-- **Base URL:** `https://uapi.demandbase.com`
-- **OpenAPI:** openapi/demandbase-admin-openapi.yml
-- **Documentation:** https://developer.demandbase.com/docs/user-admin-overview
-- **APIReference:** https://developer.demandbase.com/reference/post_admin-v1-user
-- **Authentication:** https://developer.demandbase.com/docs/authentication-3
-- **Overlay:** overlays/demandbase-admin-overlay.yaml
+Postman and Open Collection request collections.
 
-### Demandbase Usage API
+- [Admin API](https://apis.io/collections/demandbase/open-demandbase-admin/)
+- [Demandbase Auth API](https://apis.io/collections/demandbase/open-demandbase-auth/)
+- [B2B API](https://apis.io/collections/demandbase/open-demandbase-b2b/)
+- [Custom Sources API](https://apis.io/collections/demandbase/open-demandbase-custom-sources/)
+- [Data Export API](https://apis.io/collections/demandbase/open-demandbase-data-export/)
+- [Data Import API](https://apis.io/collections/demandbase/open-demandbase-data-import/)
+- [Intent API](https://apis.io/collections/demandbase/open-demandbase-intent/)
+- [Usage API](https://apis.io/collections/demandbase/open-demandbase-usage/)
 
-Credit usage reporting: returns a summary of credit consumption and entitlements for a given API category, the only runtime signal a consumer has for remaining quota. 1 operation.
+#### Overlays (8)
 
-- **Human URL:** https://developer.demandbase.com/docs/credit-usage-overview
-- **Base URL:** `https://uapi.demandbase.com`
-- **OpenAPI:** openapi/demandbase-usage-openapi.yml
-- **Documentation:** https://developer.demandbase.com/docs/credit-usage-overview
-- **APIReference:** https://developer.demandbase.com/reference/getcreditusagedetails
-- **Authentication:** https://developer.demandbase.com/docs/authentication-2
-- **Overlay:** overlays/demandbase-usage-overlay.yaml
+OpenAPI overlays, including conversational phrasing for each operation.
 
-### Demandbase Custom Sources API
+- [Demandbase Admin Overlay](https://apis.io/overlays/demandbase/demandbase-admin-overlay/)
+- [Demandbase Auth Overlay](https://apis.io/overlays/demandbase/demandbase-auth-overlay/)
+- [Demandbase B2B Overlay](https://apis.io/overlays/demandbase/demandbase-b2b-overlay/)
+- [Demandbase Custom Sources Overlay](https://apis.io/overlays/demandbase/demandbase-custom-sources-overlay/)
+- [Demandbase Data Export Overlay](https://apis.io/overlays/demandbase/demandbase-data-export-overlay/)
+- [Demandbase Data Import Overlay](https://apis.io/overlays/demandbase/demandbase-data-import-overlay/)
+- [Demandbase Intent Overlay](https://apis.io/overlays/demandbase/demandbase-intent-overlay/)
+- [Demandbase Usage Overlay](https://apis.io/overlays/demandbase/demandbase-usage-overlay/)
 
-Manage custom data sources and their per-object field mappings so third-party systems can feed the Demandbase platform. 7 operations.
+#### Security (3)
 
-- **Human URL:** https://developer.demandbase.com/docs/custom-sources-overview
-- **Base URL:** `https://uapi.demandbase.com/integration/v1`
-- **OpenAPI:** openapi/demandbase-custom-sources-openapi.yml
-- **Documentation:** https://developer.demandbase.com/docs/custom-sources-overview
-- **APIReference:** https://developer.demandbase.com/reference/get_integration-v1-custom-sources
-- **Overlay:** overlays/demandbase-custom-sources-overlay.yaml
+Authentication, trust centre, and vulnerability disclosure.
 
-### Demandbase Auth API
+- [Demandbase Authentication](https://apis.io/security/demandbase/demandbase-authentication/)
+- [Demandbase Domain Security](https://apis.io/security/demandbase/demandbase-domain-security/)
+- [Demandbase Trust Center](https://apis.io/security/demandbase/demandbase-trust-center/)
 
-Token exchange for every other Demandbase API: POST an API Key Set client ID and client secret with grantType client_credentials and receive a bearer access token valid for 8 hours. 1 operation.
+#### OAuth scopes (1)
 
-- **Human URL:** https://developer.demandbase.com/docs/authenticating-with-the-apis
-- **Base URL:** `https://uapi.demandbase.com`
-- **OpenAPI:** openapi/demandbase-auth-openapi.yml
-- **Documentation:** https://developer.demandbase.com/docs/authenticating-with-the-apis
-- **APIReference:** https://developer.demandbase.com/reference/generate_access_token
-- **Authentication:** authentication/demandbase-authentication.yml
-- **Overlay:** overlays/demandbase-auth-overlay.yaml
+The permissions the API asks for.
 
-### Demandbase MCP Server
+- [Demandbase Scopes](https://apis.io/scopes/demandbase/demandbase-scopes/)
 
-Hosted remote Model Context Protocol server exposing Demandbase account, person, intent, buying-group, account-brief, global company/contact and reference capabilities to AI assistants. OAuth 2.1 authorization-code + PKCE with dynamic client registration; tools/list is tenant-gated.
+#### Plans and pricing (1)
 
-- **Human URL:** https://developer.demandbase.com/docs/mcp
-- **Base URL:** `https://gateway.demandbase.com/mcp/servers/db-mcp`
-- **MCPServer:** mcp/demandbase-mcp.yml
-- **ToolCrosswalk:** mcp/demandbase-tool-crosswalk.yml
-- **Documentation:** https://developer.demandbase.com/docs/mcp
-- **GettingStarted:** https://developer.demandbase.com/docs/custom-mcp-clients
-- **Authentication:** authentication/demandbase-authentication.yml
-- **OAuthScopes:** scopes/demandbase-scopes.yml
+Published plans, tiers and prices.
 
-### Demandbase IP-API v3
+- [Demandbase Plans Pricing](https://apis.io/plans/demandbase/demandbase-plans-pricing/)
 
-Real-time visitor identification: resolves a visitor IP address to a Demandbase company ID, firmographics and corporate hierarchy for web personalization, forms enrichment and analytics integrations. No OpenAPI is published for this API and its reference documentation sits on the support knowledge base, which is behind a bot challenge.
+#### Rate limits (1)
 
-- **Human URL:** https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
-- **Base URL:** `https://api.company-target.com`
-- **Documentation:** https://support.demandbase.com/hc/en-us/articles/23789223879323-Demandbase-IP-API-v3-for-Demandbase-One-Current-Version
-- **Migration:** https://support.demandbase.com/hc/en-us/articles/25137915441947-Upgrading-to-Demandbase-IP-API-v3
+Published request limits.
 
-## Common properties
+- [Demandbase Rate Limits](https://apis.io/rate-limits/demandbase/demandbase-rate-limits/)
 
-- **AgenticAccess:** agentic-access/demandbase-agentic-access.yml
-- **TrustCenter:** security/demandbase-trust-center.yml
-- **DomainSecurity:** security/demandbase-domain-security.yml
-- **Authentication:** authentication/demandbase-authentication.yml
-- **GitHubOrganization:** https://github.com/demandbase
-- **StatusPage:** https://status.demandbase.com/
-- **Support:** https://support.demandbase.com/
-- **PrivacyPolicy:** https://www.demandbase.com/privacy-policy/
-- **Blog:** https://www.demandbase.com/blog/
-- **LinkedIn:** https://www.linkedin.com/company/demandbase/
-- **Twitter:** https://twitter.com/Demandbase
-- **Portal:** https://developer.demandbase.com
-- **KnowledgeBase:** https://kb.demandbase.com/hc/en-us
-- **Partners:** https://partners.demandbase.com/
-- **Integrations:** https://partners.demandbase.com/t/partners/integrations
-- **TermsOfService:** https://www.demandbase.com/terms-of-use/
-- **Signup:** https://www.demandbase.com/products/data/api-integration/api-trial/
-- **Vocabulary:** vocabulary/demandbase-vocabulary.yml
-- **Packages:** packages/demandbase-packages.yml
-- **SDKs:** packages/demandbase-packages.yml
-- **WellKnown:** well-known/demandbase-well-known.yml
-- **MCPServer:** mcp/demandbase-mcp.yml
-- **ToolCrosswalk:** mcp/demandbase-tool-crosswalk.yml
-- **LLMsTxt:** llms/demandbase-llms.txt
-- **Conformance:** conformance/demandbase-conformance.yml
-- **Compliance:** https://trust.demandbase.com/
-- **ErrorCatalog:** errors/demandbase-error-codes.yml
-- **ErrorCodes:** errors/demandbase-problem-types.yml
-- **Lifecycle:** lifecycle/demandbase-lifecycle.yml
-- **Deprecation:** https://developer.demandbase.com/docs/migrating-from-legacy-tokens-to-api-keysets
-- **OAuthScopes:** scopes/demandbase-scopes.yml
-- **Conventions:** conventions/demandbase-conventions.yml
-- **ChangeLog:** changelog/demandbase-changelog.yml
-- **DataModel:** data-model/demandbase-data-model.yml
-- **Webhooks:** asyncapi/demandbase-webhooks.yml
-- **AgentSkill:** skills/_index.yml
-- **RateLimits:** rate-limits/demandbase-rate-limits.yml
-- **Plans:** plans/demandbase-plans-pricing.yml
-- **FinOps:** finops/demandbase-finops.yml
-- **DeveloperPortal:** https://developer.demandbase.com
-- **Documentation:** https://developer.demandbase.com/docs/welcome
-- **APIReference:** https://developer.demandbase.com/reference/generate_access_token
-- **GettingStarted:** https://developer.demandbase.com/docs/api-getting-started
-- **Pricing:** https://www.demandbase.com/pricing/
-- **SignUp:** https://www.demandbase.com/products/data/api-integration/api-trial/
-- **Login:** https://web.demandbase.com/
-- **HelpCenter:** https://support.demandbase.com/hc/en-us
-- **SDK:** https://pypi.org/project/demandbase-sdk/
-- **Contact:** https://www.demandbase.com/company/contact-us/
+#### FinOps (1)
 
-## Provenance
+What the API costs to run, by operation.
 
-All eight OpenAPI definitions in `openapi/` were harvested verbatim on 2026-08-13 from the Demandbase developer portal at https://developer.demandbase.com. They replace 28 scaffolded specifications that a prior bulk pass had written against `api.demandbase.com` — a host that returns "404 page not found" on every path. The real production host is `uapi.demandbase.com`. Artifacts derived from the scaffolds (GraphQL schema, Postman/Open collections, Spectral rules, JSON Schema, JSON Structure, JSON-LD context) were removed in the same pass rather than carried forward.
+- [Demandbase Finops](https://apis.io/finops/demandbase/demandbase-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.demandbase.com/)
+- [Documentation](https://developer.demandbase.com/docs/welcome)
+- [Getting started](https://developer.demandbase.com/docs/api-getting-started)
+- [API reference](https://developer.demandbase.com/reference/generate_access_token)
+- [Pricing](https://www.demandbase.com/pricing/)
+- [Sign up](https://www.demandbase.com/products/data/api-integration/api-trial/)
+- [Support](https://support.demandbase.com/)
+- [Blog](https://www.demandbase.com/blog/)
+- [Compliance](https://trust.demandbase.com/)
+- [Terms of service](https://www.demandbase.com/terms-of-use/)
+- [Privacy policy](https://www.demandbase.com/privacy-policy/)
+- [GitHub](https://github.com/demandbase)
+- [Status](https://status.demandbase.com/)
+
+## API Evangelist rating
+
+**Kin Score 64.8** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 58.8 |
+| Contract governance | 22.0 |
+| Operational transparency | 69.7 |
+| Developer ergonomics | 51.8 |
+| Access clarity | 60.5 |
+
+**Agent readiness 59.4** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 39.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/demandbase/](https://apis.io/providers/demandbase/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Demandbase: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/demandbase/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
